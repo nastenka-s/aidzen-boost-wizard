@@ -8,26 +8,26 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 270 50% 85%;
-    --foreground: 270 10% 10%;
+    --background: 0 0% 100%;
+    --foreground: 270 15% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 270 10% 10%;
+    --card-foreground: 270 15% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 270 10% 10%;
-    --primary: 270 60% 55%;
+    --popover-foreground: 270 15% 10%;
+    --primary: 267 84% 64%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 60 100% 50%;
-    --secondary-foreground: 270 10% 10%;
-    --muted: 270 20% 90%;
-    --muted-foreground: 270 10% 40%;
-    --accent: 280 70% 45%;
+    --secondary: 52 100% 56%;
+    --secondary-foreground: 270 15% 10%;
+    --muted: 270 15% 96%;
+    --muted-foreground: 270 8% 45%;
+    --accent: 267 84% 64%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 270 20% 80%;
-    --input: 270 20% 90%;
-    --ring: 270 60% 55%;
-    --radius: 1rem;
+    --border: 270 15% 90%;
+    --input: 270 15% 90%;
+    --ring: 267 84% 64%;
+    --radius: 0.75rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -36,33 +36,28 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-    
-    /* Custom mystical colors */
-    --mystical-purple: 270 60% 55%;
-    --mystical-dark: 270 30% 20%;
-    --mystical-yellow: 60 100% 50%;
   }
 
   .dark {
-    --background: 270 30% 15%;
+    --background: 270 20% 8%;
     --foreground: 0 0% 98%;
-    --card: 270 25% 20%;
+    --card: 270 18% 12%;
     --card-foreground: 0 0% 98%;
-    --popover: 270 25% 20%;
+    --popover: 270 18% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 270 60% 60%;
+    --primary: 267 84% 64%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 60 100% 55%;
-    --secondary-foreground: 270 10% 10%;
-    --muted: 270 20% 25%;
-    --muted-foreground: 270 10% 70%;
-    --accent: 280 70% 50%;
+    --secondary: 52 100% 56%;
+    --secondary-foreground: 270 15% 10%;
+    --muted: 270 15% 16%;
+    --muted-foreground: 270 8% 65%;
+    --accent: 267 84% 64%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 270 20% 30%;
-    --input: 270 20% 25%;
-    --ring: 270 60% 60%;
+    --border: 270 15% 20%;
+    --input: 270 15% 16%;
+    --ring: 267 84% 64%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -80,26 +75,32 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   }
 }
 
 @layer utilities {
-  .text-shadow-glow {
-    text-shadow: 0 0 20px hsl(var(--secondary) / 0.5);
+  .gradient-purple-glow {
+    background: linear-gradient(135deg, hsl(267 84% 64% / 0.1) 0%, hsl(280 70% 60% / 0.05) 100%);
   }
   
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  .gradient-purple {
+    background: linear-gradient(135deg, hsl(267 84% 64%) 0%, hsl(280 70% 60%) 100%);
   }
   
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(267 84% 64%) 0%, hsl(280 70% 60%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 40px hsl(267 84% 64% / 0.3);
+  }
+  
+  .glow-yellow {
+    box-shadow: 0 0 30px hsl(52 100% 56% / 0.4);
   }
 }
