@@ -13,8 +13,15 @@ import {
   Clock,
   TrendingUp,
   Zap,
-  Eye
+  Eye,
+  Smartphone,
+  Check,
+  BookOpen,
+  ArrowRight
 } from "lucide-react";
+import logo from "@/assets/logo.png";
+import neurodzenApp from "@/assets/neurodzenapp.png";
+import astrologyGif from "@/assets/astrologyapp.gif";
 
 const Index = () => {
   return (
@@ -22,11 +29,8 @@ const Index = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="relative">
-              <Sparkles className="w-7 h-7 text-primary" />
-              <div className="absolute inset-0 blur-xl opacity-50 bg-primary"></div>
-            </div>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="НейроДзен" className="w-10 h-10" />
             <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
           </div>
           <div className="flex gap-3">
@@ -36,6 +40,10 @@ const Index = () => {
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
               <MessageCircle className="w-4 h-4 md:mr-2" />
               <span className="hidden md:inline">Telegram</span>
+            </Button>
+            <Button size="sm" variant="outline" className="border-primary/30">
+              <Smartphone className="w-4 h-4 md:mr-2" />
+              <span className="hidden md:inline">RuStore</span>
             </Button>
           </div>
         </div>
@@ -110,69 +118,24 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Urgency */}
+              {/* News */}
               <div className="inline-flex items-center gap-3 px-5 py-3 bg-card border border-border rounded-xl shadow-sm">
                 <div className="relative">
-                  <Clock className="w-5 h-5 text-primary" />
+                  <Sparkles className="w-5 h-5 text-secondary" />
                   <span className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
                 </div>
-                <span className="text-sm font-medium">Осталось 3 места на сегодня</span>
+                <span className="text-sm font-medium">Добавлен новый расчет - Каббала - Путь Души</span>
               </div>
             </div>
 
-            {/* Right Column - Modern Phone Mockup */}
+            {/* Right Column - App Screenshot */}
             <div className="relative lg:scale-110">
-              <div className="relative mx-auto w-[280px] h-[560px] rounded-[3rem] bg-gradient-to-br from-primary via-primary to-accent p-1 shadow-2xl glow-purple">
-                <div className="w-full h-full bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950 rounded-[2.8rem] overflow-hidden">
-                  {/* Phone notch */}
-                  <div className="h-8 bg-black/20 rounded-b-3xl mx-auto w-40"></div>
-                  
-                  {/* Screen Content */}
-                  <div className="p-6 space-y-6">
-                    <div className="text-center text-white space-y-3">
-                      <p className="text-xs font-medium text-purple-300 tracking-wide">НАТАЛЬНАЯ КАРТА</p>
-                      <div className="relative w-44 h-44 mx-auto">
-                        {/* Zodiac wheel */}
-                        <div className="absolute inset-0 border-2 border-purple-400/40 rounded-full"></div>
-                        <div className="absolute inset-3 border border-purple-500/30 rounded-full"></div>
-                        <div className="absolute inset-6 border border-purple-600/20 rounded-full"></div>
-                        
-                        {/* Center star */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <div className="relative">
-                            <Star className="w-12 h-12 text-secondary fill-secondary drop-shadow-lg" />
-                            <div className="absolute inset-0 blur-xl bg-secondary opacity-50"></div>
-                          </div>
-                        </div>
-                        
-                        {/* Constellation lines */}
-                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                          <line x1="50" y1="20" x2="50" y2="50" stroke="rgba(168, 85, 247, 0.3)" strokeWidth="1"/>
-                          <line x1="50" y1="50" x2="80" y2="50" stroke="rgba(168, 85, 247, 0.3)" strokeWidth="1"/>
-                          <line x1="50" y1="50" x2="50" y2="80" stroke="rgba(168, 85, 247, 0.3)" strokeWidth="1"/>
-                          <line x1="50" y1="50" x2="20" y2="50" stroke="rgba(168, 85, 247, 0.3)" strokeWidth="1"/>
-                        </svg>
-                      </div>
-                    </div>
-                    
-                    {/* Menu items */}
-                    <div className="space-y-2">
-                      {[
-                        { icon: TrendingUp, text: 'Нумерологический Расчет' },
-                        { icon: Heart, text: 'Совместимость' },
-                        { icon: Gem, text: 'Счастливые Камни' }
-                      ].map((item, i) => (
-                        <div 
-                          key={i} 
-                          className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 text-white text-xs py-3 px-4 rounded-xl hover:bg-white/10 transition-colors"
-                        >
-                          <item.icon className="w-4 h-4 text-secondary" />
-                          <span className="font-medium">{item.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              <div className="relative mx-auto w-[320px] h-auto">
+                <img 
+                  src={neurodzenApp} 
+                  alt="НейроДзен приложение" 
+                  className="w-full h-auto rounded-[3rem] shadow-2xl glow-purple"
+                />
               </div>
               
               {/* Floating orbs */}
@@ -183,7 +146,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section with GIF */}
       <section className="py-20 lg:py-32 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
@@ -196,6 +159,15 @@ const Index = () => {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Комплексный анализ с использованием новейших методов эзотерики
             </p>
+          </div>
+
+          {/* GIF Preview */}
+          <div className="mb-16 max-w-md mx-auto">
+            <img 
+              src={astrologyGif} 
+              alt="Астрологический анализ в действии" 
+              className="w-full h-auto rounded-2xl shadow-2xl border border-primary/20"
+            />
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -222,25 +194,220 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Uniqueness Section 1 */}
       <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
-          <Card className="p-12 lg:p-16 bg-gradient-to-br from-card via-primary/5 to-card border-primary/20 shadow-xl">
-            <div className="grid md:grid-cols-3 gap-12 text-center">
-              <div className="space-y-3">
-                <div className="text-5xl lg:text-6xl font-bold text-gradient">37</div>
-                <div className="text-muted-foreground font-medium">Книг изучено</div>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="order-2 lg:order-1">
+              <img 
+                src={neurodzenApp} 
+                alt="Астрологическая программа считает" 
+                className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl shadow-2xl"
+              />
+            </div>
+            <div className="order-1 lg:order-2 space-y-6">
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
+                Астрологическая программа считает
+              </h2>
+              <div className="space-y-4 text-lg text-muted-foreground">
+                <p>Искусственный интеллект анализирует и оперативно выдает отчет</p>
+                <p className="font-medium text-foreground">30+ готовых расчетов на любой случай жизни по различным методологиям и учениям</p>
               </div>
-              <div className="space-y-3">
-                <div className="text-5xl lg:text-6xl font-bold text-gradient">45</div>
-                <div className="text-muted-foreground font-medium">Курсов пройдено</div>
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow">
+                НАЧАТЬ СЧИТАТЬ....Я ГОТОВ
+                <img src={logo} alt="" className="w-6 h-6 ml-2" />
+              </Button>
+              <p className="text-sm text-muted-foreground">Первые 5 расчетов бесплатно</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Uniqueness Section 2 - Tarot Cards */}
+      <section className="py-20 lg:py-32 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
+                Точные расчеты и анализ
+              </h2>
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold">Консультация Астролога</h3>
+                  <p className="text-lg text-primary font-semibold">5000р - 15000р</p>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold">Консультация Нумерлога</h3>
+                  <p className="text-lg text-primary font-semibold">5000р - 10000р</p>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold">Комплексные консультации</h3>
+                  <p className="text-lg text-primary font-semibold">7000р - 20000р</p>
+                </div>
               </div>
-              <div className="space-y-3">
-                <div className="text-5xl lg:text-6xl font-bold text-gradient">91%</div>
-                <div className="text-muted-foreground font-medium">Получили ясность</div>
+              <div className="space-y-4">
+                <p className="text-lg text-primary font-semibold">Первые 5 расчетов и анализов БЕСПЛАТНО</p>
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow">
+                  НАЧАТЬ СЧИТАТЬ....Я ГОТОВ
+                  <img src={logo} alt="" className="w-6 h-6 ml-2" />
+                </Button>
               </div>
             </div>
-          </Card>
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-lg">
+                <svg viewBox="0 0 600 400" className="w-full h-auto">
+                  {/* Tarot cards illustration */}
+                  {[
+                    { x: 50, y: 50, rotate: -15, title: 'ЗАЧЕМ\nРОДИЛАСЬ', emoji: '♀' },
+                    { x: 150, y: 30, rotate: -5, title: 'ФОРМУ\nДУШИ', emoji: '🎯' },
+                    { x: 250, y: 20, rotate: 5, title: 'МАГИЯ ИИ', emoji: '🤖' },
+                    { x: 350, y: 30, rotate: 15, title: 'ОН-МОЯ\nСУДЬБА?', emoji: '💑' },
+                    { x: 450, y: 50, rotate: 25, title: 'ПОПУЛЯРНО\nПЕРИОД', emoji: '⭐' },
+                  ].map((card, i) => (
+                    <g key={i} transform={`translate(${card.x}, ${card.y}) rotate(${card.rotate})`}>
+                      <rect 
+                        width="100" 
+                        height="140" 
+                        rx="8" 
+                        fill="none" 
+                        stroke="hsl(var(--primary))" 
+                        strokeWidth="2"
+                      />
+                      <text 
+                        x="50" 
+                        y="60" 
+                        textAnchor="middle" 
+                        fill="hsl(var(--primary))" 
+                        fontSize="12" 
+                        fontWeight="600"
+                      >
+                        {card.title.split('\n').map((line, j) => (
+                          <tspan key={j} x="50" dy={j === 0 ? 0 : 14}>{line}</tspan>
+                        ))}
+                      </text>
+                      <text x="50" y="100" textAnchor="middle" fontSize="24">
+                        {card.emoji}
+                      </text>
+                    </g>
+                  ))}
+                </svg>
+              </div>
+            </div>
+          </div>
+          <p className="text-center mt-12 text-xl font-semibold max-w-3xl mx-auto">
+            НЕЙРОДЗЕН - уникальный сервис, который совмещает расчеты и искусственный интеллект
+          </p>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 lg:py-32">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-16 space-y-4">
+            <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
+              Тарифы
+            </Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
+              ПАКЕТЫ КОНСУЛЬТАЦИЙ
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Консультанты и любители эзотерики теперь могут использовать силу современного искусственного интеллекта и точно рассчитывать и анализировать личную жизнь, карьеру, совместимость, удачные периоды для сделок, поездок.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto space-y-4">
+            {[
+              { count: '5', price: 'БЕСПЛАТНО', popular: true },
+              { count: '20', price: '1000р' },
+              { count: '40', price: '1500р' },
+              { count: '70', price: '2000р' },
+              { count: '100', price: '2500р' },
+            ].map((plan, i) => (
+              <Card 
+                key={i} 
+                className={`p-6 ${plan.popular ? 'border-secondary shadow-xl shadow-secondary/20 glow-yellow' : 'border-border/50'}`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-6">
+                    <div className="text-4xl font-bold text-foreground">{plan.count}</div>
+                    <div className="text-xl font-medium text-muted-foreground">Расчетов</div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className={`text-3xl font-bold ${plan.popular ? 'text-secondary' : 'text-foreground'}`}>
+                      {plan.price}
+                    </div>
+                    {plan.popular && (
+                      <Badge className="bg-secondary text-secondary-foreground">Популярно</Badge>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow">
+              НАЧАТЬ СЧИТАТЬ....Я ГОТОВ
+              <img src={logo} alt="" className="w-6 h-6 ml-2" />
+            </Button>
+            <p className="mt-4 text-sm text-muted-foreground">Первые 5 расчетов бесплатно</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-20 lg:py-32 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-16 space-y-4">
+            <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
+              Блог
+            </Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
+              НЕЙРОДЗЕН - блог духовного нейропомощника
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Астролог, нумеролог, духовный наставник
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {[
+              { title: 'НЕЙРОДЗЕН - НОВЫЙ РАСЧЕТ', desc: 'Добавили новый расчет счастливый камней по вашей дате рождения', date: '4 сентября, 2025' },
+              { title: 'СОЛЯР - РАСЧЕТ', desc: 'Персональный астрологический прогноз на год', date: '4 сентября, 2025' },
+              { title: 'ФОРМУЛА ДУШИ (АСТРОГОР)', desc: 'Глубинный анализ вашей души через астрологию', date: '4 сентября, 2025' },
+              { title: 'Совместимость по натальной карте', desc: 'Узнайте о совместимости с вашим партнером', date: '4 сентября, 2025' },
+            ].map((post, i) => (
+              <Card 
+                key={i} 
+                className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer"
+              >
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <BookOpen className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2">
+                      {post.desc}
+                    </p>
+                    <p className="text-xs text-muted-foreground">{post.date}</p>
+                  </div>
+                  <div className="flex items-center gap-2 text-primary font-medium text-sm">
+                    Читать далее
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button variant="outline" className="border-primary/30">
+              Смотреть все статьи
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -282,9 +449,53 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/40 py-8">
-        <div className="container mx-auto px-4 lg:px-8 text-center text-sm text-muted-foreground">
-          <p>© 2024 НейроДзен. Ваш персональный ИИ-наставник по эзотерике</p>
+      <footer className="border-t border-border/40 py-12">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <img src={logo} alt="НейроДзен" className="w-10 h-10" />
+                <span className="text-lg font-semibold">НЕЙРОДЗЕН</span>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Ваш персональный ИИ-наставник по эзотерике
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="font-semibold">Документы</h3>
+              <div className="space-y-2 text-sm">
+                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                  Политика конфиденциальности
+                </a>
+                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                  Обработка персональных данных
+                </a>
+                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                  Публичная оферта
+                </a>
+                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                  Пользовательское соглашение
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-semibold">Контакты</h3>
+              <div className="flex gap-3">
+                <Button size="sm" className="bg-primary hover:bg-primary/90">
+                  <MessageCircle className="w-4 h-4" />
+                </Button>
+                <Button size="sm" variant="outline" className="border-primary/30">
+                  <Smartphone className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-border/40 pt-8 text-center text-sm text-muted-foreground">
+            <p>© 2024 НейроДзен. Все права защищены.</p>
+          </div>
         </div>
       </footer>
     </div>
