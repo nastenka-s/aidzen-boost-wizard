@@ -42,7 +42,7 @@ const Index = () => {
               <a href="#pricing">ЦЕНЫ</a>
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 ВХОД
               </a>
             </Button>
@@ -53,7 +53,7 @@ const Index = () => {
               </a>
             </Button>
             <Button size="sm" variant="outline" className="border-primary/30" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 <Smartphone className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">RuStore</span>
               </a>
@@ -125,7 +125,7 @@ const Index = () => {
                   className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
                   asChild
                 >
-                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                     Получить бесплатный расчет
                     <Sparkles className="w-5 h-5 ml-2" />
                   </a>
@@ -274,7 +274,7 @@ const Index = () => {
                 className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow"
                 asChild
               >
-                <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить 5 бесплатных расчетов
                   <Sparkles className="w-5 h-5 ml-2" />
                 </a>
@@ -350,7 +350,7 @@ const Index = () => {
               className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow"
               asChild
             >
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 Получить 5 бесплатных расчетов
                 <Sparkles className="w-5 h-5 ml-2" />
               </a>
@@ -448,7 +448,7 @@ const Index = () => {
                   className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
                   asChild
                 >
-                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                     Получить 5 бесплатных расчетов
                     <Sparkles className="w-5 h-5 ml-2" />
                   </a>
@@ -498,7 +498,7 @@ const Index = () => {
                   </a>
                 </Button>
                 <Button size="sm" variant="outline" className="border-primary/30" asChild>
-                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                     <Smartphone className="w-4 h-4" />
                   </a>
                 </Button>
