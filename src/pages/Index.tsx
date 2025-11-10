@@ -134,7 +134,7 @@ const Index = () => {
                 <img 
                   src={neurodzenApp} 
                   alt="НейроДзен приложение" 
-                  className="w-full h-auto rounded-[3rem] shadow-2xl glow-purple"
+                  className="w-full h-auto rounded-[3rem]"
                 />
               </div>
               
@@ -146,7 +146,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services Section with GIF */}
+      {/* Services Section */}
       <section className="py-20 lg:py-32 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
@@ -160,49 +160,100 @@ const Index = () => {
               Комплексный анализ с использованием новейших методов эзотерики
             </p>
           </div>
-
-          {/* GIF Preview */}
-          <div className="mb-16 max-w-md mx-auto">
-            <img 
-              src={astrologyGif} 
-              alt="Астрологический анализ в действии" 
-              className="w-full h-auto rounded-2xl shadow-2xl border border-primary/20"
-            />
-          </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет', color: 'text-primary' },
-              { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение', color: 'text-primary' },
-              { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь', color: 'text-primary' },
-              { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером', color: 'text-primary' },
-              { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы', color: 'text-primary' },
-              { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи', color: 'text-primary' },
-            ].map((service, i) => (
-              <Card 
-                key={i} 
-                className="group p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm"
-              >
-                <div className="mb-4 inline-flex p-3 bg-primary/10 rounded-2xl group-hover:bg-primary/20 transition-colors">
-                  <service.icon className={`w-7 h-7 ${service.color}`} />
+          {/* Design Variant 1 - Original */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 1</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет', color: 'text-primary' },
+                { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение', color: 'text-primary' },
+                { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь', color: 'text-primary' },
+                { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером', color: 'text-primary' },
+                { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы', color: 'text-primary' },
+                { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи', color: 'text-primary' },
+              ].map((service, i) => (
+                <Card 
+                  key={i} 
+                  className="group p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm"
+                >
+                  <div className="mb-4 inline-flex p-3 bg-primary/10 rounded-2xl group-hover:bg-primary/20 transition-colors">
+                    <service.icon className={`w-7 h-7 ${service.color}`} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground">{service.desc}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Design Variant 2 - Glassmorphic with gradient borders */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 2</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет' },
+                { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение' },
+                { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь' },
+                { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером' },
+                { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы' },
+                { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи' },
+              ].map((service, i) => (
+                <div key={i} className="group relative">
+                  <div className="absolute inset-0 bg-gradient-purple rounded-2xl opacity-30 group-hover:opacity-50 transition-opacity blur-xl"></div>
+                  <Card className="relative p-8 bg-background/80 backdrop-blur-xl border-primary/30 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2">
+                    <div className="mb-4 inline-flex p-4 bg-gradient-purple rounded-2xl text-white">
+                      <service.icon className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2 text-gradient">{service.title}</h3>
+                    <p className="text-muted-foreground">{service.desc}</p>
+                  </Card>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground">{service.desc}</p>
-              </Card>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Design Variant 3 - Minimal with hover glow */}
+          <div>
+            <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 3</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {[
+                { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет' },
+                { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение' },
+                { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь' },
+                { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером' },
+                { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы' },
+                { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи' },
+              ].map((service, i) => (
+                <Card 
+                  key={i} 
+                  className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-secondary/20 rounded-xl group-hover:bg-secondary/30 transition-colors">
+                      <service.icon className="w-6 h-6 text-secondary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">{service.title}</h3>
+                      <p className="text-sm text-muted-foreground">{service.desc}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Uniqueness Section 1 */}
+      {/* Uniqueness Section - Astrological Program */}
       <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <img 
-                src={neurodzenApp} 
+                src={astrologyGif} 
                 alt="Астрологическая программа считает" 
-                className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl shadow-2xl"
+                className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl"
               />
             </div>
             <div className="order-1 lg:order-2 space-y-6">
@@ -412,7 +463,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 lg:py-32 bg-muted/30">
+      <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="relative overflow-hidden bg-gradient-purple rounded-3xl p-12 lg:p-20 text-center text-white shadow-2xl">
             {/* Decorative elements */}
@@ -465,17 +516,14 @@ const Index = () => {
             <div className="space-y-4">
               <h3 className="font-semibold">Документы</h3>
               <div className="space-y-2 text-sm">
-                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                <a href="/dataprocessingpolicy" className="block text-muted-foreground hover:text-primary transition-colors">
                   Политика конфиденциальности
                 </a>
-                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                <a href="/dataprocessing" className="block text-muted-foreground hover:text-primary transition-colors">
                   Обработка персональных данных
                 </a>
-                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
+                <a href="/publicoffer" className="block text-muted-foreground hover:text-primary transition-colors">
                   Публичная оферта
-                </a>
-                <a href="#" className="block text-muted-foreground hover:text-primary transition-colors">
-                  Пользовательское соглашение
                 </a>
               </div>
             </div>
