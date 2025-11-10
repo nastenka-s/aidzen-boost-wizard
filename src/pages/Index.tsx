@@ -172,7 +172,7 @@ const Index = () => {
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
               Возможности
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Что я могу для вас сделать</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Что я могу для вас рассчитать</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Комплексный анализ с использованием новейших методов эзотерики
             </p>
