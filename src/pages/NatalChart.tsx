@@ -2,10 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
-
 const NatalChart = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
@@ -39,7 +37,7 @@ const NatalChart = () => {
           </p>
 
           <div className="bg-card border border-border rounded-2xl p-6 mb-8">
-            <h4 className="text-lg font-semibold mb-3">🔮 В НЕЙРОДЗЕН:</h4>
+            <h4 className="text-lg font-semibold mb-3"> В НЕЙРОДЗЕН:</h4>
             <ul className="space-y-2">
               <li>- вы вводите дату, время и место рождения</li>
               <li>- получаете точную карту и подробную расшифровку</li>
@@ -50,28 +48,28 @@ const NatalChart = () => {
           <h3 className="text-2xl font-semibold mt-8 mb-4">✨ Зачем нужна натальная карта?</h3>
           <p className="mb-4">Натальный гороскоп помогает:</p>
           <ul className="list-none mb-6 space-y-2">
-            <li>- 🌟 понять сильные и слабые стороны</li>
-            <li>- ❤️ разобраться в отношениях</li>
-            <li>- 💼 выбрать профессию</li>
-            <li>- 🧘‍♀️ осознать предназначение</li>
+            <li>- понять сильные и слабые стороны</li>
+            <li>-  разобраться в отношениях</li>
+            <li>-  выбрать профессию</li>
+            <li>-  осознать предназначение</li>
           </ul>
 
           <p className="mb-6">
             💡 В НЕЙРОДЗЕН вся информация подаётся простым языком, без перегрузки терминами.
           </p>
 
-          <h3 className="text-2xl font-semibold mt-8 mb-4">🧮 Как рассчитать натальную карту в ИИ Дзен</h3>
-          <p className="mb-4">🚀 Всё просто:</p>
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Как рассчитать натальную карту в ИИ Дзен</h3>
+          <p className="mb-4">Всё просто:</p>
           <ol className="list-decimal list-inside mb-6 space-y-2">
             <li>Введите дату рождения</li>
             <li>Укажите время и город</li>
             <li>Получите готовый натальный гороскоп и расшифровку</li>
           </ol>
-          <p className="mb-6">✨ Первый расчёт — бесплатно.</p>
+          <p className="mb-6">✨ Первые 5 расчетов — бесплатно.</p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">🔭 Из чего состоит натальный гороскоп</h3>
           <div className="bg-card border border-border rounded-2xl p-6 mb-8">
-            <h4 className="text-lg font-semibold mb-3">📊 Таблица планет:</h4>
+            <h4 className="text-lg font-semibold mb-3">Таблица планет:</h4>
             <div className="space-y-2">
               <p>Солнце ☉ — ядро личности</p>
               <p>Луна ☽ — эмоции, подсознание</p>
@@ -90,7 +88,7 @@ const NatalChart = () => {
             🏠 12 астрологических домов (каждый отвечает за сферу жизни: финансы, отношения, карьера и др.).
           </p>
 
-          <h3 className="text-2xl font-semibold mt-8 mb-4">🔑 Расшифровка натальной карты: шаг за шагом</h3>
+          <h3 className="text-2xl font-semibold mt-8 mb-4"> Расшифровка натальной карты: шаг за шагом</h3>
           <ul className="list-none mb-6 space-y-2">
             <li>- 🌅 Асцендент — образ, который видят окружающие</li>
             <li>- ☉ Солнце — ваше «я» и энергия жизни</li>
@@ -100,16 +98,16 @@ const NatalChart = () => {
             <li>- ♂ Марс — воля и страсть</li>
           </ul>
 
-          <h3 className="text-2xl font-semibold mt-8 mb-4">🌟 Практическая польза натальной карты</h3>
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Практическая польза натальной карты</h3>
           <ul className="list-none mb-6 space-y-2">
-            <li>- 💼 Карьера — выбор профессии</li>
-            <li>- ❤️ Отношения — понимание партнёров</li>
-            <li>- 🧘‍♀️ Самопознание — поиск предназначения</li>
-            <li>- 💫 Здоровье — слабые зоны организма</li>
+            <li>- Карьера — выбор профессии</li>
+            <li>-  Отношения — понимание партнёров</li>
+            <li>-  Самопознание — поиск предназначения</li>
+            <li>- Здоровье — слабые зоны организма</li>
           </ul>
 
           <div className="bg-card border border-border rounded-2xl p-8 my-12">
-            <h4 className="text-xl font-semibold mb-4">🚀 Заключение</h4>
+            <h4 className="text-xl font-semibold mb-4"> Заключение</h4>
             <p className="mb-6">
               Натальная карта — это карта возможностей, а не приговор.
             </p>
@@ -120,12 +118,10 @@ const NatalChart = () => {
               Рассчитать натальную карту
               <Sparkles className="w-4 h-4 ml-2" />
             </Button>
-            <p className="mt-4 text-sm">Первый расчёт — бесплатно! 🔮</p>
+            <p className="mt-4 text-sm">Первые 5 расчётов — бесплатно</p>
           </div>
         </div>
       </article>
-    </div>
-  );
+    </div>;
 };
-
 export default NatalChart;
