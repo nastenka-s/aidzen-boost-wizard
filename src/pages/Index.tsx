@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import neurodzenApp from "@/assets/neurodzenapp.png";
 import astrologyGif from "@/assets/astrologyapp.gif";
+import blondeWoman from "@/assets/blondewoman.png";
+import brunetteWoman from "@/assets/brunetterwoman.png";
+import manDarkHair from "@/assets/mandarkhair.png";
 const Index = () => {
   return <div className="min-h-screen bg-background">
       {/* Header */}
@@ -16,8 +19,8 @@ const Index = () => {
             <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
           </div>
           <div className="flex gap-3">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              ЦЕНЫ
+            <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
+              <a href="#pricing">ЦЕНЫ</a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
               <MessageCircle className="w-4 h-4 md:mr-2" />
@@ -59,42 +62,27 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* Trust Badges - Варианты */}
+              {/* Trust Badges */}
               <div className="flex flex-wrap gap-6">
-                {/* Вариант 1: 37,000+ пользователей */}
+                {/* Faces + Text */}
                 <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
                   <div className="flex -space-x-3">
-                    {[1, 2, 3].map(i => <div key={i} className="w-10 h-10 rounded-full bg-gradient-purple border-2 border-background flex items-center justify-center">
-                        <Star className="w-5 h-5 text-white" />
-                      </div>)}
+                    <img src={blondeWoman} alt="User 1" className="w-12 h-12 rounded-full border-2 border-background" />
+                    <img src={brunetteWoman} alt="User 2" className="w-12 h-12 rounded-full border-2 border-background" />
+                    <img src={manDarkHair} alt="User 3" className="w-12 h-12 rounded-full border-2 border-background" />
                   </div>
                   <div className="text-left">
-                    <div className="flex gap-0.5 mb-1">
-                      {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-secondary text-secondary" />)}
-                    </div>
-                    <p className="text-sm font-medium">37,000+ пользователей</p>
+                    <p className="text-sm font-medium">Для любителей и консультантов</p>
                   </div>
                 </div>
 
-                {/* Вариант 2: 30+ готовых расчетов */}
+                {/* 30+ готовых расчетов */}
                 <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
                   <div className="w-10 h-10 rounded-full bg-gradient-purple flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-left">
-                    <p className="text-2xl font-bold text-primary">30+</p>
-                    <p className="text-sm font-medium">готовых расчетов</p>
-                  </div>
-                </div>
-
-                {/* Вариант 3: 5 лет опыта */}
-                <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
-                  <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-2xl font-bold text-secondary">5+</p>
-                    <p className="text-sm font-medium">лет разработки</p>
+                    <p className="text-sm font-medium">Более 30 готовых астрологических и нумерологических расчетов</p>
                   </div>
                 </div>
               </div>
@@ -140,7 +128,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-12 lg:py-20 bg-muted/30">
+      <section className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
@@ -208,7 +196,7 @@ const Index = () => {
       </section>
 
       {/* Uniqueness Section - Astrological Program */}
-      <section className="py-12 lg:py-20">
+      <section className="py-8 lg:py-12">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
@@ -233,7 +221,7 @@ const Index = () => {
 
 
       {/* Pricing Section */}
-      <section className="py-12 lg:py-20 bg-muted/30">
+      <section id="pricing" className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
@@ -291,7 +279,7 @@ const Index = () => {
       </section>
 
       {/* Blog Section */}
-      <section className="py-12 lg:py-20">
+      <section className="py-8 lg:py-12">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
@@ -359,7 +347,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-12 lg:py-20 bg-muted/30">
+      <section className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="relative overflow-hidden bg-gradient-purple rounded-3xl p-12 lg:p-20 text-center shadow-2xl">
             {/* Decorative elements */}
@@ -435,7 +423,7 @@ const Index = () => {
           </div>
           
           <div className="border-t border-border/40 pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2024 НейроДзен. Все права защищены.</p>
+            <p>© 2025 НейроДзен. Все права защищены.</p>
           </div>
         </div>
       </footer>
