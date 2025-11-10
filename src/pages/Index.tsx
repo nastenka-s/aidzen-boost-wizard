@@ -63,26 +63,26 @@ const Index = () => {
               </div>
 
               {/* Trust Badges */}
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-wrap gap-4">
                 {/* Faces + Text */}
-                <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
+                <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
                   <div className="flex -space-x-3">
                     <img src={blondeWoman} alt="User 1" className="w-12 h-12 rounded-full border-2 border-background" />
                     <img src={brunetteWoman} alt="User 2" className="w-12 h-12 rounded-full border-2 border-background" />
                     <img src={manDarkHair} alt="User 3" className="w-12 h-12 rounded-full border-2 border-background" />
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm font-medium">Для любителей и консультантов</p>
+                  <div className="text-center">
+                    <p className="text-sm font-medium leading-tight">Для любителей и консультантов</p>
                   </div>
                 </div>
 
                 {/* 30+ готовых расчетов */}
-                <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
-                  <div className="w-10 h-10 rounded-full bg-gradient-purple flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
+                <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
+                  <div className="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center">
+                    <span className="text-2xl font-bold text-white">30+</span>
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm font-medium">Более 30 готовых астрологических и нумерологических расчетов</p>
+                  <div className="text-center">
+                    <p className="text-sm font-medium leading-tight">готовых астрологических и нумерологических расчетов</p>
                   </div>
                 </div>
               </div>
