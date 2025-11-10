@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Sparkles, Moon, Heart, Users, Calendar, Gem, MessageCircle, Clock, TrendingUp, Zap, Eye, Smartphone, Check, BookOpen, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import neurodzenApp from "@/assets/neurodzenapp.png";
 import astrologyGif from "@/assets/astrologyapp.gif";
@@ -37,7 +38,7 @@ const Index = () => {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl"></div>
         
-        <div className="container relative mx-auto px-4 lg:px-8 py-16 lg:py-24">
+        <div className="container relative mx-auto px-4 lg:px-8 py-12 lg:py-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column */}
             <div className="space-y-8">
@@ -58,9 +59,10 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* Trust Badges */}
+              {/* Trust Badges - Варианты */}
               <div className="flex flex-wrap gap-6">
-                <div className="flex items-center gap-3">
+                {/* Вариант 1: 37,000+ пользователей */}
+                <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
                   <div className="flex -space-x-3">
                     {[1, 2, 3].map(i => <div key={i} className="w-10 h-10 rounded-full bg-gradient-purple border-2 border-background flex items-center justify-center">
                         <Star className="w-5 h-5 text-white" />
@@ -71,6 +73,28 @@ const Index = () => {
                       {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-secondary text-secondary" />)}
                     </div>
                     <p className="text-sm font-medium">37,000+ пользователей</p>
+                  </div>
+                </div>
+
+                {/* Вариант 2: 30+ готовых расчетов */}
+                <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
+                  <div className="w-10 h-10 rounded-full bg-gradient-purple flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-2xl font-bold text-primary">30+</p>
+                    <p className="text-sm font-medium">готовых расчетов</p>
+                  </div>
+                </div>
+
+                {/* Вариант 3: 5 лет опыта */}
+                <div className="flex items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30">
+                  <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-secondary" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-2xl font-bold text-secondary">5+</p>
+                    <p className="text-sm font-medium">лет разработки</p>
                   </div>
                 </div>
               </div>
@@ -116,7 +140,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 lg:py-32 bg-muted/30">
+      <section className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
@@ -130,55 +154,9 @@ const Index = () => {
             </p>
           </div>
           
-          {/* Design Variant 1 - Original */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 1</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[{
-              icon: Star,
-              title: 'Астро-прогнозы',
-              desc: 'Персональные предсказания на основе планет',
-              color: 'text-primary'
-            }, {
-              icon: Heart,
-              title: 'Матрица судьбы',
-              desc: 'Раскройте свое истинное предназначение',
-              color: 'text-primary'
-            }, {
-              icon: TrendingUp,
-              title: 'Нумерология',
-              desc: 'Узнайте влияние чисел на вашу жизнь',
-              color: 'text-primary'
-            }, {
-              icon: Users,
-              title: 'Совместимость',
-              desc: 'Анализ отношений с партнером',
-              color: 'text-primary'
-            }, {
-              icon: Eye,
-              title: 'Хоранные вопросы',
-              desc: 'Ответы на конкретные вопросы',
-              color: 'text-primary'
-            }, {
-              icon: Gem,
-              title: 'Счастливые камни',
-              desc: 'Подбор талисманов для удачи',
-              color: 'text-primary'
-            }].map((service, i) => <Card key={i} className="group p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm">
-                  <div className="mb-4 inline-flex p-3 bg-primary/10 rounded-2xl group-hover:bg-primary/20 transition-colors">
-                    <service.icon className={`w-7 h-7 ${service.color}`} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground">{service.desc}</p>
-                </Card>)}
-            </div>
-          </div>
-
-          {/* Design Variant 2 - Glassmorphic with gradient borders */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 2</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[{
+          {/* Design Variant 3 - Selected */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[{
               icon: Star,
               title: 'Астро-прогнозы',
               desc: 'Персональные предсказания на основе планет'
@@ -202,69 +180,39 @@ const Index = () => {
               icon: Gem,
               title: 'Счастливые камни',
               desc: 'Подбор талисманов для удачи'
-            }].map((service, i) => <div key={i} className="group relative">
-                  <div className="absolute inset-0 bg-gradient-purple rounded-2xl opacity-30 group-hover:opacity-50 transition-opacity blur-xl"></div>
-                  <Card className="relative p-8 bg-background/80 backdrop-blur-xl border-primary/30 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2">
-                    <div className="mb-4 inline-flex p-4 bg-gradient-purple rounded-2xl text-white">
-                      <service.icon className="w-8 h-8" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2 text-gradient">{service.title}</h3>
-                    <p className="text-muted-foreground">{service.desc}</p>
-                  </Card>
-                </div>)}
-            </div>
-          </div>
-
-          {/* Design Variant 3 - Minimal with hover glow */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 3</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[{
-              icon: Star,
-              title: 'Астро-прогнозы',
-              desc: 'Персональные предсказания на основе планет'
-            }, {
-              icon: Heart,
-              title: 'Матрица судьбы',
-              desc: 'Раскройте свое истинное предназначение'
-            }, {
-              icon: TrendingUp,
-              title: 'Нумерология',
-              desc: 'Узнайте влияние чисел на вашу жизнь'
             }, {
               icon: Users,
-              title: 'Совместимость',
-              desc: 'Анализ отношений с партнером'
+              title: 'Дизайн Человека',
+              desc: 'Узнайте свой тип и стратегию жизни'
             }, {
-              icon: Eye,
-              title: 'Хоранные вопросы',
-              desc: 'Ответы на конкретные вопросы'
+              icon: Moon,
+              title: 'Натальная Карта',
+              desc: 'Своя и ребенка, западная и ведическая'
             }, {
-              icon: Gem,
-              title: 'Счастливые камни',
-              desc: 'Подбор талисманов для удачи'
+              icon: Sparkles,
+              title: 'Предназначение и кармические отработки',
+              desc: 'Раскройте свою миссию и уроки души'
             }].map((service, i) => <Card key={i} className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-secondary/20 rounded-xl group-hover:bg-secondary/30 transition-colors">
-                      <service.icon className="w-6 h-6 text-secondary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">{service.title}</h3>
-                      <p className="text-sm text-muted-foreground">{service.desc}</p>
-                    </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
+                    <service.icon className="w-6 h-6 text-primary" />
                   </div>
-                </Card>)}
-            </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">{service.title}</h3>
+                    <p className="text-sm text-muted-foreground">{service.desc}</p>
+                  </div>
+                </div>
+              </Card>)}
           </div>
         </div>
       </section>
 
       {/* Uniqueness Section - Astrological Program */}
-      <section className="py-20 lg:py-32">
+      <section className="py-12 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <img src={astrologyGif} alt="Астрологическая программа считает" className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl" />
+              <img src={astrologyGif} alt="Астрологическая программа считает" className="w-full max-w-sm mx-auto lg:mx-0" />
             </div>
             <div className="order-1 lg:order-2 space-y-6">
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
@@ -275,100 +223,17 @@ const Index = () => {
                 <p className="font-medium text-foreground">30+ готовых расчетов на любой случай жизни по различным методологиям и учениям</p>
               </div>
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow">
-                НАЧАТЬ СЧИТАТЬ....Я ГОТОВ
-                <img src={logo} alt="" className="w-6 h-6 ml-2" />
+                Получить 5 бесплатных расчетов
+                <Sparkles className="w-5 h-5 ml-2" />
               </Button>
-              <p className="text-sm text-muted-foreground">Первые 5 расчетов бесплатно</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Uniqueness Section 2 - Tarot Cards */}
-      <section className="py-20 lg:py-32 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
-                Точные расчеты и анализ
-              </h2>
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold">Консультация Астролога</h3>
-                  <p className="text-lg text-primary font-semibold">5000р - 15000р</p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold">Консультация Нумерлога</h3>
-                  <p className="text-lg text-primary font-semibold">5000р - 10000р</p>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold">Комплексные консультации</h3>
-                  <p className="text-lg text-primary font-semibold">7000р - 20000р</p>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <p className="text-lg text-primary font-semibold">Первые 5 расчетов и анализов БЕСПЛАТНО</p>
-                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow">
-                  НАЧАТЬ СЧИТАТЬ....Я ГОТОВ
-                  <img src={logo} alt="" className="w-6 h-6 ml-2" />
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <div className="relative w-full max-w-lg">
-                <svg viewBox="0 0 600 400" className="w-full h-auto">
-                  {/* Tarot cards illustration */}
-                  {[{
-                  x: 50,
-                  y: 50,
-                  rotate: -15,
-                  title: 'ЗАЧЕМ\nРОДИЛАСЬ',
-                  emoji: '♀'
-                }, {
-                  x: 150,
-                  y: 30,
-                  rotate: -5,
-                  title: 'ФОРМУ\nДУШИ',
-                  emoji: '🎯'
-                }, {
-                  x: 250,
-                  y: 20,
-                  rotate: 5,
-                  title: 'МАГИЯ ИИ',
-                  emoji: '🤖'
-                }, {
-                  x: 350,
-                  y: 30,
-                  rotate: 15,
-                  title: 'ОН-МОЯ\nСУДЬБА?',
-                  emoji: '💑'
-                }, {
-                  x: 450,
-                  y: 50,
-                  rotate: 25,
-                  title: 'ПОПУЛЯРНО\nПЕРИОД',
-                  emoji: '⭐'
-                }].map((card, i) => <g key={i} transform={`translate(${card.x}, ${card.y}) rotate(${card.rotate})`}>
-                      <rect width="100" height="140" rx="8" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" />
-                      <text x="50" y="60" textAnchor="middle" fill="hsl(var(--primary))" fontSize="12" fontWeight="600">
-                        {card.title.split('\n').map((line, j) => <tspan key={j} x="50" dy={j === 0 ? 0 : 14}>{line}</tspan>)}
-                      </text>
-                      <text x="50" y="100" textAnchor="middle" fontSize="24">
-                        {card.emoji}
-                      </text>
-                    </g>)}
-                </svg>
-              </div>
-            </div>
-          </div>
-          <p className="text-center mt-12 text-xl font-semibold max-w-3xl mx-auto">
-            НЕЙРОДЗЕН - уникальный сервис, который совмещает расчеты и искусственный интеллект
-          </p>
-        </div>
-      </section>
 
       {/* Pricing Section */}
-      <section className="py-20 lg:py-32">
+      <section className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
@@ -386,10 +251,11 @@ const Index = () => {
             {[{
             count: '5',
             price: 'БЕСПЛАТНО',
-            popular: true
+            popular: false
           }, {
             count: '20',
-            price: '1000р'
+            price: '1000р',
+            popular: true
           }, {
             count: '40',
             price: '1500р'
@@ -417,16 +283,15 @@ const Index = () => {
 
           <div className="text-center mt-12">
             <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow">
-              НАЧАТЬ СЧИТАТЬ....Я ГОТОВ
-              <img src={logo} alt="" className="w-6 h-6 ml-2" />
+              Получить 5 бесплатных расчетов
+              <Sparkles className="w-5 h-5 ml-2" />
             </Button>
-            <p className="mt-4 text-sm text-muted-foreground">Первые 5 расчетов бесплатно</p>
           </div>
         </div>
       </section>
 
       {/* Blog Section */}
-      <section className="py-20 lg:py-32 bg-muted/30">
+      <section className="py-12 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
@@ -442,22 +307,27 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[{
-            title: 'НЕЙРОДЗЕН - НОВЫЙ РАСЧЕТ',
-            desc: 'Добавили новый расчет счастливый камней по вашей дате рождения',
-            date: '4 сентября, 2025'
-          }, {
             title: 'СОЛЯР - РАСЧЕТ',
             desc: 'Персональный астрологический прогноз на год',
-            date: '4 сентября, 2025'
+            date: '4 сентября, 2025',
+            link: '/solar'
           }, {
             title: 'ФОРМУЛА ДУШИ (АСТРОГОР)',
             desc: 'Глубинный анализ вашей души через астрологию',
-            date: '4 сентября, 2025'
+            date: '4 сентября, 2025',
+            link: '/formuladushi'
           }, {
             title: 'Совместимость по натальной карте',
             desc: 'Узнайте о совместимости с вашим партнером',
-            date: '4 сентября, 2025'
-          }].map((post, i) => <Card key={i} className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer">
+            date: '4 сентября, 2025',
+            link: '/synastry'
+          }, {
+            title: 'Натальная карта',
+            desc: 'Полный расчет вашей натальной карты',
+            date: '4 сентября, 2025',
+            link: '/natalchart'
+          }].map((post, i) => <Link key={i} to={post.link}>
+              <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer h-full">
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <BookOpen className="w-6 h-6 text-primary" />
@@ -476,7 +346,8 @@ const Index = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
-              </Card>)}
+              </Card>
+            </Link>)}
           </div>
 
           <div className="text-center mt-12">
@@ -488,31 +359,31 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 lg:py-32">
+      <section className="py-12 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="relative overflow-hidden bg-gradient-purple rounded-3xl p-12 lg:p-20 text-center text-white shadow-2xl">
+          <div className="relative overflow-hidden bg-gradient-purple rounded-3xl p-12 lg:p-20 text-center shadow-2xl">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-full blur-3xl"></div>
             
             <div className="relative space-y-8">
               <div className="space-y-4">
-                <h2 className="text-4xl lg:text-6xl font-bold tracking-tight">
+                <h2 className="text-4xl lg:text-6xl font-bold tracking-tight text-primary">
                   Готовы узнать ответы?
                 </h2>
-                <p className="text-xl opacity-90 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                   Начните свое путешествие к самопознанию прямо сейчас
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow">
-                  Начать считать... Я готов
+                  Получить 5 бесплатных расчетов
                   <Sparkles className="w-5 h-5 ml-2" />
                 </Button>
               </div>
               
-              <Badge variant="secondary" className="text-base px-6 py-2 bg-white/20 border-white/30 backdrop-blur-sm">
+              <Badge variant="secondary" className="text-base px-6 py-2 bg-secondary/20 border-secondary/30 backdrop-blur-sm">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Первые 5 расчетов бесплатно
               </Badge>
@@ -538,15 +409,15 @@ const Index = () => {
             <div className="space-y-4">
               <h3 className="font-semibold">Документы</h3>
               <div className="space-y-2 text-sm">
-                <a href="/dataprocessingpolicy" className="block text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/dataprocessingpolicy" className="block text-muted-foreground hover:text-primary transition-colors">
                   Политика конфиденциальности
-                </a>
-                <a href="/dataprocessing" className="block text-muted-foreground hover:text-primary transition-colors">
+                </Link>
+                <Link to="/dataprocessing" className="block text-muted-foreground hover:text-primary transition-colors">
                   Обработка персональных данных
-                </a>
-                <a href="/publicoffer" className="block text-muted-foreground hover:text-primary transition-colors">
+                </Link>
+                <Link to="/publicoffer" className="block text-muted-foreground hover:text-primary transition-colors">
                   Публичная оферта
-                </a>
+                </Link>
               </div>
             </div>
 
