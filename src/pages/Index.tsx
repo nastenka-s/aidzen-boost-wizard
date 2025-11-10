@@ -108,9 +108,9 @@ const Index = () => {
 
                 {/* 30+ готовых расчетов */}
                 <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
-                  <div className="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center relative">
-                    <Zap className="w-5 h-5 text-purple-800 absolute -left-1 -top-1" />
-                    <span className="text-purple-800 text-base text-center font-bold whitespace-nowrap">Более 30</span>
+                  <div className="w-auto px-4 h-12 rounded-full bg-gradient-purple flex items-center justify-center gap-2">
+                    <Zap className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                    <span className="text-purple-800 text-base font-bold whitespace-nowrap">Более 30</span>
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-medium leading-tight">астрологических и нумерологических расчетов</p>
