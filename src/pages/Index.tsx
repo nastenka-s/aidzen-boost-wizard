@@ -79,10 +79,10 @@ const Index = () => {
                 {/* 30+ готовых расчетов */}
                 <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
                   <div className="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">30+</span>
+                    <span className="text-purple-800 text-base text-center font-bold">Более30</span>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium leading-tight">готовых астрологических и нумерологических расчетов</p>
+                    <p className="text-sm font-medium leading-tight">астрологических и нумерологических расчетов</p>
                   </div>
                 </div>
               </div>
@@ -203,11 +203,9 @@ const Index = () => {
               <img src={astrologyGif} alt="Астрологическая программа считает" className="w-full max-w-sm mx-auto lg:mx-0" />
             </div>
             <div className="order-1 lg:order-2 space-y-6">
-              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
-                Астрологическая программа считает
-              </h2>
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Астро-программа считает, ИИ анализирует</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
-                <p>Искусственный интеллект анализирует и оперативно выдает отчет</p>
+                <p>Искусственный интеллект анализирует ис и оперативно выдает отчет</p>
                 <p className="font-medium text-foreground">30+ готовых расчетов на любой случай жизни по различным методологиям и учениям</p>
               </div>
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow">
@@ -371,10 +369,7 @@ const Index = () => {
                 </Button>
               </div>
               
-              <Badge variant="secondary" className="text-base px-6 py-2 bg-secondary/20 border-secondary/30 backdrop-blur-sm">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Первые 5 расчетов бесплатно
-              </Badge>
+              
             </div>
           </div>
         </div>
