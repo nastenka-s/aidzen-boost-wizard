@@ -1,31 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Star, 
-  Sparkles, 
-  Moon, 
-  Heart, 
-  Users, 
-  Calendar, 
-  Gem,
-  MessageCircle,
-  Clock,
-  TrendingUp,
-  Zap,
-  Eye,
-  Smartphone,
-  Check,
-  BookOpen,
-  ArrowRight
-} from "lucide-react";
+import { Star, Sparkles, Moon, Heart, Users, Calendar, Gem, MessageCircle, Clock, TrendingUp, Zap, Eye, Smartphone, Check, BookOpen, ArrowRight } from "lucide-react";
 import logo from "@/assets/logo.png";
 import neurodzenApp from "@/assets/neurodzenapp.png";
 import astrologyGif from "@/assets/astrologyapp.gif";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
@@ -39,7 +20,7 @@ const Index = () => {
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
               <MessageCircle className="w-4 h-4 md:mr-2" />
-              <span className="hidden md:inline">Telegram</span>
+              <span className="hidden md:inline">Telegram </span>
             </Button>
             <Button size="sm" variant="outline" className="border-primary/30">
               <Smartphone className="w-4 h-4 md:mr-2" />
@@ -81,20 +62,13 @@ const Index = () => {
               <div className="flex flex-wrap gap-6">
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-3">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full bg-gradient-purple border-2 border-background flex items-center justify-center"
-                      >
+                    {[1, 2, 3].map(i => <div key={i} className="w-10 h-10 rounded-full bg-gradient-purple border-2 border-background flex items-center justify-center">
                         <Star className="w-5 h-5 text-white" />
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                   <div className="text-left">
                     <div className="flex gap-0.5 mb-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-secondary text-secondary" />
-                      ))}
+                      {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-secondary text-secondary" />)}
                     </div>
                     <p className="text-sm font-medium">37,000+ пользователей</p>
                   </div>
@@ -103,10 +77,7 @@ const Index = () => {
 
               {/* CTA */}
               <div className="space-y-4">
-                <Button 
-                  size="lg" 
-                  className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
-                >
+                <Button size="lg" className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow">
                   Получить бесплатный расчет
                   <Sparkles className="w-5 h-5 ml-2" />
                 </Button>
@@ -131,16 +102,14 @@ const Index = () => {
             {/* Right Column - App Screenshot */}
             <div className="relative lg:scale-110">
               <div className="relative mx-auto w-[320px] h-auto">
-                <img 
-                  src={neurodzenApp} 
-                  alt="НейроДзен приложение" 
-                  className="w-full h-auto rounded-[3rem]"
-                />
+                <img src={neurodzenApp} alt="НейроДзен приложение" className="w-full h-auto rounded-[3rem]" />
               </div>
               
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse" style={{
+              animationDelay: '1s'
+            }}></div>
             </div>
           </div>
         </div>
@@ -165,25 +134,43 @@ const Index = () => {
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 1</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[
-                { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет', color: 'text-primary' },
-                { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение', color: 'text-primary' },
-                { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь', color: 'text-primary' },
-                { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером', color: 'text-primary' },
-                { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы', color: 'text-primary' },
-                { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи', color: 'text-primary' },
-              ].map((service, i) => (
-                <Card 
-                  key={i} 
-                  className="group p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm"
-                >
+              {[{
+              icon: Star,
+              title: 'Астро-прогнозы',
+              desc: 'Персональные предсказания на основе планет',
+              color: 'text-primary'
+            }, {
+              icon: Heart,
+              title: 'Матрица судьбы',
+              desc: 'Раскройте свое истинное предназначение',
+              color: 'text-primary'
+            }, {
+              icon: TrendingUp,
+              title: 'Нумерология',
+              desc: 'Узнайте влияние чисел на вашу жизнь',
+              color: 'text-primary'
+            }, {
+              icon: Users,
+              title: 'Совместимость',
+              desc: 'Анализ отношений с партнером',
+              color: 'text-primary'
+            }, {
+              icon: Eye,
+              title: 'Хоранные вопросы',
+              desc: 'Ответы на конкретные вопросы',
+              color: 'text-primary'
+            }, {
+              icon: Gem,
+              title: 'Счастливые камни',
+              desc: 'Подбор талисманов для удачи',
+              color: 'text-primary'
+            }].map((service, i) => <Card key={i} className="group p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm">
                   <div className="mb-4 inline-flex p-3 bg-primary/10 rounded-2xl group-hover:bg-primary/20 transition-colors">
                     <service.icon className={`w-7 h-7 ${service.color}`} />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                   <p className="text-muted-foreground">{service.desc}</p>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
 
@@ -191,15 +178,31 @@ const Index = () => {
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 2</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[
-                { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет' },
-                { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение' },
-                { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь' },
-                { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером' },
-                { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы' },
-                { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи' },
-              ].map((service, i) => (
-                <div key={i} className="group relative">
+              {[{
+              icon: Star,
+              title: 'Астро-прогнозы',
+              desc: 'Персональные предсказания на основе планет'
+            }, {
+              icon: Heart,
+              title: 'Матрица судьбы',
+              desc: 'Раскройте свое истинное предназначение'
+            }, {
+              icon: TrendingUp,
+              title: 'Нумерология',
+              desc: 'Узнайте влияние чисел на вашу жизнь'
+            }, {
+              icon: Users,
+              title: 'Совместимость',
+              desc: 'Анализ отношений с партнером'
+            }, {
+              icon: Eye,
+              title: 'Хоранные вопросы',
+              desc: 'Ответы на конкретные вопросы'
+            }, {
+              icon: Gem,
+              title: 'Счастливые камни',
+              desc: 'Подбор талисманов для удачи'
+            }].map((service, i) => <div key={i} className="group relative">
                   <div className="absolute inset-0 bg-gradient-purple rounded-2xl opacity-30 group-hover:opacity-50 transition-opacity blur-xl"></div>
                   <Card className="relative p-8 bg-background/80 backdrop-blur-xl border-primary/30 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2">
                     <div className="mb-4 inline-flex p-4 bg-gradient-purple rounded-2xl text-white">
@@ -208,8 +211,7 @@ const Index = () => {
                     <h3 className="text-xl font-semibold mb-2 text-gradient">{service.title}</h3>
                     <p className="text-muted-foreground">{service.desc}</p>
                   </Card>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -217,18 +219,31 @@ const Index = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-6 text-center">Вариант 3</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[
-                { icon: Star, title: 'Астро-прогнозы', desc: 'Персональные предсказания на основе планет' },
-                { icon: Heart, title: 'Матрица судьбы', desc: 'Раскройте свое истинное предназначение' },
-                { icon: TrendingUp, title: 'Нумерология', desc: 'Узнайте влияние чисел на вашу жизнь' },
-                { icon: Users, title: 'Совместимость', desc: 'Анализ отношений с партнером' },
-                { icon: Eye, title: 'Хоранные вопросы', desc: 'Ответы на конкретные вопросы' },
-                { icon: Gem, title: 'Счастливые камни', desc: 'Подбор талисманов для удачи' },
-              ].map((service, i) => (
-                <Card 
-                  key={i} 
-                  className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2"
-                >
+              {[{
+              icon: Star,
+              title: 'Астро-прогнозы',
+              desc: 'Персональные предсказания на основе планет'
+            }, {
+              icon: Heart,
+              title: 'Матрица судьбы',
+              desc: 'Раскройте свое истинное предназначение'
+            }, {
+              icon: TrendingUp,
+              title: 'Нумерология',
+              desc: 'Узнайте влияние чисел на вашу жизнь'
+            }, {
+              icon: Users,
+              title: 'Совместимость',
+              desc: 'Анализ отношений с партнером'
+            }, {
+              icon: Eye,
+              title: 'Хоранные вопросы',
+              desc: 'Ответы на конкретные вопросы'
+            }, {
+              icon: Gem,
+              title: 'Счастливые камни',
+              desc: 'Подбор талисманов для удачи'
+            }].map((service, i) => <Card key={i} className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-secondary/20 rounded-xl group-hover:bg-secondary/30 transition-colors">
                       <service.icon className="w-6 h-6 text-secondary" />
@@ -238,8 +253,7 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground">{service.desc}</p>
                     </div>
                   </div>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
         </div>
@@ -250,11 +264,7 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <img 
-                src={astrologyGif} 
-                alt="Астрологическая программа считает" 
-                className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl"
-              />
+              <img src={astrologyGif} alt="Астрологическая программа считает" className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl" />
             </div>
             <div className="order-1 lg:order-2 space-y-6">
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
@@ -308,39 +318,45 @@ const Index = () => {
               <div className="relative w-full max-w-lg">
                 <svg viewBox="0 0 600 400" className="w-full h-auto">
                   {/* Tarot cards illustration */}
-                  {[
-                    { x: 50, y: 50, rotate: -15, title: 'ЗАЧЕМ\nРОДИЛАСЬ', emoji: '♀' },
-                    { x: 150, y: 30, rotate: -5, title: 'ФОРМУ\nДУШИ', emoji: '🎯' },
-                    { x: 250, y: 20, rotate: 5, title: 'МАГИЯ ИИ', emoji: '🤖' },
-                    { x: 350, y: 30, rotate: 15, title: 'ОН-МОЯ\nСУДЬБА?', emoji: '💑' },
-                    { x: 450, y: 50, rotate: 25, title: 'ПОПУЛЯРНО\nПЕРИОД', emoji: '⭐' },
-                  ].map((card, i) => (
-                    <g key={i} transform={`translate(${card.x}, ${card.y}) rotate(${card.rotate})`}>
-                      <rect 
-                        width="100" 
-                        height="140" 
-                        rx="8" 
-                        fill="none" 
-                        stroke="hsl(var(--primary))" 
-                        strokeWidth="2"
-                      />
-                      <text 
-                        x="50" 
-                        y="60" 
-                        textAnchor="middle" 
-                        fill="hsl(var(--primary))" 
-                        fontSize="12" 
-                        fontWeight="600"
-                      >
-                        {card.title.split('\n').map((line, j) => (
-                          <tspan key={j} x="50" dy={j === 0 ? 0 : 14}>{line}</tspan>
-                        ))}
+                  {[{
+                  x: 50,
+                  y: 50,
+                  rotate: -15,
+                  title: 'ЗАЧЕМ\nРОДИЛАСЬ',
+                  emoji: '♀'
+                }, {
+                  x: 150,
+                  y: 30,
+                  rotate: -5,
+                  title: 'ФОРМУ\nДУШИ',
+                  emoji: '🎯'
+                }, {
+                  x: 250,
+                  y: 20,
+                  rotate: 5,
+                  title: 'МАГИЯ ИИ',
+                  emoji: '🤖'
+                }, {
+                  x: 350,
+                  y: 30,
+                  rotate: 15,
+                  title: 'ОН-МОЯ\nСУДЬБА?',
+                  emoji: '💑'
+                }, {
+                  x: 450,
+                  y: 50,
+                  rotate: 25,
+                  title: 'ПОПУЛЯРНО\nПЕРИОД',
+                  emoji: '⭐'
+                }].map((card, i) => <g key={i} transform={`translate(${card.x}, ${card.y}) rotate(${card.rotate})`}>
+                      <rect width="100" height="140" rx="8" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" />
+                      <text x="50" y="60" textAnchor="middle" fill="hsl(var(--primary))" fontSize="12" fontWeight="600">
+                        {card.title.split('\n').map((line, j) => <tspan key={j} x="50" dy={j === 0 ? 0 : 14}>{line}</tspan>)}
                       </text>
                       <text x="50" y="100" textAnchor="middle" fontSize="24">
                         {card.emoji}
                       </text>
-                    </g>
-                  ))}
+                    </g>)}
                 </svg>
               </div>
             </div>
@@ -367,17 +383,23 @@ const Index = () => {
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
-            {[
-              { count: '5', price: 'БЕСПЛАТНО', popular: true },
-              { count: '20', price: '1000р' },
-              { count: '40', price: '1500р' },
-              { count: '70', price: '2000р' },
-              { count: '100', price: '2500р' },
-            ].map((plan, i) => (
-              <Card 
-                key={i} 
-                className={`p-6 ${plan.popular ? 'border-secondary shadow-xl shadow-secondary/20 glow-yellow' : 'border-border/50'}`}
-              >
+            {[{
+            count: '5',
+            price: 'БЕСПЛАТНО',
+            popular: true
+          }, {
+            count: '20',
+            price: '1000р'
+          }, {
+            count: '40',
+            price: '1500р'
+          }, {
+            count: '70',
+            price: '2000р'
+          }, {
+            count: '100',
+            price: '2500р'
+          }].map((plan, i) => <Card key={i} className={`p-6 ${plan.popular ? 'border-secondary shadow-xl shadow-secondary/20 glow-yellow' : 'border-border/50'}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-6">
                     <div className="text-4xl font-bold text-foreground">{plan.count}</div>
@@ -387,13 +409,10 @@ const Index = () => {
                     <div className={`text-3xl font-bold ${plan.popular ? 'text-secondary' : 'text-foreground'}`}>
                       {plan.price}
                     </div>
-                    {plan.popular && (
-                      <Badge className="bg-secondary text-secondary-foreground">Популярно</Badge>
-                    )}
+                    {plan.popular && <Badge className="bg-secondary text-secondary-foreground">Популярно</Badge>}
                   </div>
                 </div>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center mt-12">
@@ -422,16 +441,23 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[
-              { title: 'НЕЙРОДЗЕН - НОВЫЙ РАСЧЕТ', desc: 'Добавили новый расчет счастливый камней по вашей дате рождения', date: '4 сентября, 2025' },
-              { title: 'СОЛЯР - РАСЧЕТ', desc: 'Персональный астрологический прогноз на год', date: '4 сентября, 2025' },
-              { title: 'ФОРМУЛА ДУШИ (АСТРОГОР)', desc: 'Глубинный анализ вашей души через астрологию', date: '4 сентября, 2025' },
-              { title: 'Совместимость по натальной карте', desc: 'Узнайте о совместимости с вашим партнером', date: '4 сентября, 2025' },
-            ].map((post, i) => (
-              <Card 
-                key={i} 
-                className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer"
-              >
+            {[{
+            title: 'НЕЙРОДЗЕН - НОВЫЙ РАСЧЕТ',
+            desc: 'Добавили новый расчет счастливый камней по вашей дате рождения',
+            date: '4 сентября, 2025'
+          }, {
+            title: 'СОЛЯР - РАСЧЕТ',
+            desc: 'Персональный астрологический прогноз на год',
+            date: '4 сентября, 2025'
+          }, {
+            title: 'ФОРМУЛА ДУШИ (АСТРОГОР)',
+            desc: 'Глубинный анализ вашей души через астрологию',
+            date: '4 сентября, 2025'
+          }, {
+            title: 'Совместимость по натальной карте',
+            desc: 'Узнайте о совместимости с вашим партнером',
+            date: '4 сентября, 2025'
+          }].map((post, i) => <Card key={i} className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer">
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <BookOpen className="w-6 h-6 text-primary" />
@@ -450,8 +476,7 @@ const Index = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center mt-12">
@@ -481,10 +506,7 @@ const Index = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button 
-                  size="lg" 
-                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
-                >
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow">
                   Начать считать... Я готов
                   <Sparkles className="w-5 h-5 ml-2" />
                 </Button>
@@ -546,8 +568,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
