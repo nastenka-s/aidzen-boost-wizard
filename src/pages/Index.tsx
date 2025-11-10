@@ -69,69 +69,70 @@ const Index = () => {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl"></div>
 
-        <div className="container relative mx-auto px-4 lg:px-8 py-12 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="container relative mx-auto px-3 lg:px-8 py-6 sm:py-8 lg:py-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Column */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium">
-                <Zap className="w-4 h-4 text-primary" />
-                <span>Эзотерический ИИ-наставник нового поколения</span>
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-primary/10 border border-primary/20 rounded-full text-xs sm:text-sm font-medium">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                <span className="hidden sm:inline">Эзотерический ИИ-наставник нового поколения</span>
+                <span className="sm:hidden">ИИ-наставник нового поколения</span>
               </div>
 
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
+              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight tracking-tight">
                   Точные ответы на <span className="text-gradient">важные вопросы</span>
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-xl">
+                <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
                   Искусственный Интеллект обучен на 37 книгах и 45 курсах по эзотерике. Получите персональные астро и
                   нумерологические прогнозы за минуты.
                 </p>
               </div>
 
               {/* Trust Badges */}
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
                 {/* Faces + Text */}
-                <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
-                  <div className="flex -space-x-3">
-                    <img src={blondeWoman} alt="User 1" className="w-12 h-12 rounded-full border-2 border-background" />
+                <div className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px]">
+                  <div className="flex -space-x-2 sm:-space-x-3">
+                    <img src={blondeWoman} alt="User 1" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background" />
                     <img
                       src={brunetteWoman}
                       alt="User 2"
-                      className="w-12 h-12 rounded-full border-2 border-background"
+                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
-                    <img src={manDarkHair} alt="User 3" className="w-12 h-12 rounded-full border-2 border-background" />
+                    <img src={manDarkHair} alt="User 3" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background" />
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium leading-tight">Для любителей и консультантов</p>
+                    <p className="text-xs sm:text-sm font-medium leading-tight">Для любителей и консультантов</p>
                   </div>
                 </div>
 
                 {/* 30+ готовых расчетов */}
-                <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
-                  <div className="w-auto px-4 h-12 rounded-full bg-gradient-purple flex items-center justify-center gap-2">
-                    <Zap className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                    <span className="text-purple-800 text-base font-bold whitespace-nowrap">Более 30</span>
+                <div className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px]">
+                  <div className="w-auto px-2 sm:px-3 lg:px-4 h-8 sm:h-10 lg:h-12 rounded-full bg-gradient-purple flex items-center justify-center gap-1 sm:gap-2">
+                    <Zap className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-yellow-400 fill-yellow-400" />
+                    <span className="text-purple-800 text-sm sm:text-base font-bold whitespace-nowrap">Более 30</span>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium leading-tight">астрологических и нумерологических расчетов</p>
+                    <p className="text-xs sm:text-sm font-medium leading-tight">астрологических и нумерологических расчетов</p>
                   </div>
                 </div>
               </div>
 
               {/* CTA */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <Button
                   size="lg"
-                  className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
+                  className="w-full lg:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
                   asChild
                 >
                   <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                     Получить бесплатный расчет
-                    <Sparkles className="w-5 h-5 ml-2" />
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                   </a>
                 </Button>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Badge variant="outline" className="border-primary/30 text-primary font-medium">
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                  <Badge variant="outline" className="border-primary/30 text-primary font-medium text-xs">
                     Бесплатно
                   </Badge>
                   <span>Первые 5 расчетов без оплаты</span>
