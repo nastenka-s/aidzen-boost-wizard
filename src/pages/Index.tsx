@@ -22,13 +22,20 @@ const Index = () => {
             <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
               <a href="#pricing">ЦЕНЫ</a>
             </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
+            <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">ВХОД</a>
+            </Button>
+            <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="w-4 h-4 md:mr-2" />
               <span className="hidden md:inline">Telegram Бот </span>
+              </a>
             </Button>
-            <Button size="sm" variant="outline" className="border-primary/30">
-              <Smartphone className="w-4 h-4 md:mr-2" />
-              <span className="hidden md:inline">RuStore</span>
+            <Button size="sm" variant="outline" className="border-primary/30" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                <Smartphone className="w-4 h-4 md:mr-2" />
+                <span className="hidden md:inline">RuStore</span>
+              </a>
             </Button>
           </div>
         </div>
@@ -58,7 +65,7 @@ const Index = () => {
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-xl">
-                  ИИ обучен на 37 книгах и 45 курсах по эзотерике. Получите персональные расчеты за минуты.
+                  Искусственный Интеллект обучен на 37 книгах и 45 курсах по эзотерике. Получите персональные астро и нумерологические прогнозы за минуты.
                 </p>
               </div>
 
@@ -79,7 +86,7 @@ const Index = () => {
                 {/* 30+ готовых расчетов */}
                 <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
                   <div className="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center">
-                    <span className="text-purple-800 text-base text-center font-bold">Более30</span>
+                    <span className="text-purple-800 text-base text-center font-bold whitespace-nowrap">Более 30</span>
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-medium leading-tight">астрологических и нумерологических расчетов</p>
@@ -89,9 +96,11 @@ const Index = () => {
 
               {/* CTA */}
               <div className="space-y-4">
-                <Button size="lg" className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow">
-                  Получить бесплатный расчет
-                  <Sparkles className="w-5 h-5 ml-2" />
+                <Button size="lg" className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow" asChild>
+                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                    Получить бесплатный расчет
+                    <Sparkles className="w-5 h-5 ml-2" />
+                  </a>
                 </Button>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Badge variant="outline" className="border-primary/30 text-primary font-medium">
@@ -208,9 +217,11 @@ const Index = () => {
                 <p>Искусственный интеллект анализирует ис и оперативно выдает отчет</p>
                 <p className="font-medium text-foreground">30+ готовых расчетов на любой случай жизни по различным методологиям и учениям</p>
               </div>
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow">
-                Получить 5 бесплатных расчетов
-                <Sparkles className="w-5 h-5 ml-2" />
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow" asChild>
+                <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                  Получить 5 бесплатных расчетов
+                  <Sparkles className="w-5 h-5 ml-2" />
+                </a>
               </Button>
             </div>
           </div>
@@ -268,9 +279,11 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow">
-              Получить 5 бесплатных расчетов
-              <Sparkles className="w-5 h-5 ml-2" />
+            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                Получить 5 бесплатных расчетов
+                <Sparkles className="w-5 h-5 ml-2" />
+              </a>
             </Button>
           </div>
         </div>
@@ -337,8 +350,8 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" className="border-primary/30">
-              Смотреть все статьи
+            <Button variant="outline" className="border-primary/30" asChild>
+              <Link to="/blog">Смотреть все статьи</Link>
             </Button>
           </div>
         </div>
@@ -363,9 +376,11 @@ const Index = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow">
-                  Получить 5 бесплатных расчетов
-                  <Sparkles className="w-5 h-5 ml-2" />
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow" asChild>
+                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                    Получить 5 бесплатных расчетов
+                    <Sparkles className="w-5 h-5 ml-2" />
+                  </a>
                 </Button>
               </div>
               
@@ -407,11 +422,15 @@ const Index = () => {
             <div className="space-y-4">
               <h3 className="font-semibold">Контакты</h3>
               <div className="flex gap-3">
-                <Button size="sm" className="bg-primary hover:bg-primary/90">
-                  <MessageCircle className="w-4 h-4" />
+                <Button size="sm" className="bg-primary hover:bg-primary/90" asChild>
+                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="w-4 h-4" />
+                  </a>
                 </Button>
-                <Button size="sm" variant="outline" className="border-primary/30">
-                  <Smartphone className="w-4 h-4" />
+                <Button size="sm" variant="outline" className="border-primary/30" asChild>
+                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                    <Smartphone className="w-4 h-4" />
+                  </a>
                 </Button>
               </div>
             </div>

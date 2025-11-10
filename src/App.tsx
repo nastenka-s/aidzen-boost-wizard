@@ -12,6 +12,7 @@ import NatalChart from "./pages/NatalChart";
 import DataProcessingPolicy from "./pages/DataProcessingPolicy";
 import PublicOffer from "./pages/PublicOffer";
 import DataProcessing from "./pages/DataProcessing";
+import Blog from "./pages/Blog";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/solar" element={<Solar />} />
           <Route path="/formuladushi" element={<FormulaDushi />} />
           <Route path="/synastry" element={<Synastry />} />
