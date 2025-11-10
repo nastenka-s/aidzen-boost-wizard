@@ -18,6 +18,7 @@ import {
   Check,
   BookOpen,
   ArrowRight,
+  Send,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
@@ -40,14 +41,14 @@ const Index = () => {
             <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
               <a href="#pricing">ЦЕНЫ</a>
             </Button>
-            <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
+            <Button variant="ghost" size="sm" asChild>
               <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                 ВХОД
               </a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
               <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-4 h-4 md:mr-2" />
+                <Send className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">Telegram Бот </span>
               </a>
             </Button>
@@ -107,7 +108,8 @@ const Index = () => {
 
                 {/* 30+ готовых расчетов */}
                 <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
-                  <div className="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center relative">
+                    <Zap className="w-5 h-5 text-purple-800 absolute -left-1 -top-1" />
                     <span className="text-purple-800 text-base text-center font-bold whitespace-nowrap">Более 30</span>
                   </div>
                   <div className="text-center">
