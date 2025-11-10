@@ -21,7 +21,7 @@ const Index = () => {
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25">
               <MessageCircle className="w-4 h-4 md:mr-2" />
-              <span className="hidden md:inline">Telegram </span>
+              <span className="hidden md:inline">Telegram Бот </span>
             </Button>
             <Button size="sm" variant="outline" className="border-primary/30">
               <Smartphone className="w-4 h-4 md:mr-2" />
@@ -157,42 +157,42 @@ const Index = () => {
           {/* Design Variant 3 - Selected */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[{
-              icon: Star,
-              title: 'Астро-прогнозы',
-              desc: 'Персональные предсказания на основе планет'
-            }, {
-              icon: Heart,
-              title: 'Матрица судьбы',
-              desc: 'Раскройте свое истинное предназначение'
-            }, {
-              icon: TrendingUp,
-              title: 'Нумерология',
-              desc: 'Узнайте влияние чисел на вашу жизнь'
-            }, {
-              icon: Users,
-              title: 'Совместимость',
-              desc: 'Анализ отношений с партнером'
-            }, {
-              icon: Eye,
-              title: 'Хоранные вопросы',
-              desc: 'Ответы на конкретные вопросы'
-            }, {
-              icon: Gem,
-              title: 'Счастливые камни',
-              desc: 'Подбор талисманов для удачи'
-            }, {
-              icon: Users,
-              title: 'Дизайн Человека',
-              desc: 'Узнайте свой тип и стратегию жизни'
-            }, {
-              icon: Moon,
-              title: 'Натальная Карта',
-              desc: 'Своя и ребенка, западная и ведическая'
-            }, {
-              icon: Sparkles,
-              title: 'Предназначение и кармические отработки',
-              desc: 'Раскройте свою миссию и уроки души'
-            }].map((service, i) => <Card key={i} className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2">
+            icon: Star,
+            title: 'Астро-прогнозы',
+            desc: 'Персональные предсказания на основе планет'
+          }, {
+            icon: Heart,
+            title: 'Матрица судьбы',
+            desc: 'Раскройте свое истинное предназначение'
+          }, {
+            icon: TrendingUp,
+            title: 'Нумерология',
+            desc: 'Узнайте влияние чисел на вашу жизнь'
+          }, {
+            icon: Users,
+            title: 'Совместимость',
+            desc: 'Анализ отношений с партнером'
+          }, {
+            icon: Eye,
+            title: 'Хоранные вопросы',
+            desc: 'Ответы на конкретные вопросы'
+          }, {
+            icon: Gem,
+            title: 'Счастливые камни',
+            desc: 'Подбор талисманов для удачи'
+          }, {
+            icon: Users,
+            title: 'Дизайн Человека',
+            desc: 'Узнайте свой тип и стратегию жизни'
+          }, {
+            icon: Moon,
+            title: 'Натальная Карта',
+            desc: 'Своя и ребенка, западная и ведическая'
+          }, {
+            icon: Sparkles,
+            title: 'Предназначение и кармические отработки',
+            desc: 'Раскройте свою миссию и уроки души'
+          }].map((service, i) => <Card key={i} className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
                     <service.icon className="w-6 h-6 text-primary" />
