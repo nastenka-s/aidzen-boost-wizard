@@ -74,9 +74,11 @@ const Solar = () => {
               <li>✔ Сильные и слабые стороны года</li>
               <li>✔ Рекомендации для гармоничного прохождения года</li>
             </ul>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow">
-              Рассчитать Соляр
-              <Sparkles className="w-4 h-4 ml-2" />
+            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                Рассчитать Соляр
+                <Sparkles className="w-4 h-4 ml-2" />
+              </a>
             </Button>
           </div>
         </div>

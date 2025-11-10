@@ -75,9 +75,11 @@ const FormulaDushi = () => {
               <li>✔ раскрытие кармических уроков</li>
               <li>✔ рекомендации по развитию и профессии</li>
             </ul>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow">
-              Рассчитать Формулу Души
-              <Sparkles className="w-4 h-4 ml-2" />
+            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                Рассчитать Формулу Души
+                <Sparkles className="w-4 h-4 ml-2" />
+              </a>
             </Button>
           </div>
         </div>

@@ -114,9 +114,11 @@ const NatalChart = () => {
             <p className="mb-6">
               ✨ Постройте свою натальную карту в НЕЙРОДЗЕН прямо сейчас.
             </p>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow">
-              Рассчитать натальную карту
-              <Sparkles className="w-4 h-4 ml-2" />
+            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow" asChild>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                Рассчитать натальную карту
+                <Sparkles className="w-4 h-4 ml-2" />
+              </a>
             </Button>
             <p className="mt-4 text-sm">Первые 5 расчётов — бесплатно</p>
           </div>
