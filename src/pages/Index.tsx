@@ -1,24 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Star,
-  Sparkles,
-  Moon,
-  Heart,
-  Users,
-  Calendar,
-  Gem,
-  MessageCircle,
-  Clock,
-  TrendingUp,
-  Zap,
-  Eye,
-  Smartphone,
-  Check,
-  BookOpen,
-  ArrowRight,
-} from "lucide-react";
+import { Star, Sparkles, Moon, Heart, Users, Calendar, Gem, MessageCircle, Clock, TrendingUp, Zap, Eye, Smartphone, Check, BookOpen, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import neurodzenApp from "@/assets/neurodzenapp.png";
@@ -27,8 +10,7 @@ import blondeWoman from "@/assets/blondewoman.png";
 import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
@@ -93,11 +75,7 @@ const Index = () => {
                 <div className="flex flex-col items-center gap-3 p-4 bg-card/50 rounded-xl border border-border/30 max-w-[180px]">
                   <div className="flex -space-x-3">
                     <img src={blondeWoman} alt="User 1" className="w-12 h-12 rounded-full border-2 border-background" />
-                    <img
-                      src={brunetteWoman}
-                      alt="User 2"
-                      className="w-12 h-12 rounded-full border-2 border-background"
-                    />
+                    <img src={brunetteWoman} alt="User 2" className="w-12 h-12 rounded-full border-2 border-background" />
                     <img src={manDarkHair} alt="User 3" className="w-12 h-12 rounded-full border-2 border-background" />
                   </div>
                   <div className="text-center">
@@ -118,11 +96,7 @@ const Index = () => {
 
               {/* CTA */}
               <div className="space-y-4">
-                <Button
-                  size="lg"
-                  className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
-                  asChild
-                >
+                <Button size="lg" className="w-full lg:w-auto text-base px-8 py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow" asChild>
                   <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                     Получить бесплатный расчет
                     <Sparkles className="w-5 h-5 ml-2" />
@@ -154,12 +128,9 @@ const Index = () => {
 
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
-              <div
-                className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse"
-                style={{
-                  animationDelay: "1s",
-                }}
-              ></div>
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse" style={{
+              animationDelay: "1s"
+            }}></div>
             </div>
           </div>
         </div>
@@ -173,64 +144,48 @@ const Index = () => {
               Возможности
             </Badge>
             <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Что я могу для вас сделать</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Комплексный анализ с использованием новейших методов эзотерики
-            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Комплексный анализ с использованием новейших методов эзотерики</p>
           </div>
 
           {/* Design Variant 3 - Selected */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                icon: Star,
-                title: "Астро-прогнозы",
-                desc: "Персональные предсказания на основе планет",
-              },
-              {
-                icon: Heart,
-                title: "Матрица судьбы",
-                desc: "Раскройте свое истинное предназначение",
-              },
-              {
-                icon: TrendingUp,
-                title: "Нумерология",
-                desc: "Узнайте влияние чисел на вашу жизнь",
-              },
-              {
-                icon: Users,
-                title: "Совместимость",
-                desc: "Анализ отношений с партнером",
-              },
-              {
-                icon: Eye,
-                title: "Хоранные вопросы",
-                desc: "Ответы на конкретные вопросы",
-              },
-              {
-                icon: Gem,
-                title: "Счастливые камни",
-                desc: "Подбор талисманов для удачи",
-              },
-              {
-                icon: Users,
-                title: "Дизайн Человека",
-                desc: "Узнайте свой тип и стратегию жизни",
-              },
-              {
-                icon: Moon,
-                title: "Натальная Карта",
-                desc: "Своя и ребенка, западная и ведическая",
-              },
-              {
-                icon: Sparkles,
-                title: "Предназначение и кармические отработки",
-                desc: "Раскройте свою миссию и уроки души",
-              },
-            ].map((service, i) => (
-              <Card
-                key={i}
-                className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2"
-              >
+            {[{
+            icon: Star,
+            title: "Астро-прогнозы",
+            desc: "Персональные предсказания на основе планет"
+          }, {
+            icon: Heart,
+            title: "Матрица судьбы",
+            desc: "Раскройте свое истинное предназначение"
+          }, {
+            icon: TrendingUp,
+            title: "Нумерология",
+            desc: "Узнайте влияние чисел на вашу жизнь"
+          }, {
+            icon: Users,
+            title: "Совместимость",
+            desc: "Анализ отношений с партнером"
+          }, {
+            icon: Eye,
+            title: "Хоранные вопросы",
+            desc: "Ответы на конкретные вопросы"
+          }, {
+            icon: Gem,
+            title: "Счастливые камни",
+            desc: "Подбор талисманов для удачи"
+          }, {
+            icon: Users,
+            title: "Дизайн Человека",
+            desc: "Узнайте свой тип и стратегию жизни"
+          }, {
+            icon: Moon,
+            title: "Натальная Карта",
+            desc: "Своя и ребенка, западная и ведическая"
+          }, {
+            icon: Sparkles,
+            title: "Предназначение и кармические отработки",
+            desc: "Раскройте свою миссию и уроки души"
+          }].map((service, i) => <Card key={i} className="group p-8 border-0 bg-card hover:glow-purple transition-all duration-500 hover:-translate-y-2">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
                     <service.icon className="w-6 h-6 text-primary" />
@@ -242,8 +197,7 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground">{service.desc}</p>
                   </div>
                 </div>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -253,25 +207,17 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <img
-                src={astrologyGif}
-                alt="Астрологическая программа считает"
-                className="w-full max-w-sm mx-auto lg:mx-0"
-              />
+              <img src={astrologyGif} alt="Астрологическая программа считает" className="w-full max-w-sm mx-auto lg:mx-0" />
             </div>
             <div className="order-1 lg:order-2 space-y-6">
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Астро-программа считает, ИИ анализирует</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
-                <p>Искусственный интеллект анализирует ис и оперативно выдает отчет</p>
+                <p>Искусственный интеллект анализирует и оперативно выдает отчет</p>
                 <p className="font-medium text-foreground">
                   30+ готовых расчетов на любой случай жизни по различным методологиям и учениям
                 </p>
               </div>
-              <Button
-                size="lg"
-                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow"
-                asChild
-              >
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow" asChild>
                 <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                   Получить 5 бесплатных расчетов
                   <Sparkles className="w-5 h-5 ml-2" />
@@ -298,34 +244,24 @@ const Index = () => {
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
-            {[
-              {
-                count: "5",
-                price: "БЕСПЛАТНО",
-                popular: false,
-              },
-              {
-                count: "20",
-                price: "1000р",
-                popular: true,
-              },
-              {
-                count: "40",
-                price: "1500р",
-              },
-              {
-                count: "70",
-                price: "2000р",
-              },
-              {
-                count: "100",
-                price: "2500р",
-              },
-            ].map((plan, i) => (
-              <Card
-                key={i}
-                className={`p-6 ${plan.popular ? "border-secondary shadow-xl shadow-secondary/20 glow-yellow" : "border-border/50"}`}
-              >
+            {[{
+            count: "5",
+            price: "БЕСПЛАТНО",
+            popular: false
+          }, {
+            count: "20",
+            price: "1000р",
+            popular: true
+          }, {
+            count: "40",
+            price: "1500р"
+          }, {
+            count: "70",
+            price: "2000р"
+          }, {
+            count: "100",
+            price: "2500р"
+          }].map((plan, i) => <Card key={i} className={`p-6 ${plan.popular ? "border-secondary shadow-xl shadow-secondary/20 glow-yellow" : "border-border/50"}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-6">
                     <div className="text-4xl font-bold text-foreground">{plan.count}</div>
@@ -338,16 +274,11 @@ const Index = () => {
                     {plan.popular && <Badge className="bg-secondary text-secondary-foreground">Популярно</Badge>}
                   </div>
                 </div>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center mt-12">
-            <Button
-              size="lg"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow"
-              asChild
-            >
+            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow" asChild>
               <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                 Получить 5 бесплатных расчетов
                 <Sparkles className="w-5 h-5 ml-2" />
@@ -369,33 +300,27 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                title: "СОЛЯР - РАСЧЕТ",
-                desc: "Персональный астрологический прогноз на год",
-                date: "4 сентября, 2025",
-                link: "/solar",
-              },
-              {
-                title: "ФОРМУЛА ДУШИ (АСТРОГОР)",
-                desc: "Глубинный анализ вашей души через астрологию",
-                date: "4 сентября, 2025",
-                link: "/formuladushi",
-              },
-              {
-                title: "Совместимость по натальной карте",
-                desc: "Узнайте о совместимости с вашим партнером",
-                date: "4 сентября, 2025",
-                link: "/synastry",
-              },
-              {
-                title: "Натальная карта",
-                desc: "Полный расчет вашей натальной карты",
-                date: "4 сентября, 2025",
-                link: "/natalchart",
-              },
-            ].map((post, i) => (
-              <Link key={i} to={post.link}>
+            {[{
+            title: "СОЛЯР - РАСЧЕТ",
+            desc: "Персональный астрологический прогноз на год",
+            date: "4 сентября, 2025",
+            link: "/solar"
+          }, {
+            title: "ФОРМУЛА ДУШИ (АСТРОГОР)",
+            desc: "Глубинный анализ вашей души через астрологию",
+            date: "4 сентября, 2025",
+            link: "/formuladushi"
+          }, {
+            title: "Совместимость по натальной карте",
+            desc: "Узнайте о совместимости с вашим партнером",
+            date: "4 сентября, 2025",
+            link: "/synastry"
+          }, {
+            title: "Натальная карта",
+            desc: "Полный расчет вашей натальной карты",
+            date: "4 сентября, 2025",
+            link: "/natalchart"
+          }].map((post, i) => <Link key={i} to={post.link}>
                 <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer h-full">
                   <div className="space-y-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -412,8 +337,7 @@ const Index = () => {
                     </div>
                   </div>
                 </Card>
-              </Link>
-            ))}
+              </Link>)}
           </div>
 
           <div className="text-center mt-12">
@@ -441,11 +365,7 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  size="lg"
-                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
-                  asChild
-                >
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-10 py-6 h-auto font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow" asChild>
                   <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                     Получить 5 бесплатных расчетов
                     <Sparkles className="w-5 h-5 ml-2" />
@@ -472,10 +392,7 @@ const Index = () => {
             <div className="space-y-4">
               <h3 className="font-semibold">Документы</h3>
               <div className="space-y-2 text-sm">
-                <Link
-                  to="/dataprocessingpolicy"
-                  className="block text-muted-foreground hover:text-primary transition-colors"
-                >
+                <Link to="/dataprocessingpolicy" className="block text-muted-foreground hover:text-primary transition-colors">
                   Политика конфиденциальности
                 </Link>
                 <Link to="/dataprocessing" className="block text-muted-foreground hover:text-primary transition-colors">
@@ -509,7 +426,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
 export default Index;
