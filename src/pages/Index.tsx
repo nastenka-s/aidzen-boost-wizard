@@ -54,7 +54,7 @@ const Index = () => {
               </a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-              <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/Neurodzenai_bot" target="_blank" rel="noopener noreferrer">
                 <Send className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">Telegram Бот </span>
               </a>
