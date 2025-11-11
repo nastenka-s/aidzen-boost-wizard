@@ -15,6 +15,7 @@ import DataProcessing from "./pages/DataProcessing";
 import Blog from "./pages/Blog";
 import FormulaEvents from "./pages/FormulaEvents";
 import ChisloSudby from "./pages/ChisloSudby";
+import SovmestimostDolgih from "./pages/SovmestimostDolgih";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/sovmestimost-dlya-dolgih-otnosheniy" element={<SovmestimostDolgih />} />
           <Route path="/chislo-sudby-kak-primenit" element={<ChisloSudby />} />
           <Route path="/formulaevents" element={<FormulaEvents />} />
           <Route path="/solar" element={<Solar />} />
