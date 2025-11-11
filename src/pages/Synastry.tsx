@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
 
 const Synastry = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Совместимость по натальной карте: синастрия партнеров | НейроДзен</title>
+        <meta name="description" content="Проверьте совместимость с партнером по натальным картам. Глубокий астрологический анализ отношений и синастрии." />
+        <meta name="keywords" content="совместимость, синастрия, натальная карта совместимость, астрология отношений, гороскоп совместимости" />
+        <link rel="canonical" href="https://aidzen.ru/synastry" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">

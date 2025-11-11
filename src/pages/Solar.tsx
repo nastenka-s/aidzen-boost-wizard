@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
 
 const Solar = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Расчет соляра: персональный астрологический прогноз на год | НейроДзен</title>
+        <meta name="description" content="Узнайте что ждёт вас в следующем году с помощью солярного гороскопа. Персональный астрологический прогноз на основе вашей натальной карты." />
+        <meta name="keywords" content="соляр, солярный гороскоп, астрологический прогноз, прогноз на год, солярная карта, натальная карта" />
+        <link rel="canonical" href="https://aidzen.ru/solar" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">

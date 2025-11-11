@@ -21,6 +21,7 @@ import {
   Send,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
 import neurodzenApp from "@/assets/neurodzenapp.png";
 import astrologyGif from "@/assets/astrologyapp.gif";
@@ -30,6 +31,12 @@ import manDarkHair from "@/assets/mandarkhair.png";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>НейроДзен - Астрология, Натальная Карта, Нумерология | Бесплатный расчет</title>
+        <meta name="description" content="Получите бесплатный астрологический прогноз, натальную карту и нумерологический расчет. ИИ-наставник по астрологии, матрице судьбы и эзотерике. Первые 5 расчетов бесплатно." />
+        <meta name="keywords" content="астрология, натальная карта, натальная карта бесплатно, бесплатный расчет натальная карта, астрологический прогноз, астролог, нумерология, матрица судьбы, соляр, синастрия, совместимость, число судьбы" />
+        <link rel="canonical" href="https://aidzen.ru/" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
@@ -374,6 +381,12 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
               {
+                title: "Число судьбы: как рассчитать и применить в жизни",
+                desc: "Узнайте, как рассчитать число судьбы по дате рождения",
+                date: "16 января, 2025",
+                link: "/chislo-sudby-kak-primenit",
+              },
+              {
                 title: "Формулы событий в астрологии",
                 desc: "Как читать карту без магии и фатализма",
                 date: "11 ноября, 2025",
@@ -390,12 +403,6 @@ const Index = () => {
                 desc: "Глубинный анализ вашей души через астрологию",
                 date: "4 сентября, 2025",
                 link: "/formuladushi",
-              },
-              {
-                title: "Совместимость по натальной карте",
-                desc: "Узнайте о совместимости с вашим партнером",
-                date: "4 сентября, 2025",
-                link: "/synastry",
               },
             ].map((post, i) => (
               <Link key={i} to={post.link}>

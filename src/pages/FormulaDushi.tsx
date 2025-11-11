@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
 
 const FormulaDushi = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Формула души по Астрогору: расчет предназначения | НейроДзен</title>
+        <meta name="description" content="Узнайте своё предназначение с помощью формулы души по методике Астрогора. Глубинный астрологический анализ миссии души." />
+        <meta name="keywords" content="формула души, Астрогор, предназначение, миссия души, астрология души, расчет души" />
+        <link rel="canonical" href="https://aidzen.ru/formuladushi" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">

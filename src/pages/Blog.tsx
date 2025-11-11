@@ -3,10 +3,17 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, ArrowRight, MessageCircle, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
 
 const Blog = () => {
   const posts = [
+    {
+      title: 'Число судьбы: как рассчитать и применить в жизни',
+      desc: 'Узнайте, как рассчитать число судьбы по дате рождения и понять, что оно значит',
+      date: '16 января, 2025',
+      link: '/chislo-sudby-kak-primenit'
+    },
     {
       title: 'Формулы событий в астрологии',
       desc: 'Как читать карту без магии и фатализма',
@@ -41,6 +48,12 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Блог НейроДзен: статьи по астрологии и нумерологии | НейроДзен</title>
+        <meta name="description" content="Блог о астрологии, нумерологии и эзотерике. Полезные статьи о натальных картах, совместимости, числе судьбы и астрологических расчетах." />
+        <meta name="keywords" content="блог астрология, нумерология статьи, натальная карта, астрология обучение, эзотерика" />
+        <link rel="canonical" href="https://aidzen.ru/blog" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">

@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
 const NatalChart = () => {
   return <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Натальная карта бесплатно: расчет и расшифровка онлайн | НейроДзен</title>
+        <meta name="description" content="Рассчитайте натальную карту бесплатно онлайн. Полная расшифровка всех планет, домов и аспектов вашего гороскопа." />
+        <meta name="keywords" content="натальная карта, натальная карта бесплатно, расчет натальной карты, натальный гороскоп, гороскоп рождения" />
+        <link rel="canonical" href="https://aidzen.ru/natalchart" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
