@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,27 @@ import logo from "@/assets/logo.png";
 
 const FormulaEvents = () => {
   return (
+    <>
+      <Helmet>
+        <title>Формулы событий в натальной карте: как астрологи предсказывают моменты перемен | НейроДзен</title>
+        <meta name="description" content="Что такое формулы событий в натальной карте, как они строятся и зачем нужны. Пошагово разбираем связки планет, дома и триггеры для событий — с примерами и чек-листом." />
+        <meta name="keywords" content="формулы событий в натальной карте, астрологические формулы, прогноз событий по натальной карте, аспекты и дома, транзиты прогрессии дирекции, как читать натальную карту" />
+        <link rel="canonical" href="https://neurodzen.ru/formuly-sobytiy-v-natalnoy-karte" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Формулы событий в натальной карте: как астрологи предсказывают моменты перемен" />
+        <meta property="og:description" content="Что такое формулы событий в натальной карте, как они строятся и зачем нужны. Пошагово разбираем связки планет, дома и триггеры для событий — с примерами и чек-листом." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://neurodzen.ru/formuly-sobytiy-v-natalnoy-karte" />
+        
+        {/* Article specific */}
+        <meta property="article:published_time" content="2025-11-11" />
+        <meta property="article:author" content="НейроДзен" />
+        <meta property="article:section" content="Астрология" />
+        <meta property="article:tag" content="формулы событий в натальной карте" />
+        <meta property="article:tag" content="астрологические формулы" />
+        <meta property="article:tag" content="прогноз событий по натальной карте" />
+      </Helmet>
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
@@ -54,7 +76,7 @@ const FormulaEvents = () => {
               «Формула события» — это не магия, а логика: определённая связка планет, домов и аспектов, которая чаще всего сопровождает конкретный тип событий.
             </p>
             <div className="text-sm text-muted-foreground">
-              4 сентября, 2025
+              11 ноября, 2025
             </div>
           </div>
 
@@ -361,9 +383,8 @@ const FormulaEvents = () => {
               </p>
               <div className="flex justify-center gap-4">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-                  <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    Попробовать бесплатно
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                    Получить 5 бесплатных расчетов
                   </a>
                 </Button>
               </div>
@@ -465,6 +486,7 @@ const FormulaEvents = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

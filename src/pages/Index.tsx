@@ -374,6 +374,12 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
               {
+                title: "Формулы событий в астрологии",
+                desc: "Как читать карту без магии и фатализма",
+                date: "11 ноября, 2025",
+                link: "/formulaevents",
+              },
+              {
                 title: "СОЛЯР - РАСЧЕТ",
                 desc: "Персональный астрологический прогноз на год",
                 date: "4 сентября, 2025",
@@ -390,12 +396,6 @@ const Index = () => {
                 desc: "Узнайте о совместимости с вашим партнером",
                 date: "4 сентября, 2025",
                 link: "/synastry",
-              },
-              {
-                title: "Натальная карта",
-                desc: "Полный расчет вашей натальной карты",
-                date: "4 сентября, 2025",
-                link: "/natalchart",
               },
             ].map((post, i) => (
               <Link key={i} to={post.link}>
