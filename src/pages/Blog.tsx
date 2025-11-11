@@ -8,6 +8,12 @@ import logo from "@/assets/logo.png";
 const Blog = () => {
   const posts = [
     {
+      title: 'Формулы событий в астрологии',
+      desc: 'Как читать карту без магии и фатализма',
+      date: '4 сентября, 2025',
+      link: '/formulaevents'
+    },
+    {
       title: 'СОЛЯР - РАСЧЕТ',
       desc: 'Персональный астрологический прогноз на год',
       date: '4 сентября, 2025',

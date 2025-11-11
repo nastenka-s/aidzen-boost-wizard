@@ -13,6 +13,7 @@ import DataProcessingPolicy from "./pages/DataProcessingPolicy";
 import PublicOffer from "./pages/PublicOffer";
 import DataProcessing from "./pages/DataProcessing";
 import Blog from "./pages/Blog";
+import FormulaEvents from "./pages/FormulaEvents";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/formulaevents" element={<FormulaEvents />} />
           <Route path="/solar" element={<Solar />} />
           <Route path="/formuladushi" element={<FormulaDushi />} />
           <Route path="/synastry" element={<Synastry />} />
