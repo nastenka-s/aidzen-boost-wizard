@@ -30,13 +30,19 @@ import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
 const Index = () => {
   const isAndroid = /Android/i.test(navigator.userAgent);
-  
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>НейроДзен - Астрология, Натальная Карта, Нумерология | Бесплатный расчет</title>
-        <meta name="description" content="Получите бесплатный астрологический прогноз, натальную карту и нумерологический расчет. ИИ-наставник по астрологии, матрице судьбы и эзотерике. Первые 5 расчетов бесплатно." />
-        <meta name="keywords" content="астрология, натальная карта, натальная карта бесплатно, бесплатный расчет натальная карта, астрологический прогноз, астролог, нумерология, матрица судьбы, соляр, синастрия, совместимость, число судьбы" />
+        <meta
+          name="description"
+          content="Получите бесплатный астрологический прогноз, натальную карту и нумерологический расчет. ИИ-наставник по астрологии, матрице судьбы и эзотерике. Первые 5 расчетов бесплатно."
+        />
+        <meta
+          name="keywords"
+          content="астрология, натальная карта, натальная карта бесплатно, бесплатный расчет натальная карта, астрологический прогноз, астролог, нумерология, матрица судьбы, соляр, синастрия, совместимость, число судьбы"
+        />
         <link rel="canonical" href="https://aidzen.ru/" />
       </Helmet>
       {/* Header */}
@@ -56,7 +62,7 @@ const Index = () => {
               </a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-              <a href="https://t.me/Neurodzenai_bot" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
                 <Send className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">Telegram Бот </span>
               </a>
@@ -103,13 +109,21 @@ const Index = () => {
                 {/* Faces + Text */}
                 <div className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px]">
                   <div className="flex -space-x-2 sm:-space-x-3">
-                    <img src={blondeWoman} alt="User 1" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background" />
+                    <img
+                      src={blondeWoman}
+                      alt="User 1"
+                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
+                    />
                     <img
                       src={brunetteWoman}
                       alt="User 2"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
-                    <img src={manDarkHair} alt="User 3" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background" />
+                    <img
+                      src={manDarkHair}
+                      alt="User 3"
+                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
+                    />
                   </div>
                   <div className="text-center">
                     <p className="text-xs sm:text-sm font-medium leading-tight">Для любителей и консультантов</p>
@@ -123,7 +137,9 @@ const Index = () => {
                     <span className="text-purple-800 text-sm sm:text-base font-bold whitespace-nowrap">Более 30</span>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs sm:text-sm font-medium leading-tight">астрологических и нумерологических расчетов</p>
+                    <p className="text-xs sm:text-sm font-medium leading-tight">
+                      астрологических и нумерологических расчетов
+                    </p>
                   </div>
                 </div>
               </div>
@@ -147,7 +163,11 @@ const Index = () => {
                     className="w-full lg:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
-                    <a href="https://www.rustore.ru/catalog/app/ru.neurodzen.app" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href="https://www.rustore.ru/catalog/app/ru.neurodzen.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                       Скачать в RuStore
                     </a>
