@@ -29,6 +29,8 @@ import blondeWoman from "@/assets/blondewoman.png";
 import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
 const Index = () => {
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -138,6 +140,19 @@ const Index = () => {
                     <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                   </a>
                 </Button>
+                {isAndroid && (
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full lg:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    asChild
+                  >
+                    <a href="https://www.rustore.ru/catalog/app/ru.neurodzen.app" target="_blank" rel="noopener noreferrer">
+                      <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      Скачать в RuStore
+                    </a>
+                  </Button>
+                )}
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                   <Badge variant="outline" className="border-primary/30 text-primary font-medium text-xs">
                     Бесплатно
@@ -378,8 +393,14 @@ const Index = () => {
             <p className="text-lg text-muted-foreground">Астролог, нумеролог, духовный наставник</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
+              {
+                title: "Показатели денег и богатства в матрице судьбы",
+                desc: "Как по дате рождения увидеть денежный потенциал в матрице судьбы",
+                date: "16 января, 2025",
+                link: "/pokazateli-deneg-i-bogatstva-v-matrice-sudby",
+              },
               {
                 title: "Совместимость для долгих отношений: как понять по дате рождения",
                 desc: "Узнайте, как определить совместимость по дате рождения и числу судьбы",
@@ -391,24 +412,6 @@ const Index = () => {
                 desc: "Узнайте, как рассчитать число судьбы по дате рождения",
                 date: "16 января, 2025",
                 link: "/chislo-sudby-kak-primenit",
-              },
-              {
-                title: "Формулы событий в астрологии",
-                desc: "Как читать карту без магии и фатализма",
-                date: "11 ноября, 2025",
-                link: "/formulaevents",
-              },
-              {
-                title: "СОЛЯР - РАСЧЕТ",
-                desc: "Персональный астрологический прогноз на год",
-                date: "4 сентября, 2025",
-                link: "/solar",
-              },
-              {
-                title: "ФОРМУЛА ДУШИ (АСТРОГОР)",
-                desc: "Глубинный анализ вашей души через астрологию",
-                date: "4 сентября, 2025",
-                link: "/formuladushi",
               },
             ].map((post, i) => (
               <Link key={i} to={post.link}>
