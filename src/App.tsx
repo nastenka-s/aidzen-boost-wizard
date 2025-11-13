@@ -17,6 +17,7 @@ import FormulaEvents from "./pages/FormulaEvents";
 import ChisloSudby from "./pages/ChisloSudby";
 import SovmestimostDolgih from "./pages/SovmestimostDolgih";
 import PоказателиDeneg from "./pages/PоказателиDeneg";
+import ChisloDoma from "./pages/ChisloDoma";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son" element={<ChisloDoma />} />
           <Route path="/pokazateli-deneg-i-bogatstva-v-matrice-sudby" element={<PоказателиDeneg />} />
           <Route path="/sovmestimost-dlya-dolgih-otnosheniy" element={<SovmestimostDolgih />} />
           <Route path="/chislo-sudby-kak-primenit" element={<ChisloSudby />} />

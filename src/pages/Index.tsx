@@ -416,6 +416,12 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
+                title: "Число дома и квартиры: как адрес влияет на деньги и сон",
+                desc: "Узнайте, как посчитать число дома и квартиры по нумерологии",
+                date: "16 января, 2025",
+                link: "/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son",
+              },
+              {
                 title: "Показатели денег и богатства в матрице судьбы",
                 desc: "Как по дате рождения увидеть денежный потенциал в матрице судьбы",
                 date: "16 января, 2025",
@@ -426,12 +432,6 @@ const Index = () => {
                 desc: "Узнайте, как определить совместимость по дате рождения и числу судьбы",
                 date: "16 января, 2025",
                 link: "/sovmestimost-dlya-dolgih-otnosheniy",
-              },
-              {
-                title: "Число судьбы: как рассчитать и применить в жизни",
-                desc: "Узнайте, как рассчитать число судьбы по дате рождения",
-                date: "16 января, 2025",
-                link: "/chislo-sudby-kak-primenit",
               },
             ].map((post, i) => (
               <Link key={i} to={post.link}>
