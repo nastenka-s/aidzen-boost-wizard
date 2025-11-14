@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Блог НейроДзен: астрология и нумерология</title>
+    <link>https://aidzen.ru/blog</link>
+    <description>Блог о астрологии, нумерологии и эзотерике. Полезные статьи о натальных картах, совместимости, числе судьбы и астрологических расчетах.</description>
+    <language>ru</language>
+    <atom:link href="https://aidzen.ru/rss.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Транзиты к натальной карте и их влияние: простое объяснение</title>
+      <link>https://aidzen.ru/tranzity-k-natalnoj-karte-i-ih-vliyanie</link>
+      <description>Что такое транзиты к натальной карте, как они влияют на события и решения, как читать транзиты по шагам и не попасть в ловушку фатализма.</description>
+      <pubDate>Thu, 16 Jan 2025 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/tranzity-k-natalnoj-karte-i-ih-vliyanie</guid>
+    </item>
+    
+    <item>
+      <title>Число дома и квартиры: как адрес влияет на деньги и сон</title>
+      <link>https://aidzen.ru/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son</link>
+      <description>Узнайте, как посчитать число дома и квартиры по нумерологии, что оно значит для вашего благополучия и как нейтрализовать негативные вибрации.</description>
+      <pubDate>Thu, 16 Jan 2025 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son</guid>
+    </item>
+    
+    <item>
+      <title>Показатели денег и богатства в матрице судьбы</title>
+      <link>https://aidzen.ru/pokazateli-deneg-i-bogatstva-v-matrice-sudby</link>
+      <description>Как по дате рождения увидеть денежный потенциал в матрице судьбы. Какие линии и цифры отвечают за доход, накопления и риски. Пошаговый разбор с примерами.</description>
+      <pubDate>Thu, 16 Jan 2025 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/pokazateli-deneg-i-bogatstva-v-matrice-sudby</guid>
+    </item>
+    
+    <item>
+      <title>Совместимость для долгих отношений: как понять по дате рождения</title>
+      <link>https://aidzen.ru/sovmestimost-dlya-dolgih-otnosheniy</link>
+      <description>Узнайте, как определить совместимость по дате рождения и числу судьбы</description>
+      <pubDate>Thu, 16 Jan 2025 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/sovmestimost-dlya-dolgih-otnosheniy</guid>
+    </item>
+    
+    <item>
+      <title>Число судьбы: как рассчитать и применить в жизни</title>
+      <link>https://aidzen.ru/chislo-sudby-kak-primenit</link>
+      <description>Узнайте, как рассчитать число судьбы по дате рождения и понять, что оно значит</description>
+      <pubDate>Thu, 16 Jan 2025 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/chislo-sudby-kak-primenit</guid>
+    </item>
+    
+    <item>
+      <title>Формулы событий в астрологии</title>
+      <link>https://aidzen.ru/formulaevents</link>
+      <description>Как читать карту без магии и фатализма</description>
+      <pubDate>Mon, 11 Nov 2024 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/formulaevents</guid>
+    </item>
+    
+    <item>
+      <title>СОЛЯР - РАСЧЕТ</title>
+      <link>https://aidzen.ru/solar</link>
+      <description>Персональный астрологический прогноз на год</description>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/solar</guid>
+    </item>
+    
+    <item>
+      <title>ФОРМУЛА ДУШИ (АСТРОГОР)</title>
+      <link>https://aidzen.ru/formuladushi</link>
+      <description>Глубинный анализ вашей души через астрологию</description>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/formuladushi</guid>
+    </item>
+    
+    <item>
+      <title>Совместимость по натальной карте</title>
+      <link>https://aidzen.ru/synastry</link>
+      <description>Узнайте о совместимости с вашим партнером</description>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/synastry</guid>
+    </item>
+    
+    <item>
+      <title>Натальная карта</title>
+      <link>https://aidzen.ru/natalchart</link>
+      <description>Полный расчет вашей натальной карты</description>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 +0300</pubDate>
+      <guid>https://aidzen.ru/natalchart</guid>
+    </item>
+  </channel>
+</rss>
