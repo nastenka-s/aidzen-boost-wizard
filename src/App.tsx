@@ -18,6 +18,7 @@ import ChisloSudby from "./pages/ChisloSudby";
 import SovmestimostDolgih from "./pages/SovmestimostDolgih";
 import PоказателиDeneg from "./pages/PоказателиDeneg";
 import ChisloDoma from "./pages/ChisloDoma";
+import Tranzity from "./pages/Tranzity";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/tranzity-k-natalnoj-karte-i-ih-vliyanie" element={<Tranzity />} />
           <Route path="/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son" element={<ChisloDoma />} />
           <Route path="/pokazateli-deneg-i-bogatstva-v-matrice-sudby" element={<PоказателиDeneg />} />
           <Route path="/sovmestimost-dlya-dolgih-otnosheniy" element={<SovmestimostDolgih />} />
