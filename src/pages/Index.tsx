@@ -28,6 +28,7 @@ import astrologyGif from "@/assets/astrologyapp.gif";
 import blondeWoman from "@/assets/blondewoman.png";
 import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
+import matrixSudby from "@/assets/matrix-sudby.png";
 const Index = () => {
   const isAndroid = /Android/i.test(navigator.userAgent);
 
@@ -293,8 +294,75 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Uniqueness Section - Astrological Program */}
+      {/* Matrix Sudby Section */}
       <section className="py-8 lg:py-12">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <Badge variant="outline" className="border-primary/30 text-primary font-medium">
+                Нумерология
+              </Badge>
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Матрица судьбы</h2>
+              <div className="space-y-4 text-lg text-muted-foreground">
+                <p>
+                  Матрица судьбы — это древняя нумерологическая система, которая раскрывает ваши таланты, предназначение и кармические задачи через энергии чисел и арканов.
+                </p>
+                <p className="font-medium text-foreground">
+                  Узнайте о своих сильных сторонах, денежных возможностях, отношениях и жизненных задачах через расчет матрицы по дате рождения.
+                </p>
+                <ul className="space-y-2 text-base">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Определение предназначения и талантов</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Анализ денежных энергий и финансового потенциала</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Совместимость в отношениях по матрице</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Кармические задачи и уроки души</span>
+                  </li>
+                </ul>
+              </div>
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25"
+                asChild
+              >
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                  Рассчитать матрицу судьбы бесплатно
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </a>
+              </Button>
+            </div>
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={matrixSudby}
+                  alt="Матрица судьбы - пример расчета"
+                  className="w-full"
+                />
+              </div>
+              {/* Floating orbs */}
+              <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
+              <div
+                className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse"
+                style={{
+                  animationDelay: "1s",
+                }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Uniqueness Section - Astrological Program */}
+      <section className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
@@ -416,22 +484,22 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
+                title: "Ключевые астрологические события 2026 года: как подготовиться",
+                desc: "Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году",
+                date: "16 января, 2025",
+                link: "/klyuchevye-astrologicheskie-sobytiya-2026",
+              },
+              {
                 title: "Транзиты к натальной карте и их влияние: простое объяснение",
                 desc: "Что такое транзиты к натальной карте, как они влияют на события и решения",
-                date: "14 ноября, 2025",
+                date: "16 января, 2025",
                 link: "/tranzity-k-natalnoj-karte-i-ih-vliyanie",
               },
               {
                 title: "Число дома и квартиры: как адрес влияет на деньги и сон",
                 desc: "Узнайте, как посчитать число дома и квартиры по нумерологии",
-                date: "14 ноября, 2025",
+                date: "16 января, 2025",
                 link: "/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son",
-              },
-              {
-                title: "Показатели денег и богатства в матрице судьбы",
-                desc: "Как по дате рождения увидеть денежный потенциал в матрице судьбы",
-                date: "14 ноября, 2025",
-                link: "/pokazateli-deneg-i-bogatstva-v-matrice-sudby",
               },
             ].map((post, i) => (
               <Link key={i} to={post.link}>

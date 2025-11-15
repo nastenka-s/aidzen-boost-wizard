@@ -19,6 +19,7 @@ import SovmestimostDolgih from "./pages/SovmestimostDolgih";
 import PоказателиDeneg from "./pages/PоказателиDeneg";
 import ChisloDoma from "./pages/ChisloDoma";
 import Tranzity from "./pages/Tranzity";
+import AstrologicalEvents2026 from "./pages/AstrologicalEvents2026";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/klyuchevye-astrologicheskie-sobytiya-2026" element={<AstrologicalEvents2026 />} />
           <Route path="/tranzity-k-natalnoj-karte-i-ih-vliyanie" element={<Tranzity />} />
           <Route path="/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son" element={<ChisloDoma />} />
           <Route path="/pokazateli-deneg-i-bogatstva-v-matrice-sudby" element={<PоказателиDeneg />} />
