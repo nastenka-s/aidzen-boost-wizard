@@ -97,11 +97,12 @@ const Index = () => {
 
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight tracking-tight">
-                  Натальная карта онлайн бесплатно и <span className="text-gradient">гороскоп бесплатно</span>
+                  Точные ответы на важные вопросы:{" "}
+                  <span className="text-gradient">натальная карта, гороскоп, матрица судьбы, прогнозы</span>
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
-                  Рассчитать матрицу судьбы, нумерология, транзиты планет — ИИ обучен на 37 книгах и 45 курсах по
-                  эзотерике. Получите персональные прогнозы за минуты.
+                  Рассчитать астрологический прогноз, матрицу судьбы, транзиты планет — ИИ обучен на 37 книгах и 45
+                  курсах по эзотерике. Получите персональные прогнозы за минуты.
                 </p>
               </div>
 
@@ -305,10 +306,12 @@ const Index = () => {
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Матрица судьбы</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
                 <p>
-                  Матрица судьбы — это древняя нумерологическая система, которая раскрывает ваши таланты, предназначение и кармические задачи через энергии чисел и арканов.
+                  Матрица судьбы — это древняя нумерологическая система, которая раскрывает ваши таланты, предназначение
+                  и кармические задачи через энергии чисел и арканов.
                 </p>
                 <p className="font-medium text-foreground">
-                  Узнайте о своих сильных сторонах, денежных возможностях, отношениях и жизненных задачах через расчет матрицы по дате рождения.
+                  Узнайте о своих сильных сторонах, денежных возможностях, отношениях и жизненных задачах через расчет
+                  матрицы по дате рождения.
                 </p>
                 <ul className="space-y-2 text-base">
                   <li className="flex items-start gap-2">
@@ -329,11 +332,7 @@ const Index = () => {
                   </li>
                 </ul>
               </div>
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25"
-                asChild
-              >
+              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
                 <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Рассчитать матрицу судьбы бесплатно
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -342,11 +341,7 @@ const Index = () => {
             </div>
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={matrixSudby}
-                  alt="Матрица судьбы - пример расчета"
-                  className="w-full"
-                />
+                <img src={matrixSudby} alt="Матрица судьбы - пример расчета" className="w-full" />
               </div>
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
