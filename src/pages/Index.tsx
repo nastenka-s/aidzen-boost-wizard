@@ -98,7 +98,7 @@ const Index = () => {
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight tracking-tight">
                   Точные ответы на важные вопросы:{" "}
-                  <span className="text-gradient">натальная карта, гороскоп, матрица судьбы, прогнозы</span>
+                  <span className="text-gradient">на важные вопросы в новой астро-нейронке</span>
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
                   Рассчитать астрологический прогноз, матрицу судьбы, транзиты планет — ИИ обучен на 37 книгах и 45
