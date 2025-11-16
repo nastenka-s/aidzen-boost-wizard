@@ -20,6 +20,7 @@ import PоказателиDeneg from "./pages/PоказателиDeneg";
 import ChisloDoma from "./pages/ChisloDoma";
 import Tranzity from "./pages/Tranzity";
 import AstrologicalEvents2026 from "./pages/AstrologicalEvents2026";
+import DivorceInAstrology from "./pages/DivorceInAstrology";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/klyuchevye-astrologicheskie-sobytiya-2026" element={<AstrologicalEvents2026 />} />
+          <Route path="/razvody-v-astrologii-gde-iskat" element={<DivorceInAstrology />} />
           <Route path="/tranzity-k-natalnoj-karte-i-ih-vliyanie" element={<Tranzity />} />
           <Route path="/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son" element={<ChisloDoma />} />
           <Route path="/pokazateli-deneg-i-bogatstva-v-matrice-sudby" element={<PоказателиDeneg />} />
