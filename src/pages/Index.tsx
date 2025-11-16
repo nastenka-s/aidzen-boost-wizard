@@ -29,6 +29,8 @@ import blondeWoman from "@/assets/blondewoman.png";
 import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
 import matrixSudby from "@/assets/matrix-sudby.png";
+import { blogPosts } from "@/data/blogPosts";
+
 const Index = () => {
   const isAndroid = /Android/i.test(navigator.userAgent);
 
@@ -476,26 +478,7 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                title: "Ключевые астрологические события 2026 года: как подготовиться",
-                desc: "Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году",
-                date: "16 января, 2025",
-                link: "/klyuchevye-astrologicheskie-sobytiya-2026",
-              },
-              {
-                title: "Транзиты к натальной карте и их влияние: простое объяснение",
-                desc: "Что такое транзиты к натальной карте, как они влияют на события и решения",
-                date: "16 января, 2025",
-                link: "/tranzity-k-natalnoj-karte-i-ih-vliyanie",
-              },
-              {
-                title: "Число дома и квартиры: как адрес влияет на деньги и сон",
-                desc: "Узнайте, как посчитать число дома и квартиры по нумерологии",
-                date: "16 января, 2025",
-                link: "/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son",
-              },
-            ].map((post, i) => (
+            {blogPosts.slice(0, 3).map((post, i) => (
               <Link key={i} to={post.link}>
                 <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer h-full">
                   <div className="space-y-4">
