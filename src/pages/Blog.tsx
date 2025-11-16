@@ -5,83 +5,9 @@ import { BookOpen, ArrowRight, MessageCircle, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import logo from "@/assets/logo.png";
+import { blogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
-  const posts = [
-    {
-      title: 'Разводы в астрологии: где искать в натальной карте',
-      desc: 'Как увидеть тему разводов в натальной карте: какие дома, планеты и аспекты указывают на риск',
-      date: '15 ноября, 2025',
-      link: '/razvody-v-astrologii-gde-iskat'
-    },
-    {
-      title: 'Ключевые астрологические события 2026 года: как подготовиться',
-      desc: 'Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году',
-      date: '15 ноября, 2025',
-      link: '/klyuchevye-astrologicheskie-sobytiya-2026'
-    },
-    {
-      title: 'Транзиты к натальной карте и их влияние: простое объяснение',
-      desc: 'Что такое транзиты к натальной карте, как они влияют на события и решения, как читать транзиты по шагам',
-      date: '16 января, 2025',
-      link: '/tranzity-k-natalnoj-karte-i-ih-vliyanie'
-    },
-    {
-      title: 'Число дома и квартиры: как адрес влияет на деньги и сон',
-      desc: 'Узнайте, как посчитать число дома и квартиры по нумерологии и что оно значит для вашего благополучия',
-      date: '16 января, 2025',
-      link: '/chislo-doma-i-kvartiry-vliyanie-na-dengi-i-son'
-    },
-    {
-      title: 'Показатели денег и богатства в матрице судьбы',
-      desc: 'Как по дате рождения увидеть денежный потенциал в матрице судьбы',
-      date: '16 января, 2025',
-      link: '/pokazateli-deneg-i-bogatstva-v-matrice-sudby'
-    },
-    {
-      title: 'Совместимость для долгих отношений: как понять по дате рождения',
-      desc: 'Узнайте, как определить совместимость по дате рождения и числу судьбы',
-      date: '16 января, 2025',
-      link: '/sovmestimost-dlya-dolgih-otnosheniy'
-    },
-    {
-      title: 'Число судьбы: как рассчитать и применить в жизни',
-      desc: 'Узнайте, как рассчитать число судьбы по дате рождения и понять, что оно значит',
-      date: '16 января, 2025',
-      link: '/chislo-sudby-kak-primenit'
-    },
-    {
-      title: 'Формулы событий в астрологии',
-      desc: 'Как читать карту без магии и фатализма',
-      date: '11 ноября, 2025',
-      link: '/formulaevents'
-    },
-    {
-      title: 'СОЛЯР - РАСЧЕТ',
-      desc: 'Персональный астрологический прогноз на год',
-      date: '4 сентября, 2025',
-      link: '/solar'
-    },
-    {
-      title: 'ФОРМУЛА ДУШИ (АСТРОГОР)',
-      desc: 'Глубинный анализ вашей души через астрологию',
-      date: '4 сентября, 2025',
-      link: '/formuladushi'
-    },
-    {
-      title: 'Совместимость по натальной карте',
-      desc: 'Узнайте о совместимости с вашим партнером',
-      date: '4 сентября, 2025',
-      link: '/synastry'
-    },
-    {
-      title: 'Натальная карта',
-      desc: 'Полный расчет вашей натальной карты',
-      date: '4 сентября, 2025',
-      link: '/natalchart'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -137,7 +63,7 @@ const Blog = () => {
 
           {/* Blog Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {posts.map((post, i) => (
+            {blogPosts.map((post, i) => (
               <Link key={i} to={post.link}>
                 <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer h-full">
                   <div className="space-y-4">
