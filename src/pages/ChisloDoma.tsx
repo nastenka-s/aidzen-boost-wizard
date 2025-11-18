@@ -242,7 +242,7 @@ const ChisloDoma = () => {
 
             {/* CTA Section */}
             <Card className="p-8 bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30 text-center">
-              <h3 className="text-2xl font-bold mb-4">Получите 5 моментальных отчётов бесплатно</h3>
+              <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
               <p className="text-muted-foreground mb-6">Начните с готовых результатов за пару минут</p>
               <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
                 <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">

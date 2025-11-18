@@ -310,7 +310,7 @@ const SovmestimostDolgih = () => {
           <section className="my-12">
             <Card className="p-8 bg-gradient-to-br from-primary/10 via-primary/5 to-background border-primary/20">
               <div className="text-center space-y-4">
-                <h3 className="text-2xl font-bold">Получите 5 моментальных отчётов бесплатно</h3>
+                <h3 className="text-2xl font-bold">Получите 3 моментальных отчёта бесплатно</h3>
                 <p className="text-muted-foreground">
                   Начните с готовых мини-результатов за пару минут
                 </p>

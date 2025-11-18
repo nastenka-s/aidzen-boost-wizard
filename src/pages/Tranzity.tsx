@@ -401,7 +401,7 @@ const Tranzity = () => {
             <div className="mt-16 text-center">
               <Card className="p-8 bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
                 <h3 className="text-2xl font-bold mb-4">
-                  Получите 5 моментальных отчётов бесплатно
+                  Получите 3 моментальных отчёта бесплатно
                 </h3>
                 <p className="text-muted-foreground mb-6">
                   Начните с готовых мини-результатов за пару минут

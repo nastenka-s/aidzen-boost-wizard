@@ -429,7 +429,7 @@ const TalentsInHoroscope = () => {
             </section>
 
             <Card className="p-8 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30 text-center">
-              <h3 className="text-2xl font-bold mb-4">Получите 5 моментальных отчётов бесплатно</h3>
+              <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
               <p className="text-muted-foreground mb-6">
                 Начните с готовых мини-результатов за пару минут
               </p>

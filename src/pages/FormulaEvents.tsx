@@ -379,12 +379,12 @@ const FormulaEvents = () => {
             <Card className="p-8 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/30">
               <h2 className="text-2xl font-bold mb-4 text-center">Начни свой путь в астрологии</h2>
               <p className="text-center text-muted-foreground mb-6">
-                Регистрируйся и забирай 5 моментальных отчётов бесплатно — начни с базовой натальной карты, совместимости и персональных периодов удачи.
+                Регистрируйся и забирай 3 моментальных отчёта бесплатно — начни с базовой натальной карты, совместимости и персональных периодов удачи.
               </p>
               <div className="flex justify-center gap-4">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
                   <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                    Получить 5 бесплатных расчетов
+                    Получить 3 бесплатных расчета
                   </a>
                 </Button>
               </div>
