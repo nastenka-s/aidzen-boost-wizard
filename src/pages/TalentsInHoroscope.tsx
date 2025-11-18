@@ -435,7 +435,7 @@ const TalentsInHoroscope = () => {
               </p>
               <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
                 <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
-                  Получить 5 отчётов
+                  Получить 3 отчёта
                 </a>
               </Button>
             </Card>

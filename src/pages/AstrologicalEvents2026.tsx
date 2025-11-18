@@ -232,7 +232,7 @@ const AstrologicalEvents2026 = () => {
                 <div className="flex justify-center">
                   <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
                     <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                      Получить 5 отчётов
+                      Получить 3 отчёта
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </a>
                   </Button>

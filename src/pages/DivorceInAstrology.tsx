@@ -610,7 +610,7 @@ const DivorceInAstrology = () => {
               </p>
               <Button size="lg" className="font-semibold" asChild>
                 <a href="https://t.me/aidzenbot" target="_blank" rel="noopener noreferrer">
-                  Получить 5 отчётов
+                  Получить 3 отчёта
                 </a>
               </Button>
             </CardContent>

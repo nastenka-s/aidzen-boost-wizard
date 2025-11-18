@@ -180,7 +180,7 @@ const Index = () => {
                   <Badge variant="outline" className="border-primary/30 text-primary font-medium text-xs">
                     Бесплатно
                   </Badge>
-                  <span>Первые 5 расчетов без оплаты</span>
+                  <span>Первые 3 расчета без оплаты</span>
                 </div>
               </div>
 
@@ -409,7 +409,7 @@ const Index = () => {
           <div className="max-w-2xl mx-auto space-y-4">
             {[
               {
-                count: "5",
+                count: "3",
                 price: "БЕСПЛАТНО",
                 popular: false,
               },
