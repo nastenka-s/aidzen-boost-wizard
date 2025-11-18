@@ -72,7 +72,7 @@ const NatalChart = () => {
             <li>Укажите время и город</li>
             <li>Получите готовый натальный гороскоп и расшифровку</li>
           </ol>
-          <p className="mb-6">✨ Первые 5 расчетов — бесплатно.</p>
+          <p className="mb-6">✨ Первые 3 расчета — бесплатно.</p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">🔭 Из чего состоит натальный гороскоп</h3>
           <div className="bg-card border border-border rounded-2xl p-6 mb-8">
@@ -127,7 +127,7 @@ const NatalChart = () => {
                 <Sparkles className="w-4 h-4 ml-2" />
               </a>
             </Button>
-            <p className="mt-4 text-sm">Первые 5 расчётов — бесплатно</p>
+            <p className="mt-4 text-sm">Первые 3 расчёта — бесплатно</p>
           </div>
         </div>
       </article>

@@ -604,7 +604,7 @@ const DivorceInAstrology = () => {
           {/* CTA */}
           <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
             <CardContent className="pt-8 pb-8 text-center">
-              <h2 className="text-2xl font-bold mb-4">Получите 5 моментальных отчётов бесплатно</h2>
+              <h2 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Начните с готовых мини-результатов за пару минут
               </p>

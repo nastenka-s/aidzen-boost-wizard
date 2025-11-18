@@ -227,7 +227,7 @@ const AstrologicalEvents2026 = () => {
 
             <div className="my-12">
               <Card className="p-8 bg-gradient-to-br from-primary/5 via-purple-500/5 to-primary/5 border-primary/20">
-                <h3 className="text-2xl font-bold mb-4 text-center">Получите 5 моментальных отчётов бесплатно</h3>
+                <h3 className="text-2xl font-bold mb-4 text-center">Получите 3 моментальных отчёта бесплатно</h3>
                 <p className="text-muted-foreground mb-6 text-center">Начните с готовых мини-результатов за пару минут</p>
                 <div className="flex justify-center">
                   <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>

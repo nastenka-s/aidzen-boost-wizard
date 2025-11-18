@@ -304,7 +304,7 @@ const ChisloSudby = () => {
           </section>
 
           <div className="bg-gradient-to-br from-secondary/20 to-primary/20 border border-border rounded-2xl p-8 my-12">
-            <h3 className="text-2xl font-bold mb-4">Получите 5 моментальных отчётов бесплатно</h3>
+            <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
             <p className="mb-6 text-lg">Начните с готовых результатов за пару минут</p>
             <Button
               size="lg"
@@ -312,7 +312,7 @@ const ChisloSudby = () => {
               asChild
             >
               <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                Получить 5 бесплатных расчетов
+                Получить 3 бесплатных расчета
                 <Sparkles className="w-5 h-5 ml-2" />
               </a>
             </Button>

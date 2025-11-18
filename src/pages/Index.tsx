@@ -40,7 +40,7 @@ const Index = () => {
         <title>НейроДзен - Натальная карта онлайн бесплатно, Гороскоп, Нумерология | Бесплатный расчет</title>
         <meta
           name="description"
-          content="Получите натальную карту онлайн бесплатно, гороскоп бесплатно и нумерологический расчет. Рассчитать матрицу судьбы, число судьбы, транзиты планет. ИИ-наставник по астрологии и эзотерике. Первые 5 расчетов бесплатно."
+          content="Получите натальную карту онлайн бесплатно, гороскоп бесплатно и нумерологический расчет. Рассчитать матрицу судьбы, число судьбы, транзиты планет. ИИ-наставник по астрологии и эзотерике. Первые 3 расчета бесплатно."
         />
         <meta
           name="keywords"
@@ -382,7 +382,7 @@ const Index = () => {
                 asChild
               >
                 <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                  Получить 5 бесплатных расчетов
+                  Получить 3 бесплатных расчета
                   <Sparkles className="w-5 h-5 ml-2" />
                 </a>
               </Button>
@@ -458,7 +458,7 @@ const Index = () => {
               asChild
             >
               <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                Получить 5 бесплатных расчетов
+                Получить 3 бесплатных расчета
                 <Sparkles className="w-5 h-5 ml-2" />
               </a>
             </Button>
@@ -531,7 +531,7 @@ const Index = () => {
                   asChild
                 >
                   <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                    Получить 5 бесплатных расчетов
+                    Получить 3 бесплатных расчета
                     <Sparkles className="w-5 h-5 ml-2" />
                   </a>
                 </Button>
