@@ -10,27 +10,81 @@ import { MatrixVisualization } from "@/components/MatrixVisualization";
 import logo from "@/assets/logo.png";
 
 const ARCANA_NAMES: Record<number, string> = {
-  1: "Маг", 2: "Верховная Жрица", 3: "Императрица", 4: "Император", 5: "Иерофант",
-  6: "Влюблённые", 7: "Колесница", 8: "Сила", 9: "Отшельник", 10: "Колесо Фортуны",
-  11: "Справедливость", 12: "Повешенный", 13: "Смерть", 14: "Умеренность", 15: "Дьявол",
-  16: "Башня", 17: "Звезда", 18: "Луна", 19: "Солнце", 20: "Суд", 21: "Мир", 22: "Шут",
+  1: "Маг",
+  2: "Верховная Жрица",
+  3: "Императрица",
+  4: "Император",
+  5: "Иерофант",
+  6: "Влюблённые",
+  7: "Колесница",
+  8: "Сила",
+  9: "Отшельник",
+  10: "Колесо Фортуны",
+  11: "Справедливость",
+  12: "Повешенный",
+  13: "Смерть",
+  14: "Умеренность",
+  15: "Дьявол",
+  16: "Башня",
+  17: "Звезда",
+  18: "Луна",
+  19: "Солнце",
+  20: "Суд",
+  21: "Мир",
+  22: "Шут",
 };
 
 const calculateArcana = (num: number): number => {
   let n = Math.abs(parseInt(String(num), 10) || 0);
   if (n === 0) return 22;
   while (n > 22) {
-    n = n.toString().split("").reduce((sum, d) => sum + (parseInt(d, 10) || 0), 0);
+    n = n
+      .toString()
+      .split("")
+      .reduce((sum, d) => sum + (parseInt(d, 10) || 0), 0);
     if (n === 0) n = 22;
   }
   return n;
 };
 
 interface MatrixData {
-  Day: number; Month: number; Year: number; Bottom: number; Center: number;
-  TL: number; TR: number; BR: number; BL: number;
-  lovePoint: number; moneyPoint: number;
-  spokes: Array<{ angle: number; outer: number; middle: number; inner: number; label: string }>;
+  Day: number;
+  Month: number;
+  Year: number;
+  Bottom: number;
+  Center: number;
+  TL: number;
+  TR: number;
+  BR: number;
+  BL: number;
+
+  lovePoint: number;
+  moneyPoint: number;
+  talentPoint: number;
+
+  // Предназначения
+  P_ground: number;
+  P_sky: number;
+  P: number;
+  male: number;
+  female: number;
+  family: number;
+  general: number;
+
+  // Кармический хвост
+  tailBottom: number;
+  tailMiddle: number;
+  tailInner: number;
+
+  // Лучи и возрастной круг
+  spokes: Array<{
+    angle: number;
+    outer: number;
+    middle: number;
+    inner: number;
+    label: string;
+  }>;
+  yearCircle: Array<{ age: number; arcana: number }>;
 }
 
 export default function MatrixSudby() {
@@ -43,16 +97,16 @@ export default function MatrixSudby() {
     if (!day || !month || !year) return;
 
     // === 1. ЛИЧНЫЙ КВАДРАТ (Диагональный ромб) ===
-    const Day = calculateArcana(day); // ЛЕВО (Фиолетовый)
-    const Month = calculateArcana(month); // ВЕРХ (Фиолетовый)
+    const Day = calculateArcana(day); // ЛЕВО
+    const Month = calculateArcana(month); // ВЕРХ
 
     const yearDigitsSum = String(year)
       .split("")
       .reduce((acc, val) => acc + Number(val), 0);
-    const Year = calculateArcana(yearDigitsSum); // ПРАВО (Красный)
+    const Year = calculateArcana(yearDigitsSum); // ПРАВО
 
-    const Bottom = calculateArcana(Day + Month + Year); // НИЗ (Красный)
-    const Center = calculateArcana(Day + Month + Year + Bottom); // ЦЕНТР (Желтый)
+    const Bottom = calculateArcana(Day + Month + Year); // НИЗ
+    const Center = calculateArcana(Day + Month + Year + Bottom); // ЦЕНТР
 
     // === 2. РОДОВОЙ КВАДРАТ (Прямой квадрат) ===
     const TL = calculateArcana(Day + Month); // Верх-Лево (Духовное Отца)
@@ -89,12 +143,24 @@ export default function MatrixSudby() {
     const rod_middle_BL = calculateArcana(BL + rod_inner_BL);
 
     // === 4. ДЕНЬГИ И ОТНОШЕНИЯ ===
-    const relEntrance = sky_middle_bottom;
-    const moneyEntrance = earth_middle_right;
+    const relEntrance = sky_middle_bottom; // вход в отношения
+    const moneyEntrance = earth_middle_right; // вход в деньги
 
     const lovePoint = calculateArcana(relEntrance + sky_inner_bottom);
     const moneyPoint = calculateArcana(moneyEntrance + earth_inner_right);
 
+    // === 5. ПРЕДНАЗНАЧЕНИЯ (как в MatrixOfDestinyWheel) ===
+    const SkyDestiny = calculateArcana(Month + Bottom); // Небо (Верх + Низ)
+    const EarthDestiny = calculateArcana(Day + Year); // Земля (Лево + Право)
+    const PersonalDestiny = calculateArcana(SkyDestiny + EarthDestiny); // 1-е предназначение
+
+    const MaleRod = calculateArcana(TL + BR); // Диагональ Отца
+    const FemaleRod = calculateArcana(TR + BL); // Диагональ Матери
+    const SocialDestiny = calculateArcana(MaleRod + FemaleRod); // 2-е предназначение (Социум/Род)
+
+    const GeneralDestiny = calculateArcana(PersonalDestiny + SocialDestiny); // 3-е предназначение (Духовное)
+
+    // === 6. ЛУЧИ "ПАУТИНЫ" ===
     const spokesData = [
       { angle: 180, outer: Day, middle: earth_middle_left, inner: earth_inner_left, label: "0" },
       { angle: 225, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "10" },
@@ -106,6 +172,12 @@ export default function MatrixSudby() {
       { angle: 135, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "70" },
     ];
 
+    // === 7. КРУГ ВОЗРАСТОВ (как в колесе) ===
+    const yearCircle = spokesData.map((s, i) => ({
+      age: i * 10,
+      arcana: s.outer,
+    }));
+
     console.log("=== РАСЧЕТЫ МАТРИЦЫ ===");
     console.log("Day:", Day, "Month:", Month, "Year:", Year, "Bottom:", Bottom, "Center:", Center);
     console.log("earth_inner_right:", earth_inner_right, "earth_middle_right:", earth_middle_right);
@@ -114,10 +186,30 @@ export default function MatrixSudby() {
     console.log("Spokes для angle 90 (60 лет):", spokesData[6]);
 
     setMatrix({
-      Day, Month, Year, Bottom, Center,
-      TL, TR, BR, BL,
-      lovePoint, moneyPoint,
+      Day,
+      Month,
+      Year,
+      Bottom,
+      Center,
+      TL,
+      TR,
+      BR,
+      BL,
+      lovePoint,
+      moneyPoint,
+      talentPoint: Month,
+      P_ground: EarthDestiny,
+      P_sky: SkyDestiny,
+      P: PersonalDestiny,
+      male: MaleRod,
+      female: FemaleRod,
+      family: SocialDestiny,
+      general: GeneralDestiny,
+      tailBottom: Bottom,
+      tailMiddle: relEntrance,
+      tailInner: sky_inner_bottom,
       spokes: spokesData,
+      yearCircle,
     });
   };
 
@@ -152,32 +244,43 @@ export default function MatrixSudby() {
                   Что такое Матрица Судьбы?
                 </h3>
                 <p className="text-gray-200">
-                  Матрица Судьбы — это система самопознания, основанная на дате рождения. 
-                  Она раскрывает ваши таланты, предназначение и жизненные циклы.
+                  Матрица Судьбы — это система самопознания, основанная на дате рождения. Она раскрывает ваши таланты,
+                  предназначение и жизненные циклы.
                 </p>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="birthDate" className="text-white text-lg mb-2 block">Дата рождения</Label>
+                  <Label htmlFor="birthDate" className="text-white text-lg mb-2 block">
+                    Дата рождения
+                  </Label>
                   <Input
-                    id="birthDate" type="date" value={birthDate}
+                    id="birthDate"
+                    type="date"
+                    value={birthDate}
                     onChange={(e) => setBirthDate(e.target.value)}
                     className="bg-white/20 border-white/30 text-white text-lg"
-                    max={new Date().toISOString().split('T')[0]}
+                    max={new Date().toISOString().split("T")[0]}
                   />
                 </div>
 
-                <Button onClick={handleCalculate} disabled={!birthDate}
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-lg py-6">
+                <Button
+                  onClick={handleCalculate}
+                  disabled={!birthDate}
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-lg py-6"
+                >
                   Рассчитать Матрицу
                 </Button>
 
                 {matrix && (
                   <div className="space-y-2">
-                    <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6" asChild>
+                    <Button
+                      className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6"
+                      asChild
+                    >
                       <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                        <Sparkles className="w-5 h-5 mr-2" />Получить полный анализ
+                        <Sparkles className="w-5 h-5 mr-2" />
+                        Получить полный анализ
                       </a>
                     </Button>
                     <p className="text-sm text-gray-400 text-center">Требуется регистрация</p>
