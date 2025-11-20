@@ -11,6 +11,8 @@ interface MatrixVisualizationProps {
     TR: number;
     BR: number;
     BL: number;
+    lovePoint: number;
+    moneyPoint: number;
     spokes: Array<{
       angle: number;
       outer: number;
@@ -21,9 +23,34 @@ interface MatrixVisualizationProps {
   };
 }
 
+// Названия 22 арканов
+const ARCANA_NAMES: { [key: number]: string } = {
+  1: "Маг",
+  2: "Верховная Жрица",
+  3: "Императрица",
+  4: "Император",
+  5: "Иерофант",
+  6: "Влюблённые",
+  7: "Колесница",
+  8: "Сила",
+  9: "Отшельник",
+  10: "Колесо Фортуны",
+  11: "Справедливость",
+  12: "Повешенный",
+  13: "Смерть",
+  14: "Умеренность",
+  15: "Дьявол",
+  16: "Башня",
+  17: "Звезда",
+  18: "Луна",
+  19: "Солнце",
+  20: "Суд",
+  21: "Мир",
+  22: "Шут",
+};
+
 const OUTER_RADIUS = 330;
 const MID_RADIUS = OUTER_RADIUS * 0.75;
-const INNER_RADIUS = OUTER_RADIUS * 0.5;
 
 export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
   return (
@@ -43,19 +70,14 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           </filter>
         </defs>
 
-        {/* Центральная точка */}
-        <g transform="translate(0, 0)">
-          <circle r="50" fill="#FBBF24" stroke="#FFDC00" strokeWidth="3" filter="url(#glow)" />
-          <text
-            y="8"
-            textAnchor="middle"
-            fontSize="28"
-            fontWeight="bold"
-            fill="#7C2D12"
-          >
-            {matrix.Center}
-          </text>
-        </g>
+        {/* Внешний круг */}
+        <circle
+          r={OUTER_RADIUS}
+          fill="none"
+          stroke="#9CA3AF"
+          strokeWidth="2"
+          opacity="0.5"
+        />
 
         {/* Линии от центра к внешним точкам */}
         {matrix.spokes.map((spoke, i) => {
@@ -70,10 +92,9 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
               y1="0"
               x2={ox}
               y2={oy}
-              stroke="#6B7280"
-              strokeWidth="1"
-              strokeDasharray="4,4"
-              opacity="0.3"
+              stroke="#9CA3AF"
+              strokeWidth="2"
+              opacity="0.6"
             />
           );
         })}
@@ -194,13 +215,11 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           );
         })}
 
-        {/* Основные точки (0, 10, 20...) + внутренние энергии */}
+        {/* Основные точки (0, 10, 20...) + средние точки */}
         {matrix.spokes.map((spoke, i) => {
           const rad = (spoke.angle * Math.PI) / 180;
           const mx = Math.cos(rad) * MID_RADIUS;
           const my = Math.sin(rad) * MID_RADIUS;
-          const ix = Math.cos(rad) * INNER_RADIUS;
-          const iy = Math.sin(rad) * INNER_RADIUS;
           const ox = Math.cos(rad) * OUTER_RADIUS;
           const oy = Math.sin(rad) * OUTER_RADIUS;
 
@@ -241,6 +260,18 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
                 >
                   {age} лет
                 </text>
+                <text
+                  y={isCardinal ? 58 : 52}
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#E5E7EB"
+                  opacity="0.9"
+                  style={{
+                    textShadow: "0px 1px 2px rgba(0,0,0,0.8)",
+                  }}
+                >
+                  {ARCANA_NAMES[spoke.outer]}
+                </text>
               </g>
 
               {/* Средняя точка */}
@@ -261,23 +292,84 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
                   {spoke.middle}
                 </text>
               </g>
-
-              {/* Внутренняя точка */}
-              <g transform={`translate(${ix}, ${iy})`}>
-                <circle r="14" fill="#10B981" stroke="white" strokeWidth="1.5" />
-                <text
-                  y="4"
-                  textAnchor="middle"
-                  fontSize="10"
-                  fontWeight="600"
-                  fill="white"
-                >
-                  {spoke.inner}
-                </text>
-              </g>
             </g>
           );
         })}
+
+        {/* Точки любви и денег */}
+        <g
+          transform={`translate(${
+            Math.cos((90 * Math.PI) / 180) * 200 - 25
+          }, ${Math.sin((90 * Math.PI) / 180) * 200})`}
+        >
+          <circle
+            r="16"
+            fill="#BE185D"
+            stroke="white"
+            strokeWidth="1.5"
+          />
+          <text
+            y="4"
+            textAnchor="middle"
+            fontSize="10"
+            fontWeight="bold"
+            fill="white"
+          >
+            {matrix.lovePoint}
+          </text>
+          <text
+            x="0"
+            y="-22"
+            textAnchor="middle"
+            fontSize="14"
+          >
+            ❤
+          </text>
+        </g>
+
+        <g
+          transform={`translate(${
+            Math.cos(0) * 200
+          }, ${Math.sin(0) * 200 - 25})`}
+        >
+          <circle
+            r="16"
+            fill="#059669"
+            stroke="white"
+            strokeWidth="1.5"
+          />
+          <text
+            y="4"
+            textAnchor="middle"
+            fontSize="10"
+            fontWeight="bold"
+            fill="white"
+          >
+            {matrix.moneyPoint}
+          </text>
+          <text
+            x="0"
+            y="-22"
+            textAnchor="middle"
+            fontSize="14"
+          >
+            💰
+          </text>
+        </g>
+
+        {/* Центральная точка (на переднем плане) */}
+        <g transform="translate(0, 0)">
+          <circle r="50" fill="#FBBF24" stroke="#FFDC00" strokeWidth="3" filter="url(#glow)" />
+          <text
+            y="8"
+            textAnchor="middle"
+            fontSize="28"
+            fontWeight="bold"
+            fill="#7C2D12"
+          >
+            {matrix.Center}
+          </text>
+        </g>
 
         {/* Легенда */}
         <text
