@@ -54,6 +54,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
   const center = size / 2;
   const OUTER_RADIUS = 230;
   const MID_RADIUS = 170;
+  const INNER_RADIUS = OUTER_RADIUS * 0.5;
 
   const axes = [
     { angle: 180, label: "0 лет" },
@@ -146,11 +147,17 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
           })}
 
           {/* Точки внешнего и внутреннего кругов */}
+          {/* Основные 8 точек возраста */}
           {matrix.spokes.map((spoke, i) => {
             const rad = (spoke.angle * Math.PI) / 180;
-            const mx = Math.cos(rad) * MID_RADIUS;
+
+            const mx = Math.cos(rad) * MID_RADIUS; // средний круг (фиолетовый)
             const my = Math.sin(rad) * MID_RADIUS;
-            const ox = Math.cos(rad) * OUTER_RADIUS;
+
+            const ix = Math.cos(rad) * INNER_RADIUS; // ВНУТРЕННИЙ круг (чёрные кружки)
+            const iy = Math.sin(rad) * INNER_RADIUS;
+
+            const ox = Math.cos(rad) * OUTER_RADIUS; // внешний круг возрастов
             const oy = Math.sin(rad) * OUTER_RADIUS;
 
             const age = parseInt(spoke.label);
@@ -180,19 +187,27 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
                     fontSize="8"
                     fill="#E5E7EB"
                     opacity="0.9"
-                    style={{
-                      textShadow: "0px 1px 2px rgba(0,0,0,0.8)",
-                    }}
+                    style={{ textShadow: "0px 1px 2px rgba(0,0,0,0.8)" }}
                   >
                     {ARCANA_NAMES[spoke.outer]}
                   </text>
                 </g>
 
-                {/* Внутренняя точка (чёрный кружок ближе к центру / внутренние квадраты) */}
-                {spoke.inner > 0 && (
+                {/* Средняя точка (фиолетовый круг) */}
+                {spoke.middle > 0 && (
                   <g transform={`translate(${mx}, ${my})`}>
-                    <circle r="18" fill="#6366F1" stroke="white" strokeWidth="1.5" />
-                    <text y="5" textAnchor="middle" fontSize="11" fontWeight="600" fill="white">
+                    <circle r={INNER_NODE_RADIUS} fill="#020617" stroke="#9CA3AF" strokeWidth="1.5" />
+                    <text y="4" textAnchor="middle" fontSize={INNER_NODE_FONT_SIZE} fontWeight="bold" fill="white">
+                      {spoke.middle}
+                    </text>
+                  </g>
+                )}
+
+                {/* ВНУТРЕННЯЯ точка (чёрный кружок ближе к центру) */}
+                {spoke.inner > 0 && (
+                  <g transform={`translate(${ix}, ${iy})`}>
+                    <circle r={INNER_NODE_RADIUS} fill="#020617" stroke="#9CA3AF" strokeWidth="1.5" />
+                    <text y="4" textAnchor="middle" fontSize={INNER_NODE_FONT_SIZE} fontWeight="bold" fill="white">
                       {spoke.inner}
                     </text>
                   </g>
