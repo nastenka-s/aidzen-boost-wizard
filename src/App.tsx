@@ -24,6 +24,7 @@ import DivorceInAstrology from "./pages/DivorceInAstrology";
 import TalentsInHoroscope from "./pages/TalentsInHoroscope";
 import DecemberEvents2025 from "./pages/DecemberEvents2025";
 import NovyjGod2026 from "./pages/NovyjGod2026";
+import SeventhHouse from "./pages/SeventhHouse";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/7-dom-v-natalnoj-karte-otnosheniya-i-razryvy" element={<SeventhHouse />} />
           <Route path="/talanty-v-goroskope-tehnar-ili-gumanitarij" element={<TalentsInHoroscope />} />
           <Route path="/klyuchevye-astrologicheskie-sobytiya-2026" element={<AstrologicalEvents2026 />} />
           <Route path="/novyj-god-2026-v-chem-vstrechat-po-znaku-zodiaka" element={<NovyjGod2026 />} />
