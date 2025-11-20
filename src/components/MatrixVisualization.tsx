@@ -55,11 +55,7 @@ const MID_RADIUS = OUTER_RADIUS * 0.75;
 export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
   return (
     <div className="flex justify-center items-center w-full overflow-x-auto py-8">
-      <svg
-        viewBox="-400 -400 800 800"
-        className="w-full max-w-4xl h-auto"
-        style={{ minWidth: "600px" }}
-      >
+      <svg viewBox="-400 -400 800 800" className="w-full max-w-4xl h-auto" style={{ minWidth: "600px" }}>
         <defs>
           <filter id="glow">
             <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
@@ -71,31 +67,16 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
         </defs>
 
         {/* Внешний круг */}
-        <circle
-          r={OUTER_RADIUS}
-          fill="none"
-          stroke="#9CA3AF"
-          strokeWidth="2"
-          opacity="0.5"
-        />
+        <circle r={OUTER_RADIUS} fill="none" stroke="#9CA3AF" strokeWidth="2" opacity="0.5" />
 
         {/* Линии от центра к внешним точкам (только к 8 основным) */}
         {matrix.spokes.map((spoke, i) => {
           const rad = (spoke.angle * Math.PI) / 180;
           const ox = Math.cos(rad) * OUTER_RADIUS;
           const oy = Math.sin(rad) * OUTER_RADIUS;
-          
+
           return (
-            <line
-              key={`line-${i}`}
-              x1="0"
-              y1="0"
-              x2={ox}
-              y2={oy}
-              stroke="#9CA3AF"
-              strokeWidth="2"
-              opacity="0.6"
-            />
+            <line key={`line-${i}`} x1="0" y1="0" x2={ox} y2={oy} stroke="#9CA3AF" strokeWidth="2" opacity="0.6" />
           );
         })}
 
@@ -106,11 +87,11 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           <line x1="120" y1="-120" x2="120" y2="120" stroke="#9CA3AF" strokeWidth="2" />
           <line x1="120" y1="120" x2="-120" y2="120" stroke="#9CA3AF" strokeWidth="2" />
           <line x1="-120" y1="120" x2="-120" y2="-120" stroke="#9CA3AF" strokeWidth="2" />
-          
+
           {/* Диагонали */}
           <line x1="-120" y1="-120" x2="120" y2="120" stroke="#3B82F6" strokeWidth="2" strokeDasharray="4,4" />
           <line x1="120" y1="-120" x2="-120" y2="120" stroke="#EF4444" strokeWidth="2" strokeDasharray="4,4" />
-          
+
           {/* Углы квадрата */}
           <g transform="translate(-120, -120)">
             <circle r="24" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="2" />
@@ -118,21 +99,21 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
               {matrix.TL}
             </text>
           </g>
-          
+
           <g transform="translate(120, -120)">
             <circle r="24" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="2" />
             <text y="6" textAnchor="middle" fontSize="16" fontWeight="bold" fill="white">
               {matrix.TR}
             </text>
           </g>
-          
+
           <g transform="translate(120, 120)">
             <circle r="24" fill="#EF4444" stroke="#FFDC00" strokeWidth="2" />
             <text y="6" textAnchor="middle" fontSize="16" fontWeight="bold" fill="white">
               {matrix.BR}
             </text>
           </g>
-          
+
           <g transform="translate(-120, 120)">
             <circle r="24" fill="#EF4444" stroke="#FFDC00" strokeWidth="2" />
             <text y="6" textAnchor="middle" fontSize="16" fontWeight="bold" fill="white">
@@ -148,7 +129,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           <line x1="0" y1="-180" x2="180" y2="0" stroke="#8B5CF6" strokeWidth="2" />
           <line x1="180" y1="0" x2="0" y2="180" stroke="#EF4444" strokeWidth="2" />
           <line x1="0" y1="180" x2="-180" y2="0" stroke="#EF4444" strokeWidth="2" />
-          
+
           {/* Точки ромба */}
           <g transform="translate(-180, 0)">
             <circle r="28" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="2" filter="url(#glow)" />
@@ -159,7 +140,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
               День
             </text>
           </g>
-          
+
           <g transform="translate(0, -180)">
             <circle r="28" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="2" filter="url(#glow)" />
             <text y="6" textAnchor="middle" fontSize="18" fontWeight="bold" fill="white">
@@ -169,7 +150,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
               Месяц
             </text>
           </g>
-          
+
           <g transform="translate(180, 0)">
             <circle r="28" fill="#EF4444" stroke="#FFDC00" strokeWidth="2" filter="url(#glow)" />
             <text y="6" textAnchor="middle" fontSize="18" fontWeight="bold" fill="white">
@@ -179,7 +160,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
               Год
             </text>
           </g>
-          
+
           <g transform="translate(0, 180)">
             <circle r="28" fill="#EF4444" stroke="#FFDC00" strokeWidth="2" filter="url(#glow)" />
             <text y="6" textAnchor="middle" fontSize="18" fontWeight="bold" fill="white">
@@ -238,22 +219,10 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
                   strokeWidth="2"
                   filter="url(#glow)"
                 />
-                <text
-                  y="6"
-                  textAnchor="middle"
-                  fontSize={isMainAge ? 18 : 14}
-                  fontWeight="bold"
-                  fill="white"
-                >
+                <text y="6" textAnchor="middle" fontSize={isMainAge ? 18 : 14} fontWeight="bold" fill="white">
                   {spoke.outer}
                 </text>
-                <text
-                  y={isMainAge ? 46 : 40}
-                  textAnchor="middle"
-                  fontSize="10"
-                  fontWeight="bold"
-                  fill="#FDE047"
-                >
+                <text y={isMainAge ? 46 : 40} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#FDE047">
                   {age} лет
                 </text>
                 <text
@@ -271,22 +240,12 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
               </g>
 
               {/* Средняя точка (только если есть) */}
-              {spoke.middle > 0 && (
+              {/* Внутренняя точка (чёрный кружок ближе к центру) */}
+              {spoke.inner > 0 && (
                 <g transform={`translate(${mx}, ${my})`}>
-                  <circle
-                    r="18"
-                    fill="#6366F1"
-                    stroke="white"
-                    strokeWidth="1.5"
-                  />
-                  <text
-                    y="5"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fontWeight="600"
-                    fill="white"
-                  >
-                    {spoke.middle}
+                  <circle r="18" fill="#6366F1" stroke="white" strokeWidth="1.5" />
+                  <text y="5" textAnchor="middle" fontSize="11" fontWeight="600" fill="white">
+                    {spoke.inner}
                   </text>
                 </g>
               )}
@@ -296,61 +255,23 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
 
         {/* Точки любви и денег */}
         <g
-          transform={`translate(${
-            Math.cos((90 * Math.PI) / 180) * 200 - 25
-          }, ${Math.sin((90 * Math.PI) / 180) * 200})`}
+          transform={`translate(${Math.cos((90 * Math.PI) / 180) * 200 - 25}, ${Math.sin((90 * Math.PI) / 180) * 200})`}
         >
-          <circle
-            r="16"
-            fill="#BE185D"
-            stroke="white"
-            strokeWidth="1.5"
-          />
-          <text
-            y="4"
-            textAnchor="middle"
-            fontSize="10"
-            fontWeight="bold"
-            fill="white"
-          >
+          <circle r="16" fill="#BE185D" stroke="white" strokeWidth="1.5" />
+          <text y="4" textAnchor="middle" fontSize="10" fontWeight="bold" fill="white">
             {matrix.lovePoint}
           </text>
-          <text
-            x="0"
-            y="-22"
-            textAnchor="middle"
-            fontSize="14"
-          >
+          <text x="0" y="-22" textAnchor="middle" fontSize="14">
             ❤
           </text>
         </g>
 
-        <g
-          transform={`translate(${
-            Math.cos(0) * 200
-          }, ${Math.sin(0) * 200 - 25})`}
-        >
-          <circle
-            r="16"
-            fill="#059669"
-            stroke="white"
-            strokeWidth="1.5"
-          />
-          <text
-            y="4"
-            textAnchor="middle"
-            fontSize="10"
-            fontWeight="bold"
-            fill="white"
-          >
+        <g transform={`translate(${Math.cos(0) * 200}, ${Math.sin(0) * 200 - 25})`}>
+          <circle r="16" fill="#059669" stroke="white" strokeWidth="1.5" />
+          <text y="4" textAnchor="middle" fontSize="10" fontWeight="bold" fill="white">
             {matrix.moneyPoint}
           </text>
-          <text
-            x="0"
-            y="-22"
-            textAnchor="middle"
-            fontSize="14"
-          >
+          <text x="0" y="-22" textAnchor="middle" fontSize="14">
             💰
           </text>
         </g>
@@ -358,37 +279,17 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
         {/* Центральная точка (на переднем плане) */}
         <g transform="translate(0, 0)">
           <circle r="50" fill="#FBBF24" stroke="#FFDC00" strokeWidth="3" filter="url(#glow)" />
-          <text
-            y="8"
-            textAnchor="middle"
-            fontSize="28"
-            fontWeight="bold"
-            fill="#7C2D12"
-          >
+          <text y="8" textAnchor="middle" fontSize="28" fontWeight="bold" fill="#7C2D12">
             {matrix.Center}
           </text>
         </g>
 
         {/* Легенда */}
-        <text
-          x="-150"
-          y="-140"
-          textAnchor="middle"
-          fontSize="12"
-          fontWeight="600"
-          fill="#3B82F6"
-        >
+        <text x="-150" y="-140" textAnchor="middle" fontSize="12" fontWeight="600" fill="#3B82F6">
           Мужская линия
         </text>
 
-        <text
-          x="150"
-          y="-140"
-          textAnchor="middle"
-          fontSize="12"
-          fontWeight="600"
-          fill="#EF4444"
-        >
+        <text x="150" y="-140" textAnchor="middle" fontSize="12" fontWeight="600" fill="#EF4444">
           Женская линия
         </text>
       </svg>
