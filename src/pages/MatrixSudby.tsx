@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { MatrixVisualization } from "@/components/MatrixVisualization";
 
 // Названия 22 арканов
 const ARCANA_NAMES: Record<number, string> = {
@@ -67,6 +68,13 @@ interface MatrixData {
   lovePoint: number;
   moneyPoint: number;
   talentPoint: number;
+  spokes: Array<{
+    angle: number;
+    outer: number;
+    middle: number;
+    inner: number;
+    label: string;
+  }>;
 }
 
 export default function MatrixSudby() {
@@ -82,7 +90,7 @@ export default function MatrixSudby() {
       return;
     }
 
-    // Расчет матрицы
+    // Расчет матрицы - точно как в оригинале
     const Day = calculateArcana(day);
     const Month = calculateArcana(month);
     const yearDigitsSum = String(year)
@@ -98,6 +106,26 @@ export default function MatrixSudby() {
     const BR = calculateArcana(Year + Bottom);
     const BL = calculateArcana(Bottom + Day);
 
+    // Внутренние точки на осях
+    const earth_inner_left = calculateArcana(Center + Day);
+    const earth_middle_left = calculateArcana(Day + earth_inner_left);
+    const earth_inner_right = calculateArcana(Center + Year);
+    const earth_middle_right = calculateArcana(Year + earth_inner_right);
+    
+    const sky_inner_top = calculateArcana(Center + Month);
+    const sky_middle_top = calculateArcana(Month + sky_inner_top);
+    const sky_inner_bottom = calculateArcana(Center + Bottom);
+    const sky_middle_bottom = calculateArcana(Bottom + sky_inner_bottom);
+    
+    const rod_inner_TL = calculateArcana(TL + Center);
+    const rod_middle_TL = calculateArcana(TL + rod_inner_TL);
+    const rod_inner_TR = calculateArcana(TR + Center);
+    const rod_middle_TR = calculateArcana(TR + rod_inner_TR);
+    const rod_inner_BR = calculateArcana(BR + Center);
+    const rod_middle_BR = calculateArcana(BR + rod_inner_BR);
+    const rod_inner_BL = calculateArcana(BL + Center);
+    const rod_middle_BL = calculateArcana(BL + rod_inner_BL);
+
     // Предназначения
     const SkyDestiny = calculateArcana(Month + Bottom);
     const EarthDestiny = calculateArcana(Day + Year);
@@ -107,15 +135,21 @@ export default function MatrixSudby() {
     const SocialDestiny = calculateArcana(MaleRod + FemaleRod);
     const PlanetDestiny = calculateArcana(PersonalDestiny + SocialDestiny);
 
-    // Внутренние точки
-    const sky_inner_bottom = calculateArcana(Center + Bottom);
-    const sky_middle_bottom = calculateArcana(Bottom + sky_inner_bottom);
-    const earth_inner_right = calculateArcana(Center + Year);
-    const earth_middle_right = calculateArcana(Year + earth_inner_right);
-
     const lovePoint = calculateArcana(sky_middle_bottom + sky_inner_bottom);
     const moneyPoint = calculateArcana(earth_middle_right + earth_inner_right);
     const talentPoint = calculateArcana(Day + sky_inner_bottom);
+
+    // Формируем структуру для отрисовки (8 лучей)
+    const spokes = [
+      { angle: 180, outer: Day, middle: earth_middle_left, inner: earth_inner_left, label: "День" },
+      { angle: 225, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "Род Отца" },
+      { angle: 270, outer: Month, middle: sky_middle_top, inner: sky_inner_top, label: "Месяц" },
+      { angle: 315, outer: TR, middle: rod_middle_TR, inner: rod_inner_TR, label: "Род Матери" },
+      { angle: 0, outer: Year, middle: earth_middle_right, inner: earth_inner_right, label: "Год" },
+      { angle: 45, outer: BR, middle: rod_middle_BR, inner: rod_inner_BR, label: "Род Матери" },
+      { angle: 90, outer: Bottom, middle: sky_middle_bottom, inner: sky_inner_bottom, label: "Низ" },
+      { angle: 135, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "Род Отца" },
+    ];
 
     setMatrix({
       Day,
@@ -137,6 +171,7 @@ export default function MatrixSudby() {
       lovePoint,
       moneyPoint,
       talentPoint,
+      spokes,
     });
   };
 
@@ -224,9 +259,17 @@ export default function MatrixSudby() {
             {/* Results */}
             {matrix && (
               <div className="space-y-8">
+                {/* Визуализация матрицы */}
                 <Card>
                   <CardContent className="p-8">
-                    <h2 className="text-3xl font-bold mb-6">Ваша матрица судьбы</h2>
+                    <h2 className="text-3xl font-bold mb-6 text-center">Визуализация матрицы</h2>
+                    <MatrixVisualization matrix={matrix} />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardContent className="p-8">
+                    <h2 className="text-3xl font-bold mb-6">Расшифровка матрицы</h2>
 
                     {/* Личный квадрат */}
                     <div className="mb-8">
