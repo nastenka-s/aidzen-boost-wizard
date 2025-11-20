@@ -79,7 +79,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           opacity="0.5"
         />
 
-        {/* Линии от центра к внешним точкам */}
+        {/* Линии от центра к внешним точкам (только к 8 основным) */}
         {matrix.spokes.map((spoke, i) => {
           const rad = (spoke.angle * Math.PI) / 180;
           const ox = Math.cos(rad) * OUTER_RADIUS;
@@ -215,7 +215,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           );
         })}
 
-        {/* Основные точки (0, 10, 20...) + средние точки */}
+        {/* Основные 8 точек возраста */}
         {matrix.spokes.map((spoke, i) => {
           const rad = (spoke.angle * Math.PI) / 180;
           const mx = Math.cos(rad) * MID_RADIUS;
@@ -223,20 +223,16 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
           const ox = Math.cos(rad) * OUTER_RADIUS;
           const oy = Math.sin(rad) * OUTER_RADIUS;
 
-          const age = i * 10;
-          const isCardinal = i % 2 === 0;
-          const outerColor = isCardinal
-            ? i === 4 || i === 6
-              ? "#EF4444"
-              : "#8B5CF6"
-            : "#6B7280";
+          const age = parseInt(spoke.label);
+          const isMainAge = age % 20 === 0;
+          const outerColor = age === 0 || age === 20 ? "#8B5CF6" : age === 40 || age === 60 ? "#EF4444" : "#6B7280";
 
           return (
             <g key={`group-${i}`}>
               {/* Внешняя точка возраста */}
               <g transform={`translate(${ox}, ${oy})`}>
                 <circle
-                  r={isCardinal ? 34 : 28}
+                  r={isMainAge ? 34 : 28}
                   fill={outerColor}
                   stroke="#FFDC00"
                   strokeWidth="2"
@@ -245,14 +241,14 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
                 <text
                   y="6"
                   textAnchor="middle"
-                  fontSize={isCardinal ? 18 : 14}
+                  fontSize={isMainAge ? 18 : 14}
                   fontWeight="bold"
                   fill="white"
                 >
                   {spoke.outer}
                 </text>
                 <text
-                  y={isCardinal ? 46 : 40}
+                  y={isMainAge ? 46 : 40}
                   textAnchor="middle"
                   fontSize="10"
                   fontWeight="bold"
@@ -261,7 +257,7 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
                   {age} лет
                 </text>
                 <text
-                  y={isCardinal ? 58 : 52}
+                  y={isMainAge ? 58 : 52}
                   textAnchor="middle"
                   fontSize="8"
                   fill="#E5E7EB"
@@ -274,24 +270,26 @@ export function MatrixVisualization({ matrix }: MatrixVisualizationProps) {
                 </text>
               </g>
 
-              {/* Средняя точка */}
-              <g transform={`translate(${mx}, ${my})`}>
-                <circle
-                  r="18"
-                  fill={i === 4 ? "#F97316" : i === 6 ? "#F97316" : "#6366F1"}
-                  stroke="white"
-                  strokeWidth="1.5"
-                />
-                <text
-                  y="5"
-                  textAnchor="middle"
-                  fontSize="11"
-                  fontWeight="600"
-                  fill="white"
-                >
-                  {spoke.middle}
-                </text>
-              </g>
+              {/* Средняя точка (только если есть) */}
+              {spoke.middle > 0 && (
+                <g transform={`translate(${mx}, ${my})`}>
+                  <circle
+                    r="18"
+                    fill="#6366F1"
+                    stroke="white"
+                    strokeWidth="1.5"
+                  />
+                  <text
+                    y="5"
+                    textAnchor="middle"
+                    fontSize="11"
+                    fontWeight="600"
+                    fill="white"
+                  >
+                    {spoke.middle}
+                  </text>
+                </g>
+              )}
             </g>
           );
         })}
