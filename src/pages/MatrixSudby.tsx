@@ -95,20 +95,29 @@ export default function MatrixSudby() {
     const lovePoint = calculateArcana(relEntrance + sky_inner_bottom);
     const moneyPoint = calculateArcana(moneyEntrance + earth_inner_right);
 
+    const spokesData = [
+      { angle: 180, outer: Day, middle: earth_middle_left, inner: earth_inner_left, label: "0" },
+      { angle: 225, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "10" },
+      { angle: 270, outer: Month, middle: sky_middle_top, inner: sky_inner_top, label: "20" },
+      { angle: 315, outer: TR, middle: rod_middle_TR, inner: rod_inner_TR, label: "30" },
+      { angle: 0, outer: Year, middle: moneyEntrance, inner: earth_inner_right, label: "40" },
+      { angle: 45, outer: BR, middle: rod_middle_BR, inner: rod_inner_BR, label: "50" },
+      { angle: 90, outer: Bottom, middle: relEntrance, inner: sky_inner_bottom, label: "60" },
+      { angle: 135, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "70" },
+    ];
+
+    console.log("=== РАСЧЕТЫ МАТРИЦЫ ===");
+    console.log("Day:", Day, "Month:", Month, "Year:", Year, "Bottom:", Bottom, "Center:", Center);
+    console.log("earth_inner_right:", earth_inner_right, "earth_middle_right:", earth_middle_right);
+    console.log("sky_inner_bottom:", sky_inner_bottom, "sky_middle_bottom:", sky_middle_bottom);
+    console.log("Spokes для angle 0 (40 лет):", spokesData[4]);
+    console.log("Spokes для angle 90 (60 лет):", spokesData[6]);
+
     setMatrix({
       Day, Month, Year, Bottom, Center,
       TL, TR, BR, BL,
       lovePoint, moneyPoint,
-      spokes: [
-        { angle: 180, outer: Day, middle: earth_middle_left, inner: earth_inner_left, label: "0" },
-        { angle: 225, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "10" },
-        { angle: 270, outer: Month, middle: sky_middle_top, inner: sky_inner_top, label: "20" },
-        { angle: 315, outer: TR, middle: rod_middle_TR, inner: rod_inner_TR, label: "30" },
-        { angle: 0, outer: Year, middle: moneyEntrance, inner: earth_inner_right, label: "40" },
-        { angle: 45, outer: BR, middle: rod_middle_BR, inner: rod_inner_BR, label: "50" },
-        { angle: 90, outer: Bottom, middle: relEntrance, inner: sky_inner_bottom, label: "60" },
-        { angle: 135, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "70" },
-      ],
+      spokes: spokesData,
     });
   };
 
