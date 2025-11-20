@@ -162,14 +162,29 @@ export default function MatrixSudby() {
 
     // === 6. ЛУЧИ "ПАУТИНЫ" ===
     const spokesData = [
-      { angle: 180, outer: Day, middle: earth_middle_left, inner: earth_inner_left, label: "0" },
-      { angle: 225, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "10" },
-      { angle: 270, outer: Month, middle: sky_middle_top, inner: sky_inner_top, label: "20" },
-      { angle: 315, outer: TR, middle: rod_middle_TR, inner: rod_inner_TR, label: "30" },
-      { angle: 0, outer: Year, middle: moneyEntrance, inner: earth_inner_right, label: "40" },
-      { angle: 45, outer: BR, middle: rod_middle_BR, inner: rod_inner_BR, label: "50" },
-      { angle: 90, outer: Bottom, middle: relEntrance, inner: sky_inner_bottom, label: "60" },
-      { angle: 135, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "70" },
+      // 0 лет — внутренний квадрат = earth_inner_left
+      { angle: 180, outer: Day, middle: earth_inner_left, inner: earth_middle_left, label: "0" },
+
+      // 10 лет — внутренний квадрат = rod_inner_TL
+      { angle: 225, outer: TL, middle: rod_inner_TL, inner: rod_middle_TL, label: "10" },
+
+      // 20 лет — внутренний квадрат = sky_inner_top
+      { angle: 270, outer: Month, middle: sky_inner_top, inner: sky_middle_top, label: "20" },
+
+      // 30 лет — внутренний квадрат = rod_inner_TR
+      { angle: 315, outer: TR, middle: rod_inner_TR, inner: rod_middle_TR, label: "30" },
+
+      // 40 лет — внутренний квадрат = earth_inner_right
+      { angle: 0, outer: Year, middle: earth_inner_right, inner: moneyEntrance, label: "40" },
+
+      // 50 лет — внутренний квадрат = rod_inner_BR
+      { angle: 45, outer: BR, middle: rod_inner_BR, inner: rod_middle_BR, label: "50" },
+
+      // 60 лет — внутренний квадрат = sky_inner_bottom
+      { angle: 90, outer: Bottom, middle: sky_inner_bottom, inner: relEntrance, label: "60" },
+
+      // 70 лет — внутренний квадрат = rod_inner_BL
+      { angle: 135, outer: BL, middle: rod_inner_BL, inner: rod_middle_BL, label: "70" },
     ];
 
     // === 7. КРУГ ВОЗРАСТОВ (как в колесе) ===
