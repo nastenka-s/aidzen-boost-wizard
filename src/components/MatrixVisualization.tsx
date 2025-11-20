@@ -240,9 +240,6 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             const loveRad = (loveSpoke.angle * Math.PI) / 180;
             const moneyRad = (moneySpoke.angle * Math.PI) / 180;
 
-            const loveX = Math.cos(loveRad) * 100;
-            const loveY = Math.sin(loveRad) * 100;
-
             const LOVE_LINE_RADIUS = 70; // подбери размер под глаз
             const MONEY_LINE_RADIUS = 70;
 
