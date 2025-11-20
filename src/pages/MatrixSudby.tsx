@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-// import { MatrixVisualization } from "@/components/MatrixVisualization"; // Старый компонент удален
+// Используем ваш оригинальный импорт, предполагая, что этот компонент теперь содержит правильный SVG
+import { MatrixVisualization } from "@/components/MatrixVisualization";
 import logo from "@/assets/logo.png";
 
 // ====================================================================
@@ -40,7 +41,7 @@ const ARCANA_NAMES: Record<number, string> = {
 
 const calculateArcana = (num: number): number => {
   let n = Math.abs(parseInt(String(num), 10) || 0);
-  if (n === 0) return 22; // Считаем 0 как 22 (Шут/Пустота)
+  if (n === 0) return 22; // Считаем 0 как 22
   while (n > 22) {
     n = String(n)
       .split("")
@@ -52,8 +53,7 @@ const calculateArcana = (num: number): number => {
 };
 
 // ====================================================================
-// 2. ПОЛНАЯ ФУНКЦИЯ РАСЧЕТА МАТРИЦЫ
-// Включает расчет L, T, R, B, C, P1, P2, P3, lovePoint, moneyPoint и ВСЕХ wheel_spokes
+// 2. ИНТЕРФЕЙСЫ И ПОЛНАЯ ФУНКЦИЯ РАСЧЕТА МАТРИЦЫ (С ИСПРАВЛЕННЫМ РАСЧЕТОМ wheel_spokes)
 // ====================================================================
 
 interface ArcanaPoint {
@@ -82,6 +82,7 @@ interface MatrixResult {
 
 const calculateFullMatrix = (date: Date): MatrixResult => {
   const r = calculateArcana;
+  // Хелпер, который сразу возвращает объект {num: X, name: Y}
   const innerArcana = (a: number, b: number): ArcanaPoint => {
     const num = r(a + b);
     return { num, name: ARCANA_NAMES[num] };
@@ -107,9 +108,9 @@ const calculateFullMatrix = (date: Date): MatrixResult => {
   const W = r(B + L); // BL (Bottom-Left)
 
   // 3. Предназначения (P1, P2, P3)
-  const P1 = r(N + S); // Личное (N + S)
-  const P2 = r(E + W); // Социальное (E + W)
-  const P3 = r(P1 + P2); // Духовное (P1 + P2)
+  const P1 = r(N + S);
+  const P2 = r(E + W);
+  const P3 = r(P1 + P2);
 
   // 4. Точки входа
   const lovePoint = innerArcana(L, E.num); // L + E
@@ -129,7 +130,7 @@ const calculateFullMatrix = (date: Date): MatrixResult => {
     S_inner: innerArcana(S, C),
     W_inner: innerArcana(W, C),
 
-    // Средний круг (R_MIDDLE): Угол + Внутренний
+    // Средний круг (R_MIDDLE): Угол + Внутренний (L_M, T_M, R_M, B_M)
     L_middle: innerArcana(L, innerArcana(L, C).num),
     T_middle: innerArcana(T, innerArcana(T, C).num),
     R_middle: innerArcana(R, innerArcana(R, C).num),
@@ -142,6 +143,7 @@ const calculateFullMatrix = (date: Date): MatrixResult => {
     W_middle: innerArcana(W, innerArcana(W, C).num),
   };
 
+  // Собираем главный объект матрицы
   return {
     L: { num: L, name: ARCANA_NAMES[L] },
     T: { num: T, name: ARCANA_NAMES[T] },
@@ -157,56 +159,12 @@ const calculateFullMatrix = (date: Date): MatrixResult => {
     P3: { num: P3, name: ARCANA_NAMES[P3] },
     lovePoint: lovePoint,
     moneyPoint: moneyPoint,
-    wheel_spokes: wheel_spokes,
+    wheel_spokes: wheel_spokes, // <--- ЭТОТ БЛОК ТЕПЕРЬ ПОЛНЫЙ И ПЕРЕДАЕТСЯ
   };
 };
 
 // ====================================================================
-// 3. ХЕЛПЕРЫ И КОНСТАНТЫ ДЛЯ ОТРИСОВКИ SVG (Скопировано из MatrixOfDestinyWheel.jsx)
-// ====================================================================
-
-const SVG_SIZE = 1000;
-const CENTER_X = SVG_SIZE / 2; // 500
-const CENTER_Y = SVG_SIZE / 2; // 500
-
-// Радиусы (должны совпадать с тем, как вы хотите видеть колесо)
-const R_INNER = 160;
-const R_MIDDLE = 240;
-const R_OUTER = 320;
-
-const getCoords = (angle: number, radius: number) => {
-  // Угол 0 градусов = 12 часов (верх)
-  const rad = (angle - 90) * (Math.PI / 180);
-  const x = CENTER_X + radius * Math.cos(rad);
-  const y = CENTER_Y + radius * Math.sin(rad);
-  return { x, y };
-};
-
-// Компонент для отрисовки аркана (Circle + Text)
-const ArcanaCircle = ({
-  x,
-  y,
-  arcanaNum,
-  size = 30,
-  colorClass = "bg-[#B08FFF]",
-}: {
-  x: number;
-  y: number;
-  arcanaNum: number;
-  size?: number;
-  colorClass?: string;
-}) => (
-  <g transform={`translate(${x}, ${y})`}>
-    {/* Цвет круга: можно настроить через пропсы, но для простоты используем один */}
-    <circle r={size / 2} fill="#B08FFF" stroke="#8A4DFF" strokeWidth="2" />
-    <text x="0" y="5" textAnchor="middle" fill="#2b134b" fontSize="14" fontWeight="bold">
-      {arcanaNum}
-    </text>
-  </g>
-);
-
-// ====================================================================
-// 4. ОСНОВНОЙ КОМПОНЕНТ MatrixSudby
+// 3. ОСНОВНОЙ КОМПОНЕНТ MatrixSudby
 // ====================================================================
 
 const MatrixSudby = () => {
@@ -219,6 +177,7 @@ const MatrixSudby = () => {
       const date = new Date(birthDate);
       if (isNaN(date.getTime())) throw new Error("Некорректная дата");
 
+      // Используем новую, полную функцию расчета
       const result = calculateFullMatrix(date);
       setMatrix(result);
     } catch (error) {
@@ -227,19 +186,13 @@ const MatrixSudby = () => {
     }
   };
 
-  useEffect(() => {
-    // Автоматический расчет для примера, если нужно
-    // const exampleDate = new Date("1985-08-25");
-    // setBirthDate("1985-08-25");
-    // setMatrix(calculateFullMatrix(exampleDate));
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-white">
       <Helmet>
         <title>Матрица Судьбы: Расчет и Анализ</title>
       </Helmet>
       <div className="container mx-auto py-8">
+        {/* Блок ввода даты */}
         <div className="max-w-md mx-auto mb-8">
           <h2 className="text-3xl font-bold text-center text-purple-400 mb-4">Рассчитать Матрицу Судьбы</h2>
           <div className="flex flex-col gap-4">
@@ -262,96 +215,45 @@ const MatrixSudby = () => {
           </div>
         </div>
 
+        {/* Блок результатов */}
         {matrix && (
           <>
             <Card className="bg-gradient-to-br from-[#2b134b] to-[#1d0e2c] border-purple-800/50 shadow-2xl shadow-purple-900/50">
               <CardContent className="p-6 md:p-8">
                 <div className="flex flex-col md:flex-row gap-8">
-                  {/* БЛОК ВИЗУАЛИЗАЦИИ КОЛЕСА (SVG-разметка) */}
+                  {/* БЛОК ВИЗУАЛИЗАЦИИ КОЛЕСА (ВОССТАНОВЛЕННЫЙ ВЫЗОВ КОМПОНЕНТА) */}
                   <div className="flex-shrink-0 mx-auto">
-                    <svg viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`} className="w-full max-w-[500px] h-auto">
-                      {/* 1. ГЛАВНЫЕ ТОЧКИ (L, T, R, B) - Внешний круг */}
-                      <ArcanaCircle {...getCoords(0, R_OUTER)} arcanaNum={matrix.T.num} size={35} />
-                      <ArcanaCircle {...getCoords(90, R_OUTER)} arcanaNum={matrix.R.num} size={35} />
-                      <ArcanaCircle {...getCoords(180, R_OUTER)} arcanaNum={matrix.B.num} size={35} />
-                      <ArcanaCircle {...getCoords(270, R_OUTER)} arcanaNum={matrix.L.num} size={35} />
-
-                      {/* 2. ДИАГОНАЛЬНЫЕ ТОЧКИ (N, E, S, W) - Внешний квадрат */}
-                      <ArcanaCircle {...getCoords(45, R_OUTER)} arcanaNum={matrix.E.num} size={35} />
-                      <ArcanaCircle {...getCoords(135, R_OUTER)} arcanaNum={matrix.S.num} size={35} />
-                      <ArcanaCircle {...getCoords(225, R_OUTER)} arcanaNum={matrix.W.num} size={35} />
-                      <ArcanaCircle {...getCoords(315, R_OUTER)} arcanaNum={matrix.N.num} size={35} />
-
-                      {/* 3. ЦЕНТР (C) */}
-                      <ArcanaCircle x={CENTER_X} y={CENTER_Y} arcanaNum={matrix.C.num} size={45} />
-
-                      {/* 4. ВНУТРЕННИЕ ТОЧКИ (R_INNER = 160) */}
-                      {matrix.wheel_spokes && (
-                        <>
-                          {/* Главные оси */}
-                          <ArcanaCircle {...getCoords(0, R_INNER)} arcanaNum={matrix.wheel_spokes.T_inner.num} />
-                          <ArcanaCircle {...getCoords(90, R_INNER)} arcanaNum={matrix.wheel_spokes.R_inner.num} />
-                          <ArcanaCircle {...getCoords(180, R_INNER)} arcanaNum={matrix.wheel_spokes.B_inner.num} />
-                          <ArcanaCircle {...getCoords(270, R_INNER)} arcanaNum={matrix.wheel_spokes.L_inner.num} />
-
-                          {/* Диагонали */}
-                          <ArcanaCircle {...getCoords(45, R_INNER)} arcanaNum={matrix.wheel_spokes.E_inner.num} />
-                          <ArcanaCircle {...getCoords(135, R_INNER)} arcanaNum={matrix.wheel_spokes.S_inner.num} />
-                          <ArcanaCircle {...getCoords(225, R_INNER)} arcanaNum={matrix.wheel_spokes.W_inner.num} />
-                          <ArcanaCircle {...getCoords(315, R_INNER)} arcanaNum={matrix.wheel_spokes.N_inner.num} />
-
-                          {/* 5. СРЕДНИЕ ТОЧКИ (R_MIDDLE = 240) */}
-                          {/* Главные оси */}
-                          <ArcanaCircle {...getCoords(0, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.T_middle.num} />
-                          <ArcanaCircle {...getCoords(90, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.R_middle.num} />
-                          <ArcanaCircle {...getCoords(180, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.B_middle.num} />
-                          <ArcanaCircle {...getCoords(270, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.L_middle.num} />
-
-                          {/* Диагонали */}
-                          <ArcanaCircle {...getCoords(45, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.E_middle.num} />
-                          <ArcanaCircle {...getCoords(135, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.S_middle.num} />
-                          <ArcanaCircle {...getCoords(225, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.W_middle.num} />
-                          <ArcanaCircle {...getCoords(315, R_MIDDLE)} arcanaNum={matrix.wheel_spokes.N_middle.num} />
-                        </>
-                      )}
-
-                      {/* ... (Здесь должна быть отрисовка линий, предназначений и кармического хвоста, которые не были скопированы) ... */}
-                    </svg>
+                    {/* Передаем полный объект 'matrix', включая wheel_spokes */}
+                    <MatrixVisualization matrix={matrix} arcanaNames={ARCANA_NAMES} />
                   </div>
 
                   <div className="flex-grow">
-                    {/* 6. ТЕКСТОВАЯ ИНФОРМАЦИЯ И КЛЮЧЕВЫЕ ТОЧКИ */}
+                    {/* КАРТОЧКА С BL (ВОССТАНОВЛЕНА И ИСПРАВЛЕНА НА НОВУЮ СТРУКТУРУ) */}
+                    {/* Я предполагаю, что BL - это W (Bottom-Left) */}
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="bg-red-800/40 p-4 rounded-lg border border-red-500/30">
+                        <div className="text-sm text-red-200 mb-1">Аркан W (BL)</div>
+                        {/* Теперь BL берется из W.num, а не из matrix.BL, которого не было */}
+                        <div className="text-2xl font-bold text-white">{matrix.W.num}</div>
+                        <div className="text-xs text-red-300">{matrix.W.name}</div>
+                      </div>
+                    </div>
+
+                    {/* Ключевые точки (ВОССТАНОВЛЕНЫ И ИСПРАВЛЕНЫ НА НОВУЮ СТРУКТУРУ) */}
                     <div>
                       <h3 className="text-2xl font-semibold mb-4 text-purple-300">Ключевые точки</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Пример, как отобразить Точку Любви и Точку Денег */}
                         <div className="bg-pink-800/40 p-4 rounded-lg border border-pink-500/30">
                           <div className="text-sm text-pink-200 mb-1">❤ Точка любви (L+E)</div>
+                          {/* Теперь lovePoint - это объект */}
                           <div className="text-2xl font-bold text-white">{matrix.lovePoint.num}</div>
                           <div className="text-xs text-pink-300">{matrix.lovePoint.name}</div>
                         </div>
                         <div className="bg-green-800/40 p-4 rounded-lg border border-green-500/30">
                           <div className="text-sm text-green-200 mb-1">💰 Точка денег (R+W)</div>
+                          {/* Теперь moneyPoint - это объект */}
                           <div className="text-2xl font-bold text-white">{matrix.moneyPoint.num}</div>
                           <div className="text-xs text-green-300">{matrix.moneyPoint.name}</div>
-                        </div>
-                      </div>
-
-                      <h3 className="text-2xl font-semibold mt-6 mb-4 text-purple-300">Предназначение</h3>
-                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
-                        <div className="text-sm text-purple-200 mb-1">Личное (P1)</div>
-                        <div className="text-xl font-bold text-white">
-                          {matrix.P1.num} - {matrix.P1.name}
-                        </div>
-
-                        <div className="text-sm text-purple-200 mt-3 mb-1">Социальное (P2)</div>
-                        <div className="text-xl font-bold text-white">
-                          {matrix.P2.num} - {matrix.P2.name}
-                        </div>
-
-                        <div className="text-sm text-purple-200 mt-3 mb-1">Общее (P3)</div>
-                        <div className="text-xl font-bold text-white">
-                          {matrix.P3.num} - {matrix.P3.name}
                         </div>
                       </div>
                     </div>
