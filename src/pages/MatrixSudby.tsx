@@ -42,41 +42,37 @@ export default function MatrixSudby() {
     const [year, month, day] = birthDate.split("-").map(Number);
     if (!day || !month || !year) return;
 
-    const Day = calculateArcana(day);
-    const Month = calculateArcana(month);
-    const Year = calculateArcana(String(year).split("").reduce((a, v) => a + Number(v), 0));
-    const Bottom = calculateArcana(Day + Month + Year);
-    const Center = calculateArcana(Day + Month + Year + Bottom);
-    const TL = calculateArcana(Day + Month);
-    const TR = calculateArcana(Month + Year);
-    const BR = calculateArcana(Year + Bottom);
-    const BL = calculateArcana(Bottom + Day);
+    // Расчет как в оригинале: L, T, R, B, C
+    const L = calculateArcana(day);        // Left/День
+    const T = calculateArcana(month);      // Top/Месяц
+    const yearSum = String(year).split("").reduce((acc, d) => acc + Number(d), 0);
+    const R = calculateArcana(yearSum);    // Right/Год
+    const B = calculateArcana(L + T + R);  // Bottom/Низ
+    const C = calculateArcana(L + T + R + B); // Center/Центр
 
-    // Внутренние точки на осях (для средних кружков)
-    const earth_inner_left = calculateArcana(Center + Day);
-    const earth_middle_left = calculateArcana(Day + earth_inner_left);
-    const earth_inner_right = calculateArcana(Center + Year);
-    const earth_middle_right = calculateArcana(Year + earth_inner_right);
-    const sky_inner_top = calculateArcana(Center + Month);
-    const sky_middle_top = calculateArcana(Month + sky_inner_top);
-    const sky_inner_bottom = calculateArcana(Center + Bottom);
-    const sky_middle_bottom = calculateArcana(Bottom + sky_inner_bottom);
+    // Стороны квадрата (N, E, S, W)
+    const N = calculateArcana(L + T);      // North
+    const E = calculateArcana(T + R);      // East
+    const S = calculateArcana(R + B);      // South
+    const W = calculateArcana(B + L);      // West
 
     // Точки любви и денег
-    const lovePoint = calculateArcana(sky_middle_bottom + sky_inner_bottom);
-    const moneyPoint = calculateArcana(earth_middle_right + earth_inner_right);
+    const lovePoint = calculateArcana(B + C);
+    const moneyPoint = calculateArcana(R + C);
 
     setMatrix({
-      Day, Month, Year, Bottom, Center, TL, TR, BR, BL, lovePoint, moneyPoint,
+      Day: L, Month: T, Year: R, Bottom: B, Center: C,
+      TL: N, TR: E, BR: S, BL: W,
+      lovePoint, moneyPoint,
       spokes: [
-        { angle: 180, outer: Day, middle: earth_middle_left, inner: 0, label: "0" },
-        { angle: 135, outer: TL, middle: 0, inner: 0, label: "10" },
-        { angle: 90, outer: Month, middle: sky_middle_top, inner: 0, label: "20" },
-        { angle: 45, outer: TR, middle: 0, inner: 0, label: "30" },
-        { angle: 0, outer: Year, middle: earth_middle_right, inner: 0, label: "40" },
-        { angle: 315, outer: BR, middle: 0, inner: 0, label: "50" },
-        { angle: 270, outer: Center, middle: sky_middle_bottom, inner: 0, label: "60" },
-        { angle: 225, outer: BL, middle: 0, inner: 0, label: "70" },
+        { angle: 180, outer: L, middle: calculateArcana(L + C), inner: 0, label: "0" },     // 0 лет - слева
+        { angle: 225, outer: W, middle: calculateArcana(W + C), inner: 0, label: "10" },    // 10 лет
+        { angle: 270, outer: B, middle: calculateArcana(B + C), inner: 0, label: "20" },    // 20 лет - внизу
+        { angle: 315, outer: S, middle: calculateArcana(S + C), inner: 0, label: "30" },    // 30 лет
+        { angle: 0, outer: R, middle: calculateArcana(R + C), inner: 0, label: "40" },      // 40 лет - справа
+        { angle: 45, outer: E, middle: calculateArcana(E + C), inner: 0, label: "50" },     // 50 лет
+        { angle: 90, outer: T, middle: calculateArcana(T + C), inner: 0, label: "60" },     // 60 лет - вверху (C в оригинале)
+        { angle: 135, outer: N, middle: calculateArcana(N + C), inner: 0, label: "70" },    // 70 лет
       ],
     });
   };
