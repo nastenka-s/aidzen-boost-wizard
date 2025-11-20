@@ -244,6 +244,14 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             const loveY = Math.sin(loveRad) * 100;
             const moneyX = Math.cos(moneyRad) * 100;
             const moneyY = Math.sin(moneyRad) * 100;
+            const LOVE_LINE_RADIUS = 70; // подбери размер под глаз
+            const MONEY_LINE_RADIUS = 70;
+
+            const loveX = Math.cos(loveRad) * LOVE_LINE_RADIUS;
+            const loveY = Math.sin(loveRad) * LOVE_LINE_RADIUS;
+
+            const moneyX = Math.cos(moneyRad) * MONEY_LINE_RADIUS;
+            const moneyY = Math.sin(moneyRad) * MONEY_LINE_RADIUS;
 
             return (
               <>
