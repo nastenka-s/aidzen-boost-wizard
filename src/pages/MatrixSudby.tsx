@@ -52,6 +52,7 @@ export default function MatrixSudby() {
     const BR = calculateArcana(Year + Bottom);
     const BL = calculateArcana(Bottom + Day);
 
+    // Внутренние точки на осях (для средних кружков)
     const earth_inner_left = calculateArcana(Center + Day);
     const earth_middle_left = calculateArcana(Day + earth_inner_left);
     const earth_inner_right = calculateArcana(Center + Year);
@@ -60,37 +61,22 @@ export default function MatrixSudby() {
     const sky_middle_top = calculateArcana(Month + sky_inner_top);
     const sky_inner_bottom = calculateArcana(Center + Bottom);
     const sky_middle_bottom = calculateArcana(Bottom + sky_inner_bottom);
-    const rod_inner_TL = calculateArcana(TL + Center);
-    const rod_middle_TL = calculateArcana(TL + rod_inner_TL);
-    const rod_inner_TR = calculateArcana(TR + Center);
-    const rod_middle_TR = calculateArcana(TR + rod_inner_TR);
-    const rod_inner_BR = calculateArcana(BR + Center);
-    const rod_middle_BR = calculateArcana(BR + rod_inner_BR);
-    const rod_inner_BL = calculateArcana(BL + Center);
-    const rod_middle_BL = calculateArcana(BL + rod_inner_BL);
 
+    // Точки любви и денег
     const lovePoint = calculateArcana(sky_middle_bottom + sky_inner_bottom);
     const moneyPoint = calculateArcana(earth_middle_right + earth_inner_right);
 
     setMatrix({
       Day, Month, Year, Bottom, Center, TL, TR, BR, BL, lovePoint, moneyPoint,
       spokes: [
-        { angle: 90, outer: Month, middle: sky_middle_top, inner: sky_inner_top, label: "0" },
-        { angle: 67.5, outer: calculateArcana(Month + TL), middle: rod_middle_TL, inner: rod_inner_TL, label: "5" },
-        { angle: 45, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "10" },
-        { angle: 22.5, outer: calculateArcana(TL + Day), middle: earth_middle_left, inner: earth_inner_left, label: "15" },
-        { angle: 0, outer: Day, middle: earth_middle_left, inner: earth_inner_left, label: "20" },
-        { angle: 337.5, outer: calculateArcana(Day + BL), middle: rod_middle_BL, inner: rod_inner_BL, label: "25" },
-        { angle: 315, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "30" },
-        { angle: 292.5, outer: calculateArcana(BL + Bottom), middle: sky_middle_bottom, inner: sky_inner_bottom, label: "35" },
-        { angle: 270, outer: Bottom, middle: sky_middle_bottom, inner: sky_inner_bottom, label: "40" },
-        { angle: 247.5, outer: calculateArcana(Bottom + BR), middle: rod_middle_BR, inner: rod_inner_BR, label: "45" },
-        { angle: 225, outer: BR, middle: rod_middle_BR, inner: rod_inner_BR, label: "50" },
-        { angle: 202.5, outer: calculateArcana(BR + Year), middle: earth_middle_right, inner: earth_inner_right, label: "55" },
-        { angle: 180, outer: Year, middle: earth_middle_right, inner: earth_inner_right, label: "60" },
-        { angle: 157.5, outer: calculateArcana(Year + TR), middle: rod_middle_TR, inner: rod_inner_TR, label: "65" },
-        { angle: 135, outer: TR, middle: rod_middle_TR, inner: rod_inner_TR, label: "70" },
-        { angle: 112.5, outer: calculateArcana(TR + Month), middle: sky_middle_top, inner: sky_inner_top, label: "75" },
+        { angle: 180, outer: Day, middle: earth_middle_left, inner: 0, label: "0" },
+        { angle: 135, outer: TL, middle: 0, inner: 0, label: "10" },
+        { angle: 90, outer: Month, middle: sky_middle_top, inner: 0, label: "20" },
+        { angle: 45, outer: TR, middle: 0, inner: 0, label: "30" },
+        { angle: 0, outer: Year, middle: earth_middle_right, inner: 0, label: "40" },
+        { angle: 315, outer: BR, middle: 0, inner: 0, label: "50" },
+        { angle: 270, outer: Center, middle: sky_middle_bottom, inner: 0, label: "60" },
+        { angle: 225, outer: BL, middle: 0, inner: 0, label: "70" },
       ],
     });
   };
@@ -159,12 +145,97 @@ export default function MatrixSudby() {
           </Card>
 
           {matrix && (
-            <Card className="bg-white/10 backdrop-blur-lg border-white/20">
-              <CardContent className="p-8">
-                <h2 className="text-3xl font-bold mb-6 text-center text-white">Ваша Матрица</h2>
-                <MatrixVisualization matrix={matrix} />
-              </CardContent>
-            </Card>
+            <>
+              <Card className="bg-white/10 backdrop-blur-lg border-white/20">
+                <CardContent className="p-8">
+                  <h2 className="text-3xl font-bold mb-6 text-center text-white">Ваша Матрица</h2>
+                  <MatrixVisualization matrix={matrix} />
+                </CardContent>
+              </Card>
+
+              {/* Расшифровка */}
+              <Card className="bg-white/10 backdrop-blur-lg border-white/20">
+                <CardContent className="p-8">
+                  <h2 className="text-3xl font-bold mb-6 text-white">Расшифровка матрицы</h2>
+
+                  {/* Личный квадрат */}
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-semibold mb-4 text-purple-300">Личный квадрат</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
+                        <div className="text-sm text-purple-200 mb-1">День (Духовное)</div>
+                        <div className="text-2xl font-bold text-white">{matrix.Day}</div>
+                        <div className="text-xs text-purple-300">{ARCANA_NAMES[matrix.Day]}</div>
+                      </div>
+                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
+                        <div className="text-sm text-purple-200 mb-1">Месяц (Небо)</div>
+                        <div className="text-2xl font-bold text-white">{matrix.Month}</div>
+                        <div className="text-xs text-purple-300">{ARCANA_NAMES[matrix.Month]}</div>
+                      </div>
+                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
+                        <div className="text-sm text-purple-200 mb-1">Год (Материальное)</div>
+                        <div className="text-2xl font-bold text-white">{matrix.Year}</div>
+                        <div className="text-xs text-purple-300">{ARCANA_NAMES[matrix.Year]}</div>
+                      </div>
+                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
+                        <div className="text-sm text-purple-200 mb-1">Низ (Земля)</div>
+                        <div className="text-2xl font-bold text-white">{matrix.Bottom}</div>
+                        <div className="text-xs text-purple-300">{ARCANA_NAMES[matrix.Bottom]}</div>
+                      </div>
+                    </div>
+                    <div className="mt-4 bg-yellow-500/20 p-6 rounded-lg text-center border border-yellow-500/30">
+                      <div className="text-sm text-yellow-200 mb-1">Центр (Комфорт)</div>
+                      <div className="text-3xl font-bold text-white">{matrix.Center}</div>
+                      <div className="text-sm text-yellow-300">{ARCANA_NAMES[matrix.Center]}</div>
+                    </div>
+                  </div>
+
+                  {/* Родовой квадрат */}
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-semibold mb-4 text-purple-300">Родовой квадрат</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
+                        <div className="text-sm text-purple-200 mb-1">Верх-Лево</div>
+                        <div className="text-2xl font-bold text-white">{matrix.TL}</div>
+                        <div className="text-xs text-purple-300">{ARCANA_NAMES[matrix.TL]}</div>
+                      </div>
+                      <div className="bg-purple-800/40 p-4 rounded-lg border border-purple-500/30">
+                        <div className="text-sm text-purple-200 mb-1">Верх-Право</div>
+                        <div className="text-2xl font-bold text-white">{matrix.TR}</div>
+                        <div className="text-xs text-purple-300">{ARCANA_NAMES[matrix.TR]}</div>
+                      </div>
+                      <div className="bg-red-800/40 p-4 rounded-lg border border-red-500/30">
+                        <div className="text-sm text-red-200 mb-1">Низ-Право</div>
+                        <div className="text-2xl font-bold text-white">{matrix.BR}</div>
+                        <div className="text-xs text-red-300">{ARCANA_NAMES[matrix.BR]}</div>
+                      </div>
+                      <div className="bg-red-800/40 p-4 rounded-lg border border-red-500/30">
+                        <div className="text-sm text-red-200 mb-1">Низ-Лево</div>
+                        <div className="text-2xl font-bold text-white">{matrix.BL}</div>
+                        <div className="text-xs text-red-300">{ARCANA_NAMES[matrix.BL]}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Ключевые точки */}
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-4 text-purple-300">Ключевые точки</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-pink-800/40 p-4 rounded-lg border border-pink-500/30">
+                        <div className="text-sm text-pink-200 mb-1">❤ Точка любви</div>
+                        <div className="text-2xl font-bold text-white">{matrix.lovePoint}</div>
+                        <div className="text-xs text-pink-300">{ARCANA_NAMES[matrix.lovePoint]}</div>
+                      </div>
+                      <div className="bg-green-800/40 p-4 rounded-lg border border-green-500/30">
+                        <div className="text-sm text-green-200 mb-1">💰 Точка денег</div>
+                        <div className="text-2xl font-bold text-white">{matrix.moneyPoint}</div>
+                        <div className="text-xs text-green-300">{ARCANA_NAMES[matrix.moneyPoint]}</div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </>
           )}
         </div>
       </div>
