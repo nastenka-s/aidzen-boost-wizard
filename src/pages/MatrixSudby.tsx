@@ -104,9 +104,9 @@ export default function MatrixSudby() {
         { angle: 225, outer: TL, middle: rod_middle_TL, inner: rod_inner_TL, label: "10" },
         { angle: 270, outer: Month, middle: sky_middle_top, inner: sky_inner_top, label: "20" },
         { angle: 315, outer: TR, middle: rod_middle_TR, inner: rod_inner_TR, label: "30" },
-        { angle: 0, outer: Year, middle: earth_middle_right, inner: earth_inner_right, label: "40" },
+        { angle: 0, outer: Year, middle: moneyEntrance, inner: earth_inner_right, label: "40" },
         { angle: 45, outer: BR, middle: rod_middle_BR, inner: rod_inner_BR, label: "50" },
-        { angle: 90, outer: Bottom, middle: sky_middle_bottom, inner: sky_inner_bottom, label: "60" },
+        { angle: 90, outer: Bottom, middle: relEntrance, inner: sky_inner_bottom, label: "60" },
         { angle: 135, outer: BL, middle: rod_middle_BL, inner: rod_inner_BL, label: "70" },
       ],
     });
@@ -165,11 +165,14 @@ export default function MatrixSudby() {
                 </Button>
 
                 {matrix && (
-                  <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6" asChild>
-                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                      <Sparkles className="w-5 h-5 mr-2" />Получить полный анализ (требуется регистрация)
-                    </a>
-                  </Button>
+                  <div className="space-y-2">
+                    <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6" asChild>
+                      <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                        <Sparkles className="w-5 h-5 mr-2" />Получить полный анализ
+                      </a>
+                    </Button>
+                    <p className="text-sm text-gray-400 text-center">Требуется регистрация</p>
+                  </div>
                 )}
               </div>
             </CardContent>
