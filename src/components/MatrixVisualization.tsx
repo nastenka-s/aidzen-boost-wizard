@@ -55,6 +55,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
   const OUTER_RADIUS = 230;
   const MID_RADIUS = 170;
   const INNER_RADIUS = OUTER_RADIUS * 0.5;
+  const INNER_NODE_RADIUS = 120;
 
   const axes = [
     { angle: 180, label: "0 лет" },
