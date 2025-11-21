@@ -312,7 +312,7 @@ export default function MatrixSudby() {
             <>
               <Card className="bg-white/10 backdrop-blur-lg border-white/20">
                 <CardContent className="p-8">
-                  <h2 className="text-3xl font-bold mb-6 text-center text-white">Ваша Матрица</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-center text-white">Ваша Матрица Судьбы</h2>
                   <MatrixVisualization matrix={matrix} />
                 </CardContent>
               </Card>
