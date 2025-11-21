@@ -320,7 +320,7 @@ export default function MatrixSudby() {
               {/* Расшифровка */}
               <Card className="bg-white/10 backdrop-blur-lg border-white/20">
                 <CardContent className="p-8">
-                  <h2 className="text-3xl font-bold mb-6 text-white">Расшифровка Матрицы Судьбы</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-white text-center">Расшифровка Матрицы Судьбы</h2>
                   <div className="space-y-2">
                     <Button
                       className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6"
