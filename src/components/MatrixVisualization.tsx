@@ -71,6 +71,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
+      {/* Основное колесо */}
       <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-3xl mx-auto drop-shadow-xl">
         <defs>
           <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%">
@@ -148,23 +149,22 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             );
           })}
 
-          {/* Точки внешнего и внутреннего кругов */}
           {/* Основные 8 точек возраста */}
           {matrix.spokes.map((spoke, i) => {
             const rad = (spoke.angle * Math.PI) / 180;
 
-            const mx = Math.cos(rad) * MID_RADIUS; // средний круг (фиолетовый)
+            const mx = Math.cos(rad) * MID_RADIUS; // средний круг
             const my = Math.sin(rad) * MID_RADIUS;
 
-            const ix = Math.cos(rad) * INNER_RADIUS; // ВНУТРЕННИЙ круг (чёрные кружки)
+            const ix = Math.cos(rad) * INNER_RADIUS; // внутренний круг
             const iy = Math.sin(rad) * INNER_RADIUS;
 
             const ox = Math.cos(rad) * OUTER_RADIUS; // внешний круг возрастов
             const oy = Math.sin(rad) * OUTER_RADIUS;
 
-            const age = parseInt(spoke.label);
-
+            const age = parseInt(spoke.label, 10);
             const isMainAge = age % 20 === 0;
+
             const outerColor = age === 0 || age === 20 ? "#8B5CF6" : age === 40 || age === 60 ? "#EF4444" : "#6B7280";
 
             const ageLabelY = age === 20 ? -52 : isMainAge ? 46 : 40;
@@ -186,9 +186,19 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
                   <text y={ageLabelY} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#FDE047">
                     {age} лет
                   </text>
+                  <text
+                    y={isMainAge ? 58 : 52}
+                    textAnchor="middle"
+                    fontSize="8"
+                    fill="#E5E7EB"
+                    opacity="0.9"
+                    style={{ textShadow: "0px 1px 2px rgba(0,0,0,0.8)" }}
+                  >
+                    {ARCANA_NAMES[spoke.outer]}
+                  </text>
                 </g>
 
-                {/* Средняя точка (фиолетовый круг) */}
+                {/* Средняя точка */}
                 {spoke.middle > 0 && (
                   <g transform={`translate(${mx}, ${my})`}>
                     <circle r={INNER_NODE_RADIUS} fill="#020617" stroke="#9CA3AF" strokeWidth="1.5" />
@@ -198,7 +208,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
                   </g>
                 )}
 
-                {/* ВНУТРЕННЯЯ точка (чёрный кружок ближе к центру) */}
+                {/* Внутренняя точка */}
                 {spoke.inner > 0 && (
                   <g transform={`translate(${ix}, ${iy})`}>
                     <circle r={INNER_NODE_RADIUS} fill="#020617" stroke="#9CA3AF" strokeWidth="1.5" />
@@ -211,7 +221,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             );
           })}
 
-          {/* Центральная точка матрицы */}
+          {/* Центр */}
           <g transform="translate(0, 0)">
             <circle r="38" fill="#F59E0B" stroke="white" strokeWidth="2" />
             <circle r="32" fill="#0F172A" />
@@ -223,17 +233,17 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             </text>
           </g>
 
-          {/* Линия любви и денег от центра */}
+          {/* Линия любви и денег */}
           {(() => {
-            const loveSpoke = matrix.spokes.find((s) => parseInt(s.label) === 60);
-            const moneySpoke = matrix.spokes.find((s) => parseInt(s.label) === 40);
+            const loveSpoke = matrix.spokes.find((s) => parseInt(s.label, 10) === 60);
+            const moneySpoke = matrix.spokes.find((s) => parseInt(s.label, 10) === 40);
 
             if (!loveSpoke || !moneySpoke) return null;
 
             const loveRad = (loveSpoke.angle * Math.PI) / 180;
             const moneyRad = (moneySpoke.angle * Math.PI) / 180;
 
-            const LOVE_LINE_RADIUS = 70; // подбери размер под глаз
+            const LOVE_LINE_RADIUS = 70;
             const MONEY_LINE_RADIUS = 70;
 
             const loveX = Math.cos(loveRad) * LOVE_LINE_RADIUS;
@@ -244,7 +254,6 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
 
             return (
               <>
-                {/* Линия к любви */}
                 <line x1={0} y1={0} x2={loveX} y2={loveY} stroke="#EC4899" strokeWidth={2} strokeDasharray="4 4" />
                 <g transform={`translate(${loveX}, ${loveY})`}>
                   <circle r="16" fill="#DB2777" stroke="white" strokeWidth="1" />
@@ -253,7 +262,6 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
                   </text>
                 </g>
 
-                {/* Линия к деньгам */}
                 <line x1={0} y1={0} x2={moneyX} y2={moneyY} stroke="#22C55E" strokeWidth={2} strokeDasharray="4 4" />
                 <g transform={`translate(${moneyX}, ${moneyY})`}>
                   <circle r="16" fill="#16A34A" stroke="white" strokeWidth="1" />
@@ -266,33 +274,102 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
           })()}
         </g>
 
-        {/* Обрамление и подписи */}
+        {/* Внешние подписи */}
         <g transform={`translate(${center}, ${center})`}>
-          {/* Внешний декоративный круг */}
           <circle r={OUTER_RADIUS + 40} fill="none" stroke="#4C1D95" strokeWidth="2" strokeDasharray="6 10" />
           <circle r={OUTER_RADIUS + 50} fill="none" stroke="rgba(148, 163, 184, 0.35)" strokeWidth="1" />
 
-          {/* Подписи направлений */}
           <text x="0" y={-OUTER_RADIUS - 64} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             НЕБО
           </text>
           <text x="0" y={OUTER_RADIUS + 78} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ЗЕМЛЯ
           </text>
-          <text x={-OUTER_RADIUS - 60} y="-40" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={-OUTER_RADIUS - 60} y={-40} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ДУХОВНОЕ
           </text>
-          <text x={OUTER_RADIUS + 60} y="-40" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={OUTER_RADIUS + 60} y={-40} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             МАТЕРИАЛЬНОЕ
           </text>
         </g>
       </svg>
 
+      {/* Блок возрастных этапов + легенда */}
       <svg viewBox="0 0 400 220" className="w-full max-w-3xl mx-auto mt-4 drop-shadow-lg">
         <rect width="400" height="220" rx="16" fill="#020617" />
         <rect x="12" y="12" width="376" height="196" rx="14" fill="none" stroke="rgba(148, 163, 184, 0.45)" />
 
-        {/* Маленькая легенда по линиям рода */}
+        <text x="200" y="40" textAnchor="middle" fontSize="18" fontWeight="600" fill="#E5E7EB">
+          Возрастные этапы судьбы
+        </text>
+
+        <g transform="translate(200, 110)">
+          {/* 0 лет */}
+          <g transform="translate(-150, -40)">
+            <circle r="16" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="1.5" />
+            <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
+              0
+            </text>
+          </g>
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="-115" y="-42">
+              Стартовые задачи
+            </tspan>
+            <tspan x="-115" y="-26">
+              (0–10 лет)
+            </tspan>
+          </text>
+
+          {/* 20 лет */}
+          <g transform="translate(0, -40)">
+            <circle r="16" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="1.5" />
+            <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
+              20
+            </text>
+          </g>
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="35" y="-42">
+              Формирование характера
+            </tspan>
+            <tspan x="35" y="-26">
+              (20–30 лет)
+            </tspan>
+          </text>
+
+          {/* 40 лет */}
+          <g transform="translate(-150, 20)">
+            <circle r="16" fill="#EF4444" stroke="#FFDC00" strokeWidth="1.5" />
+            <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
+              40
+            </text>
+          </g>
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="-115" y="18">
+              Реализация потенциала
+            </tspan>
+            <tspan x="-115" y="34">
+              (40–50 лет)
+            </tspan>
+          </text>
+
+          {/* 60 лет */}
+          <g transform="translate(0, 20)">
+            <circle r="16" fill="#EF4444" stroke="#FFDC00" strokeWidth="1.5" />
+            <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
+              60
+            </text>
+          </g>
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="35" y="18">
+              Мудрость и передача опыта
+            </tspan>
+            <tspan x="35" y="34">
+              (60+)
+            </tspan>
+          </text>
+        </g>
+
+        {/* Легенда по линиям */}
         <g transform="translate(200, 180)">
           <circle cx="-120" cy="0" r="5" fill="#F97316" />
           <text x="-108" y="4" textAnchor="start" fontSize="12" fill="#F97316">
