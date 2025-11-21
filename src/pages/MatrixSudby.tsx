@@ -320,8 +320,19 @@ export default function MatrixSudby() {
               {/* Расшифровка */}
               <Card className="bg-white/10 backdrop-blur-lg border-white/20">
                 <CardContent className="p-8">
-                  <h2 className="text-3xl font-bold mb-6 text-white">Расшифровка матрицы</h2>
-
+                  <h2 className="text-3xl font-bold mb-6 text-white">Расшифровка Матрицы Судьбы</h2>
+                  <div className="space-y-2">
+                    <Button
+                      className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6"
+                      asChild
+                    >
+                      <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                        <Sparkles className="w-5 h-5 mr-2" />
+                        Получить полный анализ
+                      </a>
+                    </Button>
+                    <p className="text-sm text-gray-400 text-center">Требуется регистрация</p>
+                  </div>
                   {/* Личный квадрат */}
                   <div className="mb-8">
                     <h3 className="text-2xl font-semibold mb-4 text-purple-300">Личный квадрат</h3>
