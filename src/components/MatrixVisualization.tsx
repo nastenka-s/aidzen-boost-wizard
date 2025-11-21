@@ -345,7 +345,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
           <text x={-OUTER_RADIUS - 60} y={-40} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ДУХОВНОЕ
           </text>
-          <text x={OUTER_RADIUS + 60} y={-40} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={OUTER_RADIUS + 50} y={-40} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             МАТЕРИАЛЬНОЕ
           </text>
         </g>
