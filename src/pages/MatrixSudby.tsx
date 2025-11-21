@@ -232,7 +232,9 @@ export default function MatrixSudby() {
     <>
       <Helmet>
         <title>Матрица Судьбы - Расчет онлайн бесплатно | Нейродзен</title>
-        <meta name="description" content="Рассчитайте свою Матрицу Судьбы онлайн бесплатно." />
+        <meta name="description" content="Рассчитайте свою Матрицу Судьбы онлайн бесплатно. Матрица судьбы по дате рождения с расшифровкой, любовь, деньги, предназначение, совместимость." />
+        <meta name="keywords" content="матрица судьбы арканов, матрица судьбы бесплатно, матрица судьбы бесплатно с расшифровкой, матрица судьбы онлайн, матрица судьбы онлайн бесплатно, матрица судьбы по дате, матрица судьбы по дате рождения, матрица судьбы рассчитать, матрица судьбы рассчитать бесплатно, матрица судьбы рассчитать онлайн, матрица судьбы рассчитать онлайн бесплатно, матрица судьбы рождения, матрица судьбы совместимость" />
+        <link rel="canonical" href="https://aidzen.ru/matrica-sudby" />
       </Helmet>
 
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
@@ -249,7 +251,7 @@ export default function MatrixSudby() {
           <Card className="bg-white/10 backdrop-blur-lg border-white/20">
             <CardContent className="p-8">
               <div className="text-center space-y-4 mb-6">
-                <h1 className="text-4xl md:text-5xl font-bold text-white">МАТРИЦА СУДЬБЫ - БЕСПЛАТНЫй РАСЧЕТ</h1>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">МАТРИЦА СУДЬБЫ - БЕСПЛАТНЫй РАСЧЕТ</h1>
                 <p className="text-xl text-purple-200">Откройте секреты вашей судьбы</p>
               </div>
 
