@@ -167,7 +167,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             const isMainAge = age % 20 === 0;
             const outerColor = age === 0 || age === 20 ? "#8B5CF6" : age === 40 || age === 60 ? "#EF4444" : "#6B7280";
 
-            const ageLabelY = age === 20 ? -40 : isMainAge ? 46 : 40;
+            const ageLabelY = age === 20 ? -52 : isMainAge ? 46 : 40;
 
             return (
               <g key={`group-${i}`}>
@@ -279,10 +279,10 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
           <text x="0" y={OUTER_RADIUS + 78} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ЗЕМЛЯ
           </text>
-          <text x={-OUTER_RADIUS - 60} y="4" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={-OUTER_RADIUS - 60} y="-40" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ДУХОВНОЕ
           </text>
-          <text x={OUTER_RADIUS + 60} y="4" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={OUTER_RADIUS + 60} y="-40" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             МАТЕРИАЛЬНОЕ
           </text>
         </g>
@@ -298,44 +298,68 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
         </text>
 
         <g transform="translate(200, 110)">
+          {/* 0 лет */}
           <g transform="translate(-150, -40)">
             <circle r="16" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="1.5" />
             <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
               0
             </text>
           </g>
-          <text x="-115" y="-35" textAnchor="start" fontSize="12" fill="#E5E7EB">
-            Стартовые задачи (0–10 лет)
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="-115" y="-42">
+              Стартовые задачи
+            </tspan>
+            <tspan x="-115" y="-26">
+              (0–10 лет)
+            </tspan>
           </text>
 
+          {/* 20 лет */}
           <g transform="translate(0, -40)">
             <circle r="16" fill="#8B5CF6" stroke="#FFDC00" strokeWidth="1.5" />
             <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
               20
             </text>
           </g>
-          <text x="35" y="-35" textAnchor="start" fontSize="12" fill="#E5E7EB">
-            Формирование характера (20–30 лет)
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="35" y="-42">
+              Формирование характера
+            </tspan>
+            <tspan x="35" y="-26">
+              (20–30 лет)
+            </tspan>
           </text>
 
+          {/* 40 лет */}
           <g transform="translate(-150, 20)">
             <circle r="16" fill="#EF4444" stroke="#FFDC00" strokeWidth="1.5" />
             <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
               40
             </text>
           </g>
-          <text x="-115" y="25" textAnchor="start" fontSize="12" fill="#E5E7EB">
-            Реализация потенциала (40–50 лет)
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="-115" y="18">
+              Реализация потенциала
+            </tspan>
+            <tspan x="-115" y="34">
+              (40–50 лет)
+            </tspan>
           </text>
 
+          {/* 60 лет */}
           <g transform="translate(0, 20)">
             <circle r="16" fill="#EF4444" stroke="#FFDC00" strokeWidth="1.5" />
             <text y="5" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">
               60
             </text>
           </g>
-          <text x="35" y="25" textAnchor="start" fontSize="12" fill="#E5E7EB">
-            Мудрость и передача опыта (60+)
+          <text textAnchor="start" fontSize="12" fill="#E5E7EB">
+            <tspan x="35" y="18">
+              Мудрость и передача опыта
+            </tspan>
+            <tspan x="35" y="34">
+              (60+)
+            </tspan>
           </text>
         </g>
 
