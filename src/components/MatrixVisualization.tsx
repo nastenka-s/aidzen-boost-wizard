@@ -163,37 +163,57 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             const oy = Math.sin(rad) * OUTER_RADIUS;
 
             const age = parseInt(spoke.label);
-            const isMainAge = age % 20 === 0;
-            const outerColor = age === 0 || age === 20 ? "#8B5CF6" : age === 40 || age === 60 ? "#EF4444" : "#6B7280";
+           
+            const age = parseInt(spoke.label);
+const isMainAge = age % 20 === 0;
+const outerColor =
+  age === 0 || age === 20
+    ? "#8B5CF6"
+    : age === 40 || age === 60
+    ? "#EF4444"
+    : "#6B7280";
 
-            return (
-              <g key={`group-${i}`}>
-                {/* Внешняя точка возраста */}
-                <g transform={`translate(${ox}, ${oy})`}>
-                  <circle
-                    r={isMainAge ? 34 : 28}
-                    fill={outerColor}
-                    stroke="#FFDC00"
-                    strokeWidth="2"
-                    filter="url(#glow)"
-                  />
-                  <text y="6" textAnchor="middle" fontSize={isMainAge ? 18 : 14} fontWeight="bold" fill="white">
-                    {spoke.outer}
-                  </text>
-                  <text y={isMainAge ? 46 : 40} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#FDE047">
-                    {age} лет
-                  </text>
-                  <text
-                    y={isMainAge ? 58 : 52}
-                    textAnchor="middle"
-                    fontSize="8"
-                    fill="#E5E7EB"
-                    opacity="0.9"
-                    style={{ textShadow: "0px 1px 2px rgba(0,0,0,0.8)" }}
-                  >
-                    {ARCANA_NAMES[spoke.outer]}
-                  </text>
-                </g>
+const ageLabelY =
+  age === 20
+    ? -40
+    : isMainAge
+    ? 46
+    : 40;
+
+return (
+  <g key={`group-${i}`}>
+    {/* Внешняя точка возраста */}
+    <g transform={`translate(${ox}, ${oy})`}>
+      <circle
+        r={isMainAge ? 34 : 28}
+        fill={outerColor}
+        stroke="#FFDC00"
+        strokeWidth="2"
+        filter="url(#glow)"
+      />
+      <text
+        y="6"
+        textAnchor="middle"
+        fontSize={isMainAge ? 18 : 14}
+        fontWeight="bold"
+        fill="white"
+      >
+        {spoke.outer}
+      </text>
+      <text
+        y={ageLabelY}
+        textAnchor="middle"
+        fontSize="10"
+        fontWeight="bold"
+        fill="#FDE047"
+      >
+        {age} лет
+      </text>
+      ...
+    </g>
+    ...
+  </g>
+);
 
                 {/* Средняя точка (фиолетовый круг) */}
                 {spoke.middle > 0 && (
