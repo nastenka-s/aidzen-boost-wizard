@@ -73,7 +73,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
   return (
     <div className="w-full flex flex-col items-center gap-4">
       {/* Основное колесо */}
-      <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-3xl mx-auto drop-shadow-xl">
+      <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-6xl mx-auto drop-shadow-xl">
         <defs>
           <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#1F2937" />
