@@ -131,47 +131,48 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             );
           })}
           {/* Мужская и женская линии */}
+          {/* Мужская и женская линии */}
           <g>
-            {/* Мужская линия: снизу-слева → сверху-справа */}
+            {/* Мужская линия (розовая диагональ) */}
             <line
               x1={-DIAG_RADIUS}
               y1={DIAG_RADIUS}
               x2={DIAG_RADIUS}
               y2={-DIAG_RADIUS}
-              stroke="#FB7185" // ⬅ было #38BDF8, теперь розовая
+              stroke="#FB7185"
               strokeWidth={2}
               strokeDasharray="6 6"
               opacity={0.7}
             />
             <text
               x={DIAG_RADIUS * 0.55}
-              y={DIAG_RADIUS * 0.5} // ⬅ чуть выше, было 0.4
+              y={DIAG_RADIUS * 0.3} // сдвинули ВЫШЕ (ближе к центру)
               textAnchor="middle"
               fontSize={12}
               fontWeight={600}
-              fill="#FB7185" // ⬅ тот же цвет, что и линия
+              fill="#38BDF8" // надпись мужская — ГОЛУБОЙ
             >
               Мужская линия
             </text>
 
-            {/* Женская линия: сверху-слева → снизу-справа */}
+            {/* Женская линия (голубая диагональ) */}
             <line
               x1={-DIAG_RADIUS}
               y1={-DIAG_RADIUS}
               x2={DIAG_RADIUS}
               y2={DIAG_RADIUS}
-              stroke="#38BDF8" // ⬅ было розовое, теперь голубая
+              stroke="#38BDF8"
               strokeWidth={2}
               strokeDasharray="6 6"
               opacity={0.7}
             />
             <text
               x={DIAG_RADIUS * 0.55}
-              y={-DIAG_RADIUS * 0.5} // ⬅ опустили на столько же
+              y={-DIAG_RADIUS * 0.3} // сдвинули НИЖЕ (ближе к центру)
               textAnchor="middle"
               fontSize={12}
               fontWeight={600}
-              fill="#38BDF8"
+              fill="#FB7185" // надпись женская — РОЗОВЫЙ
             >
               Женская линия
             </text>
