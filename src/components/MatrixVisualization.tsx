@@ -163,7 +163,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             const oy = Math.sin(rad) * OUTER_RADIUS;
 
             const age = parseInt(spoke.label);
-            const age = parseInt(spoke.label);
+
             const isMainAge = age % 20 === 0;
             const outerColor = age === 0 || age === 20 ? "#8B5CF6" : age === 40 || age === 60 ? "#EF4444" : "#6B7280";
 
