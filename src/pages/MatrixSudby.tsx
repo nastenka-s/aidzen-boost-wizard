@@ -251,7 +251,7 @@ export default function MatrixSudby() {
           <Card className="bg-white/10 backdrop-blur-lg border-white/20">
             <CardContent className="p-8">
               <div className="text-center space-y-4 mb-6">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">МАТРИЦА СУДЬБЫ - БЕСПЛАТНЫй РАСЧЕТ</h1>
+                <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">МАТРИЦА СУДЬБЫ - БЕСПЛАТНЫй РАСЧЕТ</h1>
                 <p className="text-xl text-purple-200">Откройте секреты вашей судьбы</p>
               </div>
 
