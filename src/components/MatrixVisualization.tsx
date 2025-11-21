@@ -286,16 +286,16 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
           <text x="0" y={OUTER_RADIUS + 78} textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ЗЕМЛЯ
           </text>
-          <text x={-OUTER_RADIUS - 78} y="4" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={-OUTER_RADIUS - 60} y="4" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             ДУХОВНОЕ
           </text>
-          <text x={OUTER_RADIUS + 78} y="4" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
+          <text x={OUTER_RADIUS + 60} y="4" textAnchor="middle" fontSize="14" fontWeight="600" fill="#E5E7EB">
             МАТЕРИАЛЬНОЕ
           </text>
         </g>
       </svg>
 
-      <svg viewBox="0 0 400 220" className="w-full max-w-xl mx-auto mt-4 drop-shadow-lg">
+      <svg viewBox="0 0 400 220" className="w-full max-w-3xl mx-auto mt-4 drop-shadow-lg">
         <rect width="400" height="220" rx="16" fill="#020617" />
         <rect x="12" y="12" width="376" height="196" rx="14" fill="none" stroke="rgba(148, 163, 184, 0.45)" />
 
