@@ -231,7 +231,7 @@ export default function MatrixSudby() {
   return (
     <>
       <Helmet>
-        <title>Матрица Судьбы - Расчет онлайн бесплатно | НейроДзен</title>
+        <title>Матрица Судьбы - Расчет онлайн бесплатно | Нейродзен</title>
         <meta name="description" content="Рассчитайте свою Матрицу Судьбы онлайн бесплатно." />
       </Helmet>
 
@@ -249,18 +249,21 @@ export default function MatrixSudby() {
           <Card className="bg-white/10 backdrop-blur-lg border-white/20">
             <CardContent className="p-8">
               <div className="text-center space-y-4 mb-6">
-                <h1 className="text-4xl md:text-5xl font-bold text-white">Матрица Судьбы</h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-white">Матрица Судьбы - БЕСПЛАТНЫй РАСЧЕТ</h1>
                 <p className="text-xl text-purple-200">Откройте секреты вашей судьбы</p>
               </div>
 
               <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-300/30 rounded-lg p-6 mb-6">
                 <h3 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5" />
                   Что такое Матрица Судьбы?
                 </h3>
                 <p className="text-gray-200">
-                  Матрица Судьбы — это система самопознания, основанная на дате рождения. Она раскрывает ваши таланты,
-                  предназначение и жизненные циклы.
+                  Матрица Судьбы — это система самопознания и прогнозирования, основанная на дате рождения и 22х
+                  арканах. Она раскрывает ваши таланты, предназначение и жизненные циклы.
+                </p>
+                <p className="text-gray-200">
+                  {" "}
+                  Вы можете рассчитать свои матрицу судьбы ниже и зарегистрироваться, что бы запустить нейроанализ.
                 </p>
               </div>
 
