@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, ArrowRight, MessageCircle, Smartphone } from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import logo from "@/assets/logo.png";
 import { blogPosts } from "@/data/blogPosts";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const Blog = () => {
   return (
@@ -16,35 +17,7 @@ const Blog = () => {
         <meta name="keywords" content="блог астрология, нумерология статьи, натальная карта, астрология обучение, эзотерика" />
         <link rel="canonical" href="https://aidzen.ru/blog" />
       </Helmet>
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
-        <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="НейроДзен" className="w-10 h-10" />
-            <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
-          </Link>
-          <div className="flex gap-3">
-            <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
-              <Link to="/#pricing">ЦЕНЫ</Link>
-            </Button>
-            <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">ВХОД</a>
-            </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-              <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-4 h-4 md:mr-2" />
-                <span className="hidden md:inline">Telegram Бот </span>
-              </a>
-            </Button>
-            <Button size="sm" variant="outline" className="border-primary/30" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
-                <Smartphone className="w-4 h-4 md:mr-2" />
-                <span className="hidden md:inline">RuStore</span>
-              </a>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
@@ -91,57 +64,7 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border/40 py-12">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <img src={logo} alt="НейроДзен" className="w-10 h-10" />
-                <span className="text-lg font-semibold">НЕЙРОДЗЕН</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Ваш персональный ИИ-наставник по эзотерике
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <h3 className="font-semibold">Документы</h3>
-              <div className="space-y-2 text-sm">
-                <Link to="/dataprocessingpolicy" className="block text-muted-foreground hover:text-primary transition-colors">
-                  Политика конфиденциальности
-                </Link>
-                <Link to="/dataprocessing" className="block text-muted-foreground hover:text-primary transition-colors">
-                  Обработка персональных данных
-                </Link>
-                <Link to="/publicoffer" className="block text-muted-foreground hover:text-primary transition-colors">
-                  Публичная оферта
-                </Link>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-semibold">Контакты</h3>
-              <div className="flex gap-3">
-                <Button size="sm" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="w-4 h-4" />
-                  </a>
-                </Button>
-                <Button size="sm" variant="outline" className="border-primary/30" asChild>
-                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
-                    <Smartphone className="w-4 h-4" />
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-          
-          <div className="border-t border-border/40 pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2025 НейроДзен. Все права защищены.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

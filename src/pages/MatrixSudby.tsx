@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
 import { MatrixVisualization } from "@/components/MatrixVisualization";
-import logo from "@/assets/logo.png";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const ARCANA_NAMES: Record<number, string> = {
   1: "Маг",
@@ -237,14 +237,7 @@ export default function MatrixSudby() {
         <link rel="canonical" href="https://aidzen.ru/matrica-sudby" />
       </Helmet>
 
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
-        <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="НейроДзен" className="w-10 h-10" />
-            <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 py-12 px-4">
         <div className="max-w-7xl mx-auto space-y-8">
@@ -416,6 +409,8 @@ export default function MatrixSudby() {
           )}
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }
