@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const MatrixSudby22Arkana = () => {
   return (
@@ -24,27 +26,8 @@ const MatrixSudby22Arkana = () => {
         <meta name="twitter:description" content="Как бесплатно посчитать Матрицу судьбы по системе 22 арканов и разобрать предназначение, любовь, деньги и род. Пошаговый разбор формул с примерами и рисками." />
       </Helmet>
 
+      <Header />
       <div className="min-h-screen bg-gradient-to-b from-background via-background/95 to-primary/5">
-        <header className="border-b border-border/40 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex items-center justify-between">
-              <Link to="/" className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-bold">
-                  Н
-                </div>
-                <span className="font-semibold text-foreground">НейроДзен</span>
-              </Link>
-              <div className="flex gap-4">
-                <Link to="/blog">
-                  <Button variant="ghost">Блог</Button>
-                </Link>
-                <Link to="/#services">
-                  <Button variant="ghost">Расчёты</Button>
-                </Link>
-              </div>
-            </nav>
-          </div>
-        </header>
 
         <main className="container mx-auto px-4 py-12 max-w-4xl">
           <article>
@@ -501,13 +484,9 @@ const MatrixSudby22Arkana = () => {
             </div>
           </article>
         </main>
-
-        <footer className="border-t border-border/40 mt-20 py-8">
-          <div className="container mx-auto px-4 text-center text-muted-foreground">
-            <p>© 2025 НейроДзен. Все права защищены.</p>
-          </div>
-        </footer>
       </div>
+
+      <Footer />
     </>
   );
 };
