@@ -128,7 +128,9 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
                   strokeLinecap="round"
                 />
               </g>
-               {/* Мужская и женская линии */}
+            );
+          })}
+          {/* Мужская и женская линии */}
           <g>
             {/* Мужская линия: снизу-слева → сверху-справа */}
             <line
@@ -174,9 +176,6 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
               Женская линия
             </text>
           </g>
-            );
-          })}
-
           {/* Метки возрастов между основными точками */}
           {matrix.spokes.map((spoke, i) => {
             const nextSpoke = matrix.spokes[(i + 1) % matrix.spokes.length];
