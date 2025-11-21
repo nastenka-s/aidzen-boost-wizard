@@ -295,23 +295,6 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
       </svg>
 
       {/* Блок возрастных этапов + легенда */}
-      <svg viewBox="0 0 400 220" className="w-full max-w-3xl mx-auto mt-4 drop-shadow-lg">
-        <rect width="400" height="220" rx="16" fill="#020617" />
-        <rect x="12" y="12" width="376" height="196" rx="14" fill="none" stroke="rgba(148, 163, 184, 0.45)" />
-
-        {/* Легенда по линиям */}
-        <g transform="translate(200, 180)">
-          <circle cx="-120" cy="0" r="5" fill="#F97316" />
-          <text x="-108" y="4" textAnchor="start" fontSize="12" fill="#F97316">
-            Родовые задачи
-          </text>
-
-          <circle cx="50" cy="0" r="5" fill="#22C55E" />
-          <text x="62" y="4" textAnchor="start" fontSize="12" fill="#22C55E">
-            Деньги и ресурс
-          </text>
-        </g>
-      </svg>
     </div>
   );
 };
