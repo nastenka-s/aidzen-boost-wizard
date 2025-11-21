@@ -138,18 +138,18 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
               y1={DIAG_RADIUS}
               x2={DIAG_RADIUS}
               y2={-DIAG_RADIUS}
-              stroke="#38BDF8"
+              stroke="#FB7185" // ⬅ было #38BDF8, теперь розовая
               strokeWidth={2}
               strokeDasharray="6 6"
               opacity={0.7}
             />
             <text
               x={DIAG_RADIUS * 0.55}
-              y={DIAG_RADIUS * 0.4}
+              y={DIAG_RADIUS * 0.5} // ⬅ чуть выше, было 0.4
               textAnchor="middle"
               fontSize={12}
               fontWeight={600}
-              fill="#38BDF8"
+              fill="#FB7185" // ⬅ тот же цвет, что и линия
             >
               Мужская линия
             </text>
@@ -160,18 +160,18 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
               y1={-DIAG_RADIUS}
               x2={DIAG_RADIUS}
               y2={DIAG_RADIUS}
-              stroke="#FB7185"
+              stroke="#38BDF8" // ⬅ было розовое, теперь голубая
               strokeWidth={2}
               strokeDasharray="6 6"
               opacity={0.7}
             />
             <text
               x={DIAG_RADIUS * 0.55}
-              y={-DIAG_RADIUS * 0.4}
+              y={-DIAG_RADIUS * 0.5} // ⬅ опустили на столько же
               textAnchor="middle"
               fontSize={12}
               fontWeight={600}
-              fill="#FB7185"
+              fill="#38BDF8"
             >
               Женская линия
             </text>
