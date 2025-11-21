@@ -109,6 +109,16 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
               strokeDasharray={i === 2 ? "4 6" : "none"}
             />
           ))}
+          {/* Тонкие базовые оси (горизонталь и вертикаль) */}
+          <line
+            x1={-OUTER_RADIUS}
+            y1={0}
+            x2={OUTER_RADIUS}
+            y2={0}
+            stroke="rgba(148,163,184,0.4)" // светло-серый
+            strokeWidth={1}
+          />
+          <line x1={0} y1={-OUTER_RADIUS} x2={0} y2={OUTER_RADIUS} stroke="rgba(148,163,184,0.4)" strokeWidth={1} />
 
           {/* Оси */}
           {axes.map((axis, index) => {
@@ -168,7 +178,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
             />
             <text
               x={DIAG_RADIUS * 0.55}
-              y={-DIAG_RADIUS * 0.3} // сдвинули НИЖЕ (ближе к центру)
+              y={-DIAG_RADIUS * 0.2} // сдвинули НИЖЕ (ближе к центру)
               textAnchor="middle"
               fontSize={12}
               fontWeight={600}
