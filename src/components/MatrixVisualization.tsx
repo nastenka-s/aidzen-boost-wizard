@@ -57,6 +57,7 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
   const INNER_RADIUS = OUTER_RADIUS * 0.5;
   const INNER_NODE_RADIUS = 18;
   const INNER_NODE_FONT_SIZE = 11;
+  const DIAG_RADIUS = OUTER_RADIUS * 0.85; // длина мужской/женской диагоналей
 
   const axes = [
     { angle: 180, label: "0 лет" },
@@ -127,6 +128,52 @@ export const MatrixVisualization: React.FC<MatrixVisualizationProps> = ({ matrix
                   strokeLinecap="round"
                 />
               </g>
+               {/* Мужская и женская линии */}
+          <g>
+            {/* Мужская линия: снизу-слева → сверху-справа */}
+            <line
+              x1={-DIAG_RADIUS}
+              y1={DIAG_RADIUS}
+              x2={DIAG_RADIUS}
+              y2={-DIAG_RADIUS}
+              stroke="#38BDF8"
+              strokeWidth={2}
+              strokeDasharray="6 6"
+              opacity={0.7}
+            />
+            <text
+              x={DIAG_RADIUS * 0.55}
+              y={DIAG_RADIUS * 0.4}
+              textAnchor="middle"
+              fontSize={12}
+              fontWeight={600}
+              fill="#38BDF8"
+            >
+              Мужская линия
+            </text>
+
+            {/* Женская линия: сверху-слева → снизу-справа */}
+            <line
+              x1={-DIAG_RADIUS}
+              y1={-DIAG_RADIUS}
+              x2={DIAG_RADIUS}
+              y2={DIAG_RADIUS}
+              stroke="#FB7185"
+              strokeWidth={2}
+              strokeDasharray="6 6"
+              opacity={0.7}
+            />
+            <text
+              x={DIAG_RADIUS * 0.55}
+              y={-DIAG_RADIUS * 0.4}
+              textAnchor="middle"
+              fontSize={12}
+              fontWeight={600}
+              fill="#FB7185"
+            >
+              Женская линия
+            </text>
+          </g>
             );
           })}
 
