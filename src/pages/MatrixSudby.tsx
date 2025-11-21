@@ -245,7 +245,7 @@ export default function MatrixSudby() {
       </header>
 
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 py-12 px-4">
-        <div className="max-w-5xl mx-auto space-y-8">
+        <div className="max-w-7xl mx-auto space-y-8">
           <Card className="bg-white/10 backdrop-blur-lg border-white/20">
             <CardContent className="p-8">
               <div className="text-center space-y-4 mb-6">
