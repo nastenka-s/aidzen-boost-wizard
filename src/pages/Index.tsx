@@ -57,6 +57,10 @@ const Index = () => {
           </div>
           <div className="flex gap-3">
             <Button variant="ghost" size="sm" className="hidden lg:flex" asChild>
+              <Link to="/natal-chart-calculator">НАТАЛЬНАЯ КАРТА</Link>
+            </Button>
+
+            <Button variant="ghost" size="sm" className="hidden lg:flex" asChild>
               <Link to="/matrica-sudby-rasschitat">МАТРИЦА СУДЬБЫ</Link>
             </Button>
             <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
