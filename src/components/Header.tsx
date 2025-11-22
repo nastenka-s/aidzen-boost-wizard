@@ -11,14 +11,14 @@ export const Header = () => {
           <img src={logo} alt="НейроДзен" className="w-10 h-10" />
           <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
         </Link>
-        <div className="flex gap-3">
-          <Button variant="ghost" size="sm" className="hidden lg:flex" asChild>
+        <div className="flex gap-2 items-center overflow-x-auto">
+          <Button variant="ghost" size="sm" asChild>
             <Link to="/natal-chart-calculator">НАТАЛЬНАЯ КАРТА</Link>
           </Button>
-          <Button variant="ghost" size="sm" className="hidden lg:flex" asChild>
+          <Button variant="ghost" size="sm" asChild>
             <Link to="/matrica-sudby-rasschitat">МАТРИЦА СУДЬБЫ</Link>
           </Button>
-          <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
+          <Button variant="ghost" size="sm" asChild>
             <Link to="/blog">БЛОГ</Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
