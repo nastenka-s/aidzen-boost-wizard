@@ -27,6 +27,7 @@ import NovyjGod2026 from "./pages/NovyjGod2026";
 import SeventhHouse from "./pages/SeventhHouse";
 import MatrixSudby from "./pages/MatrixSudby";
 import MatrixSudby22Arkana from "./pages/MatrixSudby22Arkana";
+import DetiVNatalnoyKarte from "./pages/DetiVNatalnoyKarte";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/deti-v-natalnoy-karte-kogda-i-skolko" element={<DetiVNatalnoyKarte />} />
           <Route path="/matrica-sudby-22-arkana-besplatno" element={<MatrixSudby22Arkana />} />
           <Route path="/7-dom-v-natalnoj-karte-otnosheniya-i-razryvy" element={<SeventhHouse />} />
           <Route path="/matrica-sudby-rasschitat" element={<MatrixSudby />} />

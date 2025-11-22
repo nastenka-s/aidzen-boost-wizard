@@ -19,7 +19,7 @@ export const Header = () => {
             <Link to="/blog">БЛОГ</Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+            <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
               ВХОД
             </a>
           </Button>
@@ -30,7 +30,7 @@ export const Header = () => {
             </a>
           </Button>
           <Button size="sm" variant="outline" className="border-primary/30" asChild>
-            <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+            <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
               <Smartphone className="w-4 h-4 md:mr-2" />
               <span className="hidden md:inline">RuStore</span>
             </a>

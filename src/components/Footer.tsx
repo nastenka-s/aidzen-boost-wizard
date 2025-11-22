@@ -43,7 +43,7 @@ export const Footer = () => {
                 </a>
               </Button>
               <Button size="sm" variant="outline" className="border-primary/30" asChild>
-                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
                   <Smartphone className="w-4 h-4" />
                 </a>
               </Button>
