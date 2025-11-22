@@ -12,14 +12,14 @@ export const Header = () => {
           <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
         </Link>
         
-        <nav className="hidden xl:flex gap-2 items-center">
+        <nav className="flex gap-2 items-center">
           <Button variant="ghost" size="sm" asChild>
             <Link to="/natal-chart-calculator">НАТАЛЬНАЯ КАРТА</Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
             <Link to="/matrica-sudby-rasschitat">МАТРИЦА СУДЬБЫ</Link>
           </Button>
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" className="hidden lg:flex" asChild>
             <Link to="/blog">БЛОГ</Link>
           </Button>
         </nav>
