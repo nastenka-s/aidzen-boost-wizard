@@ -478,7 +478,7 @@ const NatalChartWheel = ({ data, birthInfo }: any) => {
   return (
     <Card className="bg-transparent border-none shadow-none">
       <CardHeader>
-        <CardTitle className="text-purple-100 text-center text-2xl">Колесо Натальной Карты</CardTitle>
+        <CardTitle className="text-purple-100 text-center text-2xl">Натальная карта - ваш расчет</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-6 px-0 sm:px-6">
         <div className="-mx-4 w-screen sm:mx-0 sm:w-full max-w-none">
