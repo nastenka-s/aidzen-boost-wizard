@@ -21,12 +21,57 @@ const NatalChartCalculator = () => {
   const [error, setError] = useState("");
   const [chartData, setChartData] = useState<any | null>(null);
 
+  // новое: автопоиск города
+  const [citySuggestions, setCitySuggestions] = useState<any[]>([]);
+  const [isSearchingCity, setIsSearchingCity] = useState(false);
+  const [selectedCity, setSelectedCity] = useState<any | null>(null);
+
   const validateForm = () => {
     if (!date || !time || !city) {
       setError("Пожалуйста, заполните дату, время и город рождения");
       return false;
     }
     return true;
+  };
+
+  const handleCityChange = async (value: string) => {
+    setCity(value);
+    setSelectedCity(null);
+    setCityLat("");
+    setCityLon("");
+    setCityTz("");
+    setError("");
+
+    if (!value || value.trim().length < 2) {
+      setCitySuggestions([]);
+      return;
+    }
+
+    setIsSearchingCity(true);
+    try {
+      const res = await fetch(
+        `https://api.aidzen.ru/api/geo/resolve?q=${encodeURIComponent(value.trim())}&lang=ru&limit=5`,
+      );
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setCitySuggestions(data);
+      } else {
+        setCitySuggestions([]);
+      }
+    } catch (e) {
+      setCitySuggestions([]);
+    } finally {
+      setIsSearchingCity(false);
+    }
+  };
+
+  const handleSelectCity = (item: any) => {
+    setSelectedCity(item);
+    setCity(item.display_name || item.name || city);
+    setCityLat(String(item.lat));
+    setCityLon(String(item.lon));
+    if (item.tz) setCityTz(item.tz);
+    setCitySuggestions([]);
   };
 
   const handleCalculate = async () => {
@@ -147,7 +192,7 @@ const NatalChartCalculator = () => {
                     />
                   </div>
 
-                  <div>
+                  <div className="relative">
                     <Label htmlFor="city" className="text-purple-900">
                       Город рождения *
                     </Label>
@@ -155,10 +200,35 @@ const NatalChartCalculator = () => {
                       id="city"
                       type="text"
                       value={city}
-                      onChange={(e) => setCity(e.target.value)}
+                      onChange={(e) => handleCityChange(e.target.value)}
                       placeholder="Например: Москва"
                       className={error && !city ? "border-red-500" : ""}
+                      autoComplete="off"
                     />
+
+                    {isSearchingCity && city && (
+                      <div className="absolute right-2 top-8 text-xs text-purple-500">Ищу...</div>
+                    )}
+
+                    {citySuggestions.length > 0 && (
+                      <div className="absolute z-20 mt-1 w-full max-h-48 overflow-auto rounded-md bg-white shadow-lg border border-purple-100">
+                        {citySuggestions.map((item, idx) => (
+                          <button
+                            type="button"
+                            key={idx}
+                            onClick={() => handleSelectCity(item)}
+                            className="w-full text-left px-3 py-2 text-sm hover:bg-purple-50"
+                          >
+                            <div className="font-medium text-purple-900">
+                              {item.name}
+                              {item.country ? `, ${item.country}` : ""}
+                            </div>
+                            {item.display_name && <div className="text-xs text-gray-500">{item.display_name}</div>}
+                            {item.tz && <div className="text-[10px] text-gray-400 mt-0.5">{item.tz}</div>}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -801,7 +871,7 @@ const AspectsTable = ({ aspects }: any) => (
           </thead>
           <tbody>
             {aspects.map((aspect: string, index: number) => (
-              <tr key={index} className="border-b border-purple-100">
+              <tr key={index} className="border-б border-purple-100">
                 <td className="py-2 px-3">{aspect}</td>
               </tr>
             ))}
