@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
-
+import { motion } from "framer-motion";  // ← ДОБАВЬ ЭТО
 const NatalChartCalculator = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -252,17 +252,19 @@ const NatalChartCalculator = () => {
             )}
 
             {data && chartData && (
-              <div className="space-y-8">
-                <NatalChartWheel
-                  houses={data.housesData}
-                  planets={data.planetsData}
-                  aspects={data.aspectsData}
-                  birthInfo={{
-                    date: chartData.date,
-                    time: chartData.time,
-                    city: chartData.city,
-                  }}
-                />
+              <NatalChartWheel
+  data={{
+    houses: data.housesData,
+    planets: data.planetsData,
+    aspects: data.aspectsData,
+  }}
+  birthInfo={{
+    date: chartData.date,
+    time: chartData.time,
+    location: chartData.city,
+  }}
+/>
+
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <PlanetsTable planets={data.planetsData} />
@@ -281,200 +283,462 @@ const NatalChartCalculator = () => {
   );
 };
 
-const NatalChartWheel = ({ houses, planets, aspects, birthInfo }) => {
-  const centerX = 250;
-  const centerY = 250;
-  const outerRadius = 230;
-  const zodiacRadius = 200;
-  const houseRadius = 160;
-  const planetRadius = 120;
+const ZODIAC_SIGNS = [
+  { name: "Овен", symbol: "♈", startDegree: 0, color: "#EF4444" },
+  { name: "Телец", symbol: "♉", startDegree: 30, color: "#10B981" },
+  { name: "Близнецы", symbol: "♊", startDegree: 60, color: "#F59E0B" },
+  { name: "Рак", symbol: "♋", startDegree: 90, color: "#C0C0C0" },
+  { name: "Лев", symbol: "♌", startDegree: 120, color: "#FBBF24" },
+  { name: "Дева", symbol: "♍", startDegree: 150, color: "#8B4513" },
+  { name: "Весы", symbol: "♎", startDegree: 180, color: "#FFC0CB" },
+  { name: "Скорпион", symbol: "♏", startDegree: 210, color: "#7C2D12" },
+  { name: "Стрелец", symbol: "♐", startDegree: 240, color: "#A855F7" },
+  { name: "Козерог", symbol: "♑", startDegree: 270, color: "#4B5563" },
+  { name: "Водолей", symbol: "♒", startDegree: 300, color: "#06B6D4" },
+  { name: "Рыбы", symbol: "♓", startDegree: 330, color: "#8B5CF6" },
+];
 
-  const polarToCartesian = (degree, radius) => {
-    const rad = ((degree - 90) * Math.PI) / 180;
+const PLANET_GLYPHS: any = {
+  Sun: { glyph: "☉", label: "Солнце", meaning: "Я, воля", color: "#F59E0B" },
+  Moon: { glyph: "☽", label: "Луна", meaning: "эмоции", color: "#C0C0C0" },
+  Mercury: { glyph: "☿", label: "Меркурий", meaning: "мысли", color: "#A3E635" },
+  Venus: { glyph: "♀", label: "Венера", meaning: "любовь", color: "#EC4899" },
+  Mars: { glyph: "♂", label: "Марс", meaning: "действие", color: "#EF4444" },
+  Jupiter: { glyph: "♃", label: "Юпитер", meaning: "рост", color: "#F97316" },
+  Saturn: { glyph: "♄", label: "Сатурн", meaning: "структура", color: "#6B7280" },
+  Uranus: { glyph: "♅", label: "Уран", meaning: "свобода", color: "#06B6D4" },
+  Neptune: { glyph: "♆", label: "Нептун", meaning: "мечты", color: "#8B5CF6" },
+  Pluto: { glyph: "♇", label: "Плутон", meaning: "трансформация", color: "#7C2D12" },
+};
+
+const ASPECT_STYLES: any = {
+  "Соединение": { color: "#FFDC00", label: "Соединение 0°", meaning: "слияние" },
+  "Секстиль": { color: "#06B6D4", label: "Секстиль 60°", meaning: "возможности" },
+  "Квадрат": { color: "#EF4444", label: "Квадрат 90°", meaning: "напряжение" },
+  "Трин": { color: "#10B981", label: "Трин 120°", meaning: "поддержка" },
+  "Оппозиция": { color: "#DC2626", label: "Оппозиция 180°", meaning: "полярность" },
+};
+
+const NatalChartWheel: React.FC<{ data: any; birthInfo: any }> = ({ data, birthInfo }) => {
+  const [hoveredPlanet, setHoveredPlanet] = useState<any>(null);
+  const [hoveredHouse, setHoveredHouse] = useState<number | null>(null);
+
+  const centerX = 500;
+  const centerY = 500;
+  const outerRadius = 450;
+  const zodiacRadius = 380;
+  const houseRadius = 310;
+  const planetRadius = 240;
+  const centerRadius = 100;
+
+  const firstHouse = data.houses.find((h: any) => h.number === 1);
+  const ascAngle = firstHouse ? firstHouse.cuspDegree : 0;
+  const rotationOffset = 90 - ascAngle;
+
+  const applyRotation = (angle: number) => {
+    return (angle + rotationOffset + 360) % 360;
+  };
+
+  const degToRad = (deg: number) => ((90 + deg) * Math.PI) / 180;
+
+  const polarToCartesian = (angle: number, radius: number) => {
+    const rotated = applyRotation(angle);
+    const rad = degToRad(rotated);
     return {
       x: centerX + radius * Math.cos(rad),
-      y: centerY + radius * Math.sin(rad),
+      y: centerY - radius * Math.sin(rad),
     };
   };
 
-  const zodiacSigns = [
-    { name: "Овен", symbol: "♈", start: 0 },
-    { name: "Телец", symbol: "♉", start: 30 },
-    { name: "Близнецы", symbol: "♊", start: 60 },
-    { name: "Рак", symbol: "♋", start: 90 },
-    { name: "Лев", symbol: "♌", start: 120 },
-    { name: "Дева", symbol: "♍", start: 150 },
-    { name: "Весы", symbol: "♎", start: 180 },
-    { name: "Скорпион", symbol: "♏", start: 210 },
-    { name: "Стрелец", symbol: "♐", start: 240 },
-    { name: "Козерог", symbol: "♑", start: 270 },
-    { name: "Водолей", symbol: "♒", start: 300 },
-    { name: "Рыбы", symbol: "♓", start: 330 },
-  ];
-
-  const getZodiacArc = (startDeg, endDeg, radius) => {
+  const getZodiacArc = (startDeg: number, endDeg: number, radius: number) => {
     const start = polarToCartesian(startDeg, radius);
     const end = polarToCartesian(endDeg, radius);
     const largeArc = endDeg - startDeg > 180 ? 1 : 0;
     return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArc} 1 ${end.x} ${end.y}`;
   };
 
+  const angularPoints = [
+    { name: "ASC", label: "Асцендент", house: 1, color: "#84CC16", glyph: "AC" },
+    { name: "MC", label: "МС", house: 10, color: "#06B6D4", glyph: "MC" },
+    { name: "DSC", label: "Десцендент", house: 7, color: "#059669", glyph: "DC" },
+    { name: "IC", label: "IC", house: 4, color: "#0891B2", glyph: "IC" },
+  ];
+
   return (
-    <Card className="bg-white/95 backdrop-blur">
+    <Card className="bg-transparent border-none shadow-none">
       <CardHeader>
-        <CardTitle className="text-purple-900 text-center">Колесо Натальной Карты</CardTitle>
+        <CardTitle className="text-purple-100 text-center text-2xl">
+          Колесо Натальной Карты
+        </CardTitle>
       </CardHeader>
-      <CardContent className="flex justify-center">
-        <svg width={500} height={500}>
-          <circle
-            cx={centerX}
-            cy={centerY}
-            r={outerRadius}
-            fill="#1e1030"
-            stroke="#A855F7"
-            strokeWidth="2"
-          />
+      <CardContent className="flex flex-col items-center gap-6">
+        <div className="w-full max-w-[95vmin]">
+          <svg viewBox="0 0 1000 1000" className="w-full h-auto">
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <radialGradient id="centerGlow">
+                <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#5E418F" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="centerFill">
+                <stop offset="0%" stopColor="#1E1B4B" stopOpacity="1" />
+                <stop offset="100%" stopColor="#312E81" stopOpacity="1" />
+              </radialGradient>
+            </defs>
 
-          {zodiacSigns.map((sign) => {
-            const startDeg = sign.start;
-            const endDeg = sign.start + 30;
-            const midDeg = startDeg + 15;
-            const labelPos = polarToCartesian(midDeg, zodiacRadius);
-            return (
-              <g key={sign.name}>
-                <path
-                  d={getZodiacArc(startDeg, endDeg, zodiacRadius)}
-                  fill="none"
-                  stroke="#4C1D95"
-                  strokeWidth="24"
-                />
-                <text
-                  x={labelPos.x}
-                  y={labelPos.y}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize="16"
-                  fill="#E9D5FF"
+            {/* фон */}
+            <circle cx={centerX} cy={centerY} r={outerRadius} fill="url(#centerGlow)" opacity="0.5" />
+
+            {/* зодиак */}
+            {ZODIAC_SIGNS.map((sign) => {
+              const startDeg = sign.startDegree;
+              const endDeg = (sign.startDegree + 30) % 360;
+              const midDeg = sign.startDegree + 15;
+
+              const textPos = polarToCartesian(midDeg, zodiacRadius + 35);
+              const symbolPos = polarToCartesian(midDeg, zodiacRadius + 15);
+
+              const signInner = polarToCartesian(startDeg, zodiacRadius - 15);
+              const signOuter = polarToCartesian(startDeg, outerRadius + 5);
+
+              return (
+                <g key={sign.name}>
+                  <line
+                    x1={signInner.x}
+                    y1={signInner.y}
+                    x2={signOuter.x}
+                    y2={signOuter.y}
+                    stroke="rgba(255,255,255,0.8)"
+                    strokeWidth="1"
+                    strokeDasharray="4 4"
+                  />
+
+                  <text
+                    x={symbolPos.x}
+                    y={symbolPos.y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill={sign.color}
+                    fontSize="36"
+                    fontWeight="bold"
+                    filter="url(#glow)"
+                  >
+                    {sign.symbol}
+                  </text>
+
+                  <text
+                    x={textPos.x}
+                    y={textPos.y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="white"
+                    fontSize="11"
+                    opacity="0.7"
+                  >
+                    {sign.name}
+                  </text>
+
+                  {[10, 20].map((offset) => {
+                    const deg = sign.startDegree + offset;
+                    const inner = polarToCartesian(deg, zodiacRadius - 30);
+                    const outer = polarToCartesian(deg, zodiacRadius - 20);
+                    return (
+                      <line
+                        key={offset}
+                        x1={inner.x}
+                        y1={inner.y}
+                        x2={outer.x}
+                        y2={outer.y}
+                        stroke="white"
+                        strokeWidth="1"
+                        opacity="0.2"
+                      />
+                    );
+                  })}
+                </g>
+              );
+            })}
+
+            <circle
+              cx={centerX}
+              cy={centerY}
+              r={zodiacRadius - 30}
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              opacity="0.3"
+            />
+
+            {/* дома */}
+            {data.houses.map((house: any, i: number) => {
+              const nextHouse = data.houses[(i + 1) % data.houses.length];
+              const startDeg = house.cuspDegree;
+              const endDeg = nextHouse.cuspDegree;
+              const midDeg =
+                startDeg +
+                (endDeg > startDeg
+                  ? (endDeg - startDeg) / 2
+                  : (360 - startDeg + endDeg) / 2);
+
+              const cuspPos = polarToCartesian(startDeg, houseRadius + 30);
+              const numberPos = polarToCartesian(midDeg, houseRadius + 50);
+
+              return (
+                <g
+                  key={house.number}
+                  onMouseEnter={() => setHoveredHouse(house.number)}
+                  onMouseLeave={() => setHoveredHouse(null)}
+                  style={{ cursor: "pointer" }}
                 >
-                  {sign.symbol}
-                </text>
-              </g>
-            );
-          })}
+                  <path
+                    d={`
+                      M ${centerX} ${centerY}
+                      L ${polarToCartesian(startDeg, houseRadius).x} ${polarToCartesian(startDeg, houseRadius).y}
+                      A ${houseRadius} ${houseRadius} 0 ${endDeg - startDeg > 180 ? 1 : 0} 1
+                      ${polarToCartesian(endDeg, houseRadius).x} ${polarToCartesian(endDeg, houseRadius).y}
+                      Z
+                    `}
+                    fill={house.number % 2 === 0 ? "#8B5CF6" : "#6366F1"}
+                    opacity={hoveredHouse === house.number ? 0.3 : 0.1}
+                  />
 
-          {houses.map((house, i) => {
-            const startDeg = house.cuspDegree;
-            const nextHouse = houses[(i + 1) % houses.length];
-            const endDeg = nextHouse ? nextHouse.cuspDegree : startDeg + 30;
-            const midDeg =
-              endDeg > startDeg
-                ? startDeg + (endDeg - startDeg) / 2
-                : startDeg + (360 - startDeg + endDeg) / 2;
+                  <line
+                    x1={centerX}
+                    y1={centerY}
+                    x2={polarToCartesian(startDeg, houseRadius).x}
+                    y2={polarToCartesian(startDeg, houseRadius).y}
+                    stroke="#FFDC00"
+                    strokeWidth="2"
+                    opacity="0.5"
+                  />
 
-            const cuspPos = polarToCartesian(startDeg, houseRadius);
-            const numberPos = polarToCartesian(midDeg, houseRadius - 20);
+                  <text
+                    x={numberPos.x}
+                    y={numberPos.y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="white"
+                    fontSize="16"
+                    fontWeight="bold"
+                  >
+                    {house.number}
+                  </text>
 
-            return (
-              <g key={house.number}>
+                  <text
+                    x={cuspPos.x}
+                    y={cuspPos.y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="#FFDC00"
+                    fontSize="9"
+                    opacity="0.8"
+                  >
+                    {Math.round(house.cuspDegree)}°
+                  </text>
+                </g>
+              );
+            })}
+
+            <circle
+              cx={centerX}
+              cy={centerY}
+              r={houseRadius}
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              opacity="0.3"
+            />
+
+            {/* угловые точки */}
+            {angularPoints.map((point) => {
+              const house = data.houses.find((h: any) => h.number === point.house);
+              if (!house) return null;
+
+              const pos = polarToCartesian(house.cuspDegree, houseRadius + 15);
+              const labelPos = polarToCartesian(house.cuspDegree, houseRadius + 45);
+
+              return (
+                <g key={point.name}>
+                  <circle
+                    cx={pos.x}
+                    cy={pos.y}
+                    r={12}
+                    fill={point.color}
+                    stroke="#FFDC00"
+                    strokeWidth={2.5}
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x={pos.x}
+                    y={pos.y + 1}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="white"
+                    fontSize="9"
+                    fontWeight="bold"
+                  >
+                    {point.glyph}
+                  </text>
+                  <text
+                    x={labelPos.x}
+                    y={labelPos.y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill={point.color}
+                    fontSize="11"
+                    fontWeight="bold"
+                  >
+                    {point.name}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* аспекты */}
+            {data.aspects.map((aspect: any, i: number) => {
+              const fromPlanet = data.planets.find((p: any) => p.name === aspect.from);
+              const toPlanet = data.planets.find((p: any) => p.name === aspect.to);
+              if (!fromPlanet || !toPlanet) return null;
+
+              const from = polarToCartesian(fromPlanet.longitude, planetRadius);
+              const to = polarToCartesian(toPlanet.longitude, planetRadius);
+              const style = ASPECT_STYLES[aspect.type] || {};
+
+              return (
                 <line
-                  x1={centerX}
-                  y1={centerY}
-                  x2={cuspPos.x}
-                  y2={cuspPos.y}
-                  stroke="#FDE68A"
-                  strokeWidth="2"
-                  opacity="0.7"
+                  key={i}
+                  x1={from.x}
+                  y1={from.y}
+                  x2={to.x}
+                  y2={to.y}
+                  stroke={style.color || "#FFDC00"}
+                  strokeWidth={2}
+                  opacity={0.65}
+                  filter="url(#glow)"
                 />
+              );
+            })}
+
+            {/* орбита планет */}
+            <circle
+              cx={centerX}
+              cy={centerY}
+              r={planetRadius}
+              fill="none"
+              stroke="white"
+              strokeWidth="1"
+              opacity="0.2"
+              strokeDasharray="5,5"
+            />
+
+            {/* планеты */}
+            {data.planets.map((planet: any) => {
+              const pos = polarToCartesian(planet.longitude, planetRadius);
+              const info = PLANET_GLYPHS[planet.name];
+              if (!info) return null;
+
+              return (
+                <g
+                  key={planet.name}
+                  onMouseEnter={() => setHoveredPlanet(planet)}
+                  onMouseLeave={() => setHoveredPlanet(null)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <circle
+                    cx={pos.x}
+                    cy={pos.y}
+                    r={hoveredPlanet?.name === planet.name ? 28 : 24}
+                    fill={info.color}
+                    stroke="#FFDC00"
+                    strokeWidth={2}
+                    filter="url(#glow)"
+                    style={{ transition: "all 0.3s" }}
+                  />
+
+                  <text
+                    x={pos.x}
+                    y={pos.y}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="white"
+                    fontSize="22"
+                    fontWeight="bold"
+                  >
+                    {info.glyph}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* центр */}
+            <circle
+              cx={centerX}
+              cy={centerY}
+              r={centerRadius}
+              fill="url(#centerFill)"
+              stroke="#FFDC00"
+              strokeWidth={3}
+              filter="url(#glow)"
+            />
+
+            {birthInfo && (
+              <>
                 <text
-                  x={numberPos.x}
-                  y={numberPos.y}
+                  x={centerX}
+                  y={centerY - 20}
                   textAnchor="middle"
-                  dominantBaseline="middle"
+                  fill="white"
                   fontSize="14"
-                  fill="#FDE68A"
-                  fontWeight="bold"
+                  opacity={0.9}
+                  fontWeight={500}
                 >
-                  {house.number}
+                  {birthInfo.date}
                 </text>
-              </g>
-            );
-          })}
-
-          <circle
-            cx={centerX}
-            cy={centerY}
-            r={planetRadius}
-            fill="none"
-            stroke="#A855F7"
-            strokeWidth="1"
-            opacity="0.5"
-          />
-
-          {planets.map((planet) => {
-            const pos = polarToCartesian(planet.longitude, planetRadius);
-            return (
-              <g key={planet.name}>
-                <circle cx={pos.x} cy={pos.y} r={8} fill="#FCD34D" />
                 <text
-                  x={pos.x}
-                  y={pos.y - 14}
+                  x={centerX}
+                  y={centerY + 5}
                   textAnchor="middle"
-                  fontSize="10"
-                  fill="#E9D5FF"
+                  fill="white"
+                  fontSize="14"
+                  opacity={0.9}
+                  fontWeight={500}
                 >
-                  {planet.name}
+                  {birthInfo.time}
                 </text>
-              </g>
-            );
-          })}
+                <text
+                  x={centerX}
+                  y={centerY + 30}
+                  textAnchor="middle"
+                  fill="#FFDC00"
+                  fontSize="13"
+                  opacity={0.8}
+                >
+                  {birthInfo.location}
+                </text>
+              </>
+            )}
+          </svg>
 
-          {aspects.map((asp, index) => {
-            const from = planets.find((p) => p.name === asp.from);
-            const to = planets.find((p) => p.name === asp.to);
-            if (!from || !to) return null;
-
-            const fromPos = polarToCartesian(from.longitude, planetRadius);
-            const toPos = polarToCartesian(to.longitude, planetRadius);
-
-            let color = "#FDE68A";
-            if (asp.type.includes("Квадрат")) color = "#F97373";
-            if (asp.type.includes("Трин")) color = "#6EE7B7";
-            if (asp.type.includes("Оппозиция")) color = "#FB7185";
-
-            return (
-              <line
-                key={index}
-                x1={fromPos.x}
-                y1={fromPos.y}
-                x2={toPos.x}
-                y2={toPos.y}
-                stroke={color}
-                strokeWidth="1.5"
-                opacity="0.7"
-              />
-            );
-          })}
-
-          <circle cx={centerX} cy={centerY} r={40} fill="#4C1D95" opacity="0.8" />
-          <text
-            x={centerX}
-            y={centerY - 6}
-            textAnchor="middle"
-            fontSize="12"
-            fill="#E9D5FF"
-          >
-            {birthInfo.date}
-          </text>
-          <text
-            x={centerX}
-            y={centerY + 10}
-            textAnchor="middle"
-            fontSize="11"
-            fill="#E9D5FF"
-          >
-            {birthInfo.time} · {birthInfo.city}
-          </text>
-        </svg>
+          {hoveredPlanet && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 p-4 bg-purple-900/80 backdrop-blur-sm rounded-lg border border-yellow-400/30"
+            >
+              <p className="text-white font-medium text-sm">
+                {PLANET_GLYPHS[hoveredPlanet.name]?.label} ·{" "}
+                {Math.round(hoveredPlanet.longitude)}° {hoveredPlanet.sign} ·{" "}
+                {hoveredPlanet.house} дом
+              </p>
+            </motion.div>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
