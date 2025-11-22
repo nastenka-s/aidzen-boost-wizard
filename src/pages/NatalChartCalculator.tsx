@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 type CityOption = {
   name: string;
@@ -37,6 +38,7 @@ const NatalChartCalculator = () => {
   const [cityLoading, setCityLoading] = useState(false);
   const [cityError, setCityError] = useState<string | null>(null);
   const [showCityDropdown, setShowCityDropdown] = useState(false);
+  const STORAGE_KEY = "natalChartForm";
 
   const validateForm = () => {
     if (!date || !time || !cityQuery) {
@@ -165,13 +167,49 @@ const NatalChartCalculator = () => {
 
     return { housesData, planetsData, aspectsData };
   };
+  useEffect(() => {
+    try {
+      if (typeof window === "undefined") return;
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+
+      const saved = JSON.parse(raw);
+
+      if (saved.date) setDate(saved.date);
+      if (saved.time) setTime(saved.time);
+      if (saved.cityQuery) setCityQuery(saved.cityQuery);
+      if (saved.cityLat) setCityLat(saved.cityLat);
+      if (saved.cityLon) setCityLon(saved.cityLon);
+      if (saved.cityTz) setCityTz(saved.cityTz);
+      if (saved.selectedCity) setSelectedCity(saved.selectedCity);
+    } catch (e) {
+      console.warn("Не удалось восстановить форму натальной карты из localStorage", e);
+    }
+  }, []);
+  useEffect(() => {
+    try {
+      if (typeof window === "undefined") return;
+      const payload = {
+        date,
+        time,
+        cityQuery,
+        cityLat,
+        cityLon,
+        cityTz,
+        selectedCity,
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch (e) {
+      console.warn("Не удалось сохранить форму натальной карты в localStorage", e);
+    }
+  }, [date, time, cityQuery, cityLat, cityLon, cityTz, selectedCity]);
 
   const data = prepareChartData();
 
   return (
     <>
       <Helmet>
-        <title>Натальная Карта - Расчет и Интерпретация | НейроДзен</title>
+        <title>Натальная Карта - Расчет и Расшифровка | Нейродзен</title>
         <meta
           name="description"
           content="Рассчитайте свою натальную карту онлайн бесплатно. Астрологический анализ планет, домов и аспектов в вашем гороскопе рождения."
@@ -183,7 +221,7 @@ const NatalChartCalculator = () => {
 
         <main className="container mx-auto px-4 py-12">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold text-center mb-8 text-white">Расчет Натальной Карты</h1>
+            <h1 className="text-4xl font-bold text-center mb-8 text-white">Бесплатный Расчет Натальной Карты</h1>
 
             <Card className="mb-8 bg-white/95 backdrop-blur">
               <CardHeader>
@@ -477,8 +515,21 @@ const NatalChartWheel = ({ data, birthInfo }: any) => {
 
   return (
     <Card className="bg-transparent border-none shadow-none">
-      <CardHeader>
-        <CardTitle className="text-purple-100 text-center text-2xl">Натальная карта - ваш расчет</CardTitle>
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-purple-100 text-center text-2xl">Натальная карта — ваш расчет</CardTitle>
+
+        <p className="text-xs sm:text-sm text-purple-200 text-center max-w-xl mx-auto">
+          Глубокий разбор натальной карты с расшифровкой домов, аспектов и жизненных задач доступен после регистрации.
+        </p>
+
+        <div className="flex justify-center mt-1">
+          <Link to="https://aidzen.app/login">
+            {/* замени на свой маршрут регистрации, если другой */}
+            <Button size="sm" className="bg-yellow-400 text-purple-900 hover:bg-yellow-300 px-4 py-1 rounded-full">
+              Получить анализ карты
+            </Button>
+          </Link>
+        </div>
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-6 px-0 sm:px-6">
         <div className="-mx-4 w-screen sm:mx-0 sm:w-full max-w-none">
