@@ -519,14 +519,15 @@ const NatalChartWheel = ({ data, birthInfo }: any) => {
         <CardTitle className="text-purple-100 text-center text-2xl">Натальная карта — ваш расчет</CardTitle>
 
         <p className="text-xs sm:text-sm text-purple-200 text-center max-w-xl mx-auto">
-          Глубокий разбор натальной карты с расшифровкой домов, аспектов и жизненных задач доступен после регистрации.
+          БЕСПЛАТНЫЙ глубокий разбор натальной карты с расшифровкой домов, аспектов и жизненных задач астронейронкой
+          доступен после регистрации.
         </p>
 
         <div className="flex justify-center mt-1">
           <Link to="https://aidzen.app/login">
             {/* замени на свой маршрут регистрации, если другой */}
             <Button size="sm" className="bg-yellow-400 text-purple-900 hover:bg-yellow-300 px-4 py-1 rounded-full">
-              Получить анализ карты
+              Получить бесплатный анализ карты
             </Button>
           </Link>
         </div>
