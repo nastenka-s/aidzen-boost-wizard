@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -9,39 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 
-// ───────────────── типы ─────────────────
-
-interface NatalHouse {
-  number: number;
-  cuspDegree: number;
-}
-
-interface NatalPlanet {
-  name: string;
-  longitude: number;
-  sign: string;
-  signShort: string;
-  degInSign: number;
-  element: string;
-  modality: string;
-  house: number | null;
-}
-
-interface NatalAspectParsed {
-  from: string;
-  to: string;
-  type: string;
-  orb: number;
-}
-
-interface PreparedChartData {
-  housesData: NatalHouse[];
-  planetsData: NatalPlanet[];
-  aspectsData: NatalAspectParsed[];
-}
-
-const NatalChartCalculator: React.FC = () => {
+const NatalChartCalculator = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [city, setCity] = useState("");
@@ -51,7 +20,7 @@ const NatalChartCalculator: React.FC = () => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [chartData, setChartData] = useState<any | null>(null);
+  const [chartData, setChartData] = useState(null);
 
   const validateForm = () => {
     if (!date || !time || !city) {
@@ -68,7 +37,7 @@ const NatalChartCalculator: React.FC = () => {
     setError("");
     setChartData(null);
 
-    const payload: any = { date, time, city };
+    const payload = { date, time, city };
     if (cityLat) payload.city_lat = Number(cityLat);
     if (cityLon) payload.city_lon = Number(cityLon);
     if (cityTz) payload.city_tz = cityTz;
@@ -95,17 +64,17 @@ const NatalChartCalculator: React.FC = () => {
     }
   };
 
-  const prepareChartData = (): PreparedChartData | null => {
+  const prepareChartData = () => {
     if (!chartData) return null;
 
-    const housesData: NatalHouse[] = Object.entries(chartData.houses.cusps)
+    const housesData = Object.entries(chartData.houses.cusps)
       .map(([num, deg]) => ({
         number: Number(num),
         cuspDegree: Number(deg),
       }))
       .sort((a, b) => a.number - b.number);
 
-    const planetsData: NatalPlanet[] = Object.entries(chartData.planets).map(([name, p]: [string, any]) => ({
+    const planetsData = Object.entries(chartData.planets).map(([name, p]) => ({
       name,
       longitude: Number(p.ecliptic_deg),
       sign: p.sign,
@@ -116,16 +85,14 @@ const NatalChartCalculator: React.FC = () => {
       house: chartData.planet_house_map?.[name] || null,
     }));
 
-    const parseAspectString = (s: string): NatalAspectParsed | null => {
+    const parseAspectString = (s) => {
       const match = s.match(/^(\S+)\s+(.+?)\s+(\S+)\s*\(([-\d.]+)°\)/);
       if (!match) return null;
       const [, p1, aspectRu, p2, diff] = match;
       return { from: p1, to: p2, type: aspectRu, orb: Number(diff) };
     };
 
-    const aspectsData: NatalAspectParsed[] = (chartData.aspects || [])
-      .map(parseAspectString)
-      .filter((x: NatalAspectParsed | null): x is NatalAspectParsed => Boolean(x));
+    const aspectsData = (chartData.aspects || []).map(parseAspectString).filter((x) => Boolean(x));
 
     return { housesData, planetsData, aspectsData };
   };
@@ -314,8 +281,6 @@ const NatalChartCalculator: React.FC = () => {
   );
 };
 
-// ───────────────── колесо ─────────────────
-
 const ZODIAC_SIGNS = [
   { name: "Овен", symbol: "♈", startDegree: 0, color: "#EF4444" },
   { name: "Телец", symbol: "♉", startDegree: 30, color: "#10B981" },
@@ -331,7 +296,7 @@ const ZODIAC_SIGNS = [
   { name: "Рыбы", symbol: "♓", startDegree: 330, color: "#8B5CF6" },
 ];
 
-const PLANET_GLYPHS: Record<string, { glyph: string; label: string; meaning: string; color: string }> = {
+const PLANET_GLYPHS = {
   Sun: { glyph: "☉", label: "Солнце", meaning: "Я, воля", color: "#F59E0B" },
   Moon: { glyph: "☽", label: "Луна", meaning: "эмоции", color: "#C0C0C0" },
   Mercury: { glyph: "☿", label: "Меркурий", meaning: "мысли", color: "#A3E635" },
@@ -344,7 +309,7 @@ const PLANET_GLYPHS: Record<string, { glyph: string; label: string; meaning: str
   Pluto: { glyph: "♇", label: "Плутон", meaning: "трансформация", color: "#7C2D12" },
 };
 
-const ASPECT_STYLES: Record<string, { color: string; label: string; meaning: string }> = {
+const ASPECT_STYLES = {
   Соединение: { color: "#FFDC00", label: "Соединение 0°", meaning: "слияние" },
   Секстиль: { color: "#06B6D4", label: "Секстиль 60°", meaning: "возможности" },
   Квадрат: { color: "#EF4444", label: "Квадрат 90°", meaning: "напряжение" },
@@ -352,18 +317,9 @@ const ASPECT_STYLES: Record<string, { color: string; label: string; meaning: str
   Оппозиция: { color: "#DC2626", label: "Оппозиция 180°", meaning: "полярность" },
 };
 
-interface NatalChartWheelProps {
-  data: {
-    houses: NatalHouse[];
-    planets: NatalPlanet[];
-    aspects: NatalAspectParsed[];
-  };
-  birthInfo: { date: string; time: string; location: string };
-}
-
-const NatalChartWheel: React.FC<NatalChartWheelProps> = ({ data, birthInfo }) => {
-  const [hoveredPlanet, setHoveredPlanet] = useState<NatalPlanet | null>(null);
-  const [hoveredHouse, setHoveredHouse] = useState<number | null>(null);
+const NatalChartWheel = ({ data, birthInfo }) => {
+  const [hoveredPlanet, setHoveredPlanet] = useState(null);
+  const [hoveredHouse, setHoveredHouse] = useState(null);
 
   const centerX = 500;
   const centerY = 500;
@@ -377,11 +333,13 @@ const NatalChartWheel: React.FC<NatalChartWheelProps> = ({ data, birthInfo }) =>
   const ascAngle = firstHouse ? firstHouse.cuspDegree : 0;
   const rotationOffset = 90 - ascAngle;
 
-  const applyRotation = (angle: number) => (angle + rotationOffset + 360) % 360;
+  const applyRotation = (angle) => {
+    return (angle + rotationOffset + 360) % 360;
+  };
 
-  const degToRad = (deg: number) => ((90 + deg) * Math.PI) / 180;
+  const degToRad = (deg) => ((90 + deg) * Math.PI) / 180;
 
-  const polarToCartesian = (angle: number, radius: number) => {
+  const polarToCartesian = (angle, radius) => {
     const rotated = applyRotation(angle);
     const rad = degToRad(rotated);
     return {
@@ -763,9 +721,7 @@ const NatalChartWheel: React.FC<NatalChartWheelProps> = ({ data, birthInfo }) =>
   );
 };
 
-// ───────────────── таблицы ─────────────────
-
-const PlanetsTable: React.FC<{ planets: NatalPlanet[] }> = ({ planets }) => (
+const PlanetsTable = ({ planets }) => (
   <Card className="bg-white/95 backdrop-blur">
     <CardHeader>
       <CardTitle className="text-purple-900">Планеты</CardTitle>
@@ -801,10 +757,7 @@ const PlanetsTable: React.FC<{ planets: NatalPlanet[] }> = ({ planets }) => (
   </Card>
 );
 
-const HousesTable: React.FC<{
-  houses: NatalHouse[];
-  housesReadable: Record<string, string>;
-}> = ({ houses, housesReadable }) => (
+const HousesTable = ({ houses, housesReadable }) => (
   <Card className="bg-white/95 backdrop-blur">
     <CardHeader>
       <CardTitle className="text-purple-900">Дома</CardTitle>
@@ -824,7 +777,7 @@ const HousesTable: React.FC<{
               <tr key={house.number} className="border-b border-purple-100">
                 <td className="py-2 px-2 font-medium text-purple-900">{house.number}</td>
                 <td className="py-2 px-2">{house.cuspDegree.toFixed(2)}°</td>
-                <td className="py-2 px-2">{housesReadable?.[`H${house.number}`] ?? "-"}</td>
+                <td className="py-2 px-2">{housesReadable?.[`H${house.number}`] || "-"}</td>
               </tr>
             ))}
           </tbody>
@@ -834,7 +787,7 @@ const HousesTable: React.FC<{
   </Card>
 );
 
-const AspectsTable: React.FC<{ aspects: string[] }> = ({ aspects }) => (
+const AspectsTable = ({ aspects }) => (
   <Card className="bg-white/95 backdrop-blur">
     <CardHeader>
       <CardTitle className="text-purple-900">Аспекты</CardTitle>
