@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Helmet } from "react-helmet";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -9,6 +9,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";  // ← ДОБАВЬ ЭТО
+import React, { useState } from "react";
+
+
 const NatalChartCalculator = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -84,7 +87,7 @@ const NatalChartCalculator = () => {
       house: chartData.planet_house_map?.[name] || null,
     }));
 
-    const parseAspectString = (s) => {
+    const parseAspectString = (s: string) => {
       const match = s.match(/^(\S+)\s+(.+?)\s+(\S+)\s*\(([-\d.]+)°\)/);
       if (!match) return null;
       const [, p1, aspectRu, p2, diff] = match;
@@ -251,30 +254,36 @@ const NatalChartCalculator = () => {
               </div>
             )}
 
-            {data && chartData && (
-              <NatalChartWheel
-  data={{
-    houses: data.housesData,
-    planets: data.planetsData,
-    aspects: data.aspectsData,
-  }}
-  birthInfo={{
-    date: chartData.date,
-    time: chartData.time,
-    location: chartData.city,
-  }}
-/>
+    {data && chartData && (
+  <>
+    <NatalChartWheel
+      data={{
+        houses: data.housesData,
+        planets: data.planetsData,
+        aspects: data.aspectsData,
+      }}
+      birthInfo={{
+        date: chartData.date,
+        time: chartData.time,
+        location: chartData.city,
+      }}
+    />
 
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      <PlanetsTable planets={data.planetsData} />
+      <HousesTable
+        houses={data.housesData}
+        housesReadable={chartData.houses_readable}
+      />
+    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <PlanetsTable planets={data.planetsData} />
-                  <HousesTable houses={data.housesData} housesReadable={chartData.houses_readable} />
-                </div>
+    <div className="mt-6">
+      <AspectsTable aspects={chartData.aspects || []} />
+    </div>
+  </>
+)}
 
-                <AspectsTable aspects={chartData.aspects || []} />
-              </div>
-            )}
-          </div>
+          
         </main>
 
         <Footer />
@@ -319,7 +328,7 @@ const ASPECT_STYLES: any = {
   "Оппозиция": { color: "#DC2626", label: "Оппозиция 180°", meaning: "полярность" },
 };
 
-const NatalChartWheel: React.FC<{ data: any; birthInfo: any }> = ({ data, birthInfo }) => {
+const NatalChartWheel = ({ data, birthInfo }: { data: any; birthInfo: any }) => {
   const [hoveredPlanet, setHoveredPlanet] = useState<any>(null);
   const [hoveredHouse, setHoveredHouse] = useState<number | null>(null);
 
