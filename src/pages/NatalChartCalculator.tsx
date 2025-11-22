@@ -9,10 +9,19 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 
+type CityOption = {
+  name: string;
+  country?: string;
+  country_code?: string;
+  lat: number;
+  lon: number;
+  tz?: string | null;
+  display_name?: string;
+};
+
 const NatalChartCalculator = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [city, setCity] = useState("");
   const [cityLat, setCityLat] = useState("");
   const [cityLon, setCityLon] = useState("");
   const [cityTz, setCityTz] = useState("");
@@ -21,57 +30,56 @@ const NatalChartCalculator = () => {
   const [error, setError] = useState("");
   const [chartData, setChartData] = useState<any | null>(null);
 
-  // новое: автопоиск города
-  const [citySuggestions, setCitySuggestions] = useState<any[]>([]);
-  const [isSearchingCity, setIsSearchingCity] = useState(false);
-  const [selectedCity, setSelectedCity] = useState<any | null>(null);
+  // автопоиск города
+  const [cityQuery, setCityQuery] = useState("");
+  const [cityOptions, setCityOptions] = useState<CityOption[]>([]);
+  const [selectedCity, setSelectedCity] = useState<CityOption | null>(null);
+  const [cityLoading, setCityLoading] = useState(false);
+  const [cityError, setCityError] = useState<string | null>(null);
+  const [showCityDropdown, setShowCityDropdown] = useState(false);
 
   const validateForm = () => {
-    if (!date || !time || !city) {
+    if (!date || !time || !cityQuery) {
       setError("Пожалуйста, заполните дату, время и город рождения");
       return false;
     }
     return true;
   };
 
-  const handleCityChange = async (value: string) => {
-    setCity(value);
-    setSelectedCity(null);
-    setCityLat("");
-    setCityLon("");
-    setCityTz("");
-    setError("");
+  const searchCities = async (q: string) => {
+    setCityError(null);
 
-    if (!value || value.trim().length < 2) {
-      setCitySuggestions([]);
+    if (!q || q.trim().length < 2) {
+      setCityOptions([]);
+      setShowCityDropdown(false);
       return;
     }
 
-    setIsSearchingCity(true);
     try {
+      setCityLoading(true);
       const res = await fetch(
-        `https://api.aidzen.ru/api/geo/resolve?q=${encodeURIComponent(value.trim())}&lang=ru&limit=5`,
+        `https://api.aidzen.ru/api/geo/resolve?q=${encodeURIComponent(q.trim())}&lang=ru&limit=7`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
       );
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        setCitySuggestions(data);
-      } else {
-        setCitySuggestions([]);
-      }
-    } catch (e) {
-      setCitySuggestions([]);
-    } finally {
-      setIsSearchingCity(false);
-    }
-  };
 
-  const handleSelectCity = (item: any) => {
-    setSelectedCity(item);
-    setCity(item.display_name || item.name || city);
-    setCityLat(String(item.lat));
-    setCityLon(String(item.lon));
-    if (item.tz) setCityTz(item.tz);
-    setCitySuggestions([]);
+      if (!res.ok) {
+        throw new Error(`Ошибка поиска города: ${res.status}`);
+      }
+
+      const data: CityOption[] = await res.json();
+      setCityOptions(data || []);
+      setShowCityDropdown((data || []).length > 0);
+    } catch (err: any) {
+      console.error("City search error:", err);
+      setCityError("Не удалось найти город, попробуйте ещё раз");
+      setCityOptions([]);
+      setShowCityDropdown(false);
+    } finally {
+      setCityLoading(false);
+    }
   };
 
   const handleCalculate = async () => {
@@ -81,7 +89,22 @@ const NatalChartCalculator = () => {
     setError("");
     setChartData(null);
 
-    const payload: any = { date, time, city };
+    const payload: any = {
+      date,
+      time,
+      city: selectedCity?.display_name || cityQuery,
+    };
+
+    // если выбрали город через поиск — координаты и tz из него
+    if (selectedCity) {
+      payload.city_lat = selectedCity.lat;
+      payload.city_lon = selectedCity.lon;
+      if (selectedCity.tz) {
+        payload.city_tz = selectedCity.tz;
+      }
+    }
+
+    // если вручную переопределили
     if (cityLat) payload.city_lat = Number(cityLat);
     if (cityLon) payload.city_lon = Number(cityLon);
     if (cityTz) payload.city_tz = cityTz;
@@ -90,6 +113,7 @@ const NatalChartCalculator = () => {
       const res = await fetch("https://api.aidzen.ru/api/natal_chart_summary", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
@@ -102,6 +126,7 @@ const NatalChartCalculator = () => {
 
       setChartData(data.summary);
     } catch (err) {
+      console.error(err);
       setError("Ошибка соединения с сервером. Проверьте подключение к интернету.");
     } finally {
       setLoading(false);
@@ -199,36 +224,60 @@ const NatalChartCalculator = () => {
                     <Input
                       id="city"
                       type="text"
-                      value={city}
-                      onChange={(e) => handleCityChange(e.target.value)}
-                      placeholder="Например: Москва"
-                      className={error && !city ? "border-red-500" : ""}
+                      value={cityQuery}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setCityQuery(value);
+                        setSelectedCity(null);
+                        searchCities(value);
+                      }}
+                      onFocus={() => {
+                        if (cityOptions.length > 0) setShowCityDropdown(true);
+                      }}
+                      onBlur={() => {
+                        setTimeout(() => setShowCityDropdown(false), 200);
+                      }}
+                      placeholder="Москва, Санкт-Петербург, Череповец..."
+                      className={error && !cityQuery ? "border-red-500" : ""}
                       autoComplete="off"
                     />
 
-                    {isSearchingCity && city && (
-                      <div className="absolute right-2 top-8 text-xs text-purple-500">Ищу...</div>
-                    )}
+                    {cityLoading && <div className="absolute right-2 top-8 text-xs text-purple-500">ищу...</div>}
 
-                    {citySuggestions.length > 0 && (
-                      <div className="absolute z-20 mt-1 w-full max-h-48 overflow-auto rounded-md bg-white shadow-lg border border-purple-100">
-                        {citySuggestions.map((item, idx) => (
+                    {showCityDropdown && cityOptions.length > 0 && (
+                      <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-md border border-purple-200 bg-white shadow-lg">
+                        {cityOptions.map((opt) => (
                           <button
+                            key={`${opt.lat}-${opt.lon}-${opt.display_name}`}
                             type="button"
-                            key={idx}
-                            onClick={() => handleSelectCity(item)}
-                            className="w-full text-left px-3 py-2 text-sm hover:bg-purple-50"
+                            onMouseDown={(e) => e.preventDefault()}
+                            onClick={() => {
+                              setSelectedCity(opt);
+                              setCityQuery(opt.display_name || opt.name || "");
+                              setCityLat(String(opt.lat));
+                              setCityLon(String(opt.lon));
+                              if (opt.tz) setCityTz(opt.tz);
+                              setShowCityDropdown(false);
+                            }}
+                            className="flex w-full flex-col items-start px-3 py-2 text-left text-sm hover:bg-purple-50"
                           >
-                            <div className="font-medium text-purple-900">
-                              {item.name}
-                              {item.country ? `, ${item.country}` : ""}
-                            </div>
-                            {item.display_name && <div className="text-xs text-gray-500">{item.display_name}</div>}
-                            {item.tz && <div className="text-[10px] text-gray-400 mt-0.5">{item.tz}</div>}
+                            <span className="font-medium text-purple-900">{opt.display_name || opt.name}</span>
+                            <span className="text-xs text-gray-500">
+                              {opt.country} {opt.tz ? `· ${opt.tz}` : ""}
+                            </span>
                           </button>
                         ))}
                       </div>
                     )}
+
+                    {selectedCity && (
+                      <p className="mt-1 text-xs text-purple-700">
+                        Координаты: {selectedCity.lat.toFixed(3)}, {selectedCity.lon.toFixed(3)}
+                        {selectedCity.tz ? ` · Часовой пояс: ${selectedCity.tz}` : ""}
+                      </p>
+                    )}
+
+                    {cityError && <p className="mt-1 text-xs text-red-500">{cityError}</p>}
                   </div>
                 </div>
 
@@ -453,7 +502,7 @@ const NatalChartWheel = ({ data, birthInfo }: any) => {
             </defs>
 
             {/* фон */}
-            <circle cx={centerX} cy={centerY} r={outerRadius} fill="url(#centerGlow)" opacity="0.5" />
+            <circle cx={centerX} cy={centerY} r={outerRadius} fill="url(#centerGlow)" opacity={0.5} />
 
             {/* зодиак */}
             {ZODIAC_SIGNS.map((sign) => {
@@ -871,7 +920,7 @@ const AspectsTable = ({ aspects }: any) => (
           </thead>
           <tbody>
             {aspects.map((aspect: string, index: number) => (
-              <tr key={index} className="border-б border-purple-100">
+              <tr key={index} className="border-b border-purple-100">
                 <td className="py-2 px-3">{aspect}</td>
               </tr>
             ))}
