@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
-import { motion } from "framer-motion";
 import React, { useState } from "react";
 
 const NatalChartCalculator = () => {
@@ -20,7 +19,7 @@ const NatalChartCalculator = () => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState<any | null>(null);
 
   const validateForm = () => {
     if (!date || !time || !city) {
@@ -37,7 +36,7 @@ const NatalChartCalculator = () => {
     setError("");
     setChartData(null);
 
-    const payload = { date, time, city };
+    const payload: any = { date, time, city };
     if (cityLat) payload.city_lat = Number(cityLat);
     if (cityLon) payload.city_lon = Number(cityLon);
     if (cityTz) payload.city_tz = cityTz;
@@ -74,7 +73,7 @@ const NatalChartCalculator = () => {
       }))
       .sort((a, b) => a.number - b.number);
 
-    const planetsData = Object.entries(chartData.planets).map(([name, p]) => ({
+    const planetsData = Object.entries(chartData.planets).map(([name, p]: [string, any]) => ({
       name,
       longitude: Number(p.ecliptic_deg),
       sign: p.sign,
@@ -85,14 +84,14 @@ const NatalChartCalculator = () => {
       house: chartData.planet_house_map?.[name] || null,
     }));
 
-    const parseAspectString = (s) => {
+    const parseAspectString = (s: string) => {
       const match = s.match(/^(\S+)\s+(.+?)\s+(\S+)\s*\(([-\d.]+)°\)/);
       if (!match) return null;
       const [, p1, aspectRu, p2, diff] = match;
       return { from: p1, to: p2, type: aspectRu, orb: Number(diff) };
     };
 
-    const aspectsData = (chartData.aspects || []).map(parseAspectString).filter((x) => Boolean(x));
+    const aspectsData = (chartData.aspects || []).map(parseAspectString).filter((x: any): x is any => Boolean(x));
 
     return { housesData, planetsData, aspectsData };
   };
@@ -281,6 +280,8 @@ const NatalChartCalculator = () => {
   );
 };
 
+// ─────────── колесо натальной карты ───────────
+
 const ZODIAC_SIGNS = [
   { name: "Овен", symbol: "♈", startDegree: 0, color: "#EF4444" },
   { name: "Телец", symbol: "♉", startDegree: 30, color: "#10B981" },
@@ -296,7 +297,7 @@ const ZODIAC_SIGNS = [
   { name: "Рыбы", symbol: "♓", startDegree: 330, color: "#8B5CF6" },
 ];
 
-const PLANET_GLYPHS = {
+const PLANET_GLYPHS: any = {
   Sun: { glyph: "☉", label: "Солнце", meaning: "Я, воля", color: "#F59E0B" },
   Moon: { glyph: "☽", label: "Луна", meaning: "эмоции", color: "#C0C0C0" },
   Mercury: { glyph: "☿", label: "Меркурий", meaning: "мысли", color: "#A3E635" },
@@ -309,7 +310,7 @@ const PLANET_GLYPHS = {
   Pluto: { glyph: "♇", label: "Плутон", meaning: "трансформация", color: "#7C2D12" },
 };
 
-const ASPECT_STYLES = {
+const ASPECT_STYLES: any = {
   Соединение: { color: "#FFDC00", label: "Соединение 0°", meaning: "слияние" },
   Секстиль: { color: "#06B6D4", label: "Секстиль 60°", meaning: "возможности" },
   Квадрат: { color: "#EF4444", label: "Квадрат 90°", meaning: "напряжение" },
@@ -317,9 +318,9 @@ const ASPECT_STYLES = {
   Оппозиция: { color: "#DC2626", label: "Оппозиция 180°", meaning: "полярность" },
 };
 
-const NatalChartWheel = ({ data, birthInfo }) => {
-  const [hoveredPlanet, setHoveredPlanet] = useState(null);
-  const [hoveredHouse, setHoveredHouse] = useState(null);
+const NatalChartWheel = ({ data, birthInfo }: any) => {
+  const [hoveredPlanet, setHoveredPlanet] = useState<any | null>(null);
+  const [hoveredHouse, setHoveredHouse] = useState<number | null>(null);
 
   const centerX = 500;
   const centerY = 500;
@@ -329,17 +330,17 @@ const NatalChartWheel = ({ data, birthInfo }) => {
   const planetRadius = 240;
   const centerRadius = 100;
 
-  const firstHouse = data.houses.find((h) => h.number === 1);
+  const firstHouse = data.houses.find((h: any) => h.number === 1);
   const ascAngle = firstHouse ? firstHouse.cuspDegree : 0;
   const rotationOffset = 90 - ascAngle;
 
-  const applyRotation = (angle) => {
+  const applyRotation = (angle: number) => {
     return (angle + rotationOffset + 360) % 360;
   };
 
-  const degToRad = (deg) => ((90 + deg) * Math.PI) / 180;
+  const degToRad = (deg: number) => ((90 + deg) * Math.PI) / 180;
 
-  const polarToCartesian = (angle, radius) => {
+  const polarToCartesian = (angle: number, radius: number) => {
     const rotated = applyRotation(angle);
     const rad = degToRad(rotated);
     return {
@@ -465,7 +466,7 @@ const NatalChartWheel = ({ data, birthInfo }) => {
             />
 
             {/* дома */}
-            {data.houses.map((house, i) => {
+            {data.houses.map((house: any, i: number) => {
               const nextHouse = data.houses[(i + 1) % data.houses.length];
               const startDeg = house.cuspDegree;
               const endDeg = nextHouse.cuspDegree;
@@ -542,7 +543,7 @@ const NatalChartWheel = ({ data, birthInfo }) => {
 
             {/* угловые точки */}
             {angularPoints.map((point) => {
-              const house = data.houses.find((h) => h.number === point.house);
+              const house = data.houses.find((h: any) => h.number === point.house);
               if (!house) return null;
 
               const pos = polarToCartesian(house.cuspDegree, houseRadius + 15);
@@ -586,14 +587,14 @@ const NatalChartWheel = ({ data, birthInfo }) => {
             })}
 
             {/* аспекты */}
-            {data.aspects.map((aspect, i) => {
-              const fromPlanet = data.planets.find((p) => p.name === aspect.from);
-              const toPlanet = data.planets.find((p) => p.name === aspect.to);
+            {data.aspects.map((aspect: any, i: number) => {
+              const fromPlanet = data.planets.find((p: any) => p.name === aspect.from);
+              const toPlanet = data.planets.find((p: any) => p.name === aspect.to);
               if (!fromPlanet || !toPlanet) return null;
 
               const from = polarToCartesian(fromPlanet.longitude, planetRadius);
               const to = polarToCartesian(toPlanet.longitude, planetRadius);
-              const style = ASPECT_STYLES[aspect.type] || {};
+              const style: any = ASPECT_STYLES[aspect.type] || {};
 
               return (
                 <line
@@ -623,7 +624,7 @@ const NatalChartWheel = ({ data, birthInfo }) => {
             />
 
             {/* планеты */}
-            {data.planets.map((planet) => {
+            {data.planets.map((planet: any) => {
               const pos = polarToCartesian(planet.longitude, planetRadius);
               const info = PLANET_GLYPHS[planet.name];
               if (!info) return null;
@@ -704,16 +705,12 @@ const NatalChartWheel = ({ data, birthInfo }) => {
           </svg>
 
           {hoveredPlanet && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-4 p-4 bg-purple-900/80 backdrop-blur-sm rounded-lg border border-yellow-400/30"
-            >
+            <div className="mt-4 p-4 bg-purple-900/80 backdrop-blur-sm rounded-lg border border-yellow-400/30">
               <p className="text-white font-medium text-sm">
                 {PLANET_GLYPHS[hoveredPlanet.name]?.label} · {Math.round(hoveredPlanet.longitude)}° {hoveredPlanet.sign}{" "}
                 · {hoveredPlanet.house} дом
               </p>
-            </motion.div>
+            </div>
           )}
         </div>
       </CardContent>
@@ -721,7 +718,9 @@ const NatalChartWheel = ({ data, birthInfo }) => {
   );
 };
 
-const PlanetsTable = ({ planets }) => (
+// ─────────── таблицы ───────────
+
+const PlanetsTable = ({ planets }: any) => (
   <Card className="bg-white/95 backdrop-blur">
     <CardHeader>
       <CardTitle className="text-purple-900">Планеты</CardTitle>
@@ -740,7 +739,7 @@ const PlanetsTable = ({ planets }) => (
             </tr>
           </thead>
           <tbody>
-            {planets.map((planet) => (
+            {planets.map((planet: any) => (
               <tr key={planet.name} className="border-b border-purple-100">
                 <td className="py-2 px-2 font-medium text-purple-900">{planet.name}</td>
                 <td className="py-2 px-2">{planet.sign}</td>
@@ -757,7 +756,7 @@ const PlanetsTable = ({ planets }) => (
   </Card>
 );
 
-const HousesTable = ({ houses, housesReadable }) => (
+const HousesTable = ({ houses, housesReadable }: any) => (
   <Card className="bg-white/95 backdrop-blur">
     <CardHeader>
       <CardTitle className="text-purple-900">Дома</CardTitle>
@@ -773,7 +772,7 @@ const HousesTable = ({ houses, housesReadable }) => (
             </tr>
           </thead>
           <tbody>
-            {houses.map((house) => (
+            {houses.map((house: any) => (
               <tr key={house.number} className="border-b border-purple-100">
                 <td className="py-2 px-2 font-medium text-purple-900">{house.number}</td>
                 <td className="py-2 px-2">{house.cuspDegree.toFixed(2)}°</td>
@@ -787,7 +786,7 @@ const HousesTable = ({ houses, housesReadable }) => (
   </Card>
 );
 
-const AspectsTable = ({ aspects }) => (
+const AspectsTable = ({ aspects }: any) => (
   <Card className="bg-white/95 backdrop-blur">
     <CardHeader>
       <CardTitle className="text-purple-900">Аспекты</CardTitle>
@@ -801,7 +800,7 @@ const AspectsTable = ({ aspects }) => (
             </tr>
           </thead>
           <tbody>
-            {aspects.map((aspect, index) => (
+            {aspects.map((aspect: string, index: number) => (
               <tr key={index} className="border-b border-purple-100">
                 <td className="py-2 px-3">{aspect}</td>
               </tr>
