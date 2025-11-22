@@ -481,7 +481,7 @@ const NatalChartWheel = ({ data, birthInfo }: any) => {
         <CardTitle className="text-purple-100 text-center text-2xl">Колесо Натальной Карты</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-6">
-        <div className="w-full max-w-full mx-auto">
+        <div className="w-full max-w-[min(1100px,100%)] mx-auto">
           <svg viewBox="0 0 1000 1000" className="w-full h-auto">
             <defs>
               <filter id="glow">
