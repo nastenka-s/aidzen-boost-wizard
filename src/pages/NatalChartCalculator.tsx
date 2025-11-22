@@ -275,7 +275,7 @@ const NatalChartCalculator = () => {
                       onBlur={() => {
                         setTimeout(() => setShowCityDropdown(false), 200);
                       }}
-                      placeholder="Москва, Санкт-Петербург, Череповец..."
+                      placeholder="Москва, Санкт-Петербург, Казань..."
                       className={error && !cityQuery ? "border-red-500" : ""}
                       autoComplete="off"
                     />
@@ -520,7 +520,8 @@ const NatalChartWheel = ({ data, birthInfo }: any) => {
 
         <p className="text-xs sm:text-sm text-purple-200 text-center max-w-xl mx-auto">
           БЕСПЛАТНЫЙ глубокий разбор натальной карты с расшифровкой домов, аспектов и жизненных задач астронейронкой
-          доступен после регистрации.
+          доступен после регистрации.         </p>
+         <p В личном кабинете вас ждут 30+ астрологических, нумерологических,прогностических расчетов.
         </p>
 
         <div className="flex justify-center mt-1">
