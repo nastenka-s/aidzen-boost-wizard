@@ -9,6 +9,7 @@ import Solar from "./pages/Solar";
 import FormulaDushi from "./pages/FormulaDushi";
 import Synastry from "./pages/Synastry";
 import NatalChart from "./pages/NatalChart";
+import NatalChartCalculator from "./pages/NatalChartCalculator";
 import DataProcessingPolicy from "./pages/DataProcessingPolicy";
 import PublicOffer from "./pages/PublicOffer";
 import DataProcessing from "./pages/DataProcessing";
@@ -59,6 +60,7 @@ const App = () => (
           <Route path="/formuladushi" element={<FormulaDushi />} />
           <Route path="/synastry" element={<Synastry />} />
           <Route path="/natalchart" element={<NatalChart />} />
+          <Route path="/natal-chart-calculator" element={<NatalChartCalculator />} />
           <Route path="/dataprocessingpolicy" element={<DataProcessingPolicy />} />
           <Route path="/publicoffer" element={<PublicOffer />} />
           <Route path="/dataprocessing" element={<DataProcessing />} />
