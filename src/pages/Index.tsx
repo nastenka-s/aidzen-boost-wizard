@@ -29,6 +29,7 @@ import blondeWoman from "@/assets/blondewoman.png";
 import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
 import matrixSudby from "@/assets/matrix-sudby.png";
+import astroBackground from "@/assets/astro-background.png";
 import { blogPosts } from "@/data/blogPosts";
 
 const Index = () => {
@@ -203,7 +204,16 @@ const Index = () => {
 
             {/* Right Column - App Screenshot */}
             <div className="relative lg:scale-110">
-              <div className="relative mx-auto w-[320px] h-auto">
+              {/* Background image with high transparency */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <img 
+                  src={astroBackground} 
+                  alt="" 
+                  className="w-full h-full object-contain opacity-15 blur-sm"
+                />
+              </div>
+              
+              <div className="relative mx-auto w-[320px] h-auto z-10">
                 <img src={neurodzenApp} alt="НейроДзен приложение" className="w-full h-auto rounded-[3rem]" />
               </div>
 
