@@ -291,7 +291,7 @@ export default function MatrixSudby() {
                       className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6"
                       asChild
                     >
-                      <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                      <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
                         <Sparkles className="w-5 h-5 mr-2" />
                         Получить полный анализ
                       </a>
@@ -321,7 +321,7 @@ export default function MatrixSudby() {
                       className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold text-lg py-6"
                       asChild
                     >
-                      <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                      <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
                         <Sparkles className="w-5 h-5 mr-2" />
                         Получить полный анализ
                       </a>
