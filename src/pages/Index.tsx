@@ -413,62 +413,89 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto space-y-4">
-            {[
-              {
-                count: "3",
-                price: "БЕСПЛАТНО",
-                popular: false,
-              },
-              {
-                count: "20",
-                price: "1000р",
-                popular: true,
-              },
-              {
-                count: "40",
-                price: "1500р",
-              },
-              {
-                count: "70",
-                price: "2000р",
-              },
-              {
-                count: "100",
-                price: "2500р",
-              },
-            ].map((plan, i) => (
-              <Card
-                key={i}
-                className={`p-6 ${plan.popular ? "border-secondary shadow-xl shadow-secondary/20 glow-yellow" : "border-border/50"}`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-6">
-                    <div className="text-4xl font-bold text-foreground">{plan.count}</div>
-                    <div className="text-xl font-medium text-muted-foreground">Расчетов</div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className={`text-3xl font-bold ${plan.popular ? "text-secondary" : "text-foreground"}`}>
-                      {plan.price}
-                    </div>
-                    {plan.popular && <Badge className="bg-secondary text-secondary-foreground">Популярно</Badge>}
-                  </div>
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+            {/* Free Plan */}
+            <Card className="p-8 border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <div className="space-y-6">
+                <div className="text-center space-y-2">
+                  <h3 className="text-3xl font-bold text-foreground">3 БЕСПЛАТНЫХ РАСЧЕТА</h3>
+                  <div className="text-5xl font-bold text-primary">БЕСПЛАТНО</div>
                 </div>
-              </Card>
-            ))}
+                <div className="pt-6">
+                  <Button
+                    size="lg"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+                    asChild
+                  >
+                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                      Начать бесплатно
+                      <Sparkles className="w-5 h-5 ml-2" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Unlimited Plan */}
+            <Card className="p-8 border-secondary shadow-2xl shadow-secondary/20 glow-yellow bg-card relative overflow-hidden">
+              <div className="absolute top-4 right-4">
+                <Badge className="bg-secondary text-secondary-foreground font-semibold">Популярно</Badge>
+              </div>
+              <div className="space-y-6">
+                <div className="text-center space-y-2">
+                  <h3 className="text-3xl font-bold text-foreground">БЕЗЛИМИТ НА МЕСЯЦ</h3>
+                  <div className="text-5xl font-bold text-secondary">1299₽</div>
+                </div>
+                <ul className="space-y-3 text-base">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span className="font-semibold">БЕЗЛИМИТ (до 200 расчетов и более по запросу)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>30+ шаблонов расчетов</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>ВСЕ авторские расчеты Нейродзен (гороскоп релокаций, прогнозы, Дизайн Человека)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>Анализ личной жизни по всем системам</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>Анализ карьеры и финансов по всем системам</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>Соляр и много других расчетов</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>Лунный Календарь</span>
+                  </li>
+                </ul>
+                <div className="pt-4">
+                  <Button
+                    size="lg"
+                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg font-semibold glow-yellow"
+                    asChild
+                  >
+                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                      Подключить безлимит
+                      <Sparkles className="w-5 h-5 ml-2" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
 
           <div className="text-center mt-12">
-            <Button
-              size="lg"
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-12 py-6 h-auto font-semibold glow-yellow"
-              asChild
-            >
-              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                Получить 3 бесплатных расчета
-                <Sparkles className="w-5 h-5 ml-2" />
-              </a>
-            </Button>
+            <p className="text-sm text-muted-foreground">
+              Все расчеты доступны сразу после регистрации
+            </p>
           </div>
         </div>
       </section>
