@@ -158,7 +158,7 @@ const Index = () => {
               <div className="space-y-3 sm:space-y-4">
                 <Button
                   size="lg"
-                  className="w-full lg:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 glow-yellow"
+                  className="w-full lg:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 glow-yellow animate-pulse"
                   asChild
                 >
                   <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
