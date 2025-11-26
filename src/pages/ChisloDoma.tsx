@@ -32,7 +32,7 @@ const ChisloDoma = () => {
               <Link to="/#pricing">ЦЕНЫ</Link>
             </Button>
             <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
-              <a href="https://aidzen.app" target="_blank" rel="noopener noreferrer">ВХОД</a>
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">ВХОД</a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
               <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
@@ -41,7 +41,7 @@ const ChisloDoma = () => {
               </a>
             </Button>
             <Button size="sm" variant="outline" className="border-primary/30" asChild>
-              <a href="https://aidzen.app" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                 <Smartphone className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">RuStore</span>
               </a>
@@ -245,7 +245,7 @@ const ChisloDoma = () => {
               <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
               <p className="text-muted-foreground mb-6">Начните с готовых результатов за пару минут</p>
               <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-                <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчёта
                 </a>
               </Button>
@@ -329,7 +329,7 @@ const ChisloDoma = () => {
                   </a>
                 </Button>
                 <Button size="sm" variant="outline" className="border-primary/30" asChild>
-                  <a href="https://aidzen.app" target="_blank" rel="noopener noreferrer">
+                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                     <Smartphone className="w-4 h-4" />
                   </a>
                 </Button>

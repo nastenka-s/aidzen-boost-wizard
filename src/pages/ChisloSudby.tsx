@@ -311,7 +311,7 @@ const ChisloSudby = () => {
               className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold glow-yellow"
               asChild
             >
-              <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 Получить 3 бесплатных расчета
                 <Sparkles className="w-5 h-5 ml-2" />
               </a>
