@@ -453,11 +453,14 @@ const Index = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                    <span>30+ шаблонов расчетов</span>
+                    <span>
+                      30+ шаблонов расчетов (гороскоп релокаций, прогнозы, Дизайн Человека, Соляр, Матрица Судьбы,
+                      подбор даты и удачных периодов)
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                    <span>ВСЕ авторские расчеты Нейродзен (гороскоп релокаций, прогнозы, Дизайн Человека)</span>
+                    <span>ВСЕ авторские расчеты Нейродзен</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
@@ -467,10 +470,7 @@ const Index = () => {
                     <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
                     <span>Анализ карьеры и финансов по всем системам</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                    <span>Соляр и много других расчетов</span>
-                  </li>
+
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
                     <span>Лунный Календарь</span>
@@ -493,9 +493,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-sm text-muted-foreground">
-              Все расчеты доступны сразу после регистрации
-            </p>
+            <p className="text-sm text-muted-foreground">Все расчеты доступны сразу после регистрации</p>
           </div>
         </div>
       </section>
