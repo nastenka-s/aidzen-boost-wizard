@@ -31,7 +31,7 @@ const PоказателиDeneg = () => {
               <Link to="/#pricing">ЦЕНЫ</Link>
             </Button>
             <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
-              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">ВХОД</a>
+              <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">ВХОД</a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
               <a href="https://t.me/Neurodzenai_bot" target="_blank" rel="noopener noreferrer">
@@ -286,7 +286,7 @@ const PоказателиDeneg = () => {
               <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
               <p className="text-muted-foreground mb-6">Начните с готовых мини-результатов за пару минут</p>
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
-                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчёта
                 </a>
               </Button>

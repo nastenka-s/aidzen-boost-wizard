@@ -43,7 +43,7 @@ const FormulaEvents = () => {
               <Link to="/#pricing">ЦЕНЫ</Link>
             </Button>
             <Button variant="ghost" size="sm" className="hidden md:flex" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">ВХОД</a>
+              <a href="https://aidzen.app" target="_blank" rel="noopener noreferrer">ВХОД</a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
               <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
@@ -52,7 +52,7 @@ const FormulaEvents = () => {
               </a>
             </Button>
             <Button size="sm" variant="outline" className="border-primary/30" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://aidzen.app" target="_blank" rel="noopener noreferrer">
                 <Smartphone className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">RuStore</span>
               </a>
@@ -383,7 +383,7 @@ const FormulaEvents = () => {
               </p>
               <div className="flex justify-center gap-4">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                  <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
                     Получить 3 бесплатных расчета
                   </a>
                 </Button>
@@ -472,7 +472,7 @@ const FormulaEvents = () => {
                   </a>
                 </Button>
                 <Button size="sm" variant="outline" className="border-primary/30" asChild>
-                  <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                  <a href="https://aidzen.app" target="_blank" rel="noopener noreferrer">
                     <Smartphone className="w-4 h-4" />
                   </a>
                 </Button>
