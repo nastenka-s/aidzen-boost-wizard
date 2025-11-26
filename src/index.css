@@ -102,5 +102,15 @@ All colors MUST be HSL.
   
   .glow-yellow {
     box-shadow: 0 0 30px hsl(52 100% 56% / 0.4);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(52 100% 56% / 0.5), 0 0 30px hsl(52 100% 56% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(52 100% 56% / 0.8), 0 0 50px hsl(52 100% 56% / 0.5), 0 0 70px hsl(52 100% 56% / 0.3);
+    }
   }
 }
