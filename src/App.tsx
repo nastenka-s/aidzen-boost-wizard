@@ -37,6 +37,7 @@ import PyatyiDomGoroskopa from "./pages/PyatyiDomGoroskopa";
 import ShestoyDomGoroskopa from "./pages/ShestoyDomGoroskopa";
 import SedmoyDomGoroskopa from "./pages/SedmoyDomGoroskopa";
 import VosmoyDomGoroskopa from "./pages/VosmoyDomGoroskopa";
+import DevyatyiDomGoroskopa from "./pages/DevyatyiDomGoroskopa";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/9-dom-v-natalnoj-karte" element={<DevyatyiDomGoroskopa />} />
           <Route path="/8-dom-v-natalnoj-karte" element={<VosmoyDomGoroskopa />} />
           <Route path="/7-dom-goroskopa" element={<SedmoyDomGoroskopa />} />
           <Route path="/shestoy-dom-goroskopa" element={<ShestoyDomGoroskopa />} />
