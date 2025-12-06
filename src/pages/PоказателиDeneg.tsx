@@ -34,7 +34,7 @@ const PоказателиDeneg = () => {
               <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">ВХОД</a>
             </Button>
             <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-              <a href="https://t.me/Neurodzenai_bot" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">Telegram Бот </span>
               </a>
@@ -370,7 +370,7 @@ const PоказателиDeneg = () => {
               <h3 className="font-semibold">Контакты</h3>
               <div className="flex gap-3">
                 <Button size="sm" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://t.me/Neurodzenai_bot" target="_blank" rel="noopener noreferrer">
+                  <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-4 h-4" />
                   </a>
                 </Button>

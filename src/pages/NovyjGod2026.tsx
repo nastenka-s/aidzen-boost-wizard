@@ -405,7 +405,7 @@ const NovyjGod2026 = () => {
               <h4 className="font-semibold mb-4">Контакты</h4>
               <div className="space-y-3">
                 <Button variant="outline" className="w-full" asChild>
-                  <a href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">
+                  <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
                     Telegram
                   </a>
                 </Button>
