@@ -35,7 +35,7 @@ const DivorceInAstrology = () => {
               Блог
             </Link>
             <a 
-              href="https://t.me/aidzenbot" 
+              href="https://t.me/Neurodzenaibot"
               target="_blank" 
               rel="noopener noreferrer"
               className="text-sm font-medium hover:text-primary transition-colors"
@@ -609,7 +609,7 @@ const DivorceInAstrology = () => {
                 Начните с готовых мини-результатов за пару минут
               </p>
               <Button size="lg" className="font-semibold" asChild>
-                <a href="https://t.me/aidzenbot" target="_blank" rel="noopener noreferrer">
+                <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчёта
                 </a>
               </Button>
@@ -656,7 +656,7 @@ const DivorceInAstrology = () => {
               <h3 className="font-semibold mb-4">Контакты</h3>
               <div className="space-y-3">
                 <Button variant="outline" className="w-full" asChild>
-                  <a href="https://t.me/aidzenbot" target="_blank" rel="noopener noreferrer">
+                  <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
                     Telegram Bot
                   </a>
                 </Button>
