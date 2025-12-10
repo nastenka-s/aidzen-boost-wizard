@@ -209,11 +209,49 @@ const NatalChartCalculator = () => {
   return (
     <>
       <Helmet>
-        <title>Натальная Карта - Расчет и Расшифровка | Нейродзен</title>
+        <title>Натальная карта онлайн бесплатно: расчет и расшифровка с ИИ | Нейродзен</title>
         <meta
           name="description"
-          content="Рассчитайте свою натальную карту онлайн бесплатно. Астрологический анализ планет, домов и аспектов в вашем гороскопе рождения."
+          content="Рассчитайте натальную карту онлайн бесплатно с мгновенной расшифровкой. Узнайте положение планет, значение домов и аспектов в вашем гороскопе рождения. Точный расчет по дате, времени и месту рождения."
         />
+        <meta
+          name="keywords"
+          content="натальная карта онлайн бесплатно, расчет натальной карты, натальный гороскоп, гороскоп рождения, расшифровка натальной карты, дома гороскопа, планеты в натальной карте, аспекты планет, асцендент, построить натальную карту"
+        />
+        <link rel="canonical" href="https://aidzen.ru/natal-chart-calculator" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Натальная карта онлайн бесплатно: расчет и расшифровка" />
+        <meta property="og:description" content="Рассчитайте натальную карту бесплатно. Мгновенная расшифровка планет, домов и аспектов." />
+        <meta property="og:url" content="https://aidzen.ru/natal-chart-calculator" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Калькулятор натальной карты онлайн",
+            "description": "Бесплатный онлайн калькулятор натальной карты с мгновенной расшифровкой планет, домов и аспектов",
+            "url": "https://aidzen.ru/natal-chart-calculator",
+            "applicationCategory": "LifestyleApplication",
+            "operatingSystem": "Web",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "RUB"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://aidzen.ru/logo.png"
+              }
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-purple-950 via-purple-900 to-purple-950">
@@ -221,7 +259,10 @@ const NatalChartCalculator = () => {
 
         <main className="container mx-auto px-4 py-12">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold text-center mb-8 text-white">Бесплатный Расчет Натальной Карты</h1>
+            <h1 className="text-4xl font-bold text-center mb-4 text-white">Натальная карта онлайн бесплатно</h1>
+            <p className="text-center text-white/80 mb-8 max-w-2xl mx-auto">
+              Рассчитайте свой гороскоп рождения и получите мгновенную расшифровку положения планет, домов и аспектов
+            </p>
 
             <Card className="mb-8 bg-white/95 backdrop-blur">
               <CardHeader>
@@ -432,81 +473,191 @@ const NatalChartCalculator = () => {
 
           {/* SEO-блоки */}
           <section className="mt-16 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center text-white">📚 Изучите натальную карту глубже</h2>
-            
+            {/* Что такое натальная карта */}
             <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mb-8">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="p-3 rounded-xl bg-purple-100">
-                  <Home className="w-6 h-6 text-purple-700" />
+              <h2 className="text-2xl font-bold mb-6 text-purple-900">Что такое натальная карта и зачем она нужна</h2>
+              <div className="space-y-4 text-purple-800">
+                <p>
+                  <strong>Натальная карта</strong> (или гороскоп рождения) — это астрологическая схема, которая фиксирует 
+                  положение всех планет Солнечной системы в момент вашего рождения. Это своеобразный «космический паспорт», 
+                  который раскрывает ваши врождённые таланты, характер, жизненные задачи и потенциал.
+                </p>
+                <p>
+                  Для точного расчёта натальной карты необходимы три параметра: <strong>дата рождения</strong>, 
+                  <strong> точное время рождения</strong> и <strong>место рождения</strong>. Время особенно важно — 
+                  оно определяет ваш Асцендент (восходящий знак) и расположение домов гороскопа.
+                </p>
+              </div>
+            </div>
+
+            {/* Как читать натальную карту */}
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mb-8">
+              <h2 className="text-2xl font-bold mb-6 text-purple-900">Как читать натальную карту: основы расшифровки</h2>
+              <div className="space-y-4 text-purple-800">
+                <p>
+                  Расшифровка натальной карты начинается с анализа трёх ключевых элементов:
+                </p>
+                <ul className="list-disc list-inside space-y-2 ml-4">
+                  <li><strong>Солнце</strong> — ваше истинное «Я», жизненная энергия и цели</li>
+                  <li><strong>Луна</strong> — эмоции, подсознание и внутренний мир</li>
+                  <li><strong>Асцендент</strong> — внешний образ и первое впечатление</li>
+                </ul>
+                <p>
+                  Далее изучаются положения других планет в знаках и домах, а также аспекты — углы между планетами, 
+                  которые показывают, как разные части вашей личности взаимодействуют друг с другом.
+                </p>
+              </div>
+            </div>
+
+            {/* Планеты в натальной карте */}
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mb-8">
+              <h2 className="text-2xl font-bold mb-6 text-purple-900">Планеты в натальной карте и их значение</h2>
+              <div className="grid gap-3 sm:grid-cols-2 text-purple-800">
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">☉ Солнце</span> — личность, воля, жизненная сила
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-3 text-purple-900">12 домов гороскопа</h3>
-                  <p className="text-purple-700">Каждый дом описывает определённую сферу жизни.</p>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">☽ Луна</span> — эмоции, интуиция, привычки
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">☿ Меркурий</span> — мышление, общение, обучение
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♀ Венера</span> — любовь, красота, ценности
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♂ Марс</span> — энергия, действие, страсть
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♃ Юпитер</span> — удача, рост, философия
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♄ Сатурн</span> — ответственность, ограничения
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♅ Уран</span> — перемены, свобода, новаторство
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♆ Нептун</span> — мечты, духовность, иллюзии
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <span className="font-semibold">♇ Плутон</span> — трансформация, власть, глубина
                 </div>
               </div>
+            </div>
+
+            {/* 12 домов */}
+            <h2 className="text-3xl font-bold mb-8 text-center text-white">12 домов гороскопа</h2>
+            <p className="text-center text-white/80 mb-8">
+              Дома натальной карты — это 12 секторов, каждый из которых отвечает за определённую сферу жизни
+            </p>
+            
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mb-8">
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 <Link to="/pervyi-dom-goroskopa-upravitel-aspekty" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">1 дом</span> <span className="text-sm text-purple-600">Личность</span>
+                  <span className="font-medium text-purple-900">1 дом</span> <span className="text-sm text-purple-600">— Личность, внешность, Асцендент</span>
                 </Link>
                 <Link to="/2-dom-v-natalnoy-karte-aspekty-tranzity" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">2 дом</span> <span className="text-sm text-purple-600">Деньги</span>
+                  <span className="font-medium text-purple-900">2 дом</span> <span className="text-sm text-purple-600">— Деньги, ресурсы, самооценка</span>
                 </Link>
                 <Link to="/3-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">3 дом</span> <span className="text-sm text-purple-600">Общение</span>
+                  <span className="font-medium text-purple-900">3 дом</span> <span className="text-sm text-purple-600">— Общение, обучение, братья</span>
                 </Link>
                 <Link to="/4-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">4 дом</span> <span className="text-sm text-purple-600">Семья</span>
+                  <span className="font-medium text-purple-900">4 дом</span> <span className="text-sm text-purple-600">— Семья, дом, корни</span>
                 </Link>
                 <Link to="/5-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">5 дом</span> <span className="text-sm text-purple-600">Дети, творчество</span>
+                  <span className="font-medium text-purple-900">5 дом</span> <span className="text-sm text-purple-600">— Дети, творчество, романы</span>
                 </Link>
                 <Link to="/shestoy-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">6 дом</span> <span className="text-sm text-purple-600">Работа</span>
+                  <span className="font-medium text-purple-900">6 дом</span> <span className="text-sm text-purple-600">— Работа, здоровье, рутина</span>
                 </Link>
                 <Link to="/7-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">7 дом</span> <span className="text-sm text-purple-600">Брак</span>
+                  <span className="font-medium text-purple-900">7 дом</span> <span className="text-sm text-purple-600">— Брак, партнёрство, контракты</span>
                 </Link>
                 <Link to="/8-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">8 дом</span> <span className="text-sm text-purple-600">Кризисы</span>
+                  <span className="font-medium text-purple-900">8 дом</span> <span className="text-sm text-purple-600">— Кризисы, чужие деньги, секс</span>
                 </Link>
                 <Link to="/9-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">9 дом</span> <span className="text-sm text-purple-600">Путешествия</span>
+                  <span className="font-medium text-purple-900">9 дом</span> <span className="text-sm text-purple-600">— Путешествия, образование</span>
                 </Link>
                 <Link to="/10-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">10 дом</span> <span className="text-sm text-purple-600">Карьера</span>
+                  <span className="font-medium text-purple-900">10 дом</span> <span className="text-sm text-purple-600">— Карьера, статус, призвание</span>
                 </Link>
                 <Link to="/11-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">11 дом</span> <span className="text-sm text-purple-600">Друзья</span>
+                  <span className="font-medium text-purple-900">11 дом</span> <span className="text-sm text-purple-600">— Друзья, цели, сообщества</span>
                 </Link>
                 <Link to="/12-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
-                  <span className="font-medium text-purple-900">12 дом</span> <span className="text-sm text-purple-600">Подсознание</span>
+                  <span className="font-medium text-purple-900">12 дом</span> <span className="text-sm text-purple-600">— Подсознание, тайны, карма</span>
                 </Link>
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            {/* Популярные темы */}
+            <h3 className="text-2xl font-bold mb-6 text-center text-white">Популярные темы в астрологии</h3>
+            <div className="grid gap-4 sm:grid-cols-2 mb-8">
               <Link to="/venera-v-domah-goroskopa" className="block p-6 bg-gradient-to-r from-pink-500/20 to-transparent rounded-xl border border-pink-500/30 hover:border-pink-500/50 transition-colors">
                 <h4 className="font-semibold mb-2 text-white">♀ Венера в домах гороскопа</h4>
-                <p className="text-sm text-white/70">Любовь, деньги и красота</p>
+                <p className="text-sm text-white/70">Как позиция Венеры влияет на любовь, деньги и отношения</p>
               </Link>
               <Link to="/synastry" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
-                <h4 className="font-semibold mb-2 text-white">💑 Совместимость</h4>
-                <p className="text-sm text-white/70">Анализ отношений по картам</p>
+                <h4 className="font-semibold mb-2 text-white">💑 Синастрия: совместимость по картам</h4>
+                <p className="text-sm text-white/70">Анализ отношений между двумя натальными картами</p>
               </Link>
               <Link to="/deti-v-natalnoy-karte-kogda-i-skolko" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
                 <h4 className="font-semibold mb-2 text-white">👶 Дети в натальной карте</h4>
-                <p className="text-sm text-white/70">Когда и сколько</p>
+                <p className="text-sm text-white/70">Как увидеть тему детей по 5 дому и другим показателям</p>
               </Link>
               <Link to="/talanty-v-goroskope-tehnar-ili-gumanitarij" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
-                <h4 className="font-semibold mb-2 text-white">🎯 Таланты в гороскопе</h4>
-                <p className="text-sm text-white/70">Технарь или гуманитарий?</p>
+                <h4 className="font-semibold mb-2 text-white">🎯 Таланты и профессия</h4>
+                <p className="text-sm text-white/70">Как найти своё призвание по натальной карте</p>
+              </Link>
+              <Link to="/tranzity-k-natalnoj-karte-i-ih-vliyanie" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                <h4 className="font-semibold mb-2 text-white">🔮 Транзиты планет</h4>
+                <p className="text-sm text-white/70">Как текущие положения планет влияют на вашу карту</p>
+              </Link>
+              <Link to="/razvody-v-astrologii-gde-iskat" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                <h4 className="font-semibold mb-2 text-white">💔 Отношения и разводы</h4>
+                <p className="text-sm text-white/70">Показатели сложностей в браке по натальной карте</p>
               </Link>
             </div>
 
-            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mt-8 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-purple-900">🌟 Хотите полную расшифровку?</h3>
-              <p className="text-purple-700 mb-6">Получите детальный анализ вашей натальной карты от ИИ-астролога</p>
-              <Button className="bg-purple-700 hover:bg-purple-800 text-white" asChild>
+            {/* FAQ */}
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mb-8">
+              <h2 className="text-2xl font-bold mb-6 text-purple-900">Часто задаваемые вопросы</h2>
+              <div className="space-y-6 text-purple-800">
+                <div>
+                  <h3 className="font-semibold mb-2">Можно ли рассчитать натальную карту без времени рождения?</h3>
+                  <p className="text-sm">
+                    Да, но расчёт будет неполным. Без точного времени невозможно определить Асцендент и положение домов. 
+                    В таком случае обычно используют полдень как условное время.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Насколько точен онлайн-расчёт натальной карты?</h3>
+                  <p className="text-sm">
+                    Наш калькулятор использует точные астрономические эфемериды и учитывает часовые пояса. 
+                    Расчёт идентичен профессиональным астрологическим программам.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Что такое Асцендент и почему он важен?</h3>
+                  <p className="text-sm">
+                    Асцендент (восходящий знак) — это знак зодиака, который поднимался на восточном горизонте в момент вашего рождения. 
+                    Он определяет вашу внешность, первое впечатление и стиль поведения.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4 text-purple-900">🌟 Хотите полную расшифровку натальной карты?</h3>
+              <p className="text-purple-700 mb-6">
+                Получите детальный анализ всех планет, домов и аспектов от ИИ-астролога. 
+                Узнайте о своих талантах, отношениях, карьере и предназначении.
+              </p>
+              <Button className="bg-purple-700 hover:bg-purple-800 text-white" size="lg" asChild>
                 <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
                   Получить полную расшифровку
                   <Sparkles className="w-4 h-4 ml-2" />
