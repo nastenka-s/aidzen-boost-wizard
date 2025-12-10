@@ -41,6 +41,7 @@ import DevyatyiDomGoroskopa from "./pages/DevyatyiDomGoroskopa";
 import DesyatyiDomGoroskopa from "./pages/DesyatyiDomGoroskopa";
 import OdinnadcatyiDomGoroskopa from "./pages/OdinnadcatyiDomGoroskopa";
 import DvenadtsatyiDomGoroskopa from "./pages/DvenadtsatyiDomGoroskopa";
+import VeneraVDomahGoroskopa from "./pages/VeneraVDomahGoroskopa";
 import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/venera-v-domah-goroskopa" element={<VeneraVDomahGoroskopa />} />
           <Route path="/12-dom-v-natalnoj-karte" element={<DvenadtsatyiDomGoroskopa />} />
           <Route path="/11-dom-v-natalnoj-karte" element={<OdinnadcatyiDomGoroskopa />} />
           <Route path="/10-dom-v-natalnoj-karte" element={<DesyatyiDomGoroskopa />} />
