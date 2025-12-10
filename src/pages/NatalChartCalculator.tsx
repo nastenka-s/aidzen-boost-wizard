@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { Loader2, ChevronDown, ChevronUp, Home, Sparkles } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -429,6 +429,92 @@ const NatalChartCalculator = () => {
               </>
             )}
           </div>
+
+          {/* SEO-блоки */}
+          <section className="mt-16 max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center text-white">📚 Изучите натальную карту глубже</h2>
+            
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mb-8">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="p-3 rounded-xl bg-purple-100">
+                  <Home className="w-6 h-6 text-purple-700" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-3 text-purple-900">12 домов гороскопа</h3>
+                  <p className="text-purple-700">Каждый дом описывает определённую сферу жизни.</p>
+                </div>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <Link to="/pervyi-dom-goroskopa-upravitel-aspekty" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">1 дом</span> <span className="text-sm text-purple-600">Личность</span>
+                </Link>
+                <Link to="/2-dom-v-natalnoy-karte-aspekty-tranzity" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">2 дом</span> <span className="text-sm text-purple-600">Деньги</span>
+                </Link>
+                <Link to="/3-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">3 дом</span> <span className="text-sm text-purple-600">Общение</span>
+                </Link>
+                <Link to="/4-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">4 дом</span> <span className="text-sm text-purple-600">Семья</span>
+                </Link>
+                <Link to="/5-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">5 дом</span> <span className="text-sm text-purple-600">Дети, творчество</span>
+                </Link>
+                <Link to="/shestoy-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">6 дом</span> <span className="text-sm text-purple-600">Работа</span>
+                </Link>
+                <Link to="/7-dom-goroskopa" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">7 дом</span> <span className="text-sm text-purple-600">Брак</span>
+                </Link>
+                <Link to="/8-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">8 дом</span> <span className="text-sm text-purple-600">Кризисы</span>
+                </Link>
+                <Link to="/9-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">9 дом</span> <span className="text-sm text-purple-600">Путешествия</span>
+                </Link>
+                <Link to="/10-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">10 дом</span> <span className="text-sm text-purple-600">Карьера</span>
+                </Link>
+                <Link to="/11-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">11 дом</span> <span className="text-sm text-purple-600">Друзья</span>
+                </Link>
+                <Link to="/12-dom-v-natalnoj-karte" className="block p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                  <span className="font-medium text-purple-900">12 дом</span> <span className="text-sm text-purple-600">Подсознание</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Link to="/venera-v-domah-goroskopa" className="block p-6 bg-gradient-to-r from-pink-500/20 to-transparent rounded-xl border border-pink-500/30 hover:border-pink-500/50 transition-colors">
+                <h4 className="font-semibold mb-2 text-white">♀ Венера в домах гороскопа</h4>
+                <p className="text-sm text-white/70">Любовь, деньги и красота</p>
+              </Link>
+              <Link to="/synastry" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                <h4 className="font-semibold mb-2 text-white">💑 Совместимость</h4>
+                <p className="text-sm text-white/70">Анализ отношений по картам</p>
+              </Link>
+              <Link to="/deti-v-natalnoy-karte-kogda-i-skolko" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                <h4 className="font-semibold mb-2 text-white">👶 Дети в натальной карте</h4>
+                <p className="text-sm text-white/70">Когда и сколько</p>
+              </Link>
+              <Link to="/talanty-v-goroskope-tehnar-ili-gumanitarij" className="block p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                <h4 className="font-semibold mb-2 text-white">🎯 Таланты в гороскопе</h4>
+                <p className="text-sm text-white/70">Технарь или гуманитарий?</p>
+              </Link>
+            </div>
+
+            <div className="bg-white/95 backdrop-blur border border-purple-200 rounded-2xl p-8 mt-8 text-center">
+              <h3 className="text-2xl font-bold mb-4 text-purple-900">🌟 Хотите полную расшифровку?</h3>
+              <p className="text-purple-700 mb-6">Получите детальный анализ вашей натальной карты от ИИ-астролога</p>
+              <Button className="bg-purple-700 hover:bg-purple-800 text-white" asChild>
+                <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                  Получить полную расшифровку
+                  <Sparkles className="w-4 h-4 ml-2" />
+                </a>
+              </Button>
+              <p className="mt-4 text-sm text-purple-600">Первые 3 расчёта — бесплатно</p>
+            </div>
+          </section>
         </main>
 
         <Footer />
