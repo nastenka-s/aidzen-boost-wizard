@@ -9,14 +9,114 @@ const DvenadtsatyiDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>12 дом в натальной карте: подсознание, тайны и духовность</title>
-        <meta name="description" content="Что значит 12 дом в натальной карте. Как его найти, как читать тему подсознания, уединения, тайных врагов, кармы и духовных практик." />
-        <meta name="keywords" content="12 дом в натальной карте, двенадцатый дом астрология, 12 дом гороскопа значение, 12 дом подсознание, 12 дом карма, 12 дом тайные враги, планеты в 12 доме, двенадцатый дом натальная карта" />
-        <link rel="canonical" href="https://neuro-zen.ru/12-dom-v-natalnoj-karte" />
+        <title>12 дом в натальной карте: подсознание, тайны и духовность | Расшифровка</title>
+        <meta name="description" content="Узнайте что значит 12 дом в натальной карте: подсознание, тайные враги, карма и духовность. Пошаговая инструкция как найти и расшифровать 12 дом гороскопа. Значение планет и знаков в двенадцатом доме." />
+        <meta name="keywords" content="12 дом в натальной карте, двенадцатый дом астрология, 12 дом гороскопа значение, 12 дом подсознание, 12 дом карма, 12 дом тайные враги, планеты в 12 доме, двенадцатый дом натальная карта, солнце в 12 доме, луна в 12 доме, венера в 12 доме, марс в 12 доме, 12 дом в овне, 12 дом в рыбах, куспид 12 дома, управитель 12 дома, дом уединения астрология, скрытые враги в гороскопе, духовный дом натальной карты" />
+        <link rel="canonical" href="https://aidzen.ru/12-dom-v-natalnoj-karte" />
+        <meta name="robots" content="index, follow" />
         <meta property="og:title" content="12 дом в натальной карте: подсознание, тайны и духовность" />
-        <meta property="og:description" content="Что значит 12 дом в натальной карте. Как его найти, как читать тему подсознания, уединения, тайных врагов, кармы и духовных практик." />
+        <meta property="og:description" content="Полный гайд по 12 дому гороскопа. Как найти, расшифровать и работать с домом подсознания, кармы и духовности." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://neuro-zen.ru/12-dom-v-natalnoj-karte" />
+        <meta property="og:url" content="https://aidzen.ru/12-dom-v-natalnoj-karte" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-12-07T00:00:00+03:00" />
+        <meta property="article:author" content="НЕЙРОДЗЕН" />
+        <meta property="article:section" content="Астрология" />
+        <meta property="article:tag" content="натальная карта" />
+        <meta property="article:tag" content="12 дом" />
+        <meta property="article:tag" content="дома гороскопа" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="12 дом в натальной карте: подсознание, тайны и духовность" />
+        <meta name="twitter:description" content="Полный гайд по 12 дому гороскопа: как найти и расшифровать дом подсознания, кармы и духовности." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "12 дом в натальной карте: подсознание, тайны и духовность",
+            "description": "Узнайте что значит 12 дом в натальной карте: подсознание, тайные враги, карма и духовность. Пошаговая инструкция как найти и расшифровать 12 дом гороскопа.",
+            "image": "https://aidzen.ru/logo.png",
+            "author": {
+              "@type": "Organization",
+              "name": "НЕЙРОДЗЕН",
+              "url": "https://aidzen.ru"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "НЕЙРОДЗЕН",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://aidzen.ru/logo.png"
+              }
+            },
+            "datePublished": "2025-12-07",
+            "dateModified": "2025-12-10",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://aidzen.ru/12-dom-v-natalnoj-karte"
+            },
+            "keywords": "12 дом в натальной карте, двенадцатый дом астрология, 12 дом гороскопа, подсознание, карма, тайные враги",
+            "articleSection": "Астрология",
+            "wordCount": 3500
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Главная",
+                "item": "https://aidzen.ru"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Блог",
+                "item": "https://aidzen.ru/blog"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "12 дом в натальной карте",
+                "item": "https://aidzen.ru/12-dom-v-natalnoj-karte"
+              }
+            ]
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Что такое 12 дом в натальной карте?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "12 дом в натальной карте — это дом подсознания, тайн и духовности. Он отвечает за скрытые страхи, кармические темы, уединение, тайных врагов, интуицию и связь с высшим."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Как найти 12 дом в своём гороскопе?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "12 дом находится прямо перед асцендентом (линией восходящего знака). Для точного определения нужны дата, время и место рождения. Постройте натальную карту и найдите сектор с цифрой 12."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Планеты в 12 доме — это плохо?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Нет, планеты в 12 доме не плохие. Они указывают на скрытые таланты и энергии, которые работают из подсознания. При осознанной работе они дают глубокую интуицию и духовные способности."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">
