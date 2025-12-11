@@ -233,22 +233,23 @@ export default function MatrixSudby() {
   return (
     <>
       <Helmet>
-        <title>Матрица Судьбы онлайн бесплатно — рассчитать по дате рождения с расшифровкой | Нейродзен</title>
-        <meta name="description" content="Рассчитайте Матрицу Судьбы онлайн бесплатно по дате рождения. Расшифровка 22 арканов: точка любви, денег, предназначение, родовые программы. Калькулятор с мгновенным результатом." />
-        <meta name="keywords" content="матрица судьбы, матрица судьбы рассчитать, матрица судьбы онлайн бесплатно, матрица судьбы по дате рождения, матрица судьбы расшифровка, 22 аркана, точка любви, точка денег, предназначение по матрице судьбы, родовые программы, кармический хвост" />
+        <title>Матрица Судьбы: Рассчитай и Расшифруй Онлайн Бесплатно | Нейродзен</title>
+        <meta name="description" content="Узнай свою матрицу судьбы! Рассчитай и расшифруй бесплатно онлайн. Получи полное понимание своей судьбы с помощью нашей матрицы судьбы. Калькулятор онлайн с расшифровкой по дате рождения." />
+        <meta name="keywords" content="матрица судьбы, матрица судьбы рассчитать, матрица судьбы онлайн бесплатно, матрица судьбы бесплатно, расшифровка матрицы судьбы, матрица судьбы калькулятор, матрица судьбы с расшифровкой, матрица судьбы по дате рождения, рассчитать матрицу судьбы бесплатно, моя матрица судьбы, твоя матрица судьбы, расчет матрицы судьбы, матрица судьбы онлайн смотреть, матрица судьбы расшифровка бесплатно, разбор матрицы судьбы" />
         <link rel="canonical" href="https://aidzen.ru/matrica-sudby-rasschitat" />
         
-        <meta property="og:title" content="Матрица Судьбы — бесплатный расчёт онлайн" />
-        <meta property="og:description" content="Рассчитайте свою Матрицу Судьбы по дате рождения. Узнайте своё предназначение, точку любви, денег и родовые программы." />
+        <meta property="og:title" content="Матрица Судьбы: Рассчитай и Расшифруй Онлайн Бесплатно" />
+        <meta property="og:description" content="Узнай свою матрицу судьбы! Рассчитай и расшифруй бесплатно онлайн. Получи полное понимание своей судьбы с помощью нашей матрицы судьбы." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://aidzen.ru/matrica-sudby-rasschitat" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
         
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Калькулятор Матрицы Судьбы",
-            "description": "Бесплатный онлайн калькулятор Матрицы Судьбы по дате рождения с расшифровкой 22 арканов",
+            "name": "Матрица Судьбы — Калькулятор Онлайн",
+            "description": "Бесплатный онлайн калькулятор Матрицы Судьбы по дате рождения с полной расшифровкой. Узнай своё предназначение, точку любви и денег.",
             "url": "https://aidzen.ru/matrica-sudby-rasschitat",
             "applicationCategory": "LifestyleApplication",
             "operatingSystem": "Web",
@@ -256,6 +257,14 @@ export default function MatrixSudby() {
               "@type": "Offer",
               "price": "0",
               "priceCurrency": "RUB"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://aidzen.ru/logo.png"
+              }
             }
           })}
         </script>
@@ -268,7 +277,7 @@ export default function MatrixSudby() {
           <Card className="bg-white/10 backdrop-blur-lg border-white/20">
             <CardContent className="p-8">
               <div className="text-center space-y-4 mb-6">
-                <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">МАТРИЦА СУДЬБЫ - БЕСПЛАТНЫй РАСЧЕТ</h1>
+                <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">Матрица Судьбы Онлайн — Бесплатный Расчет</h1>
                 <p className="text-xl text-purple-200">Откройте секреты вашей судьбы</p>
               </div>
 
