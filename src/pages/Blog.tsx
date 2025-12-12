@@ -16,6 +16,35 @@ const Blog = () => {
         <meta name="description" content="Блог о астрологии, нумерологии и эзотерике. Полезные статьи о натальных картах, совместимости, числе судьбы и астрологических расчетах." />
         <meta name="keywords" content="блог астрология, нумерология статьи, натальная карта, астрология обучение, эзотерика" />
         <link rel="canonical" href="https://aidzen.ru/blog" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Блог НейроДзен: статьи по астрологии и нумерологии" />
+        <meta property="og:description" content="Блог о астрологии, нумерологии и эзотерике. Полезные статьи о натальных картах, совместимости, числе судьбы." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aidzen.ru/blog" />
+        <meta property="og:site_name" content="НейроДзен" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Блог НейроДзен: статьи по астрологии и нумерологии" />
+        <meta name="twitter:description" content="Блог о астрологии, нумерологии и эзотерике. Полезные статьи о натальных картах и астрологии." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Блог НейроДзен",
+            "url": "https://aidzen.ru/blog",
+            "description": "Блог о астрологии, нумерологии и эзотерике",
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "url": "https://aidzen.ru"
+            }
+          })}
+        </script>
       </Helmet>
       <Header />
 

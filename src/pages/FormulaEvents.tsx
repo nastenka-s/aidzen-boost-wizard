@@ -14,13 +14,13 @@ const FormulaEvents = () => {
         <title>Формулы событий в натальной карте: как астрологи предсказывают моменты перемен | НейроДзен</title>
         <meta name="description" content="Что такое формулы событий в натальной карте, как они строятся и зачем нужны. Пошагово разбираем связки планет, дома и триггеры для событий — с примерами и чек-листом." />
         <meta name="keywords" content="формулы событий в натальной карте, астрологические формулы, прогноз событий по натальной карте, аспекты и дома, транзиты прогрессии дирекции, как читать натальную карту" />
-        <link rel="canonical" href="https://neurodzen.ru/formuly-sobytiy-v-natalnoy-karte" />
+        <link rel="canonical" href="https://aidzen.ru/formuly-sobytiy-v-natalnoy-karte" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Формулы событий в натальной карте: как астрологи предсказывают моменты перемен" />
         <meta property="og:description" content="Что такое формулы событий в натальной карте, как они строятся и зачем нужны. Пошагово разбираем связки планет, дома и триггеры для событий — с примерами и чек-листом." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://neurodzen.ru/formuly-sobytiy-v-natalnoy-karte" />
+        <meta property="og:url" content="https://aidzen.ru/formuly-sobytiy-v-natalnoy-karte" />
         
         {/* Article specific */}
         <meta property="article:published_time" content="2025-11-11" />

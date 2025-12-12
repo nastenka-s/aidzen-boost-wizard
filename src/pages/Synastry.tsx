@@ -12,6 +12,35 @@ const Synastry = () => {
         <meta name="description" content="Проверьте совместимость с партнером по натальным картам. Глубокий астрологический анализ отношений и синастрии." />
         <meta name="keywords" content="совместимость, синастрия, натальная карта совместимость, астрология отношений, гороскоп совместимости" />
         <link rel="canonical" href="https://aidzen.ru/synastry" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Совместимость по натальной карте: синастрия партнеров" />
+        <meta property="og:description" content="Проверьте совместимость с партнером по натальным картам. Глубокий астрологический анализ отношений." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/synastry" />
+        <meta property="og:site_name" content="НейроДзен" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Совместимость по натальной карте: синастрия партнеров" />
+        <meta name="twitter:description" content="Проверьте совместимость с партнером по натальным картам." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Совместимость по натальной карте: синастрия партнеров",
+            "description": "Глубокий астрологический анализ отношений и синастрии",
+            "url": "https://aidzen.ru/synastry",
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "url": "https://aidzen.ru"
+            }
+          })}
+        </script>
       </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
