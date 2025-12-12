@@ -47,6 +47,35 @@ const Index = () => {
           content="астронумерология, астрологическая карта рождения, гороскоп карта, планеты в домах рассчитать, астральная карта, натальная карта онлайн бесплатно, гороскоп бесплатно, нумерология, рассчитать матрицу судьбы, астрология, натальная карта, астрологический прогноз, матрица судьбы, соляр, синастрия, совместимость, число судьбы, транзиты планет"
         />
         <link rel="canonical" href="https://aidzen.ru/" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Астронумерология: Рассчитайте свой гороскоп онлайн | Нейродзен" />
+        <meta property="og:description" content="Создайте свою астрологическую карту рождения и узнайте о планетах в домах. Рассчитайте судьбу по дате рождения онлайн. Первые 3 расчета бесплатно." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aidzen.ru/" />
+        <meta property="og:site_name" content="НейроДзен" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Астронумерология: Рассчитайте свой гороскоп онлайн | Нейродзен" />
+        <meta name="twitter:description" content="Создайте свою астрологическую карту рождения и узнайте о планетах в домах. Первые 3 расчета бесплатно." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "НейроДзен",
+            "url": "https://aidzen.ru/",
+            "description": "Эзотерический ИИ-помощник для астрологии и нумерологии",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://aidzen.ru/blog?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
       </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">

@@ -9,10 +9,39 @@ const PervyiDomGoroskopa = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Первый дом гороскопа: асцендент, управители и аспекты</title>
+        <title>Первый дом гороскопа: асцендент, управители и аспекты | НейроДзен</title>
         <meta name="description" content="Как понять первый дом гороскопа, найти управителя и разобрать аспекты. Простые шаги, примеры и подсказки по рискам для реальной жизни." />
         <meta name="keywords" content="первый дом гороскопа, асцендент в гороскопе, управитель первого дома, аспекты к управителю первого дома, что значит первый дом, значение асцендента, дома гороскопа для начинающих, как считать управителя дома" />
-        <link rel="canonical" href="https://aidzen.app/pervyi-dom-goroskopa-upravitel-aspekty" />
+        <link rel="canonical" href="https://aidzen.ru/pervyi-dom-goroskopa-upravitel-aspekty" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Первый дом гороскопа: асцендент, управители и аспекты" />
+        <meta property="og:description" content="Как понять первый дом гороскопа, найти управителя и разобрать аспекты." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/pervyi-dom-goroskopa-upravitel-aspekty" />
+        <meta property="og:site_name" content="НейроДзен" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Первый дом гороскопа: асцендент, управители и аспекты" />
+        <meta name="twitter:description" content="Как понять первый дом гороскопа, найти управителя и разобрать аспекты." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Первый дом гороскопа: асцендент, управители и аспекты",
+            "description": "Как понять первый дом гороскопа, найти управителя и разобрать аспекты",
+            "url": "https://aidzen.ru/pervyi-dom-goroskopa-upravitel-aspekty",
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "url": "https://aidzen.ru"
+            }
+          })}
+        </script>
       </Helmet>
 
       <Header />

@@ -12,6 +12,35 @@ const Solar = () => {
         <meta name="description" content="Узнайте что ждёт вас в следующем году с помощью солярного гороскопа. Персональный астрологический прогноз на основе вашей натальной карты." />
         <meta name="keywords" content="соляр, солярный гороскоп, астрологический прогноз, прогноз на год, солярная карта, натальная карта" />
         <link rel="canonical" href="https://aidzen.ru/solar" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Расчет соляра: персональный астрологический прогноз на год" />
+        <meta property="og:description" content="Узнайте что ждёт вас в следующем году с помощью солярного гороскопа. Персональный прогноз на основе натальной карты." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/solar" />
+        <meta property="og:site_name" content="НейроДзен" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Расчет соляра: персональный астрологический прогноз на год" />
+        <meta name="twitter:description" content="Узнайте что ждёт вас в следующем году с помощью солярного гороскопа." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Расчет соляра: персональный астрологический прогноз на год",
+            "description": "Узнайте что ждёт вас в следующем году с помощью солярного гороскопа",
+            "url": "https://aidzen.ru/solar",
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "url": "https://aidzen.ru"
+            }
+          })}
+        </script>
       </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">

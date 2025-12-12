@@ -12,6 +12,35 @@ const FormulaDushi = () => {
         <meta name="description" content="Узнайте своё предназначение с помощью формулы души по методике Астрогора. Глубинный астрологический анализ миссии души." />
         <meta name="keywords" content="формула души, Астрогор, предназначение, миссия души, астрология души, расчет души" />
         <link rel="canonical" href="https://aidzen.ru/formuladushi" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Формула души по Астрогору: расчет предназначения" />
+        <meta property="og:description" content="Узнайте своё предназначение с помощью формулы души по методике Астрогора." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/formuladushi" />
+        <meta property="og:site_name" content="НейроДзен" />
+        <meta property="og:locale" content="ru_RU" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Формула души по Астрогору: расчет предназначения" />
+        <meta name="twitter:description" content="Узнайте своё предназначение с помощью формулы души по методике Астрогора." />
+        
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Формула души по Астрогору: расчет предназначения",
+            "description": "Глубинный астрологический анализ миссии души по методике Астрогора",
+            "url": "https://aidzen.ru/formuladushi",
+            "publisher": {
+              "@type": "Organization",
+              "name": "НейроДзен",
+              "url": "https://aidzen.ru"
+            }
+          })}
+        </script>
       </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
