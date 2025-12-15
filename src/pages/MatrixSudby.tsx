@@ -244,6 +244,10 @@ export default function MatrixSudby() {
         <meta property="og:url" content="https://aidzen.ru/matrica-sudby-rasschitat" />
         <meta property="og:image" content="https://aidzen.ru/logo.png" />
         
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Матрица Судьбы: Рассчитай и Расшифруй Онлайн Бесплатно" />
+        <meta name="twitter:description" content="Узнай свою матрицу судьбы! Рассчитай и расшифруй бесплатно онлайн." />
+        
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -266,6 +270,16 @@ export default function MatrixSudby() {
                 "url": "https://aidzen.ru/logo.png"
               }
             }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru/" },
+              { "@type": "ListItem", "position": 2, "name": "Калькуляторы", "item": "https://aidzen.ru/matrica-sudby-rasschitat" }
+            ]
           })}
         </script>
       </Helmet>

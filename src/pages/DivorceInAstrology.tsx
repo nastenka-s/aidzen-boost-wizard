@@ -18,10 +18,35 @@ const DivorceInAstrology = () => {
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://aidzen.ru/razvody-v-astrologii-gde-iskat" />
         <meta property="article:published_time" content="2025-11-15" />
+        <meta property="article:author" content="НейроДзен" />
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Разводы в астрологии: где искать в натальной карте" />
         <meta name="twitter:description" content="Как увидеть тему разводов в натальной карте: какие дома, планеты и аспекты указывают на риск, а что помогает сохранить брак." />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Разводы в астрологии: где искать и как с этим работать",
+            "description": "Как увидеть тему разводов в натальной карте: какие дома, планеты и аспекты указывают на риск, а что помогает сохранить брак.",
+            "author": { "@type": "Organization", "name": "НейроДзен" },
+            "publisher": { "@type": "Organization", "name": "НейроДзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-15",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/razvody-v-astrologii-gde-iskat" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru/" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Разводы в астрологии" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Header */}

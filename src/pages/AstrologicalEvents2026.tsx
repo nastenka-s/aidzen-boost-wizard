@@ -11,19 +11,44 @@ const AstrologicalEvents2026 = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Ключевые астрологические события 2026 года: как подготовиться | НейроДзен</title>
-        <meta
-          name="description"
-          content="Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году. Простое объяснение по шагам: что это значит и как использовать в свою пользу."
-        />
-        <meta
-          name="keywords"
-          content="астрологические события 2026, ключевые астрологические события 2026, астропрогноз 2026, затмения 2026, меркурий ретроградный 2026, сатурн в овне 2026, уран в близнецах 2026, плутон в водолее 2026"
-        />
+        <meta name="description" content="Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году. Простое объяснение по шагам: что это значит и как использовать в свою пользу." />
+        <meta name="keywords" content="астрологические события 2026, ключевые астрологические события 2026, астропрогноз 2026, затмения 2026, меркурий ретроградный 2026, сатурн в овне 2026, уран в близнецах 2026, плутон в водолее 2026" />
         <link rel="canonical" href="https://aidzen.ru/klyuchevye-astrologicheskie-sobytiya-2026" />
+        
         <meta property="og:title" content="Ключевые астрологические события 2026 года: как подготовиться" />
         <meta property="og:description" content="Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году. Простое объяснение по шагам." />
         <meta property="og:url" content="https://aidzen.ru/klyuchevye-astrologicheskie-sobytiya-2026" />
         <meta property="og:type" content="article" />
+        <meta property="article:published_time" content="2025-01-16" />
+        <meta property="article:author" content="НейроДзен" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ключевые астрологические события 2026 года" />
+        <meta name="twitter:description" content="Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году." />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Ключевые астрологические события 2026 года: как подготовиться",
+            "description": "Какие затмения, ретроградный Меркурий и большие транзиты ждут нас в 2026 году.",
+            "author": { "@type": "Organization", "name": "НейроДзен" },
+            "publisher": { "@type": "Organization", "name": "НейроДзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-01-16",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/klyuchevye-astrologicheskie-sobytiya-2026" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru/" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Ключевые астрологические события 2026 года" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Header */}
