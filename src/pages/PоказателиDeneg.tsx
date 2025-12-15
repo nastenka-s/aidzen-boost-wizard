@@ -14,9 +14,41 @@ const PоказателиDeneg = () => {
         <meta name="description" content="Как по дате рождения увидеть денежный потенциал в матрице судьбы. Какие линии и цифры отвечают за доход, накопления и риски. Пошаговый разбор с примерами." />
         <meta name="keywords" content="показатели денег в матрице судьбы, матрица судьбы деньги, линия 3-6-9, денежный потенциал по дате рождения, цифра 8 в матрице, как считать матрицу судьбы, линия материальных результатов, нумерология деньги, матрица Пифагора деньги" />
         <link rel="canonical" href="https://aidzen.ru/pokazateli-deneg-i-bogatstva-v-matrice-sudby" />
+        
         <meta property="og:title" content="Показатели денег и богатства в матрице судьбы" />
         <meta property="og:description" content="Узнайте свой денежный потенциал по дате рождения. Пошаговый разбор с примерами и рекомендациями." />
         <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/pokazateli-deneg-i-bogatstva-v-matrice-sudby" />
+        <meta property="article:published_time" content="2025-01-16" />
+        <meta property="article:author" content="НейроДзен" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Показатели денег и богатства в матрице судьбы" />
+        <meta name="twitter:description" content="Как по дате рождения увидеть денежный потенциал в матрице судьбы." />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Показатели денег и богатства в матрице судьбы",
+            "description": "Как по дате рождения увидеть денежный потенциал в матрице судьбы. Какие линии и цифры отвечают за доход, накопления и риски.",
+            "author": { "@type": "Organization", "name": "НейроДзен" },
+            "publisher": { "@type": "Organization", "name": "НейроДзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-01-16",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/pokazateli-deneg-i-bogatstva-v-matrice-sudby" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru/" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Показатели денег и богатства в матрице судьбы" }
+            ]
+          })}
+        </script>
       </Helmet>
       
       {/* Header */}

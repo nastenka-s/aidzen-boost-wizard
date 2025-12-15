@@ -227,6 +227,10 @@ const NatalChartCalculator = () => {
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://aidzen.ru/logo.png" />
         
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Натальная карта: Расчет и Расшифровка Онлайн Бесплатно" />
+        <meta name="twitter:description" content="Узнайте, что такое натальная карта, как ее проверить и получить точный прогноз." />
+        
         {/* Schema.org */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -250,6 +254,16 @@ const NatalChartCalculator = () => {
                 "url": "https://aidzen.ru/logo.png"
               }
             }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru/" },
+              { "@type": "ListItem", "position": 2, "name": "Натальная карта — Калькулятор", "item": "https://aidzen.ru/natal-chart-calculator" }
+            ]
           })}
         </script>
       </Helmet>

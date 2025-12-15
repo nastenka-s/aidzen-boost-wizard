@@ -14,12 +14,41 @@ const SovmestimostDolgih = () => {
         <meta name="description" content="Узнайте, как определить совместимость по дате рождения и числу судьбы. Простые формулы, расшифровки и советы, как укрепить отношения и избежать типичных ошибок." />
         <meta name="keywords" content="совместимость по дате рождения, совместимость чисел судьбы, нумерология отношений, любовь и нумерология, как проверить совместимость, число судьбы пары, энергия отношений, совместимость по числам" />
         <link rel="canonical" href="https://aidzen.ru/sovmestimost-dlya-dolgih-otnosheniy" />
+        
         <meta property="og:title" content="Совместимость для долгих отношений: как понять по дате рождения и нумерологии" />
         <meta property="og:description" content="Узнайте, как определить совместимость по дате рождения и числу судьбы. Простые формулы, расшифровки и советы, как укрепить отношения и избежать типичных ошибок." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://aidzen.ru/sovmestimost-dlya-dolgih-otnosheniy" />
-        <meta name="article:published_time" content="2025-01-16" />
-        <meta name="article:author" content="НейроДзен" />
+        <meta property="article:published_time" content="2025-01-16" />
+        <meta property="article:author" content="НейроДзен" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Совместимость для долгих отношений: как понять по дате рождения" />
+        <meta name="twitter:description" content="Узнайте, как определить совместимость по дате рождения и числу судьбы." />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Совместимость для долгих отношений: как понять по дате рождения",
+            "description": "Узнайте, как определить совместимость по дате рождения и числу судьбы. Простые формулы, расшифровки и советы.",
+            "author": { "@type": "Organization", "name": "НейроДзен" },
+            "publisher": { "@type": "Organization", "name": "НейроДзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-01-16",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/sovmestimost-dlya-dolgih-otnosheniy" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru/" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Совместимость для долгих отношений" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Header */}
