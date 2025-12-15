@@ -43,6 +43,7 @@ import OdinnadcatyiDomGoroskopa from "./pages/OdinnadcatyiDomGoroskopa";
 import DvenadtsatyiDomGoroskopa from "./pages/DvenadtsatyiDomGoroskopa";
 import VeneraVDomahGoroskopa from "./pages/VeneraVDomahGoroskopa";
 import MarsVDomahGoroskopa from "./pages/MarsVDomahGoroskopa";
+import BogatstvoVNatalnoyKarte from "./pages/BogatstvoVNatalnoyKarte";
 import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/venera-v-domah-goroskopa" element={<VeneraVDomahGoroskopa />} />
           <Route path="/mars-v-domah-goroskopa" element={<MarsVDomahGoroskopa />} />
+          <Route path="/bogatstvo-v-natalnoy-karte" element={<BogatstvoVNatalnoyKarte />} />
           <Route path="/12-dom-v-natalnoj-karte" element={<DvenadtsatyiDomGoroskopa />} />
           <Route path="/11-dom-v-natalnoj-karte" element={<OdinnadcatyiDomGoroskopa />} />
           <Route path="/10-dom-v-natalnoj-karte" element={<DesyatyiDomGoroskopa />} />
