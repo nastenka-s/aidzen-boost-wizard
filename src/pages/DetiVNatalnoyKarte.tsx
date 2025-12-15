@@ -9,10 +9,43 @@ const DetiVNatalnoyKarte = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Дети в натальной карте: когда появятся и сколько их может быть</title>
+        <title>Дети в натальной карте: когда появятся и сколько их может быть | Нейродзен</title>
         <meta name="description" content="Как по натальной карте понять тему детей: когда вероятно рождение, сколько может быть детей и какие есть риски материнства." />
         <meta name="keywords" content="дети в натальной карте, когда будут дети по натальной карте, сколько детей по гороскопу, 5 дом дети, управитель 5 дома, беременность по натальной карте, гороскоп детей, астрология дети" />
-        <link rel="canonical" href="https://aidzen.app/deti-v-natalnoy-karte-kogda-i-skolko" />
+        <link rel="canonical" href="https://aidzen.ru/deti-v-natalnoy-karte-kogda-i-skolko" />
+        <meta property="og:title" content="Дети в натальной карте: когда появятся и сколько их может быть" />
+        <meta property="og:description" content="Как по натальной карте понять тему детей: когда вероятно рождение, сколько может быть детей и какие есть риски материнства." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/deti-v-natalnoy-karte-kogda-i-skolko" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-22" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Дети в натальной карте: когда появятся и сколько их может быть" />
+        <meta name="twitter:description" content="Как по натальной карте понять тему детей: когда вероятно рождение, сколько может быть детей и какие есть риски материнства." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Дети в натальной карте: когда появятся и сколько их может быть",
+            "description": "Как по натальной карте понять тему детей: когда вероятно рождение, сколько может быть детей и какие есть риски материнства.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-22",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/deti-v-natalnoy-karte-kogda-i-skolko" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Дети в натальной карте", "item": "https://aidzen.ru/deti-v-natalnoy-karte-kogda-i-skolko" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

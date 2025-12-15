@@ -13,7 +13,40 @@ const PyatyiDomGoroskopa = () => {
         <title>5 дом гороскопа: дети, любовь и самореализация | Нейродзен</title>
         <meta name="description" content="Что значит 5 дом гороскопа в астрологии. Как он описывает детей, любовь, творчество, хобби и риск. Простое объяснение, примеры и разбор рисков." />
         <meta name="keywords" content="5 дом гороскопа, пятый дом гороскопа, 5 дом в натальной карте, дом детей и любви, астрология домов, как трактовать 5 дом, 5 дом зодиака, управитель 5 дома" />
-        <link rel="canonical" href="https://neurodzen.ru/5-dom-goroskopa" />
+        <link rel="canonical" href="https://aidzen.ru/5-dom-goroskopa" />
+        <meta property="og:title" content="5 дом гороскопа: дети, любовь и самореализация" />
+        <meta property="og:description" content="Что значит 5 дом гороскопа в астрологии. Как он описывает детей, любовь, творчество, хобби и риск." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/5-dom-goroskopa" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-27" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="5 дом гороскопа: дети, любовь и самореализация" />
+        <meta name="twitter:description" content="Что значит 5 дом гороскопа в астрологии. Как он описывает детей, любовь, творчество, хобби и риск." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "5 дом гороскопа: дети, любовь и самореализация",
+            "description": "Что значит 5 дом гороскопа в астрологии. Как он описывает детей, любовь, творчество, хобби и риск.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-27",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/5-dom-goroskopa" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "5 дом гороскопа", "item": "https://aidzen.ru/5-dom-goroskopa" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

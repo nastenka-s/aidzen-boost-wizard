@@ -12,10 +12,43 @@ const ShestoyDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>6-й дом гороскопа: здоровье, работа и привычки в натале | НейроДзен</title>
+        <title>6-й дом гороскопа: здоровье, работа и привычки в натале | Нейродзен</title>
         <meta name="description" content="Что значит 6-й дом гороскопа, за что он отвечает в натальной карте, как его найти и читать. Разбираем здоровье, работу по найму, выгорание и бытовые привычки на простом языке." />
         <meta name="keywords" content="6-й дом гороскопа, 6 дом в натальной карте, значение 6 дома, 6 дом здоровье, 6 дом работа по найму, управитель 6 дома, планеты в 6 доме, дом гороскопа здоровье" />
-        <link rel="canonical" href="https://neurodzen.ru/shestoy-dom-goroskopa" />
+        <link rel="canonical" href="https://aidzen.ru/shestoy-dom-goroskopa" />
+        <meta property="og:title" content="6-й дом гороскопа: здоровье, работа и привычки в натале" />
+        <meta property="og:description" content="Что значит 6-й дом гороскопа, за что он отвечает в натальной карте, как его найти и читать. Разбираем здоровье, работу по найму, выгорание и бытовые привычки." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/shestoy-dom-goroskopa" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-29" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="6-й дом гороскопа: здоровье, работа и привычки в натале" />
+        <meta name="twitter:description" content="Что значит 6-й дом гороскопа, за что он отвечает в натальной карте, как его найти и читать." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "6-й дом гороскопа: здоровье, работа и привычки в натале",
+            "description": "Что значит 6-й дом гороскопа, за что он отвечает в натальной карте, как его найти и читать.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-29",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/shestoy-dom-goroskopa" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "6-й дом гороскопа", "item": "https://aidzen.ru/shestoy-dom-goroskopa" }
+            ]
+          })}
+        </script>
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-background">

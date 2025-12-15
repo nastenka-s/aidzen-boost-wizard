@@ -10,10 +10,31 @@ const TalentsInHoroscope = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Таланты в гороскопе: технарь или гуманитарий | НейроДзен</title>
+        <title>Таланты в гороскопе: технарь или гуманитарий | Нейродзен</title>
         <meta name="description" content="Как по натальной карте понять, к чему есть врождённые таланты. Разбираем, где в гороскопе видно, технарь вы или гуманитарий, как считать стихии и положения Меркурия и не ошибиться с выбором дела." />
         <meta name="keywords" content="технарь или гуманитарий по гороскопу, таланты в гороскопе, гороскоп профессии технарь гуманитарий, астрология и выбор профессии, стихии в натальной карте, меркурий в гороскопе, как узнать склонности по гороскопу, технарь или гуманитарий по дате рождения" />
         <link rel="canonical" href="https://aidzen.ru/talanty-v-goroskope-tehnar-ili-gumanitarij" />
+        <meta property="og:title" content="Таланты в гороскопе: технарь или гуманитарий" />
+        <meta property="og:description" content="Как по натальной карте понять, к чему есть врождённые таланты и не ошибиться с выбором дела." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/talanty-v-goroskope-tehnar-ili-gumanitarij" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-17" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Таланты в гороскопе: технарь или гуманитарий" />
+        <meta name="twitter:description" content="Как по натальной карте понять, к чему есть врождённые таланты." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Таланты в гороскопе: технарь или гуманитарий",
+            "description": "Как по натальной карте понять, к чему есть врождённые таланты и не ошибиться с выбором дела.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-17",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/talanty-v-goroskope-tehnar-ili-gumanitarij" }
+          })}
+        </script>
       </Helmet>
 
       {/* Header */}

@@ -6,10 +6,43 @@ const NovyjGod2026 = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Новый год 2026: в чем встречать по знаку зодиака | НейроДзен</title>
+        <title>Новый год 2026: в чем встречать по знаку зодиака | Нейродзен</title>
         <meta name="description" content="В чем встречать Новый год 2026 каждой женщине по знаку зодиака: цвета, фасоны, ткани с учетом энергии Огненной Лошади и рисков для каждого знака." />
         <meta name="keywords" content="Новый год 2026 в чем встречать, образ на новый год 2026 по знаку зодиака, какой цвет надеть на новый год 2026, новогодний наряд по гороскопу 2026, одежда на новый год 2026 по знаку, огненная лошадь 2026 что надеть, гороскоп стиля на новый год 2026, счастливые цвета 2026 год" />
-        <link rel="canonical" href="https://neurodzen.lovable.app/novyj-god-2026-v-chem-vstrechat-po-znaku-zodiaka" />
+        <link rel="canonical" href="https://aidzen.ru/novyj-god-2026-v-chem-vstrechat-po-znaku-zodiaka" />
+        <meta property="og:title" content="Новый год 2026: в чем встречать по знаку зодиака" />
+        <meta property="og:description" content="В чем встречать Новый год 2026 каждой женщине по знаку зодиака: цвета, фасоны, ткани с учетом энергии Огненной Лошади." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/novyj-god-2026-v-chem-vstrechat-po-znaku-zodiaka" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-19" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Новый год 2026: в чем встречать по знаку зодиака" />
+        <meta name="twitter:description" content="В чем встречать Новый год 2026 каждой женщине по знаку зодиака: цвета, фасоны, ткани с учетом энергии Огненной Лошади." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Новый год 2026: в чем встречать по знаку зодиака",
+            "description": "В чем встречать Новый год 2026 каждой женщине по знаку зодиака: цвета, фасоны, ткани с учетом энергии Огненной Лошади.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-19",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/novyj-god-2026-v-chem-vstrechat-po-znaku-zodiaka" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Новый год 2026", "item": "https://aidzen.ru/novyj-god-2026-v-chem-vstrechat-po-znaku-zodiaka" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Header */}

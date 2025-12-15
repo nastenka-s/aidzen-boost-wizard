@@ -10,14 +10,31 @@ const Tranzity = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Транзиты к натальной карте и их влияние: простое объяснение | НейроДзен</title>
+        <title>Транзиты к натальной карте и их влияние: простое объяснение | Нейродзен</title>
         <meta name="description" content="Что такое транзиты к натальной карте, как они влияют на события и решения, как читать транзиты по шагам и не попасть в ловушку фатализма." />
         <meta name="keywords" content="транзиты к натальной карте, транзиты планет, влияние транзитов, астрология транзиты, прогноз по транзитам, как читать транзиты, транзиты домов, аспекты транзитов, натальная карта онлайн бесплатно" />
         <link rel="canonical" href="https://aidzen.ru/tranzity-k-natalnoj-karte-i-ih-vliyanie" />
         <meta property="og:title" content="Транзиты к натальной карте и их влияние: простое объяснение" />
-        <meta property="og:description" content="Что такое транзиты к натальной карте, как они влияют на события и решения, как читать транзиты по шагам и не попасть в ловушку фатализма." />
+        <meta property="og:description" content="Что такое транзиты к натальной карте, как они влияют на события и решения, как читать транзиты по шагам." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://aidzen.ru/tranzity-k-natalnoj-karte-i-ih-vliyanie" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-01-16" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Транзиты к натальной карте и их влияние" />
+        <meta name="twitter:description" content="Что такое транзиты к натальной карте, как они влияют на события и решения." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Транзиты к натальной карте и их влияние: простое объяснение",
+            "description": "Что такое транзиты к натальной карте, как они влияют на события и решения.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-01-16",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/tranzity-k-natalnoj-karte-i-ih-vliyanie" }
+          })}
+        </script>
       </Helmet>
 
       {/* Header */}

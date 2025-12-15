@@ -11,10 +11,43 @@ const VosmoyDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>8 дом в натальной карте: деньги партнёра, кризисы и сила | НейроДзен</title>
+        <title>8 дом в натальной карте: деньги партнёра, кризисы и сила | Нейродзен</title>
         <meta name="description" content="Что значит 8 дом в натальной карте у женщины. Как его найти, как читать деньги партнёра, кредиты, наследство, секс и кризисы, и какие риски учитывать." />
         <meta name="keywords" content="8 дом в натальной карте, восьмой дом астрология, 8 дом гороскопа значение, 8 дом деньги партнёра, 8 дом кредиты и долги, 8 дом секс и близость, планеты в 8 доме, 8 дом риски и кризисы" />
-        <link rel="canonical" href="https://neurozen.ru/8-dom-v-natalnoj-karte" />
+        <link rel="canonical" href="https://aidzen.ru/8-dom-v-natalnoj-karte" />
+        <meta property="og:title" content="8 дом в натальной карте: деньги партнёра, кризисы и сила" />
+        <meta property="og:description" content="Что значит 8 дом в натальной карте у женщины. Как его найти, как читать деньги партнёра, кредиты, наследство, секс и кризисы." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/8-dom-v-natalnoj-karte" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-12-02" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="8 дом в натальной карте: деньги партнёра, кризисы и сила" />
+        <meta name="twitter:description" content="Что значит 8 дом в натальной карте у женщины. Как его найти, как читать деньги партнёра, кредиты, наследство, секс и кризисы." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "8 дом в натальной карте: деньги партнёра, кризисы и сила",
+            "description": "Что значит 8 дом в натальной карте у женщины. Как его найти, как читать деньги партнёра, кредиты, наследство, секс и кризисы.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-12-02",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/8-dom-v-natalnoj-karte" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "8 дом в натальной карте", "item": "https://aidzen.ru/8-dom-v-natalnoj-karte" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <Header />

@@ -8,16 +8,43 @@ const ChetvertyiDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>4 дом гороскопа. Дом семьи и внутренней опоры | НейроДзен</title>
-        <meta 
-          name="description" 
-          content="4 дом гороскопа отвечает за дом, род, родителей и внутреннюю опору. Разбираем значение 4 дома в натальной карте, планеты и риски семейных сценариев." 
-        />
-        <meta 
-          name="keywords" 
-          content="4 дом гороскопа, четвертый дом гороскопа, 4 дом в натальной карте, 4 дом астрология, значение 4 дома гороскопа, 4 дом гороскопа что означает, 4 дом дом семьи, IC в гороскопе" 
-        />
-        <link rel="canonical" href="https://neurodzen.ru/4-dom-goroskopa" />
+        <title>4 дом гороскопа. Дом семьи и внутренней опоры | Нейродзен</title>
+        <meta name="description" content="4 дом гороскопа отвечает за дом, род, родителей и внутреннюю опору. Разбираем значение 4 дома в натальной карте, планеты и риски семейных сценариев." />
+        <meta name="keywords" content="4 дом гороскопа, четвертый дом гороскопа, 4 дом в натальной карте, 4 дом астрология, значение 4 дома гороскопа, 4 дом гороскопа что означает, 4 дом дом семьи, IC в гороскопе" />
+        <link rel="canonical" href="https://aidzen.ru/4-dom-goroskopa" />
+        <meta property="og:title" content="4 дом гороскопа. Дом семьи и внутренней опоры" />
+        <meta property="og:description" content="4 дом гороскопа отвечает за дом, род, родителей и внутреннюю опору. Разбираем значение 4 дома в натальной карте." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/4-dom-goroskopa" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-24" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="4 дом гороскопа. Дом семьи и внутренней опоры" />
+        <meta name="twitter:description" content="4 дом гороскопа отвечает за дом, род, родителей и внутреннюю опору." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "4 дом гороскопа. Дом семьи и внутренней опоры",
+            "description": "4 дом гороскопа отвечает за дом, род, родителей и внутреннюю опору. Разбираем значение 4 дома в натальной карте.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-24",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/4-dom-goroskopa" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "4 дом гороскопа", "item": "https://aidzen.ru/4-dom-goroskopa" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">
