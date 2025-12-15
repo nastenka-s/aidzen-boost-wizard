@@ -9,14 +9,43 @@ const OdinnadcatyiDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>11 дом в натальной карте: друзья, цели и социальные группы</title>
+        <title>11 дом в натальной карте: друзья, цели и социальные группы | Нейродзен</title>
         <meta name="description" content="Что значит 11 дом в натальной карте. Как его найти, как читать тему друзей, единомышленников, целей и социальных групп." />
         <meta name="keywords" content="11 дом в натальной карте, одиннадцатый дом астрология, 11 дом гороскопа значение, 11 дом друзья, 11 дом цели, 11 дом группы, планеты в 11 доме, одиннадцатый дом натальная карта" />
-        <link rel="canonical" href="https://neuro-zen.ru/11-dom-v-natalnoj-karte" />
+        <link rel="canonical" href="https://aidzen.ru/11-dom-v-natalnoj-karte" />
         <meta property="og:title" content="11 дом в натальной карте: друзья, цели и социальные группы" />
         <meta property="og:description" content="Что значит 11 дом в натальной карте. Как его найти, как читать тему друзей, единомышленников, целей и социальных групп." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://neuro-zen.ru/11-dom-v-natalnoj-karte" />
+        <meta property="og:url" content="https://aidzen.ru/11-dom-v-natalnoj-karte" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-12-06" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="11 дом в натальной карте: друзья, цели и социальные группы" />
+        <meta name="twitter:description" content="Что значит 11 дом в натальной карте. Как его найти, как читать тему друзей, единомышленников, целей и социальных групп." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "11 дом в натальной карте: друзья, цели и социальные группы",
+            "description": "Что значит 11 дом в натальной карте. Как его найти, как читать тему друзей, единомышленников, целей и социальных групп.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-12-06",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/11-dom-v-natalnoj-karte" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "11 дом в натальной карте", "item": "https://aidzen.ru/11-dom-v-natalnoj-karte" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">

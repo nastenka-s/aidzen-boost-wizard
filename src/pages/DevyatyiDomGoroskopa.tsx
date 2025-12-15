@@ -14,13 +14,43 @@ const DevyatyiDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>9 дом в натальной карте: путешествия, философия и высшее образование</title>
+        <title>9 дом в натальной карте: путешествия, философия и высшее образование | Нейродзен</title>
         <meta name="description" content="Что значит 9 дом в натальной карте. Как его найти, как читать тему путешествий, образования, веры и расширения горизонтов. Разбор планет в 9 доме и практические рекомендации." />
         <meta name="keywords" content="9 дом в натальной карте, девятый дом астрология, 9 дом гороскопа значение, 9 дом путешествия, 9 дом высшее образование, 9 дом философия, планеты в 9 доме, девятый дом натальная карта" />
-        <link rel="canonical" href="https://neuro-dzen.ru/9-dom-v-natalnoj-karte" />
+        <link rel="canonical" href="https://aidzen.ru/9-dom-v-natalnoj-karte" />
         <meta property="og:title" content="9 дом в натальной карте: путешествия, философия и высшее образование" />
         <meta property="og:description" content="Что значит 9 дом в натальной карте. Как его найти, как читать тему путешествий, образования, веры и расширения горизонтов." />
         <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/9-dom-v-natalnoj-karte" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-12-04" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="9 дом в натальной карте: путешествия, философия и высшее образование" />
+        <meta name="twitter:description" content="Что значит 9 дом в натальной карте. Как его найти, как читать тему путешествий, образования, веры и расширения горизонтов." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "9 дом в натальной карте: путешествия, философия и высшее образование",
+            "description": "Что значит 9 дом в натальной карте. Как его найти, как читать тему путешествий, образования, веры и расширения горизонтов.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-12-04",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/9-dom-v-natalnoj-karte" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "9 дом в натальной карте", "item": "https://aidzen.ru/9-dom-v-natalnoj-karte" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">

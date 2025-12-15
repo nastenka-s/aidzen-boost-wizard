@@ -9,14 +9,43 @@ const TretiDomGoroskopa = () => {
   return (
     <>
       <Helmet>
-        <title>3 дом гороскопа: общение, обучение и окружение | Натальная карта</title>
+        <title>3 дом гороскопа: общение, обучение и окружение | Нейродзен</title>
         <meta name="description" content="Третий дом гороскопа отвечает за общение, обучение и близкое окружение. Разбираем, как читать 3 дом в натальной карте, управителя, планеты и транзиты." />
         <meta name="keywords" content="третий дом гороскопа, 3 дом гороскопа, 3 дом в натальной карте, третий дом в астрологии, третий дом значение, управитель 3 дома, планеты в 3 доме, транзиты по 3 дому, дом общения в гороскопе" />
-        <link rel="canonical" href="https://neurodzen.ru/3-dom-goroskopa" />
+        <link rel="canonical" href="https://aidzen.ru/3-dom-goroskopa" />
         <meta property="og:title" content="3 дом гороскопа: общение, обучение и окружение" />
-        <meta property="og:description" content="Третий дом гороскопа отвечает за общение, обучение и близкое окружение. Разбираем, как читать 3 дом в натальной карте, управителя, планеты и транзиты." />
+        <meta property="og:description" content="Третий дом гороскопа отвечает за общение, обучение и близкое окружение. Разбираем, как читать 3 дом в натальной карте." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://neurodzen.ru/3-dom-goroskopa" />
+        <meta property="og:url" content="https://aidzen.ru/3-dom-goroskopa" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-24" />
+        <meta property="article:section" content="Астрология" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="3 дом гороскопа: общение, обучение и окружение" />
+        <meta name="twitter:description" content="Третий дом гороскопа отвечает за общение, обучение и близкое окружение." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "3 дом гороскопа: общение, обучение и окружение",
+            "description": "Третий дом гороскопа отвечает за общение, обучение и близкое окружение. Разбираем, как читать 3 дом в натальной карте.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-24",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/3-dom-goroskopa" }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://aidzen.ru" },
+              { "@type": "ListItem", "position": 2, "name": "Блог", "item": "https://aidzen.ru/blog" },
+              { "@type": "ListItem", "position": 3, "name": "3 дом гороскопа", "item": "https://aidzen.ru/3-dom-goroskopa" }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

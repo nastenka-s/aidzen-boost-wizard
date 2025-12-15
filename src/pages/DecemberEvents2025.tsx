@@ -10,16 +10,31 @@ const DecemberEvents2025 = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Ключевые астрологические события декабря 2025 | НейроДзен</title>
-        <meta
-          name="description"
-          content="Что принесёт декабрь 2025 по звёздам. Разбираем полнолуние в Близнецах, новолуние в Стрельце, Марс, Венеру и Солнце в Козероге, разворот Нептуна и «хвост» ретро-Меркурия, чтобы спланировать месяц без лишних рисков."
-        />
-        <meta
-          name="keywords"
-          content="астрологический прогноз декабрь 2025, ключевые астрологические события декабрь 2025, полнолуние 4 декабря 2025 Близнецы, новолуние 19 декабря 2025 Стрелец, Марс в Козероге декабрь 2025, Венера в Козероге декабрь 2025, Нептун директный декабрь 2025, ретро Меркурий конец 2025 тень, астропрогноз на декабрь 2025"
-        />
+        <title>Ключевые астрологические события декабря 2025 | Нейродзен</title>
+        <meta name="description" content="Что принесёт декабрь 2025 по звёздам. Разбираем полнолуние в Близнецах, новолуние в Стрельце, Марс, Венеру и Солнце в Козероге." />
+        <meta name="keywords" content="астрологический прогноз декабрь 2025, ключевые астрологические события декабрь 2025, полнолуние 4 декабря 2025 Близнецы, новолуние 19 декабря 2025 Стрелец" />
         <link rel="canonical" href="https://aidzen.ru/klyuchevye-astrologicheskie-sobytiya-dekabrya-2025" />
+        <meta property="og:title" content="Ключевые астрологические события декабря 2025" />
+        <meta property="og:description" content="Что принесёт декабрь 2025 по звёздам. Разбираем полнолуние в Близнецах, новолуние в Стрельце." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://aidzen.ru/klyuchevye-astrologicheskie-sobytiya-dekabrya-2025" />
+        <meta property="og:image" content="https://aidzen.ru/logo.png" />
+        <meta property="article:published_time" content="2025-11-18" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ключевые астрологические события декабря 2025" />
+        <meta name="twitter:description" content="Что принесёт декабрь 2025 по звёздам." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Ключевые астрологические события декабря 2025",
+            "description": "Что принесёт декабрь 2025 по звёздам. Разбираем полнолуние в Близнецах, новолуние в Стрельце.",
+            "author": { "@type": "Organization", "name": "Нейродзен" },
+            "publisher": { "@type": "Organization", "name": "Нейродзен", "logo": { "@type": "ImageObject", "url": "https://aidzen.ru/logo.png" } },
+            "datePublished": "2025-11-18",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://aidzen.ru/klyuchevye-astrologicheskie-sobytiya-dekabrya-2025" }
+          })}
+        </script>
       </Helmet>
 
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
