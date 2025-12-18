@@ -382,9 +382,11 @@ const DesyatyiDomGoroskopa = () => {
                 <Button 
                   size="lg"
                   className="bg-primary hover:bg-primary/90"
-                  onClick={() => window.open('https://app.neuro-zen.ru/', '_blank')}
+                  asChild
                 >
-                  Получить 3 отчёта
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                    Получить 3 отчёта
+                  </a>
                 </Button>
               </CardContent>
             </Card>

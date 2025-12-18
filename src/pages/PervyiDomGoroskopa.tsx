@@ -427,8 +427,8 @@ const PervyiDomGoroskopa = () => {
 
           <section className="mb-8 p-6 bg-primary/5 border border-primary/20 rounded-lg">
             <h2 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно — начните с готовых результатов за пару минут</h2>
-            <Button size="lg" className="w-full md:w-auto">
-              Получить 3 отчёта
+            <Button size="lg" className="w-full md:w-auto" asChild>
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">Получить 3 отчёта</a>
             </Button>
           </section>
 

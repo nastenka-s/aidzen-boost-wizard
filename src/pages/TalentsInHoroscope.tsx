@@ -455,7 +455,7 @@ const TalentsInHoroscope = () => {
                 Начните с готовых мини-результатов за пару минут
               </p>
               <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-                <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчёта
                 </a>
               </Button>

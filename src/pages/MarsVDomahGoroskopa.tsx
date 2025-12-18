@@ -434,12 +434,12 @@ const MarsVDomahGoroskopa = () => {
             <p className="text-muted-foreground mb-6">
               Рассчитайте натальную карту бесплатно и получите полный анализ положения Марса и других планет.
             </p>
-            <Link to="/natal-chart-calculator">
+            <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="gap-2">
                 <Target className="w-5 h-5" />
                 Рассчитать натальную карту
               </Button>
-            </Link>
+            </a>
           </section>
 
           {/* Связанные статьи */}

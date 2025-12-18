@@ -330,10 +330,12 @@ const ShestoyDomGoroskopa = () => {
                   <p className="text-muted-foreground mb-6">Начните с готовых мини-результатов за пару минут</p>
                   <Button 
                     size="lg" 
-                    onClick={() => navigate('/')}
+                    asChild
                     className="bg-primary hover:bg-primary/90"
                   >
-                    Получить 3 отчёта
+                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                      Получить 3 отчёта
+                    </a>
                   </Button>
                 </CardContent>
               </Card>

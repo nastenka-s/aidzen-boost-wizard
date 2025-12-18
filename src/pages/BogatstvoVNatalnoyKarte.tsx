@@ -301,7 +301,7 @@ const BogatstvoVNatalnoyKarte = () => {
                 Получите 3 моментальных разбора бесплатно — начните с готовых результатов за пару минут
               </p>
               <a 
-                href="https://neurodzen.app.link/e/get_reports" 
+                href="https://chat.aidzen.ru/login" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"

@@ -132,7 +132,7 @@ const NatalChart = () => {
             <h4 className="text-xl font-semibold mb-4">✨ Заключение</h4>
             <p className="mb-6">Натальная карта — это карта возможностей, а не приговор.</p>
             <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 Рассчитать натальную карту
                 <Sparkles className="w-4 h-4 ml-2" />
               </a>

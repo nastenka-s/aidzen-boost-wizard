@@ -354,7 +354,7 @@ const NovyjGod2026 = () => {
               Начните с готовых мини-результатов за пару минут
             </p>
             <Button asChild size="lg">
-              <a href="/#calculator">Получить 3 отчёта</a>
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">Получить 3 отчёта</a>
             </Button>
           </div>
 

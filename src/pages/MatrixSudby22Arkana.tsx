@@ -416,11 +416,11 @@ const MatrixSudby22Arkana = () => {
               <div className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl p-8 my-12 text-center">
                 <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
                 <p className="text-muted-foreground mb-6">Начните с готовых результатов за пару минут</p>
-                <Link to="/matrica-sudby-rasschitat">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" className="text-lg px-8">
                     Получить 3 отчёта
                   </Button>
-                </Link>
+                </a>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6">FAQ: частые вопросы по Матрице судьбы 22 арканов</h2>

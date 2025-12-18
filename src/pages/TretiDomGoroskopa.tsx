@@ -385,7 +385,7 @@ const TretiDomGoroskopa = () => {
               <section className="my-12 bg-muted/50 p-8 rounded-lg text-center">
                 <h2 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h2>
                 <p className="mb-6 text-muted-foreground">Начните с готовых мини-результатов за пару минут</p>
-                <Button size="lg" className="text-lg px-8">Получить 3 отчёта</Button>
+                <Button size="lg" className="text-lg px-8" asChild><a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">Получить 3 отчёта</a></Button>
               </section>
 
               <section className="my-12">

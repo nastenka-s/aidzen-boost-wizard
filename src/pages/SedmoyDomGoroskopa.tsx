@@ -429,11 +429,11 @@ const SedmoyDomGoroskopa = () => {
                 <p className="text-foreground/90 mb-6">
                   Начните с готовых мини-результатов за пару минут
                 </p>
-                <Link to="/natal-chart-calculator">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                     Получить 3 отчёта
                   </Button>
-                </Link>
+                </a>
               </Card>
 
               <section>

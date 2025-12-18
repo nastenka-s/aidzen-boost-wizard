@@ -288,7 +288,7 @@ const VtoroyDomNatalnayKarta = () => {
                   <p className="text-lg font-semibold">Получите 3 моментальных отчёта бесплатно</p>
                   <p className="text-muted-foreground">Начните с готовых мини-результатов за пару минут</p>
                   <Button size="lg" asChild>
-                    <a href="/natal-chart-calculator">Получить 3 отчета</a>
+                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">Получить 3 отчета</a>
                   </Button>
                 </div>
               </CardContent>
