@@ -250,7 +250,7 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-8 lg:py-12 bg-muted/30">
+      <section id="services" className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <Badge variant="outline" className="border-primary/30 text-primary font-medium mb-4">
