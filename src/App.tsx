@@ -46,6 +46,7 @@ import MarsVDomahGoroskopa from "./pages/MarsVDomahGoroskopa";
 import BogatstvoVNatalnoyKarte from "./pages/BogatstvoVNatalnoyKarte";
 import MatricaSudbyDengiKarmaOtnosheniya from "./pages/MatricaSudbyDengiKarmaOtnosheniya";
 import BrakiIRazvodyvNatalnoyKarte from "./pages/BrakiIRazvodyvNatalnoyKarte";
+import KakVyitiIzMinusaVPlyus from "./pages/KakVyitiIzMinusaVPlyus";
 import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ const App = () => (
           <Route path="/bogatstvo-v-natalnoy-karte" element={<BogatstvoVNatalnoyKarte />} />
           <Route path="/matrica-sudby-dengi-karma-otnosheniya" element={<MatricaSudbyDengiKarmaOtnosheniya />} />
           <Route path="/braki-i-razvody-v-natalnoy-karte" element={<BrakiIRazvodyvNatalnoyKarte />} />
+          <Route path="/kak-vyiti-iz-minusa-v-plyus-po-arkanu" element={<KakVyitiIzMinusaVPlyus />} />
           <Route path="/12-dom-v-natalnoj-karte" element={<DvenadtsatyiDomGoroskopa />} />
           <Route path="/11-dom-v-natalnoj-karte" element={<OdinnadcatyiDomGoroskopa />} />
           <Route path="/10-dom-v-natalnoj-karte" element={<DesyatyiDomGoroskopa />} />
