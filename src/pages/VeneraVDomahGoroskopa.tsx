@@ -418,7 +418,7 @@ const VeneraVDomahGoroskopa = () => {
               Рассчитайте свою натальную карту и получите полную расшифровку Венеры в вашем гороскопе
             </p>
             <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 Рассчитать натальную карту
                 <Sparkles className="w-4 h-4 ml-2" />
               </a>

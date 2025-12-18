@@ -403,7 +403,7 @@ const DecemberEvents2025 = () => {
                 Начните с готовых мини-результатов за пару минут
               </p>
               <Button size="lg" className="shadow-lg" asChild>
-                <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчёта
                 </a>
               </Button>

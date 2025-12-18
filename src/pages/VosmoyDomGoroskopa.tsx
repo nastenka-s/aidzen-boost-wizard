@@ -413,7 +413,7 @@ const VosmoyDomGoroskopa = () => {
                     Начните с готовых мини-результатов за пару минут
                   </p>
                   <Button asChild size="lg" className="gap-2">
-                    <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                       Получить 3 отчёта
                       <ArrowRight className="w-4 h-4" />
                     </a>

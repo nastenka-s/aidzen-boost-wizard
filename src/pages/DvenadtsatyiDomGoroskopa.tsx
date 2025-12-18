@@ -495,7 +495,7 @@ const DvenadtsatyiDomGoroskopa = () => {
                   12 дом — сложная тема для самостоятельного анализа, ведь он про то, что вы не видите в себе. Наш бот поможет рассчитать карту и увидеть, какие темы требуют внимания.
                 </p>
                 <Button asChild size="lg" className="w-full sm:w-auto">
-                  <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                     Рассчитать натальную карту
                   </a>
                 </Button>

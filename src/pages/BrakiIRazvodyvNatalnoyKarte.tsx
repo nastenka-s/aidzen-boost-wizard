@@ -299,7 +299,9 @@ const BrakiIRazvodyvNatalnoyKarte = () => {
                 Получите 3 моментальных разбора бесплатно — начните с готовых результатов за пару минут
               </p>
               <a 
-                href="https://aidzen.ru" 
+                href="https://chat.aidzen.ru/login" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
                 Получить 3 отчета

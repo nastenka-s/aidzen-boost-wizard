@@ -418,7 +418,7 @@ const PyatyiDomGoroskopa = () => {
                   <h3 className="text-2xl font-bold mb-4">Получите 3 моментальных отчёта бесплатно</h3>
                   <p className="mb-6">Начните с готовых мини-результатов за пару минут</p>
                   <Button asChild size="lg">
-                    <Link to="/natal-chart-calculator">Получить 3 отчёта</Link>
+                    <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">Получить 3 отчёта</a>
                   </Button>
                 </CardContent>
               </Card>

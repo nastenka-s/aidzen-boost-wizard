@@ -121,7 +121,7 @@ const Synastry = () => {
               <li>✔ Получить рекомендации для укрепления отношений</li>
             </ul>
             <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground glow-yellow" asChild>
-              <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                 Рассчитать Совместимость
                 <Sparkles className="w-4 h-4 ml-2" />
               </a>

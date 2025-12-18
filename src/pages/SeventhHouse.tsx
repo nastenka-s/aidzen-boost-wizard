@@ -402,11 +402,11 @@ const SeventhHouse = () => {
                 <p className="mb-6 text-muted-foreground">
                   Начните с готовых результатов за пару минут
                 </p>
-                <Link to="/#services">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" className="w-full sm:w-auto">
                     Получить 3 отчёта
                   </Button>
-                </Link>
+                </a>
               </Card>
 
               <h2 className="text-3xl font-bold mt-12 mb-6">FAQ по 7 дому: как считать и как не загонять себя в страхи</h2>

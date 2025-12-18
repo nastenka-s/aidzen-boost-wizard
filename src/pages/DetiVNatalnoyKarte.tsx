@@ -302,7 +302,7 @@ const DetiVNatalnoyKarte = () => {
             </p>
             <div className="flex justify-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчета
                 </a>
               </Button>

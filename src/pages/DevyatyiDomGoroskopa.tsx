@@ -530,7 +530,7 @@ const DevyatyiDomGoroskopa = () => {
                   Начните с готовых мини-результатов за пару минут
                 </p>
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                  <a href="https://neurodzen.ru/natal" target="_blank" rel="noopener noreferrer">
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                     Получить 3 отчёта
                   </a>
                 </Button>

@@ -672,7 +672,7 @@ const NatalChartCalculator = () => {
                 Узнайте о своих талантах, отношениях, карьере и предназначении.
               </p>
               <Button className="bg-purple-700 hover:bg-purple-800 text-white" size="lg" asChild>
-                <a href="https://chat.aidzen.ru" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить полную расшифровку
                   <Sparkles className="w-4 h-4 ml-2" />
                 </a>

@@ -634,7 +634,7 @@ const DivorceInAstrology = () => {
                 Начните с готовых мини-результатов за пару минут
               </p>
               <Button size="lg" className="font-semibold" asChild>
-                <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                   Получить 3 отчёта
                 </a>
               </Button>
