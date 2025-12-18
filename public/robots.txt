@@ -1,7 +1,19 @@
+User-agent: *
+Allow: /
+
+# Disallow internal/technical pages
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow all crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: YandexBot
 Allow: /
 
 User-agent: Twitterbot
@@ -10,7 +22,11 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
 
+# Sitemap location
 Sitemap: https://aidzen.ru/sitemap.xml
+
+# Host directive for Yandex
+Host: https://aidzen.ru

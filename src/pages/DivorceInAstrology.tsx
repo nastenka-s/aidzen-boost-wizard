@@ -670,7 +670,7 @@ const DivorceInAstrology = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/marketingacceptance" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link to="/publicoffer" className="text-muted-foreground hover:text-primary transition-colors">
                     Публичная оферта
                   </Link>
                 </li>
