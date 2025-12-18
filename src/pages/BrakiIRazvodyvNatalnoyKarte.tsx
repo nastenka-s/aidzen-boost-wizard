@@ -197,37 +197,39 @@ const BrakiIRazvodyvNatalnoyKarte = () => {
 
             <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Ключевые показатели браков и разводов</h2>
             
-            <p>
-              Сигнал: сильный управитель седьмого дома без напряженных аспектов.<br />
-              Смысл: высокая способность к стабильному официальному союзу.<br />
-              Действие: осознанно выбирать партнера с совпадающими ценностями и целями.
-            </p>
-            
-            <p>
-              Сигнал: напряженные аспекты к управителю седьмого дома.<br />
-              Смысл: брак проходит через кризисы и требует пересмотра договоренностей.<br />
-              Действие: развивать навыки переговоров и фиксации ожиданий.
-            </p>
-            
-            <p>
-              Сигнал: планеты в седьмом доме с конфликтной природой.<br />
-              Смысл: партнерство становится зоной активных столкновений интересов.<br />
-              Действие: заранее обсуждать роли и границы в союзе.
-            </p>
-            
-            <p>
-              Сигнал: сильная Венера при слабом управителе седьмого дома.<br />
-              Смысл: высокий потенциал к отношениям без фокуса на официальное оформление.<br />
-              Действие: разделять эмоциональную близость и юридические обязательства.
-            </p>
-            
-            <p>
-              Сигнал: повторяющиеся напряженные аспекты между Венерой и Марсом.<br />
-              Смысл: цикличные конфликты, приводящие к разрывам или угрозе развода.<br />
-              Действие: работать с моделью конфликта, а не с конкретным партнером.
-            </p>
+            <div className="space-y-4 mt-6">
+              <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                <p className="text-foreground/90"><strong className="text-foreground">Сигнал:</strong> сильный управитель седьмого дома без напряженных аспектов.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Смысл:</strong> высокая способность к стабильному официальному союзу.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Действие:</strong> осознанно выбирать партнера с совпадающими ценностями и целями.</p>
+              </div>
+              
+              <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                <p className="text-foreground/90"><strong className="text-foreground">Сигнал:</strong> напряженные аспекты к управителю седьмого дома.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Смысл:</strong> брак проходит через кризисы и требует пересмотра договоренностей.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Действие:</strong> развивать навыки переговоров и фиксации ожиданий.</p>
+              </div>
+              
+              <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                <p className="text-foreground/90"><strong className="text-foreground">Сигнал:</strong> планеты в седьмом доме с конфликтной природой.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Смысл:</strong> партнерство становится зоной активных столкновений интересов.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Действие:</strong> заранее обсуждать роли и границы в союзе.</p>
+              </div>
+              
+              <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                <p className="text-foreground/90"><strong className="text-foreground">Сигнал:</strong> сильная Венера при слабом управителе седьмого дома.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Смысл:</strong> высокий потенциал к отношениям без фокуса на официальное оформление.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Действие:</strong> разделять эмоциональную близость и юридические обязательства.</p>
+              </div>
+              
+              <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                <p className="text-foreground/90"><strong className="text-foreground">Сигнал:</strong> повторяющиеся напряженные аспекты между Венерой и Марсом.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Смысл:</strong> цикличные конфликты, приводящие к разрывам или угрозе развода.</p>
+                <p className="text-foreground/90"><strong className="text-foreground">Действие:</strong> работать с моделью конфликта, а не с конкретным партнером.</p>
+              </div>
+            </div>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Типичные сценарии реализации</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-10 mb-4">Типичные сценарии реализации</h2>
             
             <p>
               Первый сценарий связан с ранним браком и последующим разводом. При активном седьмом доме и напряженных аспектах к его управителю человек легко вступает в союз, но сталкивается с кризисом ожиданий. Развод в этом случае становится формой корректировки жизненной стратегии, а не ошибкой.
@@ -237,7 +239,7 @@ const BrakiIRazvodyvNatalnoyKarte = () => {
               Второй сценарий проявляется через поздний или единственный брак. Сильный, но сдержанный управитель седьмого дома и ограниченное количество аспектов указывают на осторожный подход к союзам. Такой человек вступает в брак реже, но с большей осознанностью, что снижает вероятность развода.
             </p>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Когда показатели есть но результат не реализуется</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-10 mb-4">Когда показатели есть но результат не реализуется</h2>
             
             <p>
               Иногда карта показывает выраженный потенциал к браку, но он не реализуется. Причиной может быть социальная среда, личные убеждения или приоритет других сфер жизни. В таких случаях карта не противоречит реальности, а описывает возможность, которая не была выбрана.
@@ -247,7 +249,7 @@ const BrakiIRazvodyvNatalnoyKarte = () => {
               Бывает и обратная ситуация, когда напряженные показатели присутствуют, но развод не происходит. Это связано с компенсаторными факторами, такими как осознанная работа над отношениями, поддержка среды или общие цели партнеров. Натальная карта не отменяет свободу выбора.
             </p>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Риски и границы метода</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-10 mb-4">Риски и границы метода</h2>
             
             <p>
               Астрология не позволяет точно предсказать факт развода или дату его наступления. Ошибкой является принятие решений о браке или расставании только на основании натальной карты. Неверная интерпретация может привести к преждевременному разрыву или отказу от перспективного союза.
@@ -257,17 +259,20 @@ const BrakiIRazvodyvNatalnoyKarte = () => {
               Еще один риск связан с поиском количества браков по карте. Натальная карта не содержит счетчика союзов. Попытки определить точное число приводят к натяжкам и потере доверия к методу.
             </p>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Как использовать это на практике</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-10 mb-4">Как использовать это на практике</h2>
             
             <p>
               Используйте анализ седьмого дома для понимания своих ожиданий от брака. Сравнивайте показатели управителя седьмого дома с реальным поведением в отношениях. Обращайте внимание на повторяющиеся конфликтные сценарии, а не на отдельных партнеров. Разделяйте эмоциональные отношения и юридические обязательства. Проверяйте выводы через опыт и наблюдения. Используйте карту как инструмент анализа, а не как инструкцию к действию.
             </p>
             
-            <p>
-              Рекомендации: 1) Анализируйте брак через управитель седьмого дома и его аспекты. 2) Разделяйте потенциал союза и его реализацию. 3) Не принимайте решений о разводе только по карте.
-            </p>
+            <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
+              <p className="text-foreground font-medium mb-2">Рекомендации:</p>
+              <p className="text-foreground/90">1) Анализируйте брак через управитель седьмого дома и его аспекты.</p>
+              <p className="text-foreground/90">2) Разделяйте потенциал союза и его реализацию.</p>
+              <p className="text-foreground/90">3) Не принимайте решений о разводе только по карте.</p>
+            </div>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Выводы</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-10 mb-4">Выводы</h2>
             
             <p>
               Натальная карта показывает модель партнерства, а не судьбу брака. Это делает ее полезной для анализа, но требует аккуратного подхода.
@@ -289,39 +294,62 @@ const BrakiIRazvodyvNatalnoyKarte = () => {
               Практическая ценность астрологического анализа проявляется тогда, когда он используется для осознанных решений, а не для поиска фатальных ответов.
             </p>
 
-            <div className="my-8 p-6 bg-primary/10 rounded-lg border border-primary/20">
+            <div className="my-10 p-6 bg-gradient-to-r from-primary/20 to-primary/10 rounded-xl border border-primary/20">
               <p className="text-lg font-medium text-foreground mb-4">
                 Получите 3 моментальных разбора бесплатно — начните с готовых результатов за пару минут
               </p>
               <a 
-                href="/app" 
+                href="https://aidzen.ru" 
                 className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
                 Получить 3 отчета
               </a>
             </div>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">FAQ</h2>
+            {/* Related Articles Section */}
+            <div className="my-10 p-6 bg-muted/20 rounded-xl">
+              <h2 className="text-xl font-semibold text-foreground mb-4">Читайте также</h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Link to="/7-dom-goroskopa" className="block p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                  <h3 className="font-medium text-foreground mb-1">7 дом гороскопа</h3>
+                  <p className="text-sm text-muted-foreground">Брак, партнёрства и ваши «зеркала»</p>
+                </Link>
+                <Link to="/7-dom-v-natalnoj-karte-otnosheniya-i-razryvy" className="block p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                  <h3 className="font-medium text-foreground mb-1">7 дом в натальной карте</h3>
+                  <p className="text-sm text-muted-foreground">Отношения и разрывы</p>
+                </Link>
+                <Link to="/razvody-v-astrologii-gde-iskat" className="block p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                  <h3 className="font-medium text-foreground mb-1">Разводы в астрологии</h3>
+                  <p className="text-sm text-muted-foreground">Где искать в натальной карте</p>
+                </Link>
+                <Link to="/venera-v-domah-goroskopa" className="block p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
+                  <h3 className="font-medium text-foreground mb-1">Венера в домах гороскопа</h3>
+                  <p className="text-sm text-muted-foreground">Значение и влияние в натальной карте</p>
+                </Link>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-semibold text-foreground mt-10 mb-6">FAQ</h2>
             
-            <div className="space-y-6">
-              <div>
+            <div className="space-y-4">
+              <div className="p-4 bg-muted/20 rounded-lg">
                 <h3 className="text-lg font-medium text-foreground mb-2">Как считать показатели брака в натальной карте?</h3>
-                <p>Для анализа используется седьмой дом, его управитель, планеты в нем и аспекты к ключевым сигнификаторам отношений.</p>
+                <p className="text-foreground/90">Для анализа используется седьмой дом, его управитель, планеты в нем и аспекты к ключевым сигнификаторам отношений.</p>
               </div>
               
-              <div>
+              <div className="p-4 bg-muted/20 rounded-lg">
                 <h3 className="text-lg font-medium text-foreground mb-2">Что значит развод в натальной карте?</h3>
-                <p>Развод отражает кризис или завершение партнерского соглашения, а не обязательный конфликт или неудачу.</p>
+                <p className="text-foreground/90">Развод отражает кризис или завершение партнерского соглашения, а не обязательный конфликт или неудачу.</p>
               </div>
               
-              <div>
+              <div className="p-4 bg-muted/20 rounded-lg">
                 <h3 className="text-lg font-medium text-foreground mb-2">Какие риски есть при интерпретации браков и разводов?</h3>
-                <p>Основной риск связан с буквальным чтением карты и принятием жизненных решений без учета реальных обстоятельств.</p>
+                <p className="text-foreground/90">Основной риск связан с буквальным чтением карты и принятием жизненных решений без учета реальных обстоятельств.</p>
               </div>
               
-              <div>
+              <div className="p-4 bg-muted/20 rounded-lg">
                 <h3 className="text-lg font-medium text-foreground mb-2">Как отличить потенциал брака от его реализации?</h3>
-                <p>Потенциал описывает склонность и возможности, а реализация зависит от решений, среды и навыков взаимодействия.</p>
+                <p className="text-foreground/90">Потенциал описывает склонность и возможности, а реализация зависит от решений, среды и навыков взаимодействия.</p>
               </div>
             </div>
           </div>
