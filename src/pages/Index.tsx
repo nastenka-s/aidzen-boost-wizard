@@ -47,33 +47,39 @@ const Index = () => {
           content="астронумерология, астрологическая карта рождения, гороскоп карта, планеты в домах рассчитать, астральная карта, натальная карта онлайн бесплатно, гороскоп бесплатно, нумерология, рассчитать матрицу судьбы, астрология, натальная карта, астрологический прогноз, матрица судьбы, соляр, синастрия, совместимость, число судьбы, транзиты планет"
         />
         <link rel="canonical" href="https://aidzen.ru/" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="Астронумерология: Рассчитайте свой гороскоп онлайн | Нейродзен" />
-        <meta property="og:description" content="Создайте свою астрологическую карту рождения и узнайте о планетах в домах. Рассчитайте судьбу по дате рождения онлайн. Первые 3 расчета бесплатно." />
+        <meta
+          property="og:description"
+          content="Создайте свою астрологическую карту рождения и узнайте о планетах в домах. Рассчитайте судьбу по дате рождения онлайн. Первые 3 расчета бесплатно."
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://aidzen.ru/" />
         <meta property="og:site_name" content="НейроДзен" />
         <meta property="og:locale" content="ru_RU" />
-        
+
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Астронумерология: Рассчитайте свой гороскоп онлайн | Нейродзен" />
-        <meta name="twitter:description" content="Создайте свою астрологическую карту рождения и узнайте о планетах в домах. Первые 3 расчета бесплатно." />
-        
+        <meta
+          name="twitter:description"
+          content="Создайте свою астрологическую карту рождения и узнайте о планетах в домах. Первые 3 расчета бесплатно."
+        />
+
         {/* Schema.org */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "НейроДзен",
-            "url": "https://aidzen.ru/",
-            "description": "Эзотерический ИИ-помощник для астрологии и нумерологии",
-            "potentialAction": {
+            name: "НейроДзен",
+            url: "https://aidzen.ru/",
+            description: "Эзотерический ИИ-помощник для астрологии и нумерологии",
+            potentialAction: {
               "@type": "SearchAction",
-              "target": "https://aidzen.ru/blog?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
+              target: "https://aidzen.ru/blog?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
           })}
         </script>
       </Helmet>
@@ -135,7 +141,8 @@ const Index = () => {
 
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight tracking-tight">
-                  Астронумерология на каждый день — <span className="text-gradient">точные ответы на важные вопросы</span>
+                  Астронумерология на каждый день —{" "}
+                  <span className="text-gradient">точные ответы на важные вопросы</span>
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
                   Рассчитайте натальную карту, матрицу судьбы, астрологический прогноз, транзиты планет — ИИ обучен на
@@ -473,7 +480,7 @@ const Index = () => {
               <div className="space-y-6">
                 <div className="text-center space-y-2">
                   <h3 className="text-3xl font-bold text-foreground">БЕЗЛИМИТ НА МЕСЯЦ</h3>
-                  <div className="text-5xl font-bold text-secondary">1299₽</div>
+                  <div className="text-5xl font-bold text-secondary">1599₽</div>
                 </div>
                 <ul className="space-y-3 text-base">
                   <li className="flex items-start gap-3">
