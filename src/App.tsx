@@ -48,6 +48,7 @@ import MatricaSudbyDengiKarmaOtnosheniya from "./pages/MatricaSudbyDengiKarmaOtn
 import BrakiIRazvodyvNatalnoyKarte from "./pages/BrakiIRazvodyvNatalnoyKarte";
 import KakVyitiIzMinusaVPlyus from "./pages/KakVyitiIzMinusaVPlyus";
 import KakVychislitSvoy4Dom from "./pages/KakVychislitSvoy4Dom";
+import Neurozen from "./pages/Neurozen";
 import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/braki-i-razvody-v-natalnoy-karte" element={<BrakiIRazvodyvNatalnoyKarte />} />
           <Route path="/kak-vyiti-iz-minusa-v-plyus-po-arkanu" element={<KakVyitiIzMinusaVPlyus />} />
           <Route path="/kak-vychislit-svoy-4-dom" element={<KakVychislitSvoy4Dom />} />
+          <Route path="/neurozen" element={<Neurozen />} />
           <Route path="/12-dom-v-natalnoj-karte" element={<DvenadtsatyiDomGoroskopa />} />
           <Route path="/11-dom-v-natalnoj-karte" element={<OdinnadcatyiDomGoroskopa />} />
           <Route path="/10-dom-v-natalnoj-karte" element={<DesyatyiDomGoroskopa />} />

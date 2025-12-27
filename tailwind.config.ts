@@ -62,6 +62,14 @@ export default {
           dark: "hsl(var(--mystical-dark))",
           yellow: "hsl(var(--mystical-yellow))",
         },
+        neurozen: {
+          bg: "hsl(var(--neurozen-bg))",
+          deep: "hsl(var(--neurozen-deep))",
+          text: "hsl(var(--neurozen-text))",
+          muted: "hsl(var(--neurozen-muted))",
+          lavender: "hsl(var(--neurozen-lavender))",
+          gold: "hsl(var(--neurozen-gold))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
