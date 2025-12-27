@@ -91,19 +91,30 @@ const Neurozen = () => {
           </div>
         </section>
 
-        {/* CTA Block 1 */}
-        <section className="py-16 px-6 bg-gradient-to-b from-neurozen-bg to-neurozen-deep/30">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-neurozen-lavender text-lg mb-4">→</p>
-            <a
-              href="/tranzity-k-natalnoj-karte-i-ih-vliyanie"
-              className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light"
-            >
-              Понять, в каком периоде жизни я сейчас
-            </a>
-            <p className="text-neurozen-muted/60 text-sm mt-3 font-light">
-              Астрологические транзиты и жизненные циклы — входит в безлимит
-            </p>
+        {/* CTA Block 1 with Transits Screenshot */}
+        <section className="py-16 md:py-24 px-6 bg-gradient-to-b from-neurozen-bg to-neurozen-deep/30">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1 text-center md:text-left">
+                <p className="text-neurozen-lavender text-lg mb-4">→</p>
+                <a
+                  href="/tranzity-k-natalnoj-karte-i-ih-vliyanie"
+                  className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light"
+                >
+                  Понять, в каком периоде жизни я сейчас
+                </a>
+                <p className="text-neurozen-muted/60 text-sm mt-3 font-light">
+                  Астрологические транзиты и жизненные циклы — входит в безлимит
+                </p>
+              </div>
+              <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
+                <img 
+                  src={transitsScreen} 
+                  alt="Астрологические транзиты и рекомендации" 
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -156,21 +167,32 @@ const Neurozen = () => {
           </div>
         </section>
 
-        {/* Story Section 3 */}
+        {/* Story Section 3 with Matrix Screenshot */}
         <section className="py-24 md:py-32 px-6">
-          <div className="max-w-2xl mx-auto">
-            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
-              Понять, в каком жизненном периоде ты находишься,
-            </p>
-            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
-              какие сценарии ты проживаешь,
-            </p>
-            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
-              какие кармические задачи сейчас активны
-            </p>
-            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
-              и где у тебя есть возможность начать действовать иначе.
-            </p>
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-12">
+              <div className="flex-1">
+                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
+                  Понять, в каком жизненном периоде ты находишься,
+                </p>
+                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
+                  какие сценарии ты проживаешь,
+                </p>
+                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
+                  какие кармические задачи сейчас активны
+                </p>
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
+                  и где у тебя есть возможность начать действовать иначе.
+                </p>
+              </div>
+              <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
+                <img 
+                  src={matrixScreen} 
+                  alt="Матрица Судьбы — кармические задачи" 
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -236,83 +258,50 @@ const Neurozen = () => {
           </div>
         </section>
 
-        {/* What Neurozen Does */}
+        {/* What Neurozen Does with Events Screenshot */}
         <section className="py-24 md:py-32 px-6">
-          <div className="max-w-2xl mx-auto">
-            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light mb-12">
-              Нейродзен помогает увидеть,
-            </p>
-            <div className="space-y-6 text-lg md:text-xl text-neurozen-muted/80 font-light mb-8">
-              <p>в каком периоде ты живёшь прямо сейчас,</p>
-              <p>какие темы выходят на первый план,</p>
-              <p>где лучше не торопиться,</p>
-              <p>а где, наоборот, важно не упустить момент.</p>
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1">
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light mb-12">
+                  Нейродзен помогает увидеть,
+                </p>
+                <div className="space-y-6 text-lg md:text-xl text-neurozen-muted/80 font-light mb-8">
+                  <p>в каком периоде ты живёшь прямо сейчас,</p>
+                  <p>какие темы выходят на первый план,</p>
+                  <p>где лучше не торопиться,</p>
+                  <p>а где, наоборот, важно не упустить момент.</p>
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
+                <img 
+                  src={eventsScreen} 
+                  alt="Хронология событий года" 
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Service Screenshots Gallery */}
-        <section className="py-24 md:py-32 px-6 bg-neurozen-deep/30">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-center text-xl md:text-2xl text-neurozen-muted font-light mb-16">
-              Как это выглядит внутри
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-              {/* Matrix Screenshot */}
-              <div className="group">
-                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
-                  <img 
-                    src={matrixScreen} 
-                    alt="Матрица Судьбы — анализ кармических задач" 
-                    className="w-full h-auto"
-                  />
-                </div>
-                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
-                  Матрица Судьбы — кармические задачи и родовые линии
+        {/* Relocation Section */}
+        <section className="py-24 md:py-32 px-6 bg-neurozen-deep/20">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-12">
+              <div className="flex-1 text-center md:text-left">
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-muted font-light mb-6">
+                  Анализ релокации
+                </p>
+                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/70 font-light">
+                  Сравнение городов и их влияния на вашу натальную карту
                 </p>
               </div>
-
-              {/* Transits Screenshot */}
-              <div className="group">
-                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
-                  <img 
-                    src={transitsScreen} 
-                    alt="Астрологические транзиты и рекомендации" 
-                    className="w-full h-auto"
-                  />
-                </div>
-                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
-                  Транзиты — практичные шаги и окна возможностей
-                </p>
-              </div>
-
-              {/* Events Screenshot */}
-              <div className="group">
-                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
-                  <img 
-                    src={eventsScreen} 
-                    alt="Хронология событий года" 
-                    className="w-full h-auto"
-                  />
-                </div>
-                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
-                  Формулы событий — хронология года
-                </p>
-              </div>
-
-              {/* Relocation Screenshot */}
-              <div className="group">
-                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
-                  <img 
-                    src={relocationScreen} 
-                    alt="Анализ релокации по городам" 
-                    className="w-full h-auto"
-                  />
-                </div>
-                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
-                  Анализ релокации — сравнение городов
-                </p>
+              <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
+                <img 
+                  src={relocationScreen} 
+                  alt="Анализ релокации по городам" 
+                  className="w-full h-auto"
+                />
               </div>
             </div>
           </div>
