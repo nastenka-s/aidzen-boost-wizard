@@ -36,6 +36,14 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Neurozen palette */
+    --neurozen-bg: 270 30% 8%;
+    --neurozen-deep: 270 35% 12%;
+    --neurozen-text: 270 10% 95%;
+    --neurozen-muted: 270 15% 75%;
+    --neurozen-lavender: 270 50% 70%;
+    --neurozen-gold: 42 70% 55%;
   }
 
   .dark {
