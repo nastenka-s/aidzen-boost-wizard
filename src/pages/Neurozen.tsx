@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet";
+import founderImage1 from "@/assets/neurozen-founder-1.png";
+import founderImage2 from "@/assets/neurozen-founder-2.png";
 
 const Neurozen = () => {
   return (
@@ -114,10 +116,19 @@ const Neurozen = () => {
               Иногда тратим на это большие деньги — в надежде получить конкретный прогноз и ясность.
             </p>
             
-            <div className="border-l-2 border-neurozen-lavender/30 pl-8 py-4 my-16">
-              <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light italic">
-                Как человек с большим опытом в эзотерических практиках, могу сказать честно: в большинстве случаев это не работает.
-              </p>
+            <div className="flex flex-col md:flex-row items-center gap-8 my-16">
+              <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-neurozen-lavender/20 flex-shrink-0">
+                <img 
+                  src={founderImage1} 
+                  alt="Основательница Нейродзен" 
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="border-l-2 border-neurozen-lavender/30 pl-8 py-4">
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light italic">
+                  Как человек с большим опытом в эзотерических практиках, могу сказать честно: в большинстве случаев это не работает.
+                </p>
+              </div>
             </div>
 
             <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">
@@ -177,13 +188,24 @@ const Neurozen = () => {
 
         {/* Origin Story */}
         <section className="py-24 md:py-32 px-6 bg-gradient-to-b from-neurozen-deep/10 to-neurozen-bg">
-          <div className="max-w-2xl mx-auto">
-            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">
-              Когда я сама оказалась в сложном жизненном периоде, стало очевидно:
-            </p>
-            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light mb-16">
-              мне не нужны абстрактные обещания и красивые формулировки. Мне нужна ясность.
-            </p>
+          <div className="max-w-3xl mx-auto">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-12 mb-16">
+              <div className="w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden border border-neurozen-lavender/20 flex-shrink-0 shadow-2xl shadow-neurozen-lavender/10">
+                <img 
+                  src={founderImage2} 
+                  alt="Основательница Нейродзен" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
+                  Когда я сама оказалась в сложном жизненном периоде, стало очевидно:
+                </p>
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
+                  мне не нужны абстрактные обещания и красивые формулировки. Мне нужна ясность.
+                </p>
+              </div>
+            </div>
             
             <div className="py-16 text-center">
               <p className="text-3xl md:text-4xl lg:text-5xl text-neurozen-lavender font-light tracking-wide">
