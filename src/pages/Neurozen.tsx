@@ -1,6 +1,10 @@
 import { Helmet } from "react-helmet";
 import founderImage1 from "@/assets/neurozen-founder-1.png";
 import founderImage2 from "@/assets/neurozen-founder-2.png";
+import matrixScreen from "@/assets/neurozen-matrix.png";
+import eventsScreen from "@/assets/neurozen-events.png";
+import relocationScreen from "@/assets/neurozen-relocation.png";
+import transitsScreen from "@/assets/neurozen-transits.png";
 
 const Neurozen = () => {
   return (
@@ -243,6 +247,73 @@ const Neurozen = () => {
               <p>какие темы выходят на первый план,</p>
               <p>где лучше не торопиться,</p>
               <p>а где, наоборот, важно не упустить момент.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Service Screenshots Gallery */}
+        <section className="py-24 md:py-32 px-6 bg-neurozen-deep/30">
+          <div className="max-w-6xl mx-auto">
+            <p className="text-center text-xl md:text-2xl text-neurozen-muted font-light mb-16">
+              Как это выглядит внутри
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              {/* Matrix Screenshot */}
+              <div className="group">
+                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
+                  <img 
+                    src={matrixScreen} 
+                    alt="Матрица Судьбы — анализ кармических задач" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
+                  Матрица Судьбы — кармические задачи и родовые линии
+                </p>
+              </div>
+
+              {/* Transits Screenshot */}
+              <div className="group">
+                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
+                  <img 
+                    src={transitsScreen} 
+                    alt="Астрологические транзиты и рекомендации" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
+                  Транзиты — практичные шаги и окна возможностей
+                </p>
+              </div>
+
+              {/* Events Screenshot */}
+              <div className="group">
+                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
+                  <img 
+                    src={eventsScreen} 
+                    alt="Хронология событий года" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
+                  Формулы событий — хронология года
+                </p>
+              </div>
+
+              {/* Relocation Screenshot */}
+              <div className="group">
+                <div className="rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50 transition-transform duration-500 group-hover:scale-[1.02]">
+                  <img 
+                    src={relocationScreen} 
+                    alt="Анализ релокации по городам" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-center text-neurozen-muted/60 text-sm mt-4 font-light">
+                  Анализ релокации — сравнение городов
+                </p>
+              </div>
             </div>
           </div>
         </section>
