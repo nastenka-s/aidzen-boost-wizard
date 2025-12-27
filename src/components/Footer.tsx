@@ -7,13 +7,31 @@ export const Footer = () => {
   return (
     <footer className="border-t border-border/40 py-12">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
               <img src={logo} alt="НейроДзен" className="w-10 h-10" />
               <span className="text-lg font-semibold">НЕЙРОДЗЕН</span>
             </Link>
             <p className="text-sm text-muted-foreground">Ваш персональный ИИ-наставник по эзотерике</p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="font-semibold">О проекте</h3>
+            <div className="space-y-2 text-sm">
+              <Link
+                to="/neurozen"
+                className="block text-muted-foreground hover:text-primary transition-colors"
+              >
+                О Нейродзен
+              </Link>
+              <Link
+                to="/blog"
+                className="block text-muted-foreground hover:text-primary transition-colors"
+              >
+                Блог
+              </Link>
+            </div>
           </div>
 
           <div className="space-y-4">
