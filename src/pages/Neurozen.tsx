@@ -71,7 +71,7 @@ const Neurozen = () => {
         </section>
 
         {/* Story Section 1 */}
-        <section className="py-24 md:py-32 px-6">
+        <section className="py-16 md:py-20 px-6">
           <div className="max-w-2xl mx-auto">
             <p className="text-xl md:text-2xl leading-relaxed text-neurozen-muted font-light mb-12">
               Иногда наступает момент, когда жизнь будто выходит из-под контроля.
@@ -92,7 +92,7 @@ const Neurozen = () => {
         </section>
 
         {/* CTA Block 1 with Transits Screenshot */}
-        <section className="py-16 md:py-24 px-6 bg-gradient-to-b from-neurozen-bg to-neurozen-deep/30">
+        <section className="py-12 md:py-16 px-6 bg-gradient-to-b from-neurozen-bg to-neurozen-deep/30">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1 text-center md:text-left">
@@ -119,7 +119,7 @@ const Neurozen = () => {
         </section>
 
         {/* Story Section 2 */}
-        <section className="py-24 md:py-32 px-6 bg-neurozen-deep/20">
+        <section className="py-16 md:py-20 px-6 bg-neurozen-deep/20">
           <div className="max-w-2xl mx-auto">
             <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">
               Мы начинаем искать ответы.
@@ -156,7 +156,7 @@ const Neurozen = () => {
         </section>
 
         {/* Key Insight */}
-        <section className="py-32 md:py-40 px-6 bg-gradient-to-b from-neurozen-deep/20 to-neurozen-bg">
+        <section className="py-20 md:py-24 px-6 bg-gradient-to-b from-neurozen-deep/20 to-neurozen-bg">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-neurozen-text font-light mb-12">
               Единственное, что действительно меняет жизнь, —
@@ -168,7 +168,7 @@ const Neurozen = () => {
         </section>
 
         {/* Story Section 3 with Matrix Screenshot */}
-        <section className="py-24 md:py-32 px-6">
+        <section className="py-16 md:py-20 px-6">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row-reverse items-center gap-12">
               <div className="flex-1">
@@ -197,7 +197,7 @@ const Neurozen = () => {
         </section>
 
         {/* CTA Block 2 */}
-        <section className="py-16 px-6 bg-neurozen-deep/10">
+        <section className="py-12 px-6 bg-neurozen-deep/10">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-neurozen-lavender text-lg mb-4">→</p>
             <a
@@ -213,7 +213,7 @@ const Neurozen = () => {
         </section>
 
         {/* Origin Story */}
-        <section className="py-24 md:py-32 px-6 bg-gradient-to-b from-neurozen-deep/10 to-neurozen-bg">
+        <section className="py-16 md:py-20 px-6 bg-gradient-to-b from-neurozen-deep/10 to-neurozen-bg">
           <div className="max-w-3xl mx-auto">
             <div className="flex flex-col md:flex-row-reverse items-center gap-12 mb-16">
               <div className="w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden border border-neurozen-lavender/20 flex-shrink-0 shadow-2xl shadow-neurozen-lavender/10">
@@ -242,7 +242,7 @@ const Neurozen = () => {
         </section>
 
         {/* What is Neurozen */}
-        <section className="py-24 md:py-32 px-6 bg-neurozen-deep/20">
+        <section className="py-16 md:py-20 px-6 bg-neurozen-deep/20">
           <div className="max-w-2xl mx-auto">
             <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">
               Он родился как попытка собрать в одном месте то, чего всегда не хватало:
@@ -259,7 +259,7 @@ const Neurozen = () => {
         </section>
 
         {/* What Neurozen Does with Events Screenshot */}
-        <section className="py-24 md:py-32 px-6">
+        <section className="py-16 md:py-20 px-6">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1">
@@ -285,7 +285,7 @@ const Neurozen = () => {
         </section>
 
         {/* Relocation Section */}
-        <section className="py-24 md:py-32 px-6 bg-neurozen-deep/20">
+        <section className="py-16 md:py-20 px-6 bg-neurozen-deep/20">
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row-reverse items-center gap-12">
               <div className="flex-1 text-center md:text-left">
@@ -308,7 +308,7 @@ const Neurozen = () => {
         </section>
 
         {/* CTA Block 3 */}
-        <section className="py-16 px-6 bg-neurozen-deep/10">
+        <section className="py-12 px-6 bg-neurozen-deep/10">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-neurozen-lavender text-lg mb-4">→</p>
             <a
@@ -324,7 +324,7 @@ const Neurozen = () => {
         </section>
 
         {/* Wisdom Section */}
-        <section className="py-32 md:py-40 px-6 bg-gradient-to-b from-neurozen-deep/10 to-neurozen-bg">
+        <section className="py-20 md:py-24 px-6 bg-gradient-to-b from-neurozen-deep/10 to-neurozen-bg">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xl md:text-2xl leading-relaxed text-neurozen-muted font-light mb-12">
               Многие думают, что проблемы — это ошибки.
@@ -336,7 +336,7 @@ const Neurozen = () => {
         </section>
 
         {/* Resolution */}
-        <section className="py-24 md:py-32 px-6">
+        <section className="py-16 md:py-20 px-6">
           <div className="max-w-2xl mx-auto">
             <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light mb-12">
               Когда ты видишь свой текущий цикл, многое внутри успокаивается.
@@ -351,7 +351,7 @@ const Neurozen = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="py-32 md:py-40 px-6 bg-gradient-to-b from-neurozen-bg via-neurozen-deep/30 to-neurozen-deep/50">
+        <section className="py-20 md:py-24 px-6 bg-gradient-to-b from-neurozen-bg via-neurozen-deep/30 to-neurozen-deep/50">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-neurozen-lavender text-lg mb-6">→</p>
             <a
@@ -367,7 +367,7 @@ const Neurozen = () => {
         </section>
 
         {/* Closing */}
-        <section className="py-24 px-6 bg-neurozen-deep/50">
+        <section className="py-16 px-6 bg-neurozen-deep/50">
           <div className="max-w-2xl mx-auto text-center">
             <div className="border border-neurozen-lavender/20 rounded-2xl p-12 bg-neurozen-bg/5 backdrop-blur-sm">
               <p className="text-lg md:text-xl text-neurozen-muted/80 font-light leading-relaxed italic">
