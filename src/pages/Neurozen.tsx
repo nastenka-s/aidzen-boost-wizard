@@ -5,10 +5,8 @@ import matrixScreen from "@/assets/neurozen-matrix.png";
 import eventsScreen from "@/assets/neurozen-events.png";
 import relocationScreen from "@/assets/neurozen-relocation.png";
 import transitsScreen from "@/assets/neurozen-transits.png";
-
 const Neurozen = () => {
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Нейродзен — Твоя жизнь. Твой код.</title>
         <meta name="description" content="Честные ответы на важные вопросы через астрологию и нумерологию. Персональные разборы, транзиты, жизненные циклы." />
@@ -26,18 +24,12 @@ const Neurozen = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-neurozen-deep via-neurozen-bg to-neurozen-bg">
             {/* Stars effect */}
             <div className="absolute inset-0 opacity-30">
-              {[...Array(50)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-1 h-1 bg-neurozen-lavender rounded-full animate-pulse"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 3}s`,
-                    animationDuration: `${2 + Math.random() * 3}s`,
-                  }}
-                />
-              ))}
+              {[...Array(50)].map((_, i) => <div key={i} className="absolute w-1 h-1 bg-neurozen-lavender rounded-full animate-pulse" style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }} />)}
             </div>
             {/* Orbital lines */}
             <div className="absolute inset-0 flex items-center justify-center">
@@ -54,10 +46,7 @@ const Neurozen = () => {
             <p className="text-xl md:text-2xl text-neurozen-muted font-light max-w-2xl mx-auto mb-16 leading-relaxed">
               Честные ответы на важные вопросы через астрологию и нумерологию.
             </p>
-            <a
-              href="/natal-chart-calculator"
-              className="inline-block px-8 py-4 bg-neurozen-lavender/20 border border-neurozen-lavender/40 text-neurozen-text rounded-full hover:bg-neurozen-lavender/30 transition-all duration-500 text-lg font-light tracking-wide"
-            >
+            <a href="/natal-chart-calculator" className="inline-block px-8 py-4 bg-neurozen-lavender/20 border border-neurozen-lavender/40 text-neurozen-text rounded-full hover:bg-neurozen-lavender/30 transition-all duration-500 text-lg font-light tracking-wide">
               Начать с бесплатной натальной карты
             </a>
           </div>
@@ -82,12 +71,8 @@ const Neurozen = () => {
             <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
               У кого-то внешне всё хорошо, но внутри — ощущение пустоты.
             </p>
-            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">
-              А у кого-то жизнь буквально рушится, и появляется острое чувство, что ты потерял свой путь.
-            </p>
-            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
-              В такие моменты больше всего хочется понять: что со мной происходит и что делать дальше.
-            </p>
+            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">У кого-то жизнь рушится - потери, разводы, проблемы с деньгами и появляется острое чувство, что ты потерял свой путь.</p>
+            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">В такие моменты больше всего хочется понять: что со мной происходит, почему, и что делать дальше. </p>
           </div>
         </section>
 
@@ -97,10 +82,7 @@ const Neurozen = () => {
             <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1 text-center md:text-left">
                 <p className="text-neurozen-lavender text-lg mb-4">→</p>
-                <a
-                  href="/tranzity-k-natalnoj-karte-i-ih-vliyanie"
-                  className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light"
-                >
+                <a href="/tranzity-k-natalnoj-karte-i-ih-vliyanie" className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light">
                   Понять, в каком периоде жизни я сейчас
                 </a>
                 <p className="text-neurozen-muted/60 text-sm mt-3 font-light">
@@ -108,11 +90,7 @@ const Neurozen = () => {
                 </p>
               </div>
               <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
-                <img 
-                  src={transitsScreen} 
-                  alt="Астрологические транзиты и рекомендации" 
-                  className="w-full h-auto"
-                />
+                <img src={transitsScreen} alt="Астрологические транзиты и рекомендации" className="w-full h-auto" />
               </div>
             </div>
           </div>
@@ -133,25 +111,15 @@ const Neurozen = () => {
             
             <div className="flex flex-col md:flex-row items-center gap-8 my-16">
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-neurozen-lavender/20 flex-shrink-0">
-                <img 
-                  src={founderImage1} 
-                  alt="Основательница Нейродзен" 
-                  className="w-full h-full object-cover object-top"
-                />
+                <img src={founderImage1} alt="Основательница Нейродзен" className="w-full h-full object-cover object-top" />
               </div>
               <div className="border-l-2 border-neurozen-lavender/30 pl-8 py-4">
-                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light italic">
-                  Как человек с большим опытом в эзотерических практиках, могу сказать честно: в большинстве случаев это не работает.
-                </p>
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light italic">Как человек с большим опытом в эзотерических практиках, могу сказать точно: в большинстве случаев это не работает.</p>
               </div>
             </div>
 
-            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">
-              Не потому, что «эзотерика плохая»,
-            </p>
-            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
-              а потому что чужие интерпретации редко дают опору.
-            </p>
+            <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-12">Не потому, что эзотерика не работает,</p>
+            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">а потому что чужие интерпретации твоей жизни и твоих программ редко правильные. Никто не видит будущее на 100%. </p>
           </div>
         </section>
 
@@ -172,9 +140,7 @@ const Neurozen = () => {
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row-reverse items-center gap-12">
               <div className="flex-1">
-                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
-                  Понять, в каком жизненном периоде ты находишься,
-                </p>
+                <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">Понять, какие программы заложены от рождения, в каком жизненном периоде ты находишься,</p>
                 <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
                   какие сценарии ты проживаешь,
                 </p>
@@ -186,11 +152,7 @@ const Neurozen = () => {
                 </p>
               </div>
               <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
-                <img 
-                  src={matrixScreen} 
-                  alt="Матрица Судьбы — кармические задачи" 
-                  className="w-full h-auto"
-                />
+                <img src={matrixScreen} alt="Матрица Судьбы — кармические задачи" className="w-full h-auto" />
               </div>
             </div>
           </div>
@@ -200,15 +162,11 @@ const Neurozen = () => {
         <section className="py-12 px-6 bg-neurozen-deep/10">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-neurozen-lavender text-lg mb-4">→</p>
-            <a
-              href="/natalchart"
-              className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light"
-            >
+            <a href="/natalchart" className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light">
               Увидеть свой жизненный цикл и ключевые темы
             </a>
             <p className="text-neurozen-muted/60 text-sm mt-3 font-light">
-              Астрология — входит в безлимит
-            </p>
+          </p>
           </div>
         </section>
 
@@ -217,19 +175,13 @@ const Neurozen = () => {
           <div className="max-w-3xl mx-auto">
             <div className="flex flex-col md:flex-row-reverse items-center gap-12 mb-16">
               <div className="w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden border border-neurozen-lavender/20 flex-shrink-0 shadow-2xl shadow-neurozen-lavender/10">
-                <img 
-                  src={founderImage2} 
-                  alt="Основательница Нейродзен" 
-                  className="w-full h-full object-cover"
-                />
+                <img src={founderImage2} alt="Основательница Нейродзен" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
                 <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/80 font-light mb-8">
                   Когда я сама оказалась в сложном жизненном периоде, стало очевидно:
                 </p>
-                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
-                  мне не нужны абстрактные обещания и красивые формулировки. Мне нужна ясность.
-                </p>
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">мне не нужны абстрактные обещания и красивые формулировки. Мне нужна ясность. </p>
               </div>
             </div>
             
@@ -252,9 +204,7 @@ const Neurozen = () => {
               <p>нумерологические закономерности,</p>
               <p>реальные жизненные циклы</p>
             </div>
-            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">
-              и современный интеллект, который способен связать всё это и объяснить простым, человеческим языком.
-            </p>
+            <p className="text-xl md:text-2xl leading-relaxed text-neurozen-text font-light">и современный интеллект, который способен связать всё это и объяснить простым, человеческим языком, не пытаясь продавать дорогие курсы.</p>
           </div>
         </section>
 
@@ -274,11 +224,7 @@ const Neurozen = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
-                <img 
-                  src={eventsScreen} 
-                  alt="Хронология событий года" 
-                  className="w-full h-auto"
-                />
+                <img src={eventsScreen} alt="Хронология событий года" className="w-full h-auto" />
               </div>
             </div>
           </div>
@@ -289,19 +235,14 @@ const Neurozen = () => {
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row-reverse items-center gap-12">
               <div className="flex-1 text-center md:text-left">
-                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-muted font-light mb-6">
-                  Анализ релокации
-                </p>
+                <p className="text-xl md:text-2xl leading-relaxed text-neurozen-muted font-light mb-6">А может лучше переехать? Может твой город - совсем не твой.
+              </p>
                 <p className="text-lg md:text-xl leading-relaxed text-neurozen-muted/70 font-light">
                   Сравнение городов и их влияния на вашу натальную карту
                 </p>
               </div>
               <div className="w-full md:w-1/2 rounded-2xl overflow-hidden border border-neurozen-lavender/20 shadow-2xl shadow-neurozen-deep/50">
-                <img 
-                  src={relocationScreen} 
-                  alt="Анализ релокации по городам" 
-                  className="w-full h-auto"
-                />
+                <img src={relocationScreen} alt="Анализ релокации по городам" className="w-full h-auto" />
               </div>
             </div>
           </div>
@@ -311,10 +252,7 @@ const Neurozen = () => {
         <section className="py-12 px-6 bg-neurozen-deep/10">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-neurozen-lavender text-lg mb-4">→</p>
-            <a
-              href="/formuladushi"
-              className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light"
-            >
+            <a href="/formuladushi" className="text-xl md:text-2xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light">
               Получить персональный разбор текущего периода
             </a>
             <p className="text-neurozen-muted/60 text-sm mt-3 font-light">
@@ -344,9 +282,7 @@ const Neurozen = () => {
             <p className="text-xl md:text-2xl leading-relaxed text-neurozen-muted font-light mb-12">
               Появляется ощущение опоры.
             </p>
-            <p className="text-2xl md:text-3xl leading-relaxed text-neurozen-lavender font-light">
-              Ты просто проходишь свой этап.
-            </p>
+            <p className="text-2xl md:text-3xl leading-relaxed text-neurozen-lavender font-light">Ты просто проходишь свой этап. Его можно пройти в плюс, и выйти на новый уровень, а можно в минус и потерять себя. </p>
           </div>
         </section>
 
@@ -354,10 +290,7 @@ const Neurozen = () => {
         <section className="py-20 md:py-24 px-6 bg-gradient-to-b from-neurozen-bg via-neurozen-deep/30 to-neurozen-deep/50">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-neurozen-lavender text-lg mb-6">→</p>
-            <a
-              href="/natal-chart-calculator"
-              className="inline-block text-2xl md:text-3xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light mb-4"
-            >
+            <a href="/natal-chart-calculator" className="inline-block text-2xl md:text-3xl text-neurozen-lavender hover:text-neurozen-gold transition-colors duration-300 font-light mb-4">
               Начать с бесплатной натальной карты
             </a>
             <p className="text-neurozen-muted/60 text-sm font-light">
@@ -370,11 +303,7 @@ const Neurozen = () => {
         <section className="py-16 px-6 bg-neurozen-deep/50">
           <div className="max-w-2xl mx-auto text-center">
             <div className="border border-neurozen-lavender/20 rounded-2xl p-12 bg-neurozen-bg/5 backdrop-blur-sm">
-              <p className="text-lg md:text-xl text-neurozen-muted/80 font-light leading-relaxed italic">
-                «Здесь не продают.<br />
-                Здесь понимают.<br />
-                Здесь можно спокойно разобраться.»
-              </p>
+              
             </div>
           </div>
         </section>
@@ -391,8 +320,6 @@ const Neurozen = () => {
           </div>
         </footer>
       </div>
-    </>
-  );
+    </>;
 };
-
 export default Neurozen;
