@@ -480,7 +480,7 @@ const Index = () => {
               <div className="space-y-6">
                 <div className="text-center space-y-2">
                   <h3 className="text-3xl font-bold text-foreground">БЕЗЛИМИТ НА МЕСЯЦ</h3>
-                  <div className="text-5xl font-bold text-secondary">1599₽</div>
+                  <div className="text-5xl font-bold text-secondary">1399₽</div>
                 </div>
                 <ul className="space-y-3 text-base">
                   <li className="flex items-start gap-3">
