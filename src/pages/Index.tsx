@@ -233,7 +233,7 @@ const Index = () => {
                   <Sparkles className="w-5 h-5 text-secondary" />
                   <span className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
                 </div>
-                <span className="text-sm font-medium">Добавлен новый расчет - Каббала - Путь Души</span>
+                <span className="text-sm font-medium">Добавлен новый расчет - Личный Трейдинг Календарь</span>
               </div>
             </div>
 
