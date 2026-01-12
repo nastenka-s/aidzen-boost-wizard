@@ -208,11 +208,11 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground text-center">
                       Используйте, где привычнее — браузер, приложение или Телеграм бот
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-row gap-2 justify-center">
                       <Button
-                        size="lg"
+                        size="sm"
                         variant="outline"
-                        className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="flex-1 text-xs px-2 py-3 h-auto border-primary/30 font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                         asChild
                       >
                         <a
@@ -220,14 +220,14 @@ const Index = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <Globe className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                          Онлайн версия
+                          <Globe className="w-4 h-4 mr-1" />
+                          Онлайн
                         </a>
                       </Button>
                       <Button
-                        size="lg"
+                        size="sm"
                         variant="outline"
-                        className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="flex-1 text-xs px-2 py-3 h-auto border-primary/30 font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                         asChild
                       >
                         <a
@@ -235,19 +235,19 @@ const Index = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                          <Smartphone className="w-4 h-4 mr-1" />
                           RuStore
                         </a>
                       </Button>
                       <Button
-                        size="lg"
+                        size="sm"
                         variant="outline"
-                        className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="flex-1 text-xs px-2 py-3 h-auto border-primary/30 font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                         asChild
                       >
                         <a href="https://t.me/matricasudbyaibot" target="_blank" rel="noopener noreferrer">
-                          <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                          Telegram бот
+                          <Send className="w-4 h-4 mr-1" />
+                          Telegram
                         </a>
                       </Button>
                     </div>
