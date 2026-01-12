@@ -204,7 +204,7 @@ const Index = () => {
                 </Button>
                 {isAndroid && (
                   <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">Используйте, где привычнее — приложение или Телеграм бот</p>
+                    <p className="text-sm text-muted-foreground text-center">Используйте, где привычнее — приложение или Телеграм бот</p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Button
                         size="lg"
