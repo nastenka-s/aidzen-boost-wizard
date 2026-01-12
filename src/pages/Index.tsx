@@ -153,7 +153,12 @@ const Index = () => {
               {/* Trust Badges */}
               <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
                 {/* Faces + Text */}
-                <div className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px]">
+                <a 
+                  href="https://chat.aidzen.ru/login" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px] hover:bg-card/70 transition-colors cursor-pointer"
+                >
                   <div className="flex -space-x-2 sm:-space-x-3">
                     <img
                       src={blondeWoman}
@@ -174,10 +179,15 @@ const Index = () => {
                   <div className="text-center">
                     <p className="text-xs sm:text-sm font-medium leading-tight">Для любителей и консультантов</p>
                   </div>
-                </div>
+                </a>
 
                 {/* 30+ готовых расчетов */}
-                <div className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px]">
+                <a 
+                  href="https://chat.aidzen.ru/login" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-2 p-2 sm:p-3 lg:p-4 bg-card/50 rounded-lg sm:rounded-xl border border-border/30 flex-1 min-w-[140px] max-w-[180px] hover:bg-card/70 transition-colors cursor-pointer"
+                >
                   <div className="w-auto px-2 sm:px-3 lg:px-4 h-8 sm:h-10 lg:h-12 rounded-full bg-gradient-purple flex items-center justify-center gap-1 sm:gap-2">
                     <Zap className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-yellow-400 fill-yellow-400" />
                     <span className="text-purple-800 text-sm sm:text-base font-bold whitespace-nowrap">Более 30</span>
@@ -187,7 +197,7 @@ const Index = () => {
                       астрологических и нумерологических расчетов
                     </p>
                   </div>
-                </div>
+                </a>
               </div>
 
               {/* CTA */}
@@ -202,7 +212,7 @@ const Index = () => {
                     <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                   </a>
                 </Button>
-                {isAndroid && (
+                {!isAndroid && (
                   <Button
                     size="lg"
                     variant="outline"
@@ -210,14 +220,53 @@ const Index = () => {
                     asChild
                   >
                     <a
-                      href="https://www.rustore.ru/catalog/app/ru.neurodzen.app"
+                      href="https://t.me/matricasudbyaibot"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                      Скачать в RuStore
+                      <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      Запустить Telegram бот
                     </a>
                   </Button>
+                )}
+                {isAndroid && (
+                  <>
+                    <p className="text-xs sm:text-sm text-muted-foreground text-center">
+                      Используйте, где привычнее — приложение или Телеграм бот
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="flex-1 text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        asChild
+                      >
+                        <a
+                          href="https://www.rustore.ru/catalog/app/ru.neurodzen.app"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                          Скачать в RuStore
+                        </a>
+                      </Button>
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="flex-1 text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        asChild
+                      >
+                        <a
+                          href="https://t.me/matricasudbyaibot"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                          Telegram бот
+                        </a>
+                      </Button>
+                    </div>
+                  </>
                 )}
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                   <Badge variant="outline" className="border-primary/30 text-primary font-medium text-xs">
@@ -238,7 +287,12 @@ const Index = () => {
             </div>
 
             {/* Right Column - App Screenshot */}
-            <div className="relative lg:scale-110">
+            <a 
+              href="https://chat.aidzen.ru/login" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="relative lg:scale-110 block hover:scale-[1.12] transition-transform duration-300"
+            >
               <div className="relative mx-auto w-[320px] h-auto">
                 <img src={neurodzenApp} alt="НейроДзен приложение" className="w-full h-auto rounded-[3rem]" />
               </div>
@@ -251,7 +305,7 @@ const Index = () => {
                   animationDelay: "1s",
                 }}
               ></div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -383,7 +437,12 @@ const Index = () => {
                 </a>
               </Button>
             </div>
-            <div className="relative">
+            <a 
+              href="https://chat.aidzen.ru/login" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="relative block hover:scale-105 transition-transform duration-300"
+            >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img src={matrixSudby} alt="Матрица судьбы - пример расчета" className="w-full" />
               </div>
@@ -395,7 +454,7 @@ const Index = () => {
                   animationDelay: "1s",
                 }}
               ></div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -404,13 +463,18 @@ const Index = () => {
       <section className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
+            <a 
+              href="https://chat.aidzen.ru/login" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="order-2 lg:order-1 block hover:scale-105 transition-transform duration-300"
+            >
               <img
                 src={astrologyGif}
                 alt="Астрологическая программа считает"
                 className="w-full max-w-sm mx-auto lg:mx-0"
               />
-            </div>
+            </a>
             <div className="order-1 lg:order-2 space-y-6">
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Астро-программа считает, ИИ анализирует</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
