@@ -223,7 +223,7 @@ const Index = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full lg:w-auto text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
                     <a
@@ -231,7 +231,7 @@ const Index = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                       Запустить Telegram бот
                     </a>
                   </Button>
