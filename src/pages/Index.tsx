@@ -146,7 +146,7 @@ const Index = () => {
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
                   Натальная карта, матрица судьбы и астропрогнозы — персонально за минуты. ИИ обучен на 80+ источниках
-                  по эзотерике..
+                  по эзотерике.
                 </p>
               </div>
 
