@@ -286,9 +286,9 @@ const Index = () => {
 
             {/* Right Column - App Screenshot */}
             <div className="relative lg:scale-110">
-              <div className="relative mx-auto w-[320px] h-auto">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block relative mx-auto w-[320px] h-auto cursor-pointer hover:opacity-90 transition-opacity">
                 <img src={neurodzenApp} alt="НейроДзен приложение" className="w-full h-auto rounded-[3rem]" />
-              </div>
+              </a>
 
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
@@ -431,9 +431,9 @@ const Index = () => {
               </Button>
             </div>
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity">
                 <img src={matrixSudby} alt="Матрица судьбы - пример расчета" className="w-full" />
-              </div>
+              </a>
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
               <div
@@ -452,11 +452,13 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <img
-                src={astrologyGif}
-                alt="Астрологическая программа считает"
-                className="w-full max-w-sm mx-auto lg:mx-0"
-              />
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block cursor-pointer hover:opacity-90 transition-opacity">
+                <img
+                  src={astrologyGif}
+                  alt="Астрологическая программа считает"
+                  className="w-full max-w-sm mx-auto lg:mx-0"
+                />
+              </a>
             </div>
             <div className="order-1 lg:order-2 space-y-6">
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Астро-программа считает, ИИ анализирует</h2>
