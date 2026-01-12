@@ -141,12 +141,12 @@ const Index = () => {
 
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight tracking-tight">
-                  Астронумерология на каждый день —{" "}
+                  Астрологиче и нумерология на каждый день —{" "}
                   <span className="text-gradient">точные ответы на важные вопросы</span>
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
-                  Рассчитайте натальную карту, матрицу судьбы, астрологический прогноз, транзиты планет — ИИ обучен на
-                  37 книгах и 45 курсах по эзотерике. Получите персональные прогнозы за минуты.
+                  Натальная карта, матрица судьбы и астропрогнозы — персонально за минуты. ИИ обучен на 80+ источниках
+                  по эзотерике..
                 </p>
               </div>
 
