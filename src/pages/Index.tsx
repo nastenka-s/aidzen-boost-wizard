@@ -219,6 +219,23 @@ const Index = () => {
                     </a>
                   </Button>
                 )}
+                {!isAndroid && (
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-5 lg:py-6 h-auto border-primary/30 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    asChild
+                  >
+                    <a
+                      href="https://t.me/matricasudbyaibot"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      Запустить Telegram бот
+                    </a>
+                  </Button>
+                )}
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                   <Badge variant="outline" className="border-primary/30 text-primary font-medium text-xs">
                     Бесплатно
