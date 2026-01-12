@@ -141,7 +141,7 @@ const Index = () => {
 
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight tracking-tight">
-                  Астрологиче и нумерология на каждый день —{" "}
+                  Астрология и нумерология на каждый день —{" "}
                   <span className="text-gradient">точные ответы на важные вопросы</span>
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
