@@ -148,8 +148,8 @@ const Index = () => {
                   <span className="text-gradient">точные ответы на важные вопросы</span>
                 </h1>
                 <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-xl">
-                  Натальная карта, матрица судьбы и астропрогнозы — персонально за минуты. ИИ обучен на 80+ источниках
-                  по эзотерике.
+                  Натальная карта, матрица судьбы и астропрогнозы, чтение по ладони — персонально за минуты. ИИ обучен
+                  на 80+ источниках по эзотерике.
                 </p>
               </div>
 
@@ -217,11 +217,7 @@ const Index = () => {
                         className="min-w-[90px] text-xs px-3 py-2.5 h-auto border-primary/30 font-medium shadow-lg hover:shadow-xl transition-all duration-300 whitespace-nowrap"
                         asChild
                       >
-                        <a
-                          href="https://chat.aidzen.ru/login"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
                           <Globe className="w-4 h-4 mr-1 flex-shrink-0" />
                           Онлайн
                         </a>
@@ -288,7 +284,12 @@ const Index = () => {
 
             {/* Right Column - App Screenshot */}
             <div className="relative lg:scale-110">
-              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block relative mx-auto w-[320px] h-auto cursor-pointer hover:opacity-90 transition-opacity">
+              <a
+                href="https://chat.aidzen.ru/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative mx-auto w-[320px] h-auto cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <img src={neurodzenApp} alt="НейроДзен приложение" className="w-full h-auto rounded-[3rem]" />
               </a>
 
@@ -438,7 +439,12 @@ const Index = () => {
               </Button>
             </div>
             <div className="relative">
-              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity">
+              <a
+                href="https://chat.aidzen.ru/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <img src={matrixSudby} alt="Матрица судьбы - пример расчета" className="w-full" />
               </a>
               {/* Floating orbs */}
@@ -459,7 +465,12 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
-              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block cursor-pointer hover:opacity-90 transition-opacity">
+              <a
+                href="https://chat.aidzen.ru/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <img
                   src={astrologyGif}
                   alt="Астрологическая программа считает"
@@ -495,7 +506,12 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1 relative">
-              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity">
+              <a
+                href="https://chat.aidzen.ru/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <img src={palmistryHand} alt="Хиромантия - анализ ладони" className="w-full max-w-md mx-auto" />
               </a>
               {/* Floating orbs */}
@@ -514,7 +530,8 @@ const Index = () => {
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Жизненный путь на ладони</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
                 <p>
-                  Хиромантия — древнее искусство чтения линий руки, которое помогает понять характер, таланты и судьбу человека. Каждая линия на ладони рассказывает свою историю.
+                  Хиромантия — древнее искусство чтения линий руки, которое помогает понять характер, таланты и судьбу
+                  человека. Каждая линия на ладони рассказывает свою историю.
                 </p>
                 <p className="font-medium text-foreground">
                   Загрузите фото ладони и получите персональный анализ ваших линий жизни, сердца, ума и судьбы.
