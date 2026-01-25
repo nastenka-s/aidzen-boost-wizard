@@ -20,6 +20,7 @@ import {
   ArrowRight,
   Send,
   Globe,
+  Hand,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -30,6 +31,7 @@ import blondeWoman from "@/assets/blondewoman.png";
 import brunetteWoman from "@/assets/brunetterwoman.png";
 import manDarkHair from "@/assets/mandarkhair.png";
 import matrixSudby from "@/assets/matrix-sudby.png";
+import palmistryHand from "@/assets/palmistry-hand.png";
 import { blogPosts } from "@/data/blogPosts";
 
 const Index = () => {
@@ -280,7 +282,7 @@ const Index = () => {
                   <Sparkles className="w-5 h-5 text-secondary" />
                   <span className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
                 </div>
-                <span className="text-sm font-medium">Добавлен новый расчет - Личный Трейдинг Календарь</span>
+                <span className="text-sm font-medium">Новое: Хиромантия — анализ ладони</span>
               </div>
             </div>
 
@@ -338,6 +340,11 @@ const Index = () => {
                 icon: Users,
                 title: "Совместимость",
                 desc: "Анализ отношений с партнером по вашим натальным картам",
+              },
+              {
+                icon: Hand,
+                title: "Хиромантия",
+                desc: "Анализ линий ладони для раскрытия жизненного пути",
               },
               {
                 icon: Eye,
@@ -483,6 +490,65 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Palmistry Section */}
+      <section className="py-8 lg:py-12">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="order-2 lg:order-1 relative">
+              <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer" className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity">
+                <img src={palmistryHand} alt="Хиромантия - анализ ладони" className="w-full max-w-md mx-auto" />
+              </a>
+              {/* Floating orbs */}
+              <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
+              <div
+                className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse"
+                style={{
+                  animationDelay: "1s",
+                }}
+              ></div>
+            </div>
+            <div className="order-1 lg:order-2 space-y-6">
+              <Badge variant="outline" className="border-primary/30 text-primary font-medium">
+                Хиромантия
+              </Badge>
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">Жизненный путь на ладони</h2>
+              <div className="space-y-4 text-lg text-muted-foreground">
+                <p>
+                  Хиромантия — древнее искусство чтения линий руки, которое помогает понять характер, таланты и судьбу человека. Каждая линия на ладони рассказывает свою историю.
+                </p>
+                <p className="font-medium text-foreground">
+                  Загрузите фото ладони и получите персональный анализ ваших линий жизни, сердца, ума и судьбы.
+                </p>
+                <ul className="space-y-2 text-base">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Линия жизни — здоровье и жизненная сила</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Линия сердца — эмоции и отношения</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Линия ума — интеллект и образ мышления</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <span>Линия судьбы — карьера и жизненный путь</span>
+                  </li>
+                </ul>
+              </div>
+              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
+                <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                  Анализ руки
+                  <Hand className="w-5 h-5 ml-2" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-8 lg:py-12 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
@@ -559,6 +625,10 @@ const Index = () => {
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
                     <span>Лунный Календарь</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
+                    <span>Хиромантия — 3 анализа руки</span>
                   </li>
                 </ul>
                 <div className="pt-4">
