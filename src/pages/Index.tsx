@@ -505,7 +505,25 @@ const Index = () => {
       <section className="py-8 lg:py-12">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="order-2 lg:order-2 space-y-6">
+            <div className="relative">
+              <a
+                href="https://chat.aidzen.ru/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity"
+              >
+                <img src={palmistryHand} alt="Хиромантия - анализ ладони" className="w-full max-w-md mx-auto" />
+              </a>
+              {/* Floating orbs */}
+              <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
+              <div
+                className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse"
+                style={{
+                  animationDelay: "1s",
+                }}
+              ></div>
+            </div>
+            <div className="space-y-6">
               <Badge variant="outline" className="border-primary/30 text-primary font-medium">
                 Хиромантия
               </Badge>
@@ -543,24 +561,6 @@ const Index = () => {
                   <Hand className="w-5 h-5 ml-2" />
                 </a>
               </Button>
-            </div>
-            <div className="order-1 lg:order-1 relative">
-              <a
-                href="https://chat.aidzen.ru/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                <img src={palmistryHand} alt="Хиромантия - анализ ладони" className="w-full max-w-md mx-auto" />
-              </a>
-              {/* Floating orbs */}
-              <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
-              <div
-                className="absolute -bottom-6 -left-6 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-pulse"
-                style={{
-                  animationDelay: "1s",
-                }}
-              ></div>
             </div>
           </div>
         </div>
