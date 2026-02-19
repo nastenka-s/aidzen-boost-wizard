@@ -50,6 +50,7 @@ import KakVyitiIzMinusaVPlyus from "./pages/KakVyitiIzMinusaVPlyus";
 import KakVychislitSvoy4Dom from "./pages/KakVychislitSvoy4Dom";
 import Neurozen from "./pages/Neurozen";
 import SamorealizaciyaVNatalnoyKarteZhenshchiny from "./pages/SamorealizaciyaVNatalnoyKarteZhenshchiny";
+import AstrologicheskayaSovmestimost from "./pages/AstrologicheskayaSovmestimost";
 import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -72,6 +73,7 @@ const App = () => (
           <Route path="/kak-vyiti-iz-minusa-v-plyus-po-arkanu" element={<KakVyitiIzMinusaVPlyus />} />
           <Route path="/kak-vychislit-svoy-4-dom" element={<KakVychislitSvoy4Dom />} />
           <Route path="/samorealizaciya-v-natalnoy-karte-zhenshchiny" element={<SamorealizaciyaVNatalnoyKarteZhenshchiny />} />
+          <Route path="/astrologicheskaya-sovmestimost" element={<AstrologicheskayaSovmestimost />} />
           <Route path="/neurozen" element={<Neurozen />} />
           <Route path="/12-dom-v-natalnoj-karte" element={<DvenadtsatyiDomGoroskopa />} />
           <Route path="/11-dom-v-natalnoj-karte" element={<OdinnadcatyiDomGoroskopa />} />
