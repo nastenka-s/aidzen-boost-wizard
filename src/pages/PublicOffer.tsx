@@ -29,6 +29,7 @@ const PublicOffer = () => {
         </h1>
 
         <div className="space-y-6 text-muted-foreground">
+          <p className="text-sm">Редакция от 22 мая 2026 г.</p>
           <div>
             <h2 className="text-2xl font-semibold text-foreground mb-3">1. Общие положения</h2>
             <p className="mb-3">
