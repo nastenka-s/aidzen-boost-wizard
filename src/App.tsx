@@ -51,6 +51,7 @@ import KakVychislitSvoy4Dom from "./pages/KakVychislitSvoy4Dom";
 import Neurozen from "./pages/Neurozen";
 import SamorealizaciyaVNatalnoyKarteZhenshchiny from "./pages/SamorealizaciyaVNatalnoyKarteZhenshchiny";
 import AstrologicheskayaSovmestimost from "./pages/AstrologicheskayaSovmestimost";
+// __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
           <Route path="/venera-v-domah-goroskopa" element={<VeneraVDomahGoroskopa />} />
           <Route path="/mars-v-domah-goroskopa" element={<MarsVDomahGoroskopa />} />
           <Route path="/bogatstvo-v-natalnoy-karte" element={<BogatstvoVNatalnoyKarte />} />
