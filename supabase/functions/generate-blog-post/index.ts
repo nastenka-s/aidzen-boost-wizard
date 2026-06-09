@@ -8,7 +8,7 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 const DOMAIN = "https://aidzen.ru";
-const BRANCH = "main";
+let BRANCH = "main"; // resolved at runtime from repo default_branch
 const GH_API = `https://api.github.com/repos/${GITHUB_REPO}`;
 
 // ============== Types ==============
@@ -453,6 +453,10 @@ Deno.serve(async (req) => {
     for (const [k, v] of [["LOVABLE_API_KEY", LOVABLE_API_KEY], ["GITHUB_TOKEN", GITHUB_TOKEN], ["GITHUB_REPO", GITHUB_REPO]]) {
       if (!v) throw new Error(`Missing env var: ${k}`);
     }
+
+    // Resolve default branch
+    const repoInfo = await ghJson("");
+    BRANCH = repoInfo.default_branch || "main";
 
     // 1. Get next pending topic
     const { data: topics, error: tErr } = await supabase
