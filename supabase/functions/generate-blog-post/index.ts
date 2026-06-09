@@ -152,9 +152,30 @@ ${relatedHint}
 
   const data = await res.json();
   const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error("AI returned empty content");
+  if (!content) {
+    console.error("AI raw response:", JSON.stringify(data).slice(0, 1500));
+    throw new Error("AI returned empty content");
+  }
 
-  const parsed = JSON.parse(content) as GeneratedArticle;
+  // Strip markdown code fences if present
+  let cleaned = content.trim();
+  if (cleaned.startsWith("```")) {
+    cleaned = cleaned.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
+  }
+  // Extract first {...} block if model added prose around it
+  const firstBrace = cleaned.indexOf("{");
+  const lastBrace = cleaned.lastIndexOf("}");
+  if (firstBrace > 0 || lastBrace < cleaned.length - 1) {
+    if (firstBrace >= 0 && lastBrace > firstBrace) cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  }
+
+  let parsed: GeneratedArticle;
+  try {
+    parsed = JSON.parse(cleaned) as GeneratedArticle;
+  } catch (e) {
+    console.error("AI content (first 1500 chars):", cleaned.slice(0, 1500));
+    throw new Error(`AI JSON parse failed: ${(e as Error).message}`);
+  }
   if (!parsed.title || !parsed.slug || !parsed.sections?.length) {
     throw new Error("AI response missing required fields");
   }
