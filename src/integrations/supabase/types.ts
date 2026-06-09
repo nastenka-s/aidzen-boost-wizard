@@ -14,7 +14,89 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blog_generations: {
+        Row: {
+          commit_sha: string | null
+          commit_url: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          slug: string | null
+          status: string
+          title: string | null
+          topic_id: string | null
+        }
+        Insert: {
+          commit_sha?: string | null
+          commit_url?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          slug?: string | null
+          status: string
+          title?: string | null
+          topic_id?: string | null
+        }
+        Update: {
+          commit_sha?: string | null
+          commit_url?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          slug?: string | null
+          status?: string
+          title?: string | null
+          topic_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_generations_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "blog_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_topics: {
+        Row: {
+          category: string
+          created_at: string
+          generated_at: string | null
+          id: string
+          keywords: string
+          priority: number
+          published_url: string | null
+          slug_hint: string
+          status: string
+          topic: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          generated_at?: string | null
+          id?: string
+          keywords: string
+          priority?: number
+          published_url?: string | null
+          slug_hint: string
+          status?: string
+          topic: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          generated_at?: string | null
+          id?: string
+          keywords?: string
+          priority?: number
+          published_url?: string | null
+          slug_hint?: string
+          status?: string
+          topic?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
