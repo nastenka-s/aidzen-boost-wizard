@@ -53,6 +53,7 @@ import SamorealizaciyaVNatalnoyKarteZhenshchiny from "./pages/SamorealizaciyaVNa
 import AstrologicheskayaSovmestimost from "./pages/AstrologicheskayaSovmestimost";
 import LunnyjKalendarStrizhek2026 from "./pages/blog-auto/LunnyjKalendarStrizhek2026";
 import LilitVNatalnojKarte from "./pages/blog-auto/LilitVNatalnojKarte";
+import ChisloGoda2026Numerologiya from "./pages/blog-auto/ChisloGoda2026Numerologiya";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/chislo-goda-2026-numerologiya" element={<ChisloGoda2026Numerologiya />} />
           <Route path="/lilit-v-natalnoj-karte" element={<LilitVNatalnojKarte />} />
           <Route path="/lunnyj-kalendar-strizhek-2026" element={<LunnyjKalendarStrizhek2026 />} />
           <Route path="/venera-v-domah-goroskopa" element={<VeneraVDomahGoroskopa />} />
