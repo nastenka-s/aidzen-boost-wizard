@@ -472,12 +472,17 @@ async function getFileContent(path: string): Promise<string> {
   return new TextDecoder("utf-8").decode(bytes);
 }
 
-async function createBlob(content: string): Promise<string> {
-  // Encode UTF-8 safely to base64
-  const utf8 = new TextEncoder().encode(content);
-  let bin = "";
-  for (let i = 0; i < utf8.length; i++) bin += String.fromCharCode(utf8[i]);
-  const b64 = btoa(bin);
+async function createBlob(content: string, isBase64 = false): Promise<string> {
+  let b64: string;
+  if (isBase64) {
+    b64 = content;
+  } else {
+    // Encode UTF-8 safely to base64
+    const utf8 = new TextEncoder().encode(content);
+    let bin = "";
+    for (let i = 0; i < utf8.length; i++) bin += String.fromCharCode(utf8[i]);
+    b64 = btoa(bin);
+  }
   const blob = await ghJson(`/git/blobs`, {
     method: "POST",
     body: JSON.stringify({ content: b64, encoding: "base64" }),
@@ -485,7 +490,7 @@ async function createBlob(content: string): Promise<string> {
   return blob.sha;
 }
 
-async function commitFiles(files: { path: string; content: string }[], message: string): Promise<{ sha: string; url: string }> {
+async function commitFiles(files: { path: string; content: string; isBase64?: boolean }[], message: string): Promise<{ sha: string; url: string }> {
   const ref = await ghJson(`/git/ref/heads/${BRANCH}`);
   const baseCommitSha: string = ref.object.sha;
   const baseCommit = await ghJson(`/git/commits/${baseCommitSha}`);
@@ -493,7 +498,7 @@ async function commitFiles(files: { path: string; content: string }[], message: 
 
   const treeItems = [] as { path: string; mode: string; type: string; sha: string }[];
   for (const f of files) {
-    const blobSha = await createBlob(f.content);
+    const blobSha = await createBlob(f.content, f.isBase64 === true);
     treeItems.push({ path: f.path, mode: "100644", type: "blob", sha: blobSha });
   }
 
