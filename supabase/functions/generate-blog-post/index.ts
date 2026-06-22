@@ -651,14 +651,40 @@ Deno.serve(async (req) => {
     const newSitemap = updateSitemap(sitemapRaw, article);
     const newRss = updateRss(rssRaw, article);
 
-    // 8. Atomic commit
-    const commit = await commitFiles([
+    // 7b. Generate cover image for Dzen (≥700px requirement)
+    let coverB64 = "";
+    let coverUrl = "";
+    try {
+      coverB64 = await generateCoverImage(article.title, article.category || topic.category);
+      coverUrl = `${DOMAIN}/blog-covers/${article.slug}.png`;
+      console.log(`[cover] generated ${coverB64.length} bytes (base64) for ${article.slug}`);
+    } catch (e) {
+      console.error("[cover] generation failed, continuing without cover:", (e as Error).message);
+    }
+
+    // 7c. Build Dzen-ready HTML + description
+    const dzenHtml = buildDzenHtml(article, coverUrl);
+    const dzenDescription = buildDzenDescription(article);
+
+    // 8. Atomic commit (include cover if generated)
+    const commitFilesList: { path: string; content: string; isBase64?: boolean }[] = [
       { path: `src/pages/blog-auto/${compName}.tsx`, content: tsxContent },
       { path: "src/data/blogPosts.ts", content: newBlogPostsTs },
       { path: "src/App.tsx", content: newAppTsx },
       { path: "public/sitemap.xml", content: newSitemap },
       { path: "public/rss.xml", content: newRss },
-    ], `feat(blog): auto-publish "${article.title.slice(0, 60)}"`);
+    ];
+    if (coverB64) {
+      commitFilesList.push({
+        path: `public/blog-covers/${article.slug}.png`,
+        content: coverB64,
+        isBase64: true,
+      });
+    }
+    const commit = await commitFiles(
+      commitFilesList,
+      `feat(blog): auto-publish "${article.title.slice(0, 60)}"`,
+    );
 
     // 9. Mark topic published, log
     const url = `${DOMAIN}/${article.slug}`;
@@ -666,6 +692,9 @@ Deno.serve(async (req) => {
       status: "published",
       published_url: url,
       generated_at: new Date().toISOString(),
+      cover_url: coverUrl || null,
+      description: dzenDescription,
+      dzen_html: dzenHtml,
     }).eq("id", topic.id);
 
     await supabase.from("blog_generations").insert({
