@@ -1,1 +1,4 @@
 project_id = "rhksexmodcihbasgohvb"
+
+[functions.dzen-rss]
+verify_jwt = false
