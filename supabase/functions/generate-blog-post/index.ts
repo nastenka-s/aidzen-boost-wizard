@@ -129,32 +129,59 @@ ${relatedHint}
 - relatedSlugs — ровно 3 slug из списка выше (без ведущего слэша)
 - НЕ используй markdown (**, ##, ---) в значениях полей — только обычный текст`;
 
-  const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${LOVABLE_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "google/gemini-2.5-pro",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt },
-      ],
-      response_format: { type: "json_object" },
-    }),
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`AI gateway ${res.status}: ${text.slice(0, 500)}`);
+  // Try several models with retries — Gemini 2.5 Pro occasionally returns empty content.
+  const attempts: { model: string; label: string }[] = [
+    { model: "google/gemini-2.5-pro", label: "pro#1" },
+    { model: "google/gemini-2.5-pro", label: "pro#2" },
+    { model: "google/gemini-2.5-flash", label: "flash#1" },
+    { model: "google/gemini-2.5-flash", label: "flash#2" },
+  ];
+  let content = "";
+  let lastError = "";
+  for (const attempt of attempts) {
+    try {
+      const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: attempt.model,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt },
+          ],
+          response_format: { type: "json_object" },
+        }),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        lastError = `AI gateway ${res.status}: ${text.slice(0, 300)}`;
+        console.error(`[${attempt.label}] ${lastError}`);
+        // 429/5xx — retry; 4xx других — тоже попробуем следующий вариант
+        await new Promise((r) => setTimeout(r, 1500));
+        continue;
+      }
+      const data = await res.json();
+      const c = data.choices?.[0]?.message?.content;
+      if (!c) {
+        lastError = "AI returned empty content";
+        console.error(`[${attempt.label}] empty content. Raw:`, JSON.stringify(data).slice(0, 800));
+        await new Promise((r) => setTimeout(r, 1500));
+        continue;
+      }
+      content = c;
+      console.log(`[${attempt.label}] success, length=${c.length}`);
+      break;
+    } catch (e) {
+      lastError = (e as Error).message;
+      console.error(`[${attempt.label}] exception: ${lastError}`);
+      await new Promise((r) => setTimeout(r, 1500));
+    }
   }
-
-  const data = await res.json();
-  const content = data.choices?.[0]?.message?.content;
   if (!content) {
-    console.error("AI raw response:", JSON.stringify(data).slice(0, 1500));
-    throw new Error("AI returned empty content");
+    throw new Error(`AI failed after ${attempts.length} attempts: ${lastError}`);
   }
 
   // Strip markdown code fences if present
