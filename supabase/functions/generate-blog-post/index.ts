@@ -49,6 +49,84 @@ const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace
 const escAttr = (s: string) => s.replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escJsx = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
 
+// ============== Dzen-ready HTML builder ==============
+// Only tags allowed by Dzen RSS: p, h2, h3, b, i, ul, ol, li, blockquote, a, img
+function escHtml(s: string): string {
+  return (s || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function buildDzenHtml(a: GeneratedArticle, coverUrl: string): string {
+  const parts: string[] = [];
+  if (coverUrl) {
+    parts.push(`<img src="${coverUrl}" alt="${escHtml(a.title)}" />`);
+  }
+  for (const p of a.intro ?? []) {
+    parts.push(`<p>${escHtml(p)}</p>`);
+  }
+  for (const s of a.sections ?? []) {
+    parts.push(`<h2>${escHtml(s.h2)}</h2>`);
+    for (const p of s.paragraphs ?? []) parts.push(`<p>${escHtml(p)}</p>`);
+    if (s.bulletList && s.bulletList.length) {
+      parts.push("<ul>" + s.bulletList.map((li) => `<li>${escHtml(li)}</li>`).join("") + "</ul>");
+    }
+    if (s.example) {
+      parts.push(`<blockquote><b>Пример.</b> ${escHtml(s.example)}</blockquote>`);
+    }
+    if (s.warning) {
+      parts.push(`<blockquote><b>Важно.</b> ${escHtml(s.warning)}</blockquote>`);
+    }
+  }
+  if (a.faq && a.faq.length) {
+    parts.push(`<h2>Частые вопросы</h2>`);
+    for (const q of a.faq) {
+      parts.push(`<h3>${escHtml(q.question)}</h3>`);
+      parts.push(`<p>${escHtml(q.answer)}</p>`);
+    }
+  }
+  if (a.conclusion) {
+    parts.push(`<h2>Заключение</h2>`);
+    parts.push(`<p>${escHtml(a.conclusion)}</p>`);
+  }
+  parts.push(`<p><b>Бесплатный расчёт натальной карты и матрицы судьбы:</b> <a href="https://chat.aidzen.ru/login">chat.aidzen.ru</a></p>`);
+  return parts.join("\n");
+}
+
+function buildDzenDescription(a: GeneratedArticle): string {
+  // Short snippet for Dzen card, max ~200 chars
+  let s = (a.metaDescription || a.intro?.[0] || a.title).replace(/\s+/g, " ").trim();
+  if (s.length > 200) s = s.slice(0, 197).trimEnd() + "…";
+  return s;
+}
+
+// ============== AI cover image generation ==============
+async function generateCoverImage(title: string, category: string): Promise<string> {
+  // Returns base64 PNG (no data: prefix)
+  const prompt = `Эстетичная мистическая иллюстрация на тему: "${title}". Категория: ${category}. Стиль: тёмно-фиолетовая палитра с золотыми акцентами, мягкое сияние, звёзды и космические мотивы, абстрактная композиция, минимализм, премиум-вид. БЕЗ текста, букв, цифр и людей. Художественная астрологическая визуализация.`;
+  const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "google/gemini-2.5-flash-image",
+      messages: [{ role: "user", content: prompt }],
+      modalities: ["image", "text"],
+    }),
+  });
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(`Image gateway ${res.status}: ${t.slice(0, 300)}`);
+  }
+  const data = await res.json();
+  const b64 = data?.data?.[0]?.b64_json;
+  if (!b64) throw new Error("Image gen: no b64_json in response");
+  return b64;
+}
+
 function pascalCase(slug: string): string {
   return slug
     .split(/[-_]/)
