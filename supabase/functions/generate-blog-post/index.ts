@@ -49,6 +49,84 @@ const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace
 const escAttr = (s: string) => s.replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escJsx = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
 
+// ============== Dzen-ready HTML builder ==============
+// Only tags allowed by Dzen RSS: p, h2, h3, b, i, ul, ol, li, blockquote, a, img
+function escHtml(s: string): string {
+  return (s || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function buildDzenHtml(a: GeneratedArticle, coverUrl: string): string {
+  const parts: string[] = [];
+  if (coverUrl) {
+    parts.push(`<img src="${coverUrl}" alt="${escHtml(a.title)}" />`);
+  }
+  for (const p of a.intro ?? []) {
+    parts.push(`<p>${escHtml(p)}</p>`);
+  }
+  for (const s of a.sections ?? []) {
+    parts.push(`<h2>${escHtml(s.h2)}</h2>`);
+    for (const p of s.paragraphs ?? []) parts.push(`<p>${escHtml(p)}</p>`);
+    if (s.bulletList && s.bulletList.length) {
+      parts.push("<ul>" + s.bulletList.map((li) => `<li>${escHtml(li)}</li>`).join("") + "</ul>");
+    }
+    if (s.example) {
+      parts.push(`<blockquote><b>Пример.</b> ${escHtml(s.example)}</blockquote>`);
+    }
+    if (s.warning) {
+      parts.push(`<blockquote><b>Важно.</b> ${escHtml(s.warning)}</blockquote>`);
+    }
+  }
+  if (a.faq && a.faq.length) {
+    parts.push(`<h2>Частые вопросы</h2>`);
+    for (const q of a.faq) {
+      parts.push(`<h3>${escHtml(q.question)}</h3>`);
+      parts.push(`<p>${escHtml(q.answer)}</p>`);
+    }
+  }
+  if (a.conclusion) {
+    parts.push(`<h2>Заключение</h2>`);
+    parts.push(`<p>${escHtml(a.conclusion)}</p>`);
+  }
+  parts.push(`<p><b>Бесплатный расчёт натальной карты и матрицы судьбы:</b> <a href="https://chat.aidzen.ru/login">chat.aidzen.ru</a></p>`);
+  return parts.join("\n");
+}
+
+function buildDzenDescription(a: GeneratedArticle): string {
+  // Short snippet for Dzen card, max ~200 chars
+  let s = (a.metaDescription || a.intro?.[0] || a.title).replace(/\s+/g, " ").trim();
+  if (s.length > 200) s = s.slice(0, 197).trimEnd() + "…";
+  return s;
+}
+
+// ============== AI cover image generation ==============
+async function generateCoverImage(title: string, category: string): Promise<string> {
+  // Returns base64 PNG (no data: prefix)
+  const prompt = `Эстетичная мистическая иллюстрация на тему: "${title}". Категория: ${category}. Стиль: тёмно-фиолетовая палитра с золотыми акцентами, мягкое сияние, звёзды и космические мотивы, абстрактная композиция, минимализм, премиум-вид. БЕЗ текста, букв, цифр и людей. Художественная астрологическая визуализация.`;
+  const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "google/gemini-2.5-flash-image",
+      messages: [{ role: "user", content: prompt }],
+      modalities: ["image", "text"],
+    }),
+  });
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(`Image gateway ${res.status}: ${t.slice(0, 300)}`);
+  }
+  const data = await res.json();
+  const b64 = data?.data?.[0]?.b64_json;
+  if (!b64) throw new Error("Image gen: no b64_json in response");
+  return b64;
+}
+
 function pascalCase(slug: string): string {
   return slug
     .split(/[-_]/)
@@ -394,12 +472,17 @@ async function getFileContent(path: string): Promise<string> {
   return new TextDecoder("utf-8").decode(bytes);
 }
 
-async function createBlob(content: string): Promise<string> {
-  // Encode UTF-8 safely to base64
-  const utf8 = new TextEncoder().encode(content);
-  let bin = "";
-  for (let i = 0; i < utf8.length; i++) bin += String.fromCharCode(utf8[i]);
-  const b64 = btoa(bin);
+async function createBlob(content: string, isBase64 = false): Promise<string> {
+  let b64: string;
+  if (isBase64) {
+    b64 = content;
+  } else {
+    // Encode UTF-8 safely to base64
+    const utf8 = new TextEncoder().encode(content);
+    let bin = "";
+    for (let i = 0; i < utf8.length; i++) bin += String.fromCharCode(utf8[i]);
+    b64 = btoa(bin);
+  }
   const blob = await ghJson(`/git/blobs`, {
     method: "POST",
     body: JSON.stringify({ content: b64, encoding: "base64" }),
@@ -407,7 +490,7 @@ async function createBlob(content: string): Promise<string> {
   return blob.sha;
 }
 
-async function commitFiles(files: { path: string; content: string }[], message: string): Promise<{ sha: string; url: string }> {
+async function commitFiles(files: { path: string; content: string; isBase64?: boolean }[], message: string): Promise<{ sha: string; url: string }> {
   const ref = await ghJson(`/git/ref/heads/${BRANCH}`);
   const baseCommitSha: string = ref.object.sha;
   const baseCommit = await ghJson(`/git/commits/${baseCommitSha}`);
@@ -415,7 +498,7 @@ async function commitFiles(files: { path: string; content: string }[], message: 
 
   const treeItems = [] as { path: string; mode: string; type: string; sha: string }[];
   for (const f of files) {
-    const blobSha = await createBlob(f.content);
+    const blobSha = await createBlob(f.content, f.isBase64 === true);
     treeItems.push({ path: f.path, mode: "100644", type: "blob", sha: blobSha });
   }
 
@@ -568,14 +651,40 @@ Deno.serve(async (req) => {
     const newSitemap = updateSitemap(sitemapRaw, article);
     const newRss = updateRss(rssRaw, article);
 
-    // 8. Atomic commit
-    const commit = await commitFiles([
+    // 7b. Generate cover image for Dzen (≥700px requirement)
+    let coverB64 = "";
+    let coverUrl = "";
+    try {
+      coverB64 = await generateCoverImage(article.title, article.category || topic.category);
+      coverUrl = `${DOMAIN}/blog-covers/${article.slug}.png`;
+      console.log(`[cover] generated ${coverB64.length} bytes (base64) for ${article.slug}`);
+    } catch (e) {
+      console.error("[cover] generation failed, continuing without cover:", (e as Error).message);
+    }
+
+    // 7c. Build Dzen-ready HTML + description
+    const dzenHtml = buildDzenHtml(article, coverUrl);
+    const dzenDescription = buildDzenDescription(article);
+
+    // 8. Atomic commit (include cover if generated)
+    const commitFilesList: { path: string; content: string; isBase64?: boolean }[] = [
       { path: `src/pages/blog-auto/${compName}.tsx`, content: tsxContent },
       { path: "src/data/blogPosts.ts", content: newBlogPostsTs },
       { path: "src/App.tsx", content: newAppTsx },
       { path: "public/sitemap.xml", content: newSitemap },
       { path: "public/rss.xml", content: newRss },
-    ], `feat(blog): auto-publish "${article.title.slice(0, 60)}"`);
+    ];
+    if (coverB64) {
+      commitFilesList.push({
+        path: `public/blog-covers/${article.slug}.png`,
+        content: coverB64,
+        isBase64: true,
+      });
+    }
+    const commit = await commitFiles(
+      commitFilesList,
+      `feat(blog): auto-publish "${article.title.slice(0, 60)}"`,
+    );
 
     // 9. Mark topic published, log
     const url = `${DOMAIN}/${article.slug}`;
@@ -583,6 +692,9 @@ Deno.serve(async (req) => {
       status: "published",
       published_url: url,
       generated_at: new Date().toISOString(),
+      cover_url: coverUrl || null,
+      description: dzenDescription,
+      dzen_html: dzenHtml,
     }).eq("id", topic.id);
 
     await supabase.from("blog_generations").insert({
