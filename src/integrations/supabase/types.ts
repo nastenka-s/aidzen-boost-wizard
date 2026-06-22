@@ -61,7 +61,10 @@ export type Database = {
       blog_topics: {
         Row: {
           category: string
+          cover_url: string | null
           created_at: string
+          description: string | null
+          dzen_html: string | null
           generated_at: string | null
           id: string
           keywords: string
@@ -73,7 +76,10 @@ export type Database = {
         }
         Insert: {
           category: string
+          cover_url?: string | null
           created_at?: string
+          description?: string | null
+          dzen_html?: string | null
           generated_at?: string | null
           id?: string
           keywords: string
@@ -85,7 +91,10 @@ export type Database = {
         }
         Update: {
           category?: string
+          cover_url?: string | null
           created_at?: string
+          description?: string | null
+          dzen_html?: string | null
           generated_at?: string | null
           id?: string
           keywords?: string
