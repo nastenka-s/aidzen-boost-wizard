@@ -116,9 +116,22 @@
           "value": "public, max-age=86400"
         }
       ]
+    },
+    {
+      "source": "/blog-covers/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ],
   "rewrites": [
+    {
+      "source": "/dzen-rss.xml",
+      "destination": "https://rhksexmodcihbasgohvb.supabase.co/functions/v1/dzen-rss"
+    },
     {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
