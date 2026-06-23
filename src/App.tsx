@@ -58,6 +58,7 @@ import SevernyjYuzhnyjUzlyNatalnayaKarta from "./pages/blog-auto/SevernyjYuzhnyj
 import HironVNatalnojKarte from "./pages/blog-auto/HironVNatalnojKarte";
 import ProgressiiVAstrologii from "./pages/blog-auto/ProgressiiVAstrologii";
 import VozvrashchenieSaturna2930Let from "./pages/blog-auto/VozvrashchenieSaturna2930Let";
+import ChisloDushiPoDateRozhdeniya from "./pages/blog-auto/ChisloDushiPoDateRozhdeniya";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -74,6 +75,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/chislo-dushi-po-date-rozhdeniya" element={<ChisloDushiPoDateRozhdeniya />} />
           <Route path="/vozvrashchenie-saturna-29-30-let" element={<VozvrashchenieSaturna2930Let />} />
           <Route path="/progressii-v-astrologii" element={<ProgressiiVAstrologii />} />
           <Route path="/hiron-v-natalnoj-karte" element={<HironVNatalnojKarte />} />
