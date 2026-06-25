@@ -3,6 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const DOMAIN = "https://aidzen.ru";
+const FEED_SELF_URL = `${SUPABASE_URL}/functions/v1/dzen-rss`;
 
 function esc(s: string): string {
   return (s || "")
@@ -35,6 +36,15 @@ Deno.serve(async (_req) => {
       const url = row.published_url || `${DOMAIN}/${row.slug_hint}`;
       const pubDate = row.generated_at ? rfc822(new Date(row.generated_at)) : rfc822(new Date());
       const cover = row.cover_url || "";
+      // Убираем дублирующую обложку из начала content:encoded — она уже отдается через <enclosure>
+      let body = row.dzen_html || "";
+      if (cover) {
+        const coverImgRe = new RegExp(
+          `^\\s*<img[^>]*src=["']${cover.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}["'][^>]*\\/?>\\s*`,
+          "i",
+        );
+        body = body.replace(coverImgRe, "");
+      }
       return `
     <item>
       <title>${esc(row.topic)}</title>
@@ -48,8 +58,8 @@ Deno.serve(async (_req) => {
       <category>index</category>
       <category>comment-all</category>
       <description>${esc(row.description || row.topic)}</description>
-      <enclosure url="${esc(cover)}" type="image/png" />
-      <content:encoded><![CDATA[${row.dzen_html || ""}]]></content:encoded>
+      <enclosure url="${esc(cover)}" type="image/png" length="0" />
+      <content:encoded><![CDATA[${body}]]></content:encoded>
     </item>`;
     }).join("");
 
@@ -64,7 +74,7 @@ Deno.serve(async (_req) => {
     <link>${DOMAIN}/blog</link>
     <description>Экспертный блог об астрологии, нумерологии и эзотерике. Натальные карты, матрица судьбы, число судьбы, совместимость.</description>
     <language>ru</language>
-    <atom:link href="${DOMAIN}/dzen-rss.xml" rel="self" type="application/rss+xml" />${items}
+    <atom:link href="${FEED_SELF_URL}" rel="self" type="application/rss+xml" />${items}
   </channel>
 </rss>`;
 
