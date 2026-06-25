@@ -589,6 +589,21 @@ Deno.serve(async (req) => {
     const repoInfo = await ghJson("");
     BRANCH = repoInfo.default_branch || "main";
 
+    // 0. Guard: если за последние 20 часов уже была успешная публикация — выходим (это retry, не нужен)
+    const since = new Date(Date.now() - 20 * 60 * 60 * 1000).toISOString();
+    const { data: recent } = await supabase
+      .from("blog_generations")
+      .select("id, slug, created_at")
+      .eq("status", "success")
+      .gte("created_at", since)
+      .limit(1);
+    if (recent && recent.length > 0) {
+      return new Response(
+        JSON.stringify({ ok: true, skipped: true, reason: "Already published in last 20h", last: recent[0] }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 },
+      );
+    }
+
     // 1. Get next pending topic
     const { data: topics, error: tErr } = await supabase
       .from("blog_topics")
