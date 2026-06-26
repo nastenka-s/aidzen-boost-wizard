@@ -66,18 +66,39 @@ function pickLinkTarget(): { target: 'site' | 'bot'; url: string } {
 }
 
 async function callAI(messages: any[], json = false) {
-  const res = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${LOVABLE_KEY}` },
-    body: JSON.stringify({
-      model: 'google/gemini-2.5-pro',
-      messages,
-      ...(json ? { response_format: { type: 'json_object' } } : {}),
-    }),
-  });
-  if (!res.ok) throw new Error(`AI ${res.status}: ${await res.text()}`);
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? '';
+  const models = ['google/gemini-2.5-pro', 'google/gemini-2.5-flash', 'google/gemini-2.5-flash'];
+  let lastErr = '';
+  for (const model of models) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const res = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${LOVABLE_KEY}` },
+          body: JSON.stringify({
+            model,
+            messages,
+            ...(json ? { response_format: { type: 'json_object' } } : {}),
+          }),
+        });
+        if (!res.ok) { lastErr = `AI ${res.status}: ${await res.text()}`; continue; }
+        const data = await res.json();
+        const content = data.choices?.[0]?.message?.content ?? '';
+        if (!content || !content.trim()) { lastErr = 'empty AI content'; continue; }
+        return content;
+      } catch (e) { lastErr = String(e); }
+    }
+  }
+  throw new Error(`callAI failed: ${lastErr}`);
+}
+
+function safeJSON(raw: string): any {
+  const cleaned = raw.replace(/^```(?:json)?/i, '').replace(/```\s*$/, '').trim();
+  try { return JSON.parse(cleaned); }
+  catch {
+    const m = cleaned.match(/\{[\s\S]*\}/);
+    if (m) { try { return JSON.parse(m[0]); } catch {} }
+    return {};
+  }
 }
 
 async function publishToThreads(text: string): Promise<{ thread_id: string; permalink: string }> {
@@ -141,13 +162,20 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
 
+  let forceFormat: string | null = null;
+  if (req.method === 'POST') {
+    try { const b = await req.json(); forceFormat = b?.force_format ?? null; } catch {}
+  }
+
   // 0) Pick format + length
   const { data: formats } = await supabase
     .from('threads_formats').select('*').eq('active', true);
   if (!formats || formats.length === 0) {
     return new Response(JSON.stringify({ error: 'no formats' }), { status: 500, headers: corsHeaders });
   }
-  const format = weightedPick(formats as any[]);
+  const format = forceFormat
+    ? (formats as any[]).find(f => f.id === forceFormat) ?? weightedPick(formats as any[])
+    : weightedPick(formats as any[]);
   const lengthBucket = LENGTH_BUCKETS[Math.floor(Math.random() * LENGTH_BUCKETS.length)];
 
   // 1) Load active patterns
@@ -193,7 +221,7 @@ ${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":
       { role: 'system', content: sysThread },
       { role: 'user', content: 'Сгенерируй прогноз сегодняшнего дня по 4 стихиям.' },
     ], true);
-    const parsed = JSON.parse(raw);
+    const parsed = safeJSON(raw);
     const intro: string = parsed.intro;
     const groups: Array<{ name: string; signs: Array<{ sign: string; text: string }> }> = parsed.groups ?? [];
 
@@ -290,7 +318,7 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
     { role: 'system', content: systemPrompt },
     { role: 'user', content: 'Сгенерируй 3 варианта поста. Верни JSON: {"variants":[{"text":"...","hook":"...","topic":"..."}]}' },
   ], true);
-  const drafts = JSON.parse(draftsRaw).variants ?? [];
+  const drafts = safeJSON(draftsRaw).variants ?? [];
   if (drafts.length === 0) {
     return new Response(JSON.stringify({ error: 'no drafts' }), { status: 500, headers: corsHeaders });
   }
@@ -300,7 +328,7 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
     { role: 'system', content: 'Ты строгий редактор виральных постов. Оцени каждый по 10 критериям (hook, ясность, эмоция, конкретика, длина, CTA, факты, оригинальность, ритм, шанс репоста) — каждый 0-10. Верни JSON.' },
     { role: 'user', content: `Варианты:\n${drafts.map((d: any, i: number) => `[${i}] ${d.text}`).join('\n\n')}\n\nВерни {"best_index":N,"score":0-100,"reasoning":"..."}.` },
   ], true);
-  const critique = JSON.parse(critiqueRaw);
+  const critique = safeJSON(critiqueRaw);
   const best = drafts[critique.best_index ?? 0];
   const score = critique.score ?? 0;
 
