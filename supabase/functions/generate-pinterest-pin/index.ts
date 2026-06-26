@@ -155,7 +155,7 @@ async function kieGenerateImage(prompt: string): Promise<string> {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "gpt-image-2",
+      model: "gpt-image-2-text-to-image",
       input: {
         prompt,
         size: "2:3",
