@@ -162,13 +162,20 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
 
+  let forceFormat: string | null = null;
+  if (req.method === 'POST') {
+    try { const b = await req.json(); forceFormat = b?.force_format ?? null; } catch {}
+  }
+
   // 0) Pick format + length
   const { data: formats } = await supabase
     .from('threads_formats').select('*').eq('active', true);
   if (!formats || formats.length === 0) {
     return new Response(JSON.stringify({ error: 'no formats' }), { status: 500, headers: corsHeaders });
   }
-  const format = weightedPick(formats as any[]);
+  const format = forceFormat
+    ? (formats as any[]).find(f => f.id === forceFormat) ?? weightedPick(formats as any[])
+    : weightedPick(formats as any[]);
   const lengthBucket = LENGTH_BUCKETS[Math.floor(Math.random() * LENGTH_BUCKETS.length)];
 
   // 1) Load active patterns
