@@ -90,7 +90,7 @@ const Index = () => {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="НейроДзен" className="w-10 h-10" />
+            <img src={logo} alt="НейроДзен" width={40} height={40} className="w-10 h-10" />
             <span className="text-lg font-semibold tracking-tight">НЕЙРОДЗЕН</span>
           </div>
           <div className="flex gap-3">
@@ -161,16 +161,28 @@ const Index = () => {
                     <img
                       src={blondeWoman}
                       alt="Портрет довольной пользовательницы НейроДзен"
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      decoding="async"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
                     <img
                       src={brunetteWoman}
                       alt="Портрет ещё одной пользовательницы НейроДзен"
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      decoding="async"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
                     <img
                       src={manDarkHair}
                       alt="Портрет пользователя НейроДзен"
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      decoding="async"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
                   </div>
@@ -290,7 +302,15 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="block relative mx-auto w-[320px] h-auto cursor-pointer hover:opacity-90 transition-opacity"
               >
-                <img src={neurodzenApp} alt="НейроДзен приложение" className="w-full h-auto rounded-[3rem]" />
+                <img
+                  src={neurodzenApp}
+                  alt="НейроДзен приложение"
+                  width={640}
+                  height={1280}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full h-auto rounded-[3rem]"
+                />
               </a>
 
               {/* Floating orbs */}
@@ -445,7 +465,15 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity"
               >
-                <img src={matrixSudby} alt="Матрица судьбы - пример расчета" className="w-full" />
+                <img
+                  src={matrixSudby}
+                  alt="Матрица судьбы - пример расчета"
+                  width={800}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full"
+                />
               </a>
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
@@ -474,6 +502,10 @@ const Index = () => {
                 <img
                   src={astrologyGif}
                   alt="Астрологическая программа считает"
+                  width={480}
+                  height={480}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full max-w-sm mx-auto lg:mx-0"
                 />
               </a>
@@ -551,7 +583,15 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="block relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:opacity-90 transition-opacity"
               >
-                <img src={palmistryHand} alt="Хиромантия - анализ ладони" className="w-full max-w-md mx-auto" />
+                <img
+                  src={palmistryHand}
+                  alt="Хиромантия - анализ ладони"
+                  width={600}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full max-w-md mx-auto"
+                />
               </a>
               {/* Floating orbs */}
               <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/20 rounded-full blur-2xl animate-pulse"></div>
@@ -751,7 +791,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <img src={logo} alt="НейроДзен" className="w-10 h-10" />
+                <img src={logo} alt="НейроДзен" width={40} height={40} className="w-10 h-10" />
                 <span className="text-lg font-semibold">НЕЙРОДЗЕН</span>
               </div>
               <p className="text-sm text-muted-foreground">Ваш персональный ИИ-наставник по эзотерике</p>
