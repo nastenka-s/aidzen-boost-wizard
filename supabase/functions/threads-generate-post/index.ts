@@ -214,7 +214,7 @@ ${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":
       { role: 'system', content: sysThread },
       { role: 'user', content: 'Сгенерируй прогноз сегодняшнего дня по 4 стихиям.' },
     ], true);
-    const parsed = JSON.parse(raw);
+    const parsed = safeJSON(raw);
     const intro: string = parsed.intro;
     const groups: Array<{ name: string; signs: Array<{ sign: string; text: string }> }> = parsed.groups ?? [];
 
@@ -311,7 +311,7 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
     { role: 'system', content: systemPrompt },
     { role: 'user', content: 'Сгенерируй 3 варианта поста. Верни JSON: {"variants":[{"text":"...","hook":"...","topic":"..."}]}' },
   ], true);
-  const drafts = JSON.parse(draftsRaw).variants ?? [];
+  const drafts = safeJSON(draftsRaw).variants ?? [];
   if (drafts.length === 0) {
     return new Response(JSON.stringify({ error: 'no drafts' }), { status: 500, headers: corsHeaders });
   }
@@ -321,7 +321,7 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
     { role: 'system', content: 'Ты строгий редактор виральных постов. Оцени каждый по 10 критериям (hook, ясность, эмоция, конкретика, длина, CTA, факты, оригинальность, ритм, шанс репоста) — каждый 0-10. Верни JSON.' },
     { role: 'user', content: `Варианты:\n${drafts.map((d: any, i: number) => `[${i}] ${d.text}`).join('\n\n')}\n\nВерни {"best_index":N,"score":0-100,"reasoning":"..."}.` },
   ], true);
-  const critique = JSON.parse(critiqueRaw);
+  const critique = safeJSON(critiqueRaw);
   const best = drafts[critique.best_index ?? 0];
   const score = critique.score ?? 0;
 
