@@ -92,15 +92,34 @@ function sunSign(date: Date): string {
   return "Козерог";
 }
 
-function astroContext(now: Date): string {
+function astroContext(now: Date): { text: string; primaryEvent: AstroEvent | null } {
   const { phase, illumination } = moonPhase(now);
   const sign = sunSign(now);
   const dateStr = now.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" });
-  const events = upcomingEvents(now, 21);
-  const eventsBlock = events.length
-    ? `\nБлижайшие астрособытия (точные даты, можно использовать в теме пина):\n- ${events.join("\n- ")}`
+  const { events, primary, lunar } = upcomingEvents(now, 21);
+  const eventLines = [
+    ...events.map((e) => `- ${formatEventLine(e, now)} | угол: ${e.theme}`),
+    ...lunar.map((l) => `- ${l}`),
+  ];
+  const eventsBlock = eventLines.length
+    ? `\nБлижайшие астрособытия (бери даты и углы ТОЛЬКО отсюда):\n${eventLines.join("\n")}`
     : "";
-  return `Сегодня ${dateStr}. Солнце в знаке ${sign}. ${phase}, освещённость ~${illumination}%.${eventsBlock}`;
+  const primaryBlock = primary
+    ? `\nГЛАВНОЕ СОБЫТИЕ ДНЯ для пина: ${formatEventLine(primary, now)}. Триггерный угол: ${primary.theme}`
+    : "";
+  return {
+    text: `Сегодня ${dateStr}. Солнце в знаке ${sign}. ${phase}, освещённость ~${illumination}%.${primaryBlock}${eventsBlock}`,
+    primaryEvent: primary,
+  };
+}
+
+function formatEventLine(e: AstroEvent, now: Date): string {
+  const [Y, M, D] = e.date.split("-").map(Number);
+  const start = new Date(Date.UTC(Y, M - 1, D));
+  const ru = start.toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
+  const todayStr = ymd(now);
+  const status = e.date === todayStr ? " (СЕГОДНЯ!)" : (e.date > todayStr ? "" : " (идёт сейчас)");
+  return `${ru}${status} — ${e.title}`;
 }
 
 // =============== Верифицированные астрособытия 2026 (по Cafe Astrology) ===============
@@ -193,18 +212,30 @@ function nextLunarMilestones(now: Date, daysAhead: number): string[] {
   return out;
 }
 
-function upcomingEvents(now: Date, daysAhead: number): string[] {
+function upcomingEvents(now: Date, daysAhead: number): {
+  events: AstroEvent[];
+  primary: AstroEvent | null;
+  lunar: string[];
+} {
   const horizon = new Date(now.getTime() + daysAhead * 24 * 60 * 60 * 1000);
   const todayStr = ymd(now);
   const horizonStr = ymd(horizon);
-  const list = ASTRO_EVENTS_2026
-    .filter((e) => e.date >= todayStr && e.date <= horizonStr)
-    .map((e) => {
-      const [Y, M, D] = e.date.split("-").map(Number);
-      const dt = new Date(Date.UTC(Y, M - 1, D));
-      return `${ruDate(dt)} — ${e.title}`;
-    });
-  return [...list, ...nextLunarMilestones(now, daysAhead)];
+  // Активные периоды (ретрограды/сезоны), идущие прямо сейчас
+  const ongoing = ASTRO_EVENTS_2026.filter(
+    (e) => e.endDate && e.date <= todayStr && e.endDate >= todayStr,
+  );
+  // События в окне ближайших N дней
+  const upcoming = ASTRO_EVENTS_2026.filter(
+    (e) => e.date >= todayStr && e.date <= horizonStr,
+  );
+  const events = [...ongoing, ...upcoming];
+  // Приоритет для главного события: ближайшее в течение 7 дней, иначе идущий ретроград, иначе ближайшее
+  const soon = upcoming.find((e) => {
+    const diff = (new Date(e.date).getTime() - new Date(todayStr).getTime()) / 86400000;
+    return diff <= 7;
+  });
+  const primary = soon ?? ongoing[0] ?? upcoming[0] ?? null;
+  return { events, primary, lunar: nextLunarMilestones(now, daysAhead) };
 }
 
 // =============== Lovable AI (контент) ===============
