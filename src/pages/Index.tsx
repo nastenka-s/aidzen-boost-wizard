@@ -160,17 +160,17 @@ const Index = () => {
                   <div className="flex -space-x-2 sm:-space-x-3">
                     <img
                       src={blondeWoman}
-                      alt="User 1"
+                      alt="Портрет довольной пользовательницы НейроДзен"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
                     <img
                       src={brunetteWoman}
-                      alt="User 2"
+                      alt="Портрет ещё одной пользовательницы НейроДзен"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
                     <img
                       src={manDarkHair}
-                      alt="User 3"
+                      alt="Портрет пользователя НейроДзен"
                       className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border-2 border-background"
                     />
                   </div>
