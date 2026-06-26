@@ -9,8 +9,9 @@ const TOKEN = Deno.env.get('THREADS_ACCESS_TOKEN')!;
 
 const THREADS_FIELDS = 'id,media_type,text,permalink,username,timestamp';
 const PUBLIC_METRIC_FIELDS = 'like_count,reply_count,repost_count,quote_count';
-const MIN_LIKES_FOR_VIRAL = 50;
-const ALWAYS_KEEP_TOP_N = 10;
+const MIN_LIKES_FOR_VIRAL = 20;
+const ALWAYS_KEEP_TOP_N = 5;
+const OWN_USERNAME = 'astroneironka';
 
 async function fetchKeywordPosts(keyword: string, language: string) {
   // Threads Keyword Search API (beta): graph.threads.net/v1.0/keyword_search
@@ -59,6 +60,7 @@ Deno.serve(async (req) => {
       const slice = posts.slice(0, 25);
       for (let i = 0; i < slice.length; i++) {
         const p = slice[i];
+        if (p.username === OWN_USERNAME) { skipped++; continue; }
         const metrics = await fetchPublicMetrics(p.id);
         const likes = metrics.likes ?? 0;
         const isTop = i < ALWAYS_KEEP_TOP_N;
