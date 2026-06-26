@@ -57,12 +57,10 @@ function pickAstroEvent(): string {
   return `${upcoming}: ${ASTRO_2026[upcoming]}`;
 }
 
-function pickLinkTarget(): { target: 'site' | 'bot'; url: string } {
-  // Rotate by hour of day to ensure mix
-  const h = new Date().getUTCHours();
-  return h % 2 === 0
-    ? { target: 'site', url: SITE_LINK }
-    : { target: 'bot', url: BOT_LINK };
+function pickLinkTarget(): { target: 'none' | 'bot'; url: string | null } {
+  // Safer mode after unban: no site link in posts at all.
+  // Bot link only in CTA replies of daily_forecast.
+  return { target: 'none', url: null };
 }
 
 async function callAI(messages: any[], json = false) {
@@ -292,7 +290,7 @@ ${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":
   // ============ SINGLE POST (10 other formats) ============
   const systemPrompt = `Ты — топ-копирайтер виральных постов в Threads для русскоязычной эзо-аудитории.
 Бренд: НейроДзен — AI для астрологии и матрицы судьбы.
-ЦЕЛЬ: максимум сохранений + переходов по ссылке ${link.url}.
+ЦЕЛЬ: максимум сохранений и комментариев.
 
 ФОРМАТ ПОСТА: ${format.name} — ${format.description}
 ДЛИНА: ${lengthBucket.range} (строго!)
@@ -301,7 +299,7 @@ ${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":
 - Первая строка — ХУК (обрыв, цифра, вопрос, шок). Без воды.
 - Дальше — конкретика (даты, знаки, действия).
 - Без агрессии и FOMO-таймеров. Магия + забота.
-- В конце мягкий CTA с ссылкой ${link.url}.
+- В конце мягкий CTA в виде вопроса или приглашения к обсуждению (БЕЗ ссылок и БЕЗ URL).
 - Эмодзи 2-4 шт, не больше. Без хэштегов в конце.
 - Факты должны быть КОРРЕКТНЫ.
 
@@ -332,11 +330,8 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
   const best = drafts[critique.best_index ?? 0];
   const score = critique.score ?? 0;
 
-  // 5) Ensure link is in text
-  let finalText: string = best.text;
-  if (!finalText.includes(link.url)) {
-    finalText = `${finalText.trim()}\n\n${link.url}`;
-  }
+  // 5) Strip any URLs AI may have added (safer-mode: no links in single posts)
+  let finalText: string = best.text.replace(/https?:\/\/\S+/g, '').replace(/\n{3,}/g, '\n\n').trim();
   if (finalText.length > 500) finalText = finalText.slice(0, 497) + '...';
 
   // 6) Publish
