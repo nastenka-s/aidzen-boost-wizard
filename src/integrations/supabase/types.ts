@@ -154,6 +154,210 @@ export type Database = {
         }
         Relationships: []
       }
+      threads_competitor_posts: {
+        Row: {
+          collected_at: string
+          engagement_rate: number | null
+          external_id: string | null
+          id: string
+          language: string | null
+          likes: number
+          media_type: string | null
+          permalink: string | null
+          posted_at: string | null
+          quotes: number
+          replies: number
+          reposts: number
+          segment: string | null
+          source_keyword: string | null
+          text: string
+          username: string | null
+          views: number
+        }
+        Insert: {
+          collected_at?: string
+          engagement_rate?: number | null
+          external_id?: string | null
+          id?: string
+          language?: string | null
+          likes?: number
+          media_type?: string | null
+          permalink?: string | null
+          posted_at?: string | null
+          quotes?: number
+          replies?: number
+          reposts?: number
+          segment?: string | null
+          source_keyword?: string | null
+          text: string
+          username?: string | null
+          views?: number
+        }
+        Update: {
+          collected_at?: string
+          engagement_rate?: number | null
+          external_id?: string | null
+          id?: string
+          language?: string | null
+          likes?: number
+          media_type?: string | null
+          permalink?: string | null
+          posted_at?: string | null
+          quotes?: number
+          replies?: number
+          reposts?: number
+          segment?: string | null
+          source_keyword?: string | null
+          text?: string
+          username?: string | null
+          views?: number
+        }
+        Relationships: []
+      }
+      threads_keywords: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          id: string
+          keyword: string
+          language: string
+          segment: string
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          keyword: string
+          language?: string
+          segment?: string
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          keyword?: string
+          language?: string
+          segment?: string
+        }
+        Relationships: []
+      }
+      threads_posts: {
+        Row: {
+          created_at: string
+          engagement_rate: number | null
+          error_message: string | null
+          hook: string | null
+          id: string
+          likes: number
+          link_target: string
+          link_url: string
+          metrics_updated_at: string | null
+          pattern_ids: string[] | null
+          permalink: string | null
+          posted_at: string | null
+          predicted_score: number | null
+          quotes: number
+          replies: number
+          reposts: number
+          status: string
+          text: string
+          thread_id: string | null
+          topic: string | null
+          views: number
+        }
+        Insert: {
+          created_at?: string
+          engagement_rate?: number | null
+          error_message?: string | null
+          hook?: string | null
+          id?: string
+          likes?: number
+          link_target?: string
+          link_url: string
+          metrics_updated_at?: string | null
+          pattern_ids?: string[] | null
+          permalink?: string | null
+          posted_at?: string | null
+          predicted_score?: number | null
+          quotes?: number
+          replies?: number
+          reposts?: number
+          status?: string
+          text: string
+          thread_id?: string | null
+          topic?: string | null
+          views?: number
+        }
+        Update: {
+          created_at?: string
+          engagement_rate?: number | null
+          error_message?: string | null
+          hook?: string | null
+          id?: string
+          likes?: number
+          link_target?: string
+          link_url?: string
+          metrics_updated_at?: string | null
+          pattern_ids?: string[] | null
+          permalink?: string | null
+          posted_at?: string | null
+          predicted_score?: number | null
+          quotes?: number
+          replies?: number
+          reposts?: number
+          status?: string
+          text?: string
+          thread_id?: string | null
+          topic?: string | null
+          views?: number
+        }
+        Relationships: []
+      }
+      threads_virality_patterns: {
+        Row: {
+          active: boolean
+          avg_engagement: number | null
+          created_at: string
+          description: string
+          example: string | null
+          id: string
+          name: string
+          pattern_type: string
+          sample_size: number | null
+          segment: string | null
+          updated_at: string
+          weight: number
+        }
+        Insert: {
+          active?: boolean
+          avg_engagement?: number | null
+          created_at?: string
+          description: string
+          example?: string | null
+          id?: string
+          name: string
+          pattern_type: string
+          sample_size?: number | null
+          segment?: string | null
+          updated_at?: string
+          weight?: number
+        }
+        Update: {
+          active?: boolean
+          avg_engagement?: number | null
+          created_at?: string
+          description?: string
+          example?: string | null
+          id?: string
+          name?: string
+          pattern_type?: string
+          sample_size?: number | null
+          segment?: string | null
+          updated_at?: string
+          weight?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
