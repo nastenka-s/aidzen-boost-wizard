@@ -4,7 +4,7 @@ import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY")!;
-const KIE_AI_API_KEY = Deno.env.get("KIE_AI_API_KEY")!;
+const KIE_AI_API_KEY = (Deno.env.get("KIE_AI_API_KEY") ?? "").trim();
 
 const SITE_URL = "https://aidzen.ru";
 const BOT_URL = "https://t.me/Neurodzenaibot";
