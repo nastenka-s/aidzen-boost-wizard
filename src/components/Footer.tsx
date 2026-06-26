@@ -56,12 +56,22 @@ export const Footer = () => {
             <h3 className="font-semibold">Контакты</h3>
             <div className="flex gap-3">
               <Button size="sm" className="bg-primary hover:bg-primary/90" asChild>
-                <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://t.me/Neurodzenaibot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Написать НейроДзен в Telegram"
+                >
                   <MessageCircle className="w-4 h-4" />
                 </a>
               </Button>
               <Button size="sm" variant="outline" className="border-primary/30" asChild>
-                <a href="https://aidzen.app/login" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://chat.aidzen.ru/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Открыть веб-приложение НейроДзен"
+                >
                   <Smartphone className="w-4 h-4" />
                 </a>
               </Button>
