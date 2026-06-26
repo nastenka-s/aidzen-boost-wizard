@@ -12,6 +12,24 @@ const THREADS_USER_ID = Deno.env.get('THREADS_USER_ID')!;
 const SITE_LINK = 'https://aidzen.ru';
 const BOT_LINK = 'https://t.me/matricasudbyaibot';
 
+const ZODIAC = [
+  '♈ Овен','♉ Телец','♊ Близнецы','♋ Рак','♌ Лев','♍ Дева',
+  '♎ Весы','♏ Скорпион','♐ Стрелец','♑ Козерог','♒ Водолей','♓ Рыбы',
+];
+
+const LENGTH_BUCKETS = [
+  { id: 'short', range: '80-150 символов' },
+  { id: 'medium', range: '250-350 символов' },
+  { id: 'long', range: '400-500 символов' },
+];
+
+function weightedPick<T extends { weight: number }>(items: T[]): T {
+  const total = items.reduce((s, x) => s + x.weight, 0);
+  let r = Math.random() * total;
+  for (const it of items) { r -= it.weight; if (r <= 0) return it; }
+  return items[0];
+}
+
 // Astro context (truncated; can be extended)
 const ASTRO_2026: Record<string, string> = {
   '2026-01-03': 'Меркурий ретроградный начинается',
@@ -95,9 +113,42 @@ async function publishToThreads(text: string): Promise<{ thread_id: string; perm
   return { thread_id: threadId, permalink: metaJson.permalink ?? '' };
 }
 
+async function publishReply(text: string, replyToId: string): Promise<{ thread_id: string }> {
+  const createUrl = `https://graph.threads.net/v1.0/${THREADS_USER_ID}/threads`;
+  const body = new URLSearchParams({
+    media_type: 'TEXT',
+    text,
+    reply_to_id: replyToId,
+    access_token: THREADS_TOKEN,
+  });
+  const created = await fetch(createUrl, { method: 'POST', body });
+  if (!created.ok) throw new Error(`reply-create ${created.status}: ${await created.text()}`);
+  const { id: containerId } = await created.json();
+
+  const publishUrl = `https://graph.threads.net/v1.0/${THREADS_USER_ID}/threads_publish`;
+  const publishBody = new URLSearchParams({ creation_id: containerId, access_token: THREADS_TOKEN });
+  let res = await fetch(publishUrl, { method: 'POST', body: publishBody });
+  if (!res.ok) {
+    await new Promise(r => setTimeout(r, 5000));
+    res = await fetch(publishUrl, { method: 'POST', body: publishBody });
+  }
+  if (!res.ok) throw new Error(`reply-publish ${res.status}: ${await res.text()}`);
+  const { id: threadId } = await res.json();
+  return { thread_id: threadId };
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
+
+  // 0) Pick format + length
+  const { data: formats } = await supabase
+    .from('threads_formats').select('*').eq('active', true);
+  if (!formats || formats.length === 0) {
+    return new Response(JSON.stringify({ error: 'no formats' }), { status: 500, headers: corsHeaders });
+  }
+  const format = weightedPick(formats as any[]);
+  const lengthBucket = LENGTH_BUCKETS[Math.floor(Math.random() * LENGTH_BUCKETS.length)];
 
   // 1) Load active patterns
   const { data: patterns } = await supabase
@@ -116,12 +167,87 @@ Deno.serve(async (req) => {
   const astroEvent = pickAstroEvent();
   const link = pickLinkTarget();
 
+  // ============ DAILY FORECAST THREAD ============
+  if (format.is_thread && format.id === 'daily_forecast') {
+    const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    const sysThread = `Ты — астролог НейроДзен. Сделай прогноз на ${today}.
+КОНТЕКСТ: ${astroEvent}.
+
+Верни JSON:
+{
+  "intro": "пост-хедер 200-280 символов: триггер + анонс что под каждым знаком в комментах. Без агрессии, тепло.",
+  "signs": [ ${ZODIAC.map(z => `{"sign":"${z}","text":"80-180 символов: 1 совет + 1 предупреждение на день, конкретно"}`).join(',')} ]
+}
+В конце intro строка: "Твой знак ниже 👇". Без хэштегов. 1-2 эмодзи.`;
+
+    const raw = await callAI([
+      { role: 'system', content: sysThread },
+      { role: 'user', content: 'Сгенерируй прогноз сегодняшнего дня для всех 12 знаков.' },
+    ], true);
+    const parsed = JSON.parse(raw);
+    const intro: string = parsed.intro;
+    const signs: Array<{ sign: string; text: string }> = parsed.signs ?? [];
+
+    // Publish parent
+    const parentRow = await supabase.from('threads_posts').insert({
+      text: intro, hook: 'daily_forecast_intro', topic: 'forecast',
+      link_target: link.target, link_url: link.url,
+      format_id: format.id, length_bucket: 'medium', status: 'scheduled',
+    }).select('id').single();
+
+    let parentThreadId = '';
+    try {
+      const pub = await publishToThreads(intro);
+      parentThreadId = pub.thread_id;
+      await supabase.from('threads_posts').update({
+        thread_id: pub.thread_id, permalink: pub.permalink, status: 'published',
+        posted_at: new Date().toISOString(),
+      }).eq('id', parentRow.data!.id);
+    } catch (e) {
+      await supabase.from('threads_posts').update({ status: 'failed', error_message: String(e) })
+        .eq('id', parentRow.data!.id);
+      return new Response(JSON.stringify({ ok: false, error: String(e) }), { status: 500, headers: corsHeaders });
+    }
+
+    // Publish 12 replies sequentially
+    const replies: string[] = [];
+    let lastReplyId = parentThreadId;
+    for (let i = 0; i < signs.length; i++) {
+      const s = signs[i];
+      const replyText = `${s.sign}\n\n${s.text}`;
+      const childRow = await supabase.from('threads_posts').insert({
+        text: replyText, hook: s.sign, topic: 'forecast',
+        link_target: link.target, link_url: link.url,
+        format_id: format.id, length_bucket: 'short',
+        parent_post_id: parentRow.data!.id, reply_index: i + 1, status: 'scheduled',
+      }).select('id').single();
+      try {
+        const r = await publishReply(replyText, lastReplyId);
+        await supabase.from('threads_posts').update({
+          thread_id: r.thread_id, status: 'published', posted_at: new Date().toISOString(),
+        }).eq('id', childRow.data!.id);
+        lastReplyId = r.thread_id;
+        replies.push(r.thread_id);
+        await new Promise(r => setTimeout(r, 1500));
+      } catch (e) {
+        await supabase.from('threads_posts').update({ status: 'failed', error_message: String(e) })
+          .eq('id', childRow.data!.id);
+      }
+    }
+    return new Response(JSON.stringify({ ok: true, mode: 'thread', parent: parentThreadId, replies: replies.length }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
+  // ============ SINGLE POST (10 other formats) ============
   const systemPrompt = `Ты — топ-копирайтер виральных постов в Threads для русскоязычной эзо-аудитории.
 Бренд: НейроДзен — AI для астрологии и матрицы судьбы.
 ЦЕЛЬ: максимум сохранений + переходов по ссылке ${link.url}.
 
+ФОРМАТ ПОСТА: ${format.name} — ${format.description}
+ДЛИНА: ${lengthBucket.range} (строго!)
+
 ПРАВИЛА:
-- Длина 300-450 символов (оптимум для Threads).
 - Первая строка — ХУК (обрыв, цифра, вопрос, шок). Без воды.
 - Дальше — конкретика (даты, знаки, действия).
 - Без агрессии и FOMO-таймеров. Магия + забота.
@@ -172,6 +298,8 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
     link_url: link.url,
     predicted_score: score,
     status: 'scheduled',
+    format_id: format.id,
+    length_bucket: lengthBucket.id,
   }).select('id').single();
 
   try {
