@@ -62,6 +62,7 @@ import ChisloDushiPoDateRozhdeniya from "./pages/blog-auto/ChisloDushiPoDateRozh
 import ChisloImeniNumerologiya from "./pages/blog-auto/ChisloImeniNumerologiya";
 import KakChitatNatalnuyuKartu from "./pages/blog-auto/KakChitatNatalnuyuKartu";
 import KakRasschitatMatricuSudby from "./pages/blog-auto/KakRasschitatMatricuSudby";
+import Arkan1MagVMatriceSudby from "./pages/blog-auto/Arkan1MagVMatriceSudby";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -78,6 +79,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/arkan-1-mag-v-matrice-sudby" element={<Arkan1MagVMatriceSudby />} />
           <Route path="/kak-rasschitat-matricu-sudby" element={<KakRasschitatMatricuSudby />} />
           <Route path="/kak-chitat-natalnuyu-kartu" element={<KakChitatNatalnuyuKartu />} />
           <Route path="/chislo-imeni-numerologiya" element={<ChisloImeniNumerologiya />} />
