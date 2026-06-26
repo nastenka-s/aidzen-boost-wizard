@@ -214,6 +214,39 @@ export type Database = {
         }
         Relationships: []
       }
+      threads_formats: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string
+          id: string
+          is_thread: boolean
+          name: string
+          template: string | null
+          weight: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description: string
+          id: string
+          is_thread?: boolean
+          name: string
+          template?: string | null
+          weight?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          id?: string
+          is_thread?: boolean
+          name?: string
+          template?: string | null
+          weight?: number
+        }
+        Relationships: []
+      }
       threads_keywords: {
         Row: {
           created_at: string
@@ -246,18 +279,22 @@ export type Database = {
           created_at: string
           engagement_rate: number | null
           error_message: string | null
+          format_id: string | null
           hook: string | null
           id: string
+          length_bucket: string | null
           likes: number
           link_target: string
           link_url: string
           metrics_updated_at: string | null
+          parent_post_id: string | null
           pattern_ids: string[] | null
           permalink: string | null
           posted_at: string | null
           predicted_score: number | null
           quotes: number
           replies: number
+          reply_index: number | null
           reposts: number
           status: string
           text: string
@@ -269,18 +306,22 @@ export type Database = {
           created_at?: string
           engagement_rate?: number | null
           error_message?: string | null
+          format_id?: string | null
           hook?: string | null
           id?: string
+          length_bucket?: string | null
           likes?: number
           link_target?: string
           link_url: string
           metrics_updated_at?: string | null
+          parent_post_id?: string | null
           pattern_ids?: string[] | null
           permalink?: string | null
           posted_at?: string | null
           predicted_score?: number | null
           quotes?: number
           replies?: number
+          reply_index?: number | null
           reposts?: number
           status?: string
           text: string
@@ -292,18 +333,22 @@ export type Database = {
           created_at?: string
           engagement_rate?: number | null
           error_message?: string | null
+          format_id?: string | null
           hook?: string | null
           id?: string
+          length_bucket?: string | null
           likes?: number
           link_target?: string
           link_url?: string
           metrics_updated_at?: string | null
+          parent_post_id?: string | null
           pattern_ids?: string[] | null
           permalink?: string | null
           posted_at?: string | null
           predicted_score?: number | null
           quotes?: number
           replies?: number
+          reply_index?: number | null
           reposts?: number
           status?: string
           text?: string
@@ -311,7 +356,22 @@ export type Database = {
           topic?: string | null
           views?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "threads_posts_format_id_fkey"
+            columns: ["format_id"]
+            isOneToOne: false
+            referencedRelation: "threads_formats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "threads_posts_parent_post_id_fkey"
+            columns: ["parent_post_id"]
+            isOneToOne: false
+            referencedRelation: "threads_posts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       threads_virality_patterns: {
         Row: {
