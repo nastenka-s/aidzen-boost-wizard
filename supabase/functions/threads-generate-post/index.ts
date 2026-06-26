@@ -170,23 +170,32 @@ Deno.serve(async (req) => {
   // ============ DAILY FORECAST THREAD ============
   if (format.is_thread && format.id === 'daily_forecast') {
     const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    const GROUPS = [
+      { name: 'Огонь', signs: ['♈ Овен','♌ Лев','♐ Стрелец'] },
+      { name: 'Земля', signs: ['♉ Телец','♍ Дева','♑ Козерог'] },
+      { name: 'Воздух', signs: ['♊ Близнецы','♎ Весы','♒ Водолей'] },
+      { name: 'Вода',  signs: ['♋ Рак','♏ Скорпион','♓ Рыбы'] },
+    ];
     const sysThread = `Ты — астролог НейроДзен. Сделай прогноз на ${today}.
-КОНТЕКСТ: ${astroEvent}.
+КОНТЕКСТ ДНЯ: ${astroEvent}.
 
-Верни JSON:
+Верни строго JSON:
 {
-  "intro": "пост-хедер 200-280 символов: триггер + анонс что под каждым знаком в комментах. Без агрессии, тепло.",
-  "signs": [ ${ZODIAC.map(z => `{"sign":"${z}","text":"80-180 символов: 1 совет + 1 предупреждение на день, конкретно"}`).join(',')} ]
+  "intro": "пост-хедер 220-300 символов: триггер дня + анонс 'Ниже — прогноз по стихиям'. Тепло, без агрессии. В конце строка 'Твоя стихия ниже 👇'. 1-2 эмодзи.",
+  "groups": [
+${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":"${s}","text":"60-100 символов: 1 конкретный совет/предупреждение"}`).join(',')}]}`).join(',\n')}
+  ]
 }
-В конце intro строка: "Твой знак ниже 👇". Без хэштегов. 1-2 эмодзи.`;
+
+Длина каждого group-поста (после склейки знаков) ≤ 450 символов. Без хэштегов.`;
 
     const raw = await callAI([
       { role: 'system', content: sysThread },
-      { role: 'user', content: 'Сгенерируй прогноз сегодняшнего дня для всех 12 знаков.' },
+      { role: 'user', content: 'Сгенерируй прогноз сегодняшнего дня по 4 стихиям.' },
     ], true);
     const parsed = JSON.parse(raw);
     const intro: string = parsed.intro;
-    const signs: Array<{ sign: string; text: string }> = parsed.signs ?? [];
+    const groups: Array<{ name: string; signs: Array<{ sign: string; text: string }> }> = parsed.groups ?? [];
 
     // Publish parent
     const parentRow = await supabase.from('threads_posts').insert({
@@ -209,16 +218,29 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ ok: false, error: String(e) }), { status: 500, headers: corsHeaders });
     }
 
-    // Publish 12 replies sequentially
+    // Build child posts: 4 group posts + 1 CTA post → bot
+    const childTexts: Array<{ text: string; hook: string; isCta?: boolean }> = [];
+    for (const g of groups) {
+      const body = g.signs.map(s => `${s.sign}\n${s.text}`).join('\n\n');
+      childTexts.push({ text: `🔥 Стихия ${g.name}\n\n${body}`, hook: `group_${g.name}` });
+    }
+    const ctaText =
+      `Это общий прогноз по стихиям 🌙\n\n` +
+      `Хочешь точный личный прогноз — по твоей дате рождения, с учётом транзитов именно к твоей натальной карте?\n\n` +
+      `Бесплатно в боте 👉 ${BOT_LINK}`;
+    childTexts.push({ text: ctaText, hook: 'cta_bot', isCta: true });
+
+    // Publish replies sequentially
     const replies: string[] = [];
     let lastReplyId = parentThreadId;
-    for (let i = 0; i < signs.length; i++) {
-      const s = signs[i];
-      const replyText = `${s.sign}\n\n${s.text}`;
+    for (let i = 0; i < childTexts.length; i++) {
+      const c = childTexts[i];
+      const replyText = c.text;
       const childRow = await supabase.from('threads_posts').insert({
-        text: replyText, hook: s.sign, topic: 'forecast',
-        link_target: link.target, link_url: link.url,
-        format_id: format.id, length_bucket: 'short',
+        text: replyText, hook: c.hook, topic: 'forecast',
+        link_target: c.isCta ? 'bot' : link.target,
+        link_url: c.isCta ? BOT_LINK : link.url,
+        format_id: format.id, length_bucket: c.isCta ? 'medium' : 'medium',
         parent_post_id: parentRow.data!.id, reply_index: i + 1, status: 'scheduled',
       }).select('id').single();
       try {
