@@ -133,6 +133,10 @@
       "destination": "https://rhksexmodcihbasgohvb.supabase.co/functions/v1/dzen-rss"
     },
     {
+      "source": "/pinterest-rss.xml",
+      "destination": "https://rhksexmodcihbasgohvb.supabase.co/functions/v1/pinterest-rss"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
