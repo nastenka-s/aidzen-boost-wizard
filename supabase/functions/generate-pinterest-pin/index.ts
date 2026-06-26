@@ -95,7 +95,76 @@ function astroContext(now: Date): string {
   const { phase, illumination } = moonPhase(now);
   const sign = sunSign(now);
   const dateStr = now.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" });
-  return `Сегодня ${dateStr}. Солнце в знаке ${sign}. ${phase}, освещённость ~${illumination}%.`;
+  const events = upcomingEvents(now, 21);
+  const eventsBlock = events.length
+    ? `\nБлижайшие астрособытия (точные даты, можно использовать в теме пина):\n- ${events.join("\n- ")}`
+    : "";
+  return `Сегодня ${dateStr}. Солнце в знаке ${sign}. ${phase}, освещённость ~${illumination}%.${eventsBlock}`;
+}
+
+// =============== Верифицированные астрособытия 2026 ===============
+// Только даты, в которых уверены: ингрессии Солнца и затмения 2026.
+// Лунные фазы вычисляем алгоритмически (см. ниже).
+type AstroEvent = { date: string; title: string }; // date в формате YYYY-MM-DD (UTC)
+const ASTRO_EVENTS_2026: AstroEvent[] = [
+  // Ингрессии Солнца (вход в знак)
+  { date: "2026-03-20", title: "Солнце переходит в Овен — весеннее равноденствие, начало астрологического года" },
+  { date: "2026-04-20", title: "Солнце переходит в Телец — сезон стабильности и материи" },
+  { date: "2026-05-21", title: "Солнце переходит в Близнецы — сезон общения и любопытства" },
+  { date: "2026-06-21", title: "Солнце переходит в Рак — летнее солнцестояние, сезон семьи и интуиции" },
+  { date: "2026-07-22", title: "Солнце переходит в Лев — сезон творчества и яркости" },
+  { date: "2026-08-23", title: "Солнце переходит в Деву — сезон порядка и здоровых привычек" },
+  { date: "2026-09-23", title: "Солнце переходит в Весы — осеннее равноденствие, сезон баланса" },
+  { date: "2026-10-23", title: "Солнце переходит в Скорпион — сезон трансформации" },
+  { date: "2026-11-22", title: "Солнце переходит в Стрелец — сезон расширения горизонтов" },
+  { date: "2026-12-21", title: "Солнце переходит в Козерог — зимнее солнцестояние, сезон целей" },
+  // Затмения 2026
+  { date: "2026-02-17", title: "Кольцеобразное солнечное затмение в Водолее" },
+  { date: "2026-03-03", title: "Полное лунное затмение в Деве" },
+  { date: "2026-08-12", title: "Полное солнечное затмение во Льве (видно над Исландией и Испанией)" },
+  { date: "2026-08-28", title: "Частичное лунное затмение в Рыбах" },
+];
+
+function ymd(d: Date): string {
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
+}
+
+function ruDate(d: Date): string {
+  return d.toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
+}
+
+function nextLunarMilestones(now: Date, daysAhead: number): string[] {
+  // Идём по дням вперёд и фиксируем ближайшие Новолуние и Полнолуние
+  const out: string[] = [];
+  let foundNew = false;
+  let foundFull = false;
+  for (let i = 0; i <= daysAhead && (!foundNew || !foundFull); i++) {
+    const d = new Date(now.getTime() + i * 24 * 60 * 60 * 1000);
+    const { phase } = moonPhase(d);
+    if (!foundNew && phase === "Новолуние") {
+      out.push(`${ruDate(d)} — Новолуние (момент для намерений и начинаний)`);
+      foundNew = true;
+    }
+    if (!foundFull && phase === "Полнолуние") {
+      out.push(`${ruDate(d)} — Полнолуние (пик энергии, время отпускать)`);
+      foundFull = true;
+    }
+  }
+  return out;
+}
+
+function upcomingEvents(now: Date, daysAhead: number): string[] {
+  const horizon = new Date(now.getTime() + daysAhead * 24 * 60 * 60 * 1000);
+  const todayStr = ymd(now);
+  const horizonStr = ymd(horizon);
+  const list = ASTRO_EVENTS_2026
+    .filter((e) => e.date >= todayStr && e.date <= horizonStr)
+    .map((e) => {
+      const [Y, M, D] = e.date.split("-").map(Number);
+      const dt = new Date(Date.UTC(Y, M - 1, D));
+      return `${ruDate(dt)} — ${e.title}`;
+    });
+  return [...list, ...nextLunarMilestones(now, daysAhead)];
 }
 
 // =============== Lovable AI (контент) ===============
