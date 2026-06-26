@@ -2,3 +2,9 @@ project_id = "rhksexmodcihbasgohvb"
 
 [functions.dzen-rss]
 verify_jwt = false
+
+[functions.pinterest-rss]
+verify_jwt = false
+
+[functions.generate-pinterest-pin]
+verify_jwt = false
