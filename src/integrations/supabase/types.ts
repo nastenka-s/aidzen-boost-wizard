@@ -106,6 +106,54 @@ export type Database = {
         }
         Relationships: []
       }
+      pinterest_pins: {
+        Row: {
+          astro_context: string | null
+          created_at: string
+          description: string
+          error_message: string | null
+          id: string
+          image_prompt: string | null
+          image_url: string
+          link_target: string
+          link_url: string
+          status: string
+          style: string
+          title: string
+          topic: string | null
+        }
+        Insert: {
+          astro_context?: string | null
+          created_at?: string
+          description: string
+          error_message?: string | null
+          id?: string
+          image_prompt?: string | null
+          image_url: string
+          link_target: string
+          link_url: string
+          status?: string
+          style: string
+          title: string
+          topic?: string | null
+        }
+        Update: {
+          astro_context?: string | null
+          created_at?: string
+          description?: string
+          error_message?: string | null
+          id?: string
+          image_prompt?: string | null
+          image_url?: string
+          link_target?: string
+          link_url?: string
+          status?: string
+          style?: string
+          title?: string
+          topic?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
