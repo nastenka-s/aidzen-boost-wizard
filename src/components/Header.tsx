@@ -53,14 +53,19 @@ export const Header = () => {
         {/* Mobile Actions & Menu */}
         <div className="flex lg:hidden gap-2 items-center flex-shrink-0">
           <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25" asChild>
-            <a href="https://t.me/Neurodzenaibot" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://t.me/Neurodzenaibot"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Открыть Telegram-бот НейроДзен"
+            >
               <Send className="w-4 h-4" />
             </a>
           </Button>
           
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" aria-label="Открыть меню">
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
