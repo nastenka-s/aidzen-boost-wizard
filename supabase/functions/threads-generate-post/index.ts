@@ -66,18 +66,39 @@ function pickLinkTarget(): { target: 'site' | 'bot'; url: string } {
 }
 
 async function callAI(messages: any[], json = false) {
-  const res = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${LOVABLE_KEY}` },
-    body: JSON.stringify({
-      model: 'google/gemini-2.5-pro',
-      messages,
-      ...(json ? { response_format: { type: 'json_object' } } : {}),
-    }),
-  });
-  if (!res.ok) throw new Error(`AI ${res.status}: ${await res.text()}`);
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? '';
+  const models = ['google/gemini-2.5-pro', 'google/gemini-2.5-flash', 'google/gemini-2.5-flash'];
+  let lastErr = '';
+  for (const model of models) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const res = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${LOVABLE_KEY}` },
+          body: JSON.stringify({
+            model,
+            messages,
+            ...(json ? { response_format: { type: 'json_object' } } : {}),
+          }),
+        });
+        if (!res.ok) { lastErr = `AI ${res.status}: ${await res.text()}`; continue; }
+        const data = await res.json();
+        const content = data.choices?.[0]?.message?.content ?? '';
+        if (!content || !content.trim()) { lastErr = 'empty AI content'; continue; }
+        return content;
+      } catch (e) { lastErr = String(e); }
+    }
+  }
+  throw new Error(`callAI failed: ${lastErr}`);
+}
+
+function safeJSON(raw: string): any {
+  const cleaned = raw.replace(/^```(?:json)?/i, '').replace(/```\s*$/, '').trim();
+  try { return JSON.parse(cleaned); }
+  catch {
+    const m = cleaned.match(/\{[\s\S]*\}/);
+    if (m) { try { return JSON.parse(m[0]); } catch {} }
+    return {};
+  }
 }
 
 async function publishToThreads(text: string): Promise<{ thread_id: string; permalink: string }> {
