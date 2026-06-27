@@ -65,6 +65,7 @@ import KakRasschitatMatricuSudby from "./pages/blog-auto/KakRasschitatMatricuSud
 import Arkan1MagVMatriceSudby from "./pages/blog-auto/Arkan1MagVMatriceSudby";
 import Arkan2ZhricaVMatriceSudby from "./pages/blog-auto/Arkan2ZhricaVMatriceSudby";
 import Arkan3ImperatricaVMatriceSudby from "./pages/blog-auto/Arkan3ImperatricaVMatriceSudby";
+import OdinakovyeCifryNaChasah from "./pages/blog-auto/OdinakovyeCifryNaChasah";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -81,6 +82,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/odinakovye-cifry-na-chasah" element={<OdinakovyeCifryNaChasah />} />
           <Route path="/arkan-3-imperatrica-v-matrice-sudby" element={<Arkan3ImperatricaVMatriceSudby />} />
           <Route path="/arkan-2-zhrica-v-matrice-sudby" element={<Arkan2ZhricaVMatriceSudby />} />
           <Route path="/arkan-1-mag-v-matrice-sudby" element={<Arkan1MagVMatriceSudby />} />
