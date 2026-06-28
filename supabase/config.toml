@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.generate-pinterest-pin]
 verify_jwt = false
+
+[functions.pinterest-img]
+verify_jwt = false
