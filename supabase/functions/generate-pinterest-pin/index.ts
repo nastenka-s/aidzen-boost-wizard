@@ -385,7 +385,16 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const astro = astroContext(now);
+    // Берём топики последних 14 пинов, чтобы не повторяться
+    const { data: recent } = await supabase
+      .from("pinterest_pins")
+      .select("topic, title")
+      .order("created_at", { ascending: false })
+      .limit(14);
+    const excludeTitles = (recent ?? [])
+      .flatMap((r: any) => [r?.topic, r?.title])
+      .filter((s): s is string => typeof s === "string" && s.length > 0);
+    const astro = astroContext(now, excludeTitles);
     const content = await generateContent(slot, astro.text);
 
     const imageUrl = await kieGenerateImage(content.image_prompt);
@@ -401,11 +410,8 @@ Deno.serve(async (req) => {
     });
     if (upErr) throw new Error(`storage upload: ${upErr.message}`);
 
-    // 10 лет signed URL — Pinterest скачивает картинку при первом краулинге
-    const { data: signed, error: signErr } = await supabase.storage
-      .from("pinterest")
-      .createSignedUrl(path, 60 * 60 * 24 * 3650);
-    if (signErr || !signed?.signedUrl) throw new Error(`sign url: ${signErr?.message}`);
+    // Публичный URL через прокси-функцию — без токена
+    const publicUrl = `${SUPABASE_URL}/functions/v1/pinterest-img/${path}`;
 
     const linkUrl = slot.target === "site" ? SITE_URL : BOT_URL;
 
@@ -414,7 +420,7 @@ Deno.serve(async (req) => {
       .insert({
         title: content.pinterest_title,
         description: content.pinterest_description,
-        image_url: signed.signedUrl,
+        image_url: publicUrl,
         link_url: linkUrl,
         style: slot.style,
         link_target: slot.target,
