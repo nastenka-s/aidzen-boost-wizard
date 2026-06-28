@@ -92,11 +92,11 @@ function sunSign(date: Date): string {
   return "Козерог";
 }
 
-function astroContext(now: Date): { text: string; primaryEvent: AstroEvent | null } {
+function astroContext(now: Date, excludeTitles: string[] = []): { text: string; primaryEvent: AstroEvent | null } {
   const { phase, illumination } = moonPhase(now);
   const sign = sunSign(now);
   const dateStr = now.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" });
-  const { events, primary, lunar } = upcomingEvents(now, 21);
+  const { events, primary, lunar } = upcomingEvents(now, 60, excludeTitles);
   const eventLines = [
     ...events.map((e) => `- ${formatEventLine(e, now)} | угол: ${e.theme}`),
     ...lunar.map((l) => `- ${l}`),
@@ -212,7 +212,7 @@ function nextLunarMilestones(now: Date, daysAhead: number): string[] {
   return out;
 }
 
-function upcomingEvents(now: Date, daysAhead: number): {
+function upcomingEvents(now: Date, daysAhead: number, excludeTitles: string[] = []): {
   events: AstroEvent[];
   primary: AstroEvent | null;
   lunar: string[];
@@ -229,12 +229,16 @@ function upcomingEvents(now: Date, daysAhead: number): {
     (e) => e.date >= todayStr && e.date <= horizonStr,
   );
   const events = [...ongoing, ...upcoming];
-  // Приоритет для главного события: ближайшее в течение 7 дней, иначе идущий ретроград, иначе ближайшее
-  const soon = upcoming.find((e) => {
+  // Исключаем уже использованные за последние пины темы
+  const isUsed = (e: AstroEvent) => excludeTitles.some((t) => t && (t.includes(e.title) || e.title.includes(t.slice(0, 40))));
+  const freshUpcoming = upcoming.filter((e) => !isUsed(e));
+  const freshOngoing = ongoing.filter((e) => !isUsed(e));
+  // Приоритет: свежее событие в течение 14 дней → свежий идущий ретроград → любое свежее → fallback
+  const soon = freshUpcoming.find((e) => {
     const diff = (new Date(e.date).getTime() - new Date(todayStr).getTime()) / 86400000;
-    return diff <= 7;
+    return diff <= 14;
   });
-  const primary = soon ?? ongoing[0] ?? upcoming[0] ?? null;
+  const primary = soon ?? freshOngoing[0] ?? freshUpcoming[0] ?? ongoing[0] ?? upcoming[0] ?? null;
   return { events, primary, lunar: nextLunarMilestones(now, daysAhead) };
 }
 
@@ -381,7 +385,16 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const astro = astroContext(now);
+    // Берём топики последних 14 пинов, чтобы не повторяться
+    const { data: recent } = await supabase
+      .from("pinterest_pins")
+      .select("topic, title")
+      .order("created_at", { ascending: false })
+      .limit(14);
+    const excludeTitles = (recent ?? [])
+      .flatMap((r: any) => [r?.topic, r?.title])
+      .filter((s): s is string => typeof s === "string" && s.length > 0);
+    const astro = astroContext(now, excludeTitles);
     const content = await generateContent(slot, astro.text);
 
     const imageUrl = await kieGenerateImage(content.image_prompt);
@@ -397,11 +410,8 @@ Deno.serve(async (req) => {
     });
     if (upErr) throw new Error(`storage upload: ${upErr.message}`);
 
-    // 10 лет signed URL — Pinterest скачивает картинку при первом краулинге
-    const { data: signed, error: signErr } = await supabase.storage
-      .from("pinterest")
-      .createSignedUrl(path, 60 * 60 * 24 * 3650);
-    if (signErr || !signed?.signedUrl) throw new Error(`sign url: ${signErr?.message}`);
+    // Публичный URL через прокси-функцию — без токена
+    const publicUrl = `${SUPABASE_URL}/functions/v1/pinterest-img/${path}`;
 
     const linkUrl = slot.target === "site" ? SITE_URL : BOT_URL;
 
@@ -410,7 +420,7 @@ Deno.serve(async (req) => {
       .insert({
         title: content.pinterest_title,
         description: content.pinterest_description,
-        image_url: signed.signedUrl,
+        image_url: publicUrl,
         link_url: linkUrl,
         style: slot.style,
         link_target: slot.target,
