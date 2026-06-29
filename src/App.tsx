@@ -67,6 +67,7 @@ import Arkan2ZhricaVMatriceSudby from "./pages/blog-auto/Arkan2ZhricaVMatriceSud
 import Arkan3ImperatricaVMatriceSudby from "./pages/blog-auto/Arkan3ImperatricaVMatriceSudby";
 import OdinakovyeCifryNaChasah from "./pages/blog-auto/OdinakovyeCifryNaChasah";
 import KakRasschitatNatalnuyuKartu from "./pages/blog-auto/KakRasschitatNatalnuyuKartu";
+import KakUznatChisloSudby from "./pages/blog-auto/KakUznatChisloSudby";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -83,6 +84,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/kak-uznat-chislo-sudby" element={<KakUznatChisloSudby />} />
           <Route path="/kak-rasschitat-natalnuyu-kartu" element={<KakRasschitatNatalnuyuKartu />} />
           <Route path="/odinakovye-cifry-na-chasah" element={<OdinakovyeCifryNaChasah />} />
           <Route path="/arkan-3-imperatrica-v-matrice-sudby" element={<Arkan3ImperatricaVMatriceSudby />} />
