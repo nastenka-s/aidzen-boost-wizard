@@ -385,15 +385,20 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Берём топики последних 14 пинов, чтобы не повторяться
+    // Берём контекст последних 20 пинов, чтобы не повторяться по событию.
     const { data: recent } = await supabase
       .from("pinterest_pins")
-      .select("topic, title")
+      .select("astro_context, topic, title")
       .order("created_at", { ascending: false })
-      .limit(14);
-    const excludeTitles = (recent ?? [])
-      .flatMap((r: any) => [r?.topic, r?.title])
-      .filter((s): s is string => typeof s === "string" && s.length > 0);
+      .limit(20);
+    // Собираем все title астрособытий, которые уже фигурировали как "ГЛАВНОЕ" в недавних пинах.
+    const recentText = (recent ?? [])
+      .map((r: any) => `${r?.topic ?? ""} ${r?.title ?? ""} ${r?.astro_context ?? ""}`)
+      .join(" \n ")
+      .toLowerCase();
+    const excludeTitles = ASTRO_EVENTS_2026
+      .filter((e) => recentText.includes(e.title.toLowerCase().slice(0, 30)))
+      .map((e) => e.title);
     const astro = astroContext(now, excludeTitles);
     const content = await generateContent(slot, astro.text);
 
