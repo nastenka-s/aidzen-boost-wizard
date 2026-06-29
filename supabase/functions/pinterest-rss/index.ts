@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const DOMAIN = "https://aidzen.ru";
-const FEED_SELF_URL = `${DOMAIN}/pinterest-rss.xml`;
+const FEED_SELF_URL = `${SUPABASE_URL}/functions/v1/pinterest-rss`;
 
 function esc(s: string): string {
   return (s || "")
@@ -31,13 +31,16 @@ Deno.serve(async () => {
     if (error) throw error;
 
     const items = (data ?? []).map((row) => {
-      const guid = `${DOMAIN}/pin/${row.id}`;
       const pub = rfc822(new Date(row.created_at));
+      // Делаем link_url уникальным per-пин, чтобы Pinterest не считал дублем.
+      // utm-параметры безопасны и не ломают навигацию.
+      const sep = row.link_url.includes("?") ? "&" : "?";
+      const uniqueLink = `${row.link_url}${sep}utm_source=pinterest&utm_medium=pin&utm_campaign=${row.id}`;
       return `
     <item>
       <title>${esc(row.title)}</title>
-      <link>${esc(row.link_url)}</link>
-      <guid isPermaLink="false">${esc(guid)}</guid>
+      <link>${esc(uniqueLink)}</link>
+      <guid isPermaLink="true">${esc(uniqueLink)}</guid>
       <pubDate>${pub}</pubDate>
       <description>${esc(row.description)}</description>
       <enclosure url="${esc(row.image_url)}" type="image/png" />
