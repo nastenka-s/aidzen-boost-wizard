@@ -222,6 +222,7 @@ function upcomingEvents(now: Date, daysAhead: number, excludeTitles: string[] = 
   events: AstroEvent[];
   primary: AstroEvent | null;
   lunar: string[];
+  pool: AstroEvent[];
 } {
   const horizon = new Date(now.getTime() + daysAhead * 24 * 60 * 60 * 1000);
   const todayStr = ymd(now);
@@ -235,17 +236,17 @@ function upcomingEvents(now: Date, daysAhead: number, excludeTitles: string[] = 
     (e) => e.date >= todayStr && e.date <= horizonStr,
   );
   const events = [...ongoing, ...upcoming];
-  // Исключаем уже использованные за последние пины темы
-  const isUsed = (e: AstroEvent) => excludeTitles.some((t) => t && (t.includes(e.title) || e.title.includes(t.slice(0, 40))));
-  const freshUpcoming = upcoming.filter((e) => !isUsed(e));
-  const freshOngoing = ongoing.filter((e) => !isUsed(e));
-  // Приоритет: свежее событие в течение 14 дней → свежий идущий ретроград → любое свежее → fallback
-  const soon = freshUpcoming.find((e) => {
-    const diff = (new Date(e.date).getTime() - new Date(todayStr).getTime()) / 86400000;
-    return diff <= 14;
-  });
-  const primary = soon ?? freshOngoing[0] ?? freshUpcoming[0] ?? ongoing[0] ?? upcoming[0] ?? null;
-  return { events, primary, lunar: nextLunarMilestones(now, daysAhead) };
+  // Дедуп по точному ключу события (date|title).
+  const used = new Set(excludeTitles);
+  const freshUpcoming = upcoming.filter((e) => !used.has(eventKey(e)));
+  const freshOngoing = ongoing.filter((e) => !used.has(eventKey(e)));
+  // Пул для ротации: сначала свежие upcoming (по близости), затем свежие ongoing.
+  const freshSorted = [...freshUpcoming].sort((a, b) => a.date.localeCompare(b.date));
+  const freshPool = [...freshSorted, ...freshOngoing];
+  // Если всё уже использовалось — используем полный пул, ротация всё равно даст разное.
+  const pool = freshPool.length > 0 ? freshPool : [...upcoming, ...ongoing];
+  const primary = pool[0] ?? null;
+  return { events, primary, lunar: nextLunarMilestones(now, daysAhead), pool };
 }
 
 // =============== Lovable AI (контент) ===============
