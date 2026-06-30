@@ -18,6 +18,36 @@ function rfc822(d: Date): string {
   return d.toUTCString().replace("GMT", "+0000");
 }
 
+// Allowed tags per Dzen spec: p, a, b, i, u, s, h1-h4, blockquote, ul/li, ol/li, figure, img, figcaption, video, source, iframe
+const ALLOWED_TAGS = new Set([
+  "p","a","b","strong","i","em","u","s","h1","h2","h3","h4",
+  "blockquote","ul","ol","li","figure","img","figcaption","video","source","iframe","br",
+]);
+
+function sanitizeForDzen(html: string): string {
+  let out = html;
+  // 1) Convert Markdown bold/italic that leaked into HTML
+  out = out.replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>");
+  out = out.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<i>$2</i>");
+  // 2) Strip stray markdown markers
+  out = out.replace(/\*\*/g, "");
+  // 3) Normalize <strong>/<em> to <b>/<i> (both supported, but b/i are canonical)
+  out = out.replace(/<\/?strong>/gi, (m) => m.includes("/") ? "</b>" : "<b>");
+  out = out.replace(/<\/?em>/gi, (m) => m.includes("/") ? "</i>" : "<i>");
+  // 4) Remove disallowed inline formatting inside <li> (Dzen ignores it anyway)
+  out = out.replace(/<li>([\s\S]*?)<\/li>/gi, (_m, inner) => {
+    const clean = inner
+      .replace(/<\/?(b|strong|i|em|u|s|a|span|code)[^>]*>/gi, "")
+      .trim();
+    return `<li>${clean}</li>`;
+  });
+  // 5) Drop unsupported tags entirely (keep their text content)
+  out = out.replace(/<\/?([a-z0-9]+)([^>]*)>/gi, (m, tag) => {
+    return ALLOWED_TAGS.has(String(tag).toLowerCase()) ? m : "";
+  });
+  return out;
+}
+
 Deno.serve(async (_req) => {
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
@@ -45,6 +75,10 @@ Deno.serve(async (_req) => {
         );
         body = body.replace(coverImgRe, "");
       }
+      body = sanitizeForDzen(body);
+      const coverType = cover.toLowerCase().endsWith(".jpg") || cover.toLowerCase().endsWith(".jpeg")
+        ? "image/jpeg"
+        : cover.toLowerCase().endsWith(".gif") ? "image/gif" : "image/png";
       return `
     <item>
       <title>${esc(row.topic)}</title>
@@ -52,13 +86,12 @@ Deno.serve(async (_req) => {
       <guid isPermaLink="true">${esc(url)}</guid>
       <pdalink>${esc(url)}</pdalink>
       <pubDate>${pubDate}</pubDate>
-      <author>НейроДзен</author>
       <category>native-content</category>
       <category>format-article</category>
       <category>index</category>
       <category>comment-all</category>
       <description>${esc(row.description || row.topic)}</description>
-      <enclosure url="${esc(cover)}" type="image/png" length="0" />
+      <enclosure url="${esc(cover)}" type="${coverType}" />
       <content:encoded><![CDATA[${body}]]></content:encoded>
     </item>`;
     }).join("");
