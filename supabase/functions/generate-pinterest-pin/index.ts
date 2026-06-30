@@ -93,7 +93,9 @@ function sunSign(date: Date): string {
 }
 
 function eventKey(e: AstroEvent): string {
-  return `${e.date}|${e.title.slice(0, 40)}`;
+  // Без пробелов, чтобы безопасно сериализовать в поле topic и парсить регуляркой.
+  const slug = e.title.slice(0, 40).replace(/\s+/g, "_");
+  return `${e.date}#${slug}`;
 }
 
 function astroContext(now: Date, excludeTitles: string[] = [], rotationSeed = 0): { text: string; primaryEvent: AstroEvent | null } {
@@ -403,7 +405,7 @@ Deno.serve(async (req) => {
     const excludeTitles: string[] = [];
     for (const r of (recent ?? []) as Array<{ topic: string | null; title: string | null }>) {
       const t = r?.topic ?? "";
-      const m = t.match(/EVT::([^\s]+\|[^\s]{1,40})/);
+      const m = t.match(/EVT::(\S+)/);
       if (m) excludeTitles.push(m[1]);
       // Backward-compat: если в старых пинах нет EVT-маркера, угадываем по pinterest_title.
       const txt = `${r?.topic ?? ""} ${r?.title ?? ""}`.toLowerCase();
