@@ -392,21 +392,33 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Берём контекст последних 20 пинов, чтобы не повторяться по событию.
+    // Берём последние 12 пинов и извлекаем ключи использованных событий из поля topic.
+    // Формат ключа: "EVT::<date>|<title40>" — сохраняется ниже при insert.
     const { data: recent } = await supabase
       .from("pinterest_pins")
-      .select("astro_context, topic, title")
+      .select("topic, title")
+      .eq("status", "published")
       .order("created_at", { ascending: false })
-      .limit(20);
-    // Собираем все title астрособытий, которые уже фигурировали как "ГЛАВНОЕ" в недавних пинах.
-    const recentText = (recent ?? [])
-      .map((r: any) => `${r?.topic ?? ""} ${r?.title ?? ""} ${r?.astro_context ?? ""}`)
-      .join(" \n ")
-      .toLowerCase();
-    const excludeTitles = ASTRO_EVENTS_2026
-      .filter((e) => recentText.includes(e.title.toLowerCase().slice(0, 30)))
-      .map((e) => e.title);
-    const astro = astroContext(now, excludeTitles);
+      .limit(12);
+    const excludeTitles: string[] = [];
+    for (const r of (recent ?? []) as Array<{ topic: string | null; title: string | null }>) {
+      const t = r?.topic ?? "";
+      const m = t.match(/EVT::([^\s]+\|[^\s]{1,40})/);
+      if (m) excludeTitles.push(m[1]);
+      // Backward-compat: если в старых пинах нет EVT-маркера, угадываем по pinterest_title.
+      const txt = `${r?.topic ?? ""} ${r?.title ?? ""}`.toLowerCase();
+      for (const ev of ASTRO_EVENTS_2026) {
+        // Берём 3 знаковых слова из title события (планета/знак/дата).
+        const tokens = ev.title.toLowerCase().match(/[а-яё]{4,}|\d{1,2}\s+[а-яё]+/g) ?? [];
+        const hits = tokens.filter((tok) => txt.includes(tok)).length;
+        if (hits >= 2) excludeTitles.push(eventKey(ev));
+      }
+    }
+    // Ротация по слоту и дню — каждый слот суток получит РАЗНОЕ событие из пула.
+    const dayOfYear = Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 0)) / 86400000);
+    const rotationSeed = dayOfYear * SLOTS.length + slotIdx;
+    const astro = astroContext(now, excludeTitles, rotationSeed);
+    const primaryKey = astro.primaryEvent ? eventKey(astro.primaryEvent) : "";
     const content = await generateContent(slot, astro.text);
 
     const imageUrl = await kieGenerateImage(content.image_prompt);
@@ -436,7 +448,7 @@ Deno.serve(async (req) => {
         link_url: linkUrl,
         style: slot.style,
         link_target: slot.target,
-        topic: content.topic,
+        topic: `${content.topic} ::EVT::${primaryKey}`.trim(),
         astro_context: astro.text,
         image_prompt: content.image_prompt,
         status: "published",
