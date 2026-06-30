@@ -92,11 +92,19 @@ function sunSign(date: Date): string {
   return "Козерог";
 }
 
-function astroContext(now: Date, excludeTitles: string[] = []): { text: string; primaryEvent: AstroEvent | null } {
+function eventKey(e: AstroEvent): string {
+  // Без пробелов, чтобы безопасно сериализовать в поле topic и парсить регуляркой.
+  const slug = e.title.slice(0, 40).replace(/\s+/g, "_");
+  return `${e.date}#${slug}`;
+}
+
+function astroContext(now: Date, excludeTitles: string[] = [], rotationSeed = 0): { text: string; primaryEvent: AstroEvent | null } {
   const { phase, illumination } = moonPhase(now);
   const sign = sunSign(now);
   const dateStr = now.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" });
-  const { events, primary, lunar } = upcomingEvents(now, 60, excludeTitles);
+  const { events, primary: defaultPrimary, lunar, pool } = upcomingEvents(now, 60, excludeTitles);
+  // Детерминированная ротация: каждый слот берёт РАЗНОЕ событие.
+  const primary = pool.length > 0 ? (pool[rotationSeed % pool.length] ?? defaultPrimary) : defaultPrimary;
   const eventLines = [
     ...events.map((e) => `- ${formatEventLine(e, now)} | угол: ${e.theme}`),
     ...lunar.map((l) => `- ${l}`),
@@ -216,6 +224,7 @@ function upcomingEvents(now: Date, daysAhead: number, excludeTitles: string[] = 
   events: AstroEvent[];
   primary: AstroEvent | null;
   lunar: string[];
+  pool: AstroEvent[];
 } {
   const horizon = new Date(now.getTime() + daysAhead * 24 * 60 * 60 * 1000);
   const todayStr = ymd(now);
@@ -229,17 +238,17 @@ function upcomingEvents(now: Date, daysAhead: number, excludeTitles: string[] = 
     (e) => e.date >= todayStr && e.date <= horizonStr,
   );
   const events = [...ongoing, ...upcoming];
-  // Исключаем уже использованные за последние пины темы
-  const isUsed = (e: AstroEvent) => excludeTitles.some((t) => t && (t.includes(e.title) || e.title.includes(t.slice(0, 40))));
-  const freshUpcoming = upcoming.filter((e) => !isUsed(e));
-  const freshOngoing = ongoing.filter((e) => !isUsed(e));
-  // Приоритет: свежее событие в течение 14 дней → свежий идущий ретроград → любое свежее → fallback
-  const soon = freshUpcoming.find((e) => {
-    const diff = (new Date(e.date).getTime() - new Date(todayStr).getTime()) / 86400000;
-    return diff <= 14;
-  });
-  const primary = soon ?? freshOngoing[0] ?? freshUpcoming[0] ?? ongoing[0] ?? upcoming[0] ?? null;
-  return { events, primary, lunar: nextLunarMilestones(now, daysAhead) };
+  // Дедуп по точному ключу события (date|title).
+  const used = new Set(excludeTitles);
+  const freshUpcoming = upcoming.filter((e) => !used.has(eventKey(e)));
+  const freshOngoing = ongoing.filter((e) => !used.has(eventKey(e)));
+  // Пул для ротации: сначала свежие upcoming (по близости), затем свежие ongoing.
+  const freshSorted = [...freshUpcoming].sort((a, b) => a.date.localeCompare(b.date));
+  const freshPool = [...freshSorted, ...freshOngoing];
+  // Если всё уже использовалось — используем полный пул, ротация всё равно даст разное.
+  const pool = freshPool.length > 0 ? freshPool : [...upcoming, ...ongoing];
+  const primary = pool[0] ?? null;
+  return { events, primary, lunar: nextLunarMilestones(now, daysAhead), pool };
 }
 
 // =============== Lovable AI (контент) ===============
@@ -385,21 +394,33 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Берём контекст последних 20 пинов, чтобы не повторяться по событию.
+    // Берём последние 12 пинов и извлекаем ключи использованных событий из поля topic.
+    // Формат ключа: "EVT::<date>|<title40>" — сохраняется ниже при insert.
     const { data: recent } = await supabase
       .from("pinterest_pins")
-      .select("astro_context, topic, title")
+      .select("topic, title")
+      .eq("status", "published")
       .order("created_at", { ascending: false })
-      .limit(20);
-    // Собираем все title астрособытий, которые уже фигурировали как "ГЛАВНОЕ" в недавних пинах.
-    const recentText = (recent ?? [])
-      .map((r: any) => `${r?.topic ?? ""} ${r?.title ?? ""} ${r?.astro_context ?? ""}`)
-      .join(" \n ")
-      .toLowerCase();
-    const excludeTitles = ASTRO_EVENTS_2026
-      .filter((e) => recentText.includes(e.title.toLowerCase().slice(0, 30)))
-      .map((e) => e.title);
-    const astro = astroContext(now, excludeTitles);
+      .limit(12);
+    const excludeTitles: string[] = [];
+    for (const r of (recent ?? []) as Array<{ topic: string | null; title: string | null }>) {
+      const t = r?.topic ?? "";
+      const m = t.match(/EVT::(\S+)/);
+      if (m) excludeTitles.push(m[1]);
+      // Backward-compat: если в старых пинах нет EVT-маркера, угадываем по pinterest_title.
+      const txt = `${r?.topic ?? ""} ${r?.title ?? ""}`.toLowerCase();
+      for (const ev of ASTRO_EVENTS_2026) {
+        // Берём 3 знаковых слова из title события (планета/знак/дата).
+        const tokens = ev.title.toLowerCase().match(/[а-яё]{4,}|\d{1,2}\s+[а-яё]+/g) ?? [];
+        const hits = tokens.filter((tok) => txt.includes(tok)).length;
+        if (hits >= 2) excludeTitles.push(eventKey(ev));
+      }
+    }
+    // Ротация по слоту и дню — каждый слот суток получит РАЗНОЕ событие из пула.
+    const dayOfYear = Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 0)) / 86400000);
+    const rotationSeed = dayOfYear * SLOTS.length + slotIdx;
+    const astro = astroContext(now, excludeTitles, rotationSeed);
+    const primaryKey = astro.primaryEvent ? eventKey(astro.primaryEvent) : "";
     const content = await generateContent(slot, astro.text);
 
     const imageUrl = await kieGenerateImage(content.image_prompt);
@@ -429,7 +450,7 @@ Deno.serve(async (req) => {
         link_url: linkUrl,
         style: slot.style,
         link_target: slot.target,
-        topic: content.topic,
+        topic: `${content.topic} ::EVT::${primaryKey}`.trim(),
         astro_context: astro.text,
         image_prompt: content.image_prompt,
         status: "published",
