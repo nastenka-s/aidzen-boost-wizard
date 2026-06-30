@@ -57,6 +57,77 @@ function pickAstroEvent(): string {
   return `${upcoming}: ${ASTRO_2026[upcoming]}`;
 }
 
+// ============ TOPIC POOL (для разнообразия одиночных постов) ============
+// Каждый одиночный пост получает СВОЙ subject, чтобы посты не были все
+// про одно ближайшее астрособытие.
+type Subject = { category: string; key: string; brief: string };
+
+const SUBJECT_POOL: Subject[] = [
+  // Астрособытия (ближайшие + дальние)
+  ...Object.entries(ASTRO_2026).map(([d, v]) => ({
+    category: 'astro_event', key: `event_${d}`, brief: `${d}: ${v}`,
+  })),
+  // Планеты в знаках
+  { category: 'planet', key: 'mars_aries', brief: 'Марс в Овне — энергия действия, импульсивность' },
+  { category: 'planet', key: 'venus_taurus', brief: 'Венера в Тельце — чувственность, деньги через красоту' },
+  { category: 'planet', key: 'mercury_gemini', brief: 'Меркурий в Близнецах — болтовня, мелкие сделки' },
+  { category: 'planet', key: 'jupiter_leo', brief: 'Юпитер во Льве — творческая экспансия, слава' },
+  { category: 'planet', key: 'saturn_aries', brief: 'Сатурн в Овне — кармические уроки независимости' },
+  { category: 'planet', key: 'pluto_aquarius', brief: 'Плутон в Водолее — трансформация коллектива и технологий' },
+  { category: 'planet', key: 'lilith_scorpio', brief: 'Лилит в Скорпионе — теневая сексуальность, табу' },
+  { category: 'planet', key: 'chiron_aries', brief: 'Хирон в Овне — рана самоидентичности' },
+  { category: 'planet', key: 'nodes_pisces_virgo', brief: 'Узлы Рыбы-Дева — карма служения и веры' },
+  // Знаки зодиака (по одному в посте)
+  ...['Овен','Телец','Близнецы','Рак','Лев','Дева','Весы','Скорпион','Стрелец','Козерог','Водолей','Рыбы']
+    .map(s => ({ category: 'sign', key: `sign_${s}`, brief: `Знак ${s}: характер, теневые стороны, как с ним работать` })),
+  // Дома гороскопа
+  ...Array.from({length: 12}, (_, i) => ({
+    category: 'house', key: `house_${i+1}`, brief: `${i+1}-й дом гороскопа: сфера жизни и её значение`,
+  })),
+  // Нумерология чисел судьбы
+  ...Array.from({length: 9}, (_, i) => ({
+    category: 'numerology', key: `num_destiny_${i+1}`, brief: `Число судьбы ${i+1}: предназначение и сильные стороны`,
+  })),
+  { category: 'numerology', key: 'num_year_2026', brief: 'Число года 2026 = 10/1 — старт нового цикла' },
+  { category: 'numerology', key: 'num_master_11', brief: 'Мастер-число 11 — портал интуиции' },
+  { category: 'numerology', key: 'num_master_22', brief: 'Мастер-число 22 — строитель миров' },
+  { category: 'numerology', key: 'num_master_33', brief: 'Мастер-число 33 — учитель и проводник' },
+  { category: 'numerology', key: 'num_repeat_111', brief: 'Повторяющиеся цифры 11:11 — что значит' },
+  // Матрица судьбы (22 аркана) — выборка
+  ...[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+    .map(n => ({ category: 'arkan', key: `arkan_${n}`, brief: `${n}-й аркан в Матрице Судьбы: энергия и проявления` })),
+  // Лунные дни (выборка ключевых)
+  ...[1,9,15,19,23,29].map(n => ({
+    category: 'lunar_day', key: `lunar_${n}`, brief: `${n}-й лунный день: что делать и чего избегать`,
+  })),
+  // Эзо-темы общего плана
+  { category: 'practice', key: 'shadow_work', brief: 'Теневая работа — как интегрировать вытесненное' },
+  { category: 'practice', key: 'manifestation', brief: 'Манифестация желаний через намерение' },
+  { category: 'practice', key: 'meditation_planet', brief: 'Медитация на планету-управитель' },
+  { category: 'practice', key: 'energy_protection', brief: 'Защита энергетики от чужих эмоций' },
+  { category: 'practice', key: 'karmic_debt', brief: 'Кармический долг — как распознать и закрыть' },
+  { category: 'practice', key: 'past_life_signs', brief: 'Признаки прошлых жизней в натальной карте' },
+  { category: 'practice', key: 'soul_age', brief: 'Возраст души — как определить' },
+  { category: 'practice', key: 'love_compatibility', brief: 'Синастрия: ключевые аспекты совместимости' },
+  { category: 'practice', key: 'money_blocks', brief: 'Денежные блоки в натальной карте и Матрице' },
+  { category: 'practice', key: 'self_realization', brief: 'Точка самореализации в карте' },
+];
+
+async function pickSubject(supabase: any): Promise<Subject> {
+  // Берём последние 25 постов и исключаем уже использованные subjects.
+  const { data: recent } = await supabase
+    .from('threads_posts')
+    .select('topic')
+    .order('created_at', { ascending: false })
+    .limit(25);
+  const usedTopics = new Set((recent ?? []).map((r: any) => (r.topic ?? '').toString().toLowerCase()));
+  const available = SUBJECT_POOL.filter(s =>
+    !Array.from(usedTopics).some(t => t && (t.includes(s.key) || s.brief.toLowerCase().includes(t)))
+  );
+  const pool = available.length > 5 ? available : SUBJECT_POOL;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
 function pickLinkTarget(): { target: 'none' | 'bot'; url: string | null } {
   // Safer mode after unban: no site link in posts at all.
   // Bot link only in CTA replies of daily_forecast.
@@ -288,6 +359,7 @@ ${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":
   }
 
   // ============ SINGLE POST (10 other formats) ============
+  const subject = await pickSubject(supabase);
   const systemPrompt = `Ты — топ-копирайтер виральных постов в Threads для русскоязычной эзо-аудитории.
 Бренд: НейроДзен — AI для астрологии и матрицы судьбы.
 ЦЕЛЬ: максимум сохранений и комментариев.
@@ -295,15 +367,18 @@ ${GROUPS.map(g => `    {"name":"${g.name}","signs":[${g.signs.map(s => `{"sign":
 ФОРМАТ ПОСТА: ${format.name} — ${format.description}
 ДЛИНА: ${lengthBucket.range} (строго!)
 
+ТЕМА ИМЕННО ЭТОГО ПОСТА (обязательно раскрой её, не пиши про другое):
+[${subject.category}] ${subject.brief}
+
 ПРАВИЛА:
 - Первая строка — ХУК (обрыв, цифра, вопрос, шок). Без воды.
-- Дальше — конкретика (даты, знаки, действия).
+- Дальше — конкретика ПО ЗАДАННОЙ ТЕМЕ (даты, знаки, числа, действия).
 - Без агрессии и FOMO-таймеров. Магия + забота.
 - В конце мягкий CTA в виде вопроса или приглашения к обсуждению (БЕЗ ссылок и БЕЗ URL).
 - Эмодзи 2-4 шт, не больше. Без хэштегов в конце.
 - Факты должны быть КОРРЕКТНЫ.
 
-КОНТЕКСТ ДНЯ: ${astroEvent}
+ФОНОВЫЙ КОНТЕКСТ ДНЯ (упоминай только если уместно к теме): ${astroEvent}
 
 ПАТТЕРНЫ ВИРАЛЬНОСТИ (используй):
 ${(patterns ?? []).map(p => `- [${p.pattern_type}] ${p.name}: ${p.description}`).join('\n')}
@@ -338,7 +413,7 @@ ${(examples ?? []).map((e, i) => `[${i + 1}] ${e.text}`).join('\n\n')}`;
   const draftRow = await supabase.from('threads_posts').insert({
     text: finalText,
     hook: best.hook,
-    topic: best.topic,
+    topic: `${subject.key} | ${best.topic ?? ''}`.slice(0, 200),
     link_target: link.target,
     link_url: link.url,
     predicted_score: score,
