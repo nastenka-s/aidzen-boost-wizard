@@ -92,11 +92,17 @@ function sunSign(date: Date): string {
   return "Козерог";
 }
 
-function astroContext(now: Date, excludeTitles: string[] = []): { text: string; primaryEvent: AstroEvent | null } {
+function eventKey(e: AstroEvent): string {
+  return `${e.date}|${e.title.slice(0, 40)}`;
+}
+
+function astroContext(now: Date, excludeTitles: string[] = [], rotationSeed = 0): { text: string; primaryEvent: AstroEvent | null } {
   const { phase, illumination } = moonPhase(now);
   const sign = sunSign(now);
   const dateStr = now.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" });
-  const { events, primary, lunar } = upcomingEvents(now, 60, excludeTitles);
+  const { events, primary: defaultPrimary, lunar, pool } = upcomingEvents(now, 60, excludeTitles);
+  // Детерминированная ротация: каждый слот берёт РАЗНОЕ событие.
+  const primary = pool.length > 0 ? (pool[rotationSeed % pool.length] ?? defaultPrimary) : defaultPrimary;
   const eventLines = [
     ...events.map((e) => `- ${formatEventLine(e, now)} | угол: ${e.theme}`),
     ...lunar.map((l) => `- ${l}`),
