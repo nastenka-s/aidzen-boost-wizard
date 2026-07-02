@@ -70,6 +70,7 @@ import KakRasschitatNatalnuyuKartu from "./pages/blog-auto/KakRasschitatNatalnuy
 import KakUznatChisloSudby from "./pages/blog-auto/KakUznatChisloSudby";
 import AngelskayaNumerologiya from "./pages/blog-auto/AngelskayaNumerologiya";
 import GoroskopNa2026God from "./pages/blog-auto/GoroskopNa2026God";
+import LunnyjKalendarOgorodnika2026 from "./pages/blog-auto/LunnyjKalendarOgorodnika2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -86,6 +87,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/lunnyj-kalendar-ogorodnika-2026" element={<LunnyjKalendarOgorodnika2026 />} />
           <Route path="/goroskop-na-2026-god" element={<GoroskopNa2026God />} />
           <Route path="/angelskaya-numerologiya" element={<AngelskayaNumerologiya />} />
           <Route path="/kak-uznat-chislo-sudby" element={<KakUznatChisloSudby />} />
