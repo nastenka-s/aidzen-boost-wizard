@@ -49,6 +49,7 @@ import BrakiIRazvodyvNatalnoyKarte from "./pages/BrakiIRazvodyvNatalnoyKarte";
 import KakVyitiIzMinusaVPlyus from "./pages/KakVyitiIzMinusaVPlyus";
 import KakVychislitSvoy4Dom from "./pages/KakVychislitSvoy4Dom";
 import Neurozen from "./pages/Neurozen";
+import Skidki from "./pages/Skidki";
 import SamorealizaciyaVNatalnoyKarteZhenshchiny from "./pages/SamorealizaciyaVNatalnoyKarteZhenshchiny";
 import AstrologicheskayaSovmestimost from "./pages/AstrologicheskayaSovmestimost";
 import LunnyjKalendarStrizhek2026 from "./pages/blog-auto/LunnyjKalendarStrizhek2026";
@@ -121,6 +122,7 @@ const App = () => (
           <Route path="/samorealizaciya-v-natalnoy-karte-zhenshchiny" element={<SamorealizaciyaVNatalnoyKarteZhenshchiny />} />
           <Route path="/astrologicheskaya-sovmestimost" element={<AstrologicheskayaSovmestimost />} />
           <Route path="/neurozen" element={<Neurozen />} />
+          <Route path="/skidki" element={<Skidki />} />
           <Route path="/12-dom-v-natalnoj-karte" element={<DvenadtsatyiDomGoroskopa />} />
           <Route path="/11-dom-v-natalnoj-karte" element={<OdinnadcatyiDomGoroskopa />} />
           <Route path="/10-dom-v-natalnoj-karte" element={<DesyatyiDomGoroskopa />} />
