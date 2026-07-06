@@ -75,6 +75,7 @@ import LunnyjKalendarOgorodnika2026 from "./pages/blog-auto/LunnyjKalendarOgorod
 import SovmestimostPoDateRozhdeniya from "./pages/blog-auto/SovmestimostPoDateRozhdeniya";
 import PrednaznachenieMatricaSudby from "./pages/blog-auto/PrednaznachenieMatricaSudby";
 import ProfessiyaPoDateRozhdeniya from "./pages/blog-auto/ProfessiyaPoDateRozhdeniya";
+import DomaGoroskopaZnachenie from "./pages/blog-auto/DomaGoroskopaZnachenie";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -91,6 +92,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/doma-goroskopa-znachenie" element={<DomaGoroskopaZnachenie />} />
           <Route path="/professiya-po-date-rozhdeniya" element={<ProfessiyaPoDateRozhdeniya />} />
           <Route path="/prednaznachenie-matrica-sudby" element={<PrednaznachenieMatricaSudby />} />
           <Route path="/sovmestimost-po-date-rozhdeniya" element={<SovmestimostPoDateRozhdeniya />} />
