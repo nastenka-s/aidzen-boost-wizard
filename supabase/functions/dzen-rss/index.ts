@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const DOMAIN = "https://aidzen.ru";
-const FEED_SELF_URL = `${SUPABASE_URL}/functions/v1/dzen-rss`;
+const FEED_SELF_URL = `${DOMAIN}/dzen-rss.xml`;
 
 function esc(s: string): string {
   return (s || "")
@@ -21,7 +21,7 @@ function rfc822(d: Date): string {
 // Allowed tags per Dzen spec: p, a, b, i, u, s, h1-h4, blockquote, ul/li, ol/li, figure, img, figcaption, video, source, iframe
 const ALLOWED_TAGS = new Set([
   "p","a","b","strong","i","em","u","s","h1","h2","h3","h4",
-  "blockquote","ul","ol","li","figure","img","figcaption","video","source","iframe","br",
+  "blockquote","ul","ol","li","figure","img","figcaption","video","source","iframe",
 ]);
 
 function sanitizeForDzen(html: string): string {
@@ -41,7 +41,22 @@ function sanitizeForDzen(html: string): string {
       .trim();
     return `<li>${clean}</li>`;
   });
-  // 5) Drop unsupported tags entirely (keep their text content)
+  // 5) Remove unsupported attributes. Dzen only documents href for links, src for images/sources/iframes and type for sources.
+  out = out.replace(/<a\b([^>]*)>/gi, (_m, attrs) => {
+    const href = String(attrs).match(/\shref=["']([^"']+)["']/i)?.[1] || "#";
+    return `<a href="${href}">`;
+  });
+  out = out.replace(/<img\b([^>]*)>/gi, (_m, attrs) => {
+    const src = String(attrs).match(/\ssrc=["']([^"']+)["']/i)?.[1] || "";
+    return src ? `<img src="${src}">` : "";
+  });
+  out = out.replace(/<source\b([^>]*)>/gi, (_m, attrs) => {
+    const src = String(attrs).match(/\ssrc=["']([^"']+)["']/i)?.[1] || "";
+    const type = String(attrs).match(/\stype=["']([^"']+)["']/i)?.[1] || "";
+    return src ? `<source src="${src}"${type ? ` type="${type}"` : ""}>` : "";
+  });
+  out = out.replace(/<(p|b|i|u|s|h1|h2|h3|h4|blockquote|ul|ol|li|figure|figcaption|video)\b[^>]*>/gi, (_m, tag) => `<${String(tag).toLowerCase()}>`);
+  // 6) Drop unsupported tags entirely (keep their text content)
   out = out.replace(/<\/?([a-z0-9]+)([^>]*)>/gi, (m, tag) => {
     return ALLOWED_TAGS.has(String(tag).toLowerCase()) ? m : "";
   });
@@ -76,6 +91,7 @@ Deno.serve(async (_req) => {
         body = body.replace(coverImgRe, "");
       }
       body = sanitizeForDzen(body);
+      body = `<h1>${esc(row.topic)}</h1>${body}`;
       const coverType = cover.toLowerCase().endsWith(".jpg") || cover.toLowerCase().endsWith(".jpeg")
         ? "image/jpeg"
         : cover.toLowerCase().endsWith(".gif") ? "image/gif" : "image/png";
@@ -86,7 +102,8 @@ Deno.serve(async (_req) => {
       <guid isPermaLink="true">${esc(url)}</guid>
       <pdalink>${esc(url)}</pdalink>
       <pubDate>${pubDate}</pubDate>
-      <category>native-content</category>
+      <media:rating scheme="urn:simple">nonadult</media:rating>
+      <category>native-draft</category>
       <category>format-article</category>
       <category>index</category>
       <category>comment-all</category>
