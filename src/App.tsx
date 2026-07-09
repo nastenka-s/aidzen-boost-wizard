@@ -78,6 +78,7 @@ import ProfessiyaPoDateRozhdeniya from "./pages/blog-auto/ProfessiyaPoDateRozhde
 import DomaGoroskopaZnachenie from "./pages/blog-auto/DomaGoroskopaZnachenie";
 import AspektyPlanetVNatalnojKarte from "./pages/blog-auto/AspektyPlanetVNatalnojKarte";
 import LunnyjKalendarPokupok2026 from "./pages/blog-auto/LunnyjKalendarPokupok2026";
+import LunnyjKalendarZachatiya from "./pages/blog-auto/LunnyjKalendarZachatiya";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -94,6 +95,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/lunnyj-kalendar-zachatiya" element={<LunnyjKalendarZachatiya />} />
           <Route path="/lunnyj-kalendar-pokupok-2026" element={<LunnyjKalendarPokupok2026 />} />
           <Route path="/aspekty-planet-v-natalnoj-karte" element={<AspektyPlanetVNatalnojKarte />} />
           <Route path="/doma-goroskopa-znachenie" element={<DomaGoroskopaZnachenie />} />
