@@ -84,6 +84,7 @@ import SovmestimostMatricaSudby from "./pages/blog-auto/SovmestimostMatricaSudby
 import SinastriyaNatalnyhKart from "./pages/blog-auto/SinastriyaNatalnyhKart";
 import LiniyaLyubviMatricaSudby from "./pages/blog-auto/LiniyaLyubviMatricaSudby";
 import ChisloDnyaRozhdeniya from "./pages/blog-auto/ChisloDnyaRozhdeniya";
+import DenezhnyeArkanyMatrica from "./pages/blog-auto/DenezhnyeArkanyMatrica";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -100,6 +101,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/denezhnye-arkany-matrica" element={<DenezhnyeArkanyMatrica />} />
           <Route path="/chislo-dnya-rozhdeniya" element={<ChisloDnyaRozhdeniya />} />
           <Route path="/liniya-lyubvi-matrica-sudby" element={<LiniyaLyubviMatricaSudby />} />
           <Route path="/sinastriya-natalnyh-kart" element={<SinastriyaNatalnyhKart />} />
