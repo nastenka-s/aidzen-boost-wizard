@@ -90,6 +90,7 @@ import StihiiVNatalnojKarte from "./pages/blog-auto/StihiiVNatalnojKarte";
 import RetrogradnayaVeneraVKarte from "./pages/blog-auto/RetrogradnayaVeneraVKarte";
 import OvenVNatalnojKarte from "./pages/blog-auto/OvenVNatalnojKarte";
 import TelecVNatalnojKarte from "./pages/blog-auto/TelecVNatalnojKarte";
+import BliznecyVNatalnojKarte from "./pages/blog-auto/BliznecyVNatalnojKarte";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -106,6 +107,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/bliznecy-v-natalnoj-karte" element={<BliznecyVNatalnojKarte />} />
           <Route path="/telec-v-natalnoj-karte" element={<TelecVNatalnojKarte />} />
           <Route path="/oven-v-natalnoj-karte" element={<OvenVNatalnojKarte />} />
           <Route path="/retrogradnaya-venera-v-karte" element={<RetrogradnayaVeneraVKarte />} />
