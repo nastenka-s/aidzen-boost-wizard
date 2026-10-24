@@ -249,36 +249,37 @@ ${relatedHint}
         await new Promise((r) => setTimeout(r, 1500));
         continue;
       }
-      content = c;
-      console.log(`[${attempt.label}] success, length=${c.length}`);
-      break;
+      try {
+        const p = parseArticle(c);
+        console.log(`[${attempt.label}] success, length=${c.length}`);
+        return p;
+      } catch (pe) {
+        lastError = (pe as Error).message;
+        console.error(`[${attempt.label}] ${lastError}`);
+        content = c;
+        continue;
+      }
     } catch (e) {
       lastError = (e as Error).message;
       console.error(`[${attempt.label}] exception: ${lastError}`);
       await new Promise((r) => setTimeout(r, 1500));
     }
   }
-  if (!content) {
-    throw new Error(`AI failed after ${attempts.length} attempts: ${lastError}`);
-  }
+  throw new Error(`AI failed after ${attempts.length} attempts: ${lastError}`);
+}
 
-  // Strip markdown code fences if present
+function parseArticle(content: string): GeneratedArticle {
   let cleaned = content.trim();
   if (cleaned.startsWith("```")) {
     cleaned = cleaned.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
   }
-  // Extract first {...} block if model added prose around it
   const firstBrace = cleaned.indexOf("{");
   const lastBrace = cleaned.lastIndexOf("}");
-  if (firstBrace > 0 || lastBrace < cleaned.length - 1) {
-    if (firstBrace >= 0 && lastBrace > firstBrace) cleaned = cleaned.slice(firstBrace, lastBrace + 1);
-  }
-
+  if (firstBrace >= 0 && lastBrace > firstBrace) cleaned = cleaned.slice(firstBrace, lastBrace + 1);
   let parsed: GeneratedArticle;
   try {
     parsed = JSON.parse(cleaned) as GeneratedArticle;
   } catch (e) {
-    console.error("AI content (first 1500 chars):", cleaned.slice(0, 1500));
     throw new Error(`AI JSON parse failed: ${(e as Error).message}`);
   }
   if (!parsed.title || !parsed.slug || !parsed.sections?.length) {
