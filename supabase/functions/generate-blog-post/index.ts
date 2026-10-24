@@ -249,36 +249,37 @@ ${relatedHint}
         await new Promise((r) => setTimeout(r, 1500));
         continue;
       }
-      content = c;
-      console.log(`[${attempt.label}] success, length=${c.length}`);
-      break;
+      try {
+        const p = parseArticle(c);
+        console.log(`[${attempt.label}] success, length=${c.length}`);
+        return p;
+      } catch (pe) {
+        lastError = (pe as Error).message;
+        console.error(`[${attempt.label}] ${lastError}`);
+        content = c;
+        continue;
+      }
     } catch (e) {
       lastError = (e as Error).message;
       console.error(`[${attempt.label}] exception: ${lastError}`);
       await new Promise((r) => setTimeout(r, 1500));
     }
   }
-  if (!content) {
-    throw new Error(`AI failed after ${attempts.length} attempts: ${lastError}`);
-  }
+  throw new Error(`AI failed after ${attempts.length} attempts: ${lastError}`);
+}
 
-  // Strip markdown code fences if present
+function parseArticle(content: string): GeneratedArticle {
   let cleaned = content.trim();
   if (cleaned.startsWith("```")) {
     cleaned = cleaned.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
   }
-  // Extract first {...} block if model added prose around it
   const firstBrace = cleaned.indexOf("{");
   const lastBrace = cleaned.lastIndexOf("}");
-  if (firstBrace > 0 || lastBrace < cleaned.length - 1) {
-    if (firstBrace >= 0 && lastBrace > firstBrace) cleaned = cleaned.slice(firstBrace, lastBrace + 1);
-  }
-
+  if (firstBrace >= 0 && lastBrace > firstBrace) cleaned = cleaned.slice(firstBrace, lastBrace + 1);
   let parsed: GeneratedArticle;
   try {
     parsed = JSON.parse(cleaned) as GeneratedArticle;
   } catch (e) {
-    console.error("AI content (first 1500 chars):", cleaned.slice(0, 1500));
     throw new Error(`AI JSON parse failed: ${(e as Error).message}`);
   }
   if (!parsed.title || !parsed.slug || !parsed.sections?.length) {
@@ -614,26 +615,7 @@ Deno.serve(async (req) => {
       }
     }
 
-    // 1. Get next pending topic
-    const { data: topics, error: tErr } = await supabase
-      .from("blog_topics")
-      .select("id, topic, keywords, slug_hint, category")
-      .eq("status", "pending")
-      .order("priority", { ascending: true })
-      .order("created_at", { ascending: true })
-      .limit(1);
-    if (tErr) throw new Error("DB select topics: " + tErr.message);
-    if (!topics || topics.length === 0) {
-      return new Response(JSON.stringify({ ok: false, reason: "No pending topics" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
-      });
-    }
-    const topic = topics[0] as Topic;
-    topicId = topic.id;
-
-    await supabase.from("blog_topics").update({ status: "generating" }).eq("id", topic.id);
-
-    // 2. Read existing blog posts list for related linking and dedup
+    // 1. Read existing blog posts list for related linking and dedup
     const blogPostsTsRaw = await getFileContent("src/data/blogPosts.ts");
     const existing: RelatedPost[] = [];
     const re = /title:\s*'([^']+)'[\s\S]*?link:\s*'(\/[\w\-]+)'/g;
@@ -641,10 +623,35 @@ Deno.serve(async (req) => {
     while ((m = re.exec(blogPostsTsRaw)) !== null) {
       existing.push({ title: m[1], slug: m[2].replace(/^\//, "") });
     }
-    // Dedup check
-    if (existing.some((p) => p.slug === topic.slug_hint)) {
-      throw new Error(`Slug ${topic.slug_hint} already exists in blog`);
+    const existingSlugs = new Set(existing.map((p) => p.slug));
+
+    // 2. Get next pending topic whose slug is not already in the blog
+    const { data: topics, error: tErr } = await supabase
+      .from("blog_topics")
+      .select("id, topic, keywords, slug_hint, category")
+      .eq("status", "pending")
+      .order("priority", { ascending: true })
+      .order("created_at", { ascending: true })
+      .limit(50);
+    if (tErr) throw new Error("DB select topics: " + tErr.message);
+    let topic: Topic | undefined;
+    for (const t of (topics || []) as Topic[]) {
+      if (existingSlugs.has(t.slug_hint)) {
+        // Already published earlier — mark and skip so it never blocks the queue
+        await supabase.from("blog_topics").update({ status: "published" }).eq("id", t.id);
+        continue;
+      }
+      topic = t;
+      break;
     }
+    if (!topic) {
+      return new Response(JSON.stringify({ ok: false, reason: "No pending topics" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
+      });
+    }
+    topicId = topic.id;
+
+    await supabase.from("blog_topics").update({ status: "generating" }).eq("id", topic.id);
 
     // 3. Generate article via AI
     const article = await generateArticle(topic, existing);
