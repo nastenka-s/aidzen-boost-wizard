@@ -8,6 +8,13 @@
       "when": 1793004336232,
       "tag": "0000_pinterest_single_flight",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793005513358,
+      "tag": "0001_pinterest_three_daily",
+      "breakpoints": true
     }
   ]
 }
