@@ -49,7 +49,7 @@ export const NUMBERS = ["инициатива и самостоятельнос�
 const SOURCES = {
   astronomy: "https://github.com/cosinekitty/astronomy/tree/v2.1.19 — Astronomy Engine 2.1.19; геоцентрическая тропическая эклиптика даты; время МСК (UTC+3).",
   astrology: "https://www.astro.com/astrowiki/en/Aspect ; https://www.astro.com/astrowiki/en/Planet — справочник традиционных трактовок.",
-  numerology: "https://www.numerology.com/articles/about-numerology/single-digit-numbers/ — современная западная нумерология (символическая система).",
+  numerology: "https://www.numerology.com/articles/about-numerology/single-digit-numbers-in-numerology/ — современная западная нумерология (символическая система).",
 };
 export type Brief = { key: string; category: string; title: string; subtitle: string; bullets: string[]; sources: string; dateLabel?: string };
 export function briefs(now: Date): Brief[] {
@@ -66,6 +66,12 @@ export function briefs(now: Date): Brief[] {
   for (let start = 0; start < 9; start += 3) result.push({ key: `numbers:${start+1}`, category: "numerology", title: `Числа ${start+1}, ${start+2}, ${start+3}: значения`, subtitle: "Современная западная нумерология", bullets: NUMBERS.slice(start,start+3).map((m,i)=>`${start+i+1} — ${m}`), sources: SOURCES.numerology });
   for (let start = 0; start < BODIES.length; start += 3) result.push({ key: `positions:${day}:${start}`, category: "positions", title: "Где планеты сегодня", subtitle: `${label} · 12:00 МСК · тропический зодиак`, bullets: BODIES.slice(start,start+3).map((body,i)=>{ const j=start+i; const lon=longitude(body,date); return `${NAMES[j]}: ${SIGNS[Math.floor(lon/30)]}, ${Math.floor(lon%30)}° — ${MEANINGS[j]}`; }), sources: `${SOURCES.astronomy}\n${SOURCES.astrology}`, dateLabel: label });
   for (let start = 0; start < NAMES.length; start += 3) result.push({ key: `planet-meanings:${start}`, category: "planet-meanings", title: "Планеты в натальной карте", subtitle: "Что символизируют планеты в западной астрологии", bullets: NAMES.slice(start,start+3).map((n,i)=>`${n} — ${MEANINGS[start+i]}`), sources: SOURCES.astrology });
+  const qualities = ["инициативность", "устойчивость", "любознательность", "забота", "самовыражение", "практичность", "диалог", "глубина", "поиск смысла", "дисциплина", "независимость", "сочувствие"];
+  for (const j of [2, 3, 4]) for (let start = 0; start < 12; start += 3) result.push({
+    key: `placements:${j}:${start}`, category: "planet-meanings", title: `${NAMES[j]} в знаках: значения`, subtitle: "Натальные положения · символика западной астрологии",
+    bullets: SIGNS.slice(start,start+3).map((sign,i)=>`${sign} — ${qualities[start+i]} в сфере: ${MEANINGS[j]}`),
+    sources: `${SOURCES.astrology}\nhttps://www.skyscript.co.uk/begin8.html — символика знаков.`,
+  });
   return result;
 }
 export function chooseBrief(now: Date, slot: number, history: string[]): Brief {
