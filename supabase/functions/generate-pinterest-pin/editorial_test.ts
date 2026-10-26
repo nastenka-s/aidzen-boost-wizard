@@ -2,11 +2,14 @@ import { assertEquals, assert } from "https://deno.land/std@0.224.0/assert/mod.t
 import { ASPECTS, briefs, chooseBrief, DAILY_LIMIT, longitude, moscowDay, NUMBERS, pickSlot, SLOTS, visualStyle } from "./editorial.ts";
 import { Body, SearchMoonPhase } from "npm:astronomy-engine@2.1.19";
 
-Deno.test("two daily slots and hard limit", () => {
-  assertEquals(DAILY_LIMIT, 2);
-  assertEquals(SLOTS.length, 2);
-  assertEquals(SLOTS.map(s=>s.hour), [6,18]);
-  assertEquals(pickSlot(new Date("2026-10-26T18:05:00Z")).idx, 1);
+Deno.test("three daily slots and hard limit", () => {
+  assertEquals(DAILY_LIMIT, 3);
+  assertEquals(SLOTS.length, 3);
+  assertEquals(SLOTS.map(s=>s.hour), [6,12,18]);
+  assertEquals(pickSlot(new Date("2026-10-26T06:05:00Z")).idx, 0);
+  assertEquals(pickSlot(new Date("2026-10-26T12:05:00Z")).idx, 1);
+  assertEquals(pickSlot(new Date("2026-10-26T18:05:00Z")).idx, 2);
+  assertEquals(pickSlot(new Date("2026-10-26T08:00:00Z"), 2).slot.target, "bot");
 });
 Deno.test("Moscow day starts at 21 UTC", () => {
   assertEquals(moscowDay(new Date("2026-10-26T20:59:59Z")), "2026-10-26");
@@ -14,7 +17,7 @@ Deno.test("Moscow day starts at 21 UTC", () => {
 });
 Deno.test("eight distinct visual styles across four days", () => {
   const ids = new Set<string>();
-  for (let day=26; day<=29; day++) for (let slot=0; slot<2; slot++) ids.add(visualStyle(`2026-10-${day}`,slot).id);
+  for (let day=26; day<=29; day++) for (let slot=0; slot<3; slot++) ids.add(visualStyle(`2026-10-${day}`,slot).id);
   assertEquals(ids.size, 8);
 });
 Deno.test("all requested list categories and factual sources", () => {

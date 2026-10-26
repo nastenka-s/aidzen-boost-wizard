@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
       body = parsed;
     }
   } catch { return response({ error: "Invalid JSON" }, 400); }
-  if (body.slot !== undefined && (typeof body.slot !== "number" || !Number.isInteger(body.slot) || body.slot < 0 || body.slot > 1)) return response({ error: "slot must be 0 or 1" }, 400);
+  if (body.slot !== undefined && (typeof body.slot !== "number" || !Number.isInteger(body.slot) || body.slot < 0 || body.slot > 2)) return response({ error: "slot must be 0, 1 or 2" }, 400);
   const now = new Date();
   const { idx: slotIdx, slot } = pickSlot(now, typeof body.slot === "number" ? body.slot : undefined);
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);

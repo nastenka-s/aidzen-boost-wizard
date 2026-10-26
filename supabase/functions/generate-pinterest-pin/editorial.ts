@@ -2,17 +2,18 @@ import * as Astronomy from "npm:astronomy-engine@2.1.19";
 
 export const SLOTS = [
   { hour: 6, style: "dark", target: "site" },
-  { hour: 18, style: "light", target: "bot" },
+  { hour: 12, style: "light", target: "bot" },
+  { hour: 18, style: "dark", target: "bot" },
 ] as const;
 export type Slot = typeof SLOTS[number];
-export const DAILY_LIMIT = 2;
+export const DAILY_LIMIT = 3;
 export const DISCLAIMER = "Астрология и нумерология — традиционные символические трактовки, не научные прогнозы.";
 export function moscowDay(now: Date): string {
   return new Date(now.getTime() + 3 * 3600000).toISOString().slice(0, 10);
 }
 export function pickSlot(now: Date, index?: number) {
-  const idx = index ?? (now.getUTCHours() >= 18 ? 1 : 0);
-  if (!Number.isInteger(idx) || idx < 0 || idx >= SLOTS.length) throw new Error("slot must be 0 or 1");
+  const idx = index ?? (now.getUTCHours() >= 18 ? 2 : now.getUTCHours() >= 12 ? 1 : 0);
+  if (!Number.isInteger(idx) || idx < 0 || idx >= SLOTS.length) throw new Error("slot must be 0, 1 or 2");
   return { idx, slot: SLOTS[idx] };
 }
 const STYLES = [
@@ -27,7 +28,7 @@ const STYLES = [
 ] as const;
 export function visualStyle(day: string, slot: number) {
   const dayNumber = Math.floor(Date.parse(day) / 86400000);
-  return STYLES[((dayNumber % 4) * 2 + slot + 8) % 8];
+  return STYLES[((dayNumber % 8) * SLOTS.length + slot + 8) % 8];
 }
 const SIGNS = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"];
 const BODIES = [Astronomy.Body.Sun, Astronomy.Body.Moon, Astronomy.Body.Mercury, Astronomy.Body.Venus, Astronomy.Body.Mars, Astronomy.Body.Jupiter, Astronomy.Body.Saturn];
@@ -78,7 +79,7 @@ export function chooseBrief(now: Date, slot: number, history: string[]): Brief {
   const pool = briefs(now);
   const categories = ["events", "aspects", "numerology", "positions", "planet-meanings"];
   const dayNumber = Math.floor(Date.parse(moscowDay(now))/86400000);
-  const preferred = categories[(dayNumber*2+slot)%categories.length];
+  const preferred = categories[(dayNumber*SLOTS.length+slot)%categories.length];
   const recentKeys = history.map(h=>h.match(/KEY::(\S+)/)?.[1]);
   const lastCategory = history[0]?.match(/CAT::(\S+)/)?.[1];
   const fresh = pool.filter(b=>!recentKeys.includes(b.key) && b.category!==lastCategory);
