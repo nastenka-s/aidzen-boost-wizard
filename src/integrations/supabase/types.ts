@@ -106,6 +106,30 @@ export type Database = {
         }
         Relationships: []
       }
+      pinterest_generation_state: {
+        Row: {
+          id: string
+          lease_token: string | null
+          lease_until: string | null
+          paused_reason: string | null
+          resume_after: string | null
+        }
+        Insert: {
+          id?: string
+          lease_token?: string | null
+          lease_until?: string | null
+          paused_reason?: string | null
+          resume_after?: string | null
+        }
+        Update: {
+          id?: string
+          lease_token?: string | null
+          lease_until?: string | null
+          paused_reason?: string | null
+          resume_after?: string | null
+        }
+        Relationships: []
+      }
       pinterest_pins: {
         Row: {
           astro_context: string | null
@@ -423,7 +447,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
     }
     Enums: {
       [_ in never]: never
