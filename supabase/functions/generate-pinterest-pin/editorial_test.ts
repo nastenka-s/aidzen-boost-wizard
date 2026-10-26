@@ -1,4 +1,4 @@
-import { assertEquals, assert, assertAlmostEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals, assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import { ASPECTS, briefs, chooseBrief, DAILY_LIMIT, longitude, moscowDay, NUMBERS, pickSlot, SLOTS, visualStyle } from "./editorial.ts";
 import { Body, SearchMoonPhase } from "npm:astronomy-engine@2.1.19";
 
@@ -27,8 +27,9 @@ Deno.test("all requested list categories and factual sources", () => {
 Deno.test("astronomical event timestamps match the October 2026 full moon", () => {
   const event = SearchMoonPhase(180,new Date("2026-10-25T00:00:00Z"),3);
   assert(event);
+  // https://www.astropixels.com/ephemeris/phasescat/phases2001.html
   // Independent published phase table: full moon Oct 26, 04:12 UTC.
-  assertAlmostEquals(event.date.getTime(), Date.parse("2026-10-26T04:12:00Z"), 0, 120000);
+  assert(Math.abs(event.date.getTime()-Date.parse("2026-10-26T04:12:00Z")) < 120000);
   const sun=longitude(Body.Sun,new Date("2026-10-26T09:00:00Z"));
   assert(sun>=210 && sun<240);
 });
