@@ -7,3 +7,4 @@
 - Compose tomorrow horoscope prose deterministically from calculated aspects and declared solar whole-sign themes; free-form AI must not introduce dated sky events or unapproved interpretations.
 - Claim a service-only global blog lease and unique Moscow-day category slot before provider calls; persist generated payloads and finalize publication transactionally for safe retries without duplicate daily articles.
 - Read generated blog source mutations against one pinned GitHub commit and advance the branch without force; never overwrite concurrently edited source files.
+- Keep blog category ordering and Moscow release hours in the service-only database scheduling policy, with SQL regression tests, so scheduled claims share one authoritative timetable.
