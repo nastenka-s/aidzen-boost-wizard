@@ -8,7 +8,7 @@ Deno.test("four article pins across publication day and next three days", () => 
 Deno.test("approved global daily cap is twelve pins", () => assertEquals(ARTICLE_DAILY_LIMIT, 12));
 Deno.test("all four pins retain exact article destination and distinct visuals", () => {
   const pins = [0, 1, 2, 3].map(v => articlePinContent(article, v));
-  assertEquals(new Set(pins.map(p => p.style)).size, 4);
+  assertEquals(new Set(pins.map(p => p.design_id)).size, 4);
   assertEquals(pins.map(p => JSON.parse(p.astro_context).article_url), Array(4).fill(article.article_url));
 });
 Deno.test("reject external destinations and fifth variant", () => {

@@ -24,7 +24,8 @@ export function articlePinContent(article: PinArticle, variant: number) {
   const category = /numerology|нумеролог/i.test(article.content_kind + title) ? "numerology" : "astrology";
   return {
     pinterest_title: title.slice(0, 100), pinterest_description: description,
-    style: design.id, topic: `${title} ::ARTICLE::${url.pathname} ::VARIANT::${variant}`,
+    style: design.id === "mystic-watercolor" || design.id === "zodiac-collage" ? "light" : "dark",
+    design_id: design.id, topic: `${title} ::ARTICLE::${url.pathname} ::VARIANT::${variant} ::STYLE::${design.id}`,
     astro_context: JSON.stringify({ article_url: article.article_url, title, variant }),
     image_prompt: `Create a premium vertical Pinterest image, 1024x1536, 2:3. ${design.prompt} Topic: ${title}. The illustration must specifically reflect this published ${category} article, not a generic unrelated forecast. Render ONLY these exact Russian Cyrillic texts: ${JSON.stringify([title, "Подробнее — в статье", "Нейродзен · aidzen.ru"])}. Make the full title clearly readable, wrapping as needed, with generous safe margins. Do not invent facts, dates, numbers, planetary positions or predictions. Dates in the supplied title must remain exactly unchanged. Celestial elements are decorative, not a chart claiming real planetary positions. No other labels, celebrity faces, watermarks or logos.`,
   };
