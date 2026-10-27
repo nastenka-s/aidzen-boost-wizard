@@ -613,6 +613,7 @@ export type Database = {
       claim_blog_daily: { Args: { p_kind?: string }; Returns: Json }
       claim_pinterest_article: { Args: never; Returns: Json }
       claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
+      dispatch_pinterest_articles: { Args: never; Returns: undefined }
       enqueue_pinterest_article: {
         Args: {
           p_day: string

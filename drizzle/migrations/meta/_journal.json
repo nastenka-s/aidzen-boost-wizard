@@ -50,6 +50,13 @@
       "when": 1793096003816,
       "tag": "0006_pinterest_article_campaigns",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793096130354,
+      "tag": "0007_pinterest_campaign_wake_and_retry",
+      "breakpoints": true
     }
   ]
 }
