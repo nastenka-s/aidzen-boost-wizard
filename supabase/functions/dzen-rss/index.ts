@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { publicationCategories } from "./publication-policy.mjs";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -103,10 +104,7 @@ Deno.serve(async (_req) => {
       <pdalink>${esc(url)}</pdalink>
       <pubDate>${pubDate}</pubDate>
       <media:rating scheme="urn:simple">nonadult</media:rating>
-      <category>native-draft</category>
-      <category>format-article</category>
-      <category>index</category>
-      <category>comment-all</category>
+      ${publicationCategories.map((category) => `<category>${category}</category>`).join("\n      ")}
       <description>${esc(row.description || row.topic)}</description>
       <enclosure url="${esc(cover)}" type="${coverType}" />
       <content:encoded><![CDATA[${body}]]></content:encoded>
