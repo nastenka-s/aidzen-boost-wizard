@@ -106,6 +106,7 @@ export type Database = {
           lease_until: string | null
           paused_reason: string | null
           resume_after: string | null
+          scheduler_secret: string
           updated_at: string
         }
         Insert: {
@@ -114,6 +115,7 @@ export type Database = {
           lease_until?: string | null
           paused_reason?: string | null
           resume_after?: string | null
+          scheduler_secret?: string
           updated_at?: string
         }
         Update: {
@@ -122,6 +124,7 @@ export type Database = {
           lease_until?: string | null
           paused_reason?: string | null
           resume_after?: string | null
+          scheduler_secret?: string
           updated_at?: string
         }
         Relationships: []
@@ -524,6 +527,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      authorize_blog_scheduler: { Args: { p_secret: string }; Returns: boolean }
       claim_blog_daily: { Args: { p_kind?: string }; Returns: Json }
       claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
       finish_blog_daily: {

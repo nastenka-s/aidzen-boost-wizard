@@ -22,6 +22,13 @@
       "when": 1793088142219,
       "tag": "0002_blog_three_daily_editorial",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793088233926,
+      "tag": "0003_blog_scheduler_auth",
+      "breakpoints": true
     }
   ]
 }
