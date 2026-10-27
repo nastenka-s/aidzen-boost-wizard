@@ -33,3 +33,8 @@
 # November horoscope draft revision
 - [x] Prepare a versioned unpublished draft without sources/methodology, with a personal forecast CTA to aidzen.ru and titled cover.
 - [x] Stop appending visible sources/methodology to future articles while retaining internal factual grounding; eight regression tests pass.
+
+# Approved November publication and daily voice
+- [ ] Publish the approved November article with its cover, blog entry, sitemap and RSS.
+- [ ] Replace daily horoscope boilerplate with varied, concrete, grounded conversational prose; test and deploy for future forecasts only.
+- [ ] Request website publication and verify the article in preview.
