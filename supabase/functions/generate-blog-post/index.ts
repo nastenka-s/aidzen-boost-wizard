@@ -1,6 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { KINDS, lessons, skyBrief, validateArticle, dateLabel, type Kind } from "./editorial.ts";
+import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN") ?? "";
@@ -628,7 +628,7 @@ Deno.serve(async (req) => {
   let payload=claim.slot.payload;
   if(!payload){
    if(existing.some(p=>p.slug===topic.slug_hint))throw new Error('Existing article without recoverable payload');
-   const article=await generateArticle(topic,existing);article.slug=topic.slug_hint;article.category=topic.category;
+   const article=kind==='tomorrow_horoscope' ? horoscopeArticle(topic.editorial_brief,existing.map(p=>p.slug)) : await generateArticle(topic,existing);article.slug=topic.slug_hint;article.category=topic.category;
    if(!/^[a-z][a-z0-9-]*$/.test(article.slug))throw new Error('Unsafe slug');
    const coverB64=await generateCoverImage(article.title,topic.category);
    const coverUrl=`${DOMAIN}/blog-covers/${article.slug}.png`;
