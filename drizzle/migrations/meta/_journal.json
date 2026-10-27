@@ -43,6 +43,13 @@
       "when": 1793091288501,
       "tag": "0005_threads_competitor_posts_service_only",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793096003816,
+      "tag": "0006_pinterest_article_campaigns",
+      "breakpoints": true
     }
   ]
 }
