@@ -12,10 +12,10 @@
 
 # Three daily blog articles
 - [x] Study and cluster the 225 uploaded keywords into source-grounded educational topics.
-- [x] Schedule one astrology lesson, one numerology lesson and one calculated tomorrow horoscope per Moscow day (09:00, 13:00, 18:00; retries 11:00, 15:00, 21:00).
+- [x] Schedule calculated tomorrow horoscope at 09:00, astrology lesson at 13:00 and numerology lesson at 18:00 Moscow; retries at 11:00, 15:00, 21:00.
 - [x] Add atomic daily slots, global lease, provider circuit breaker, saved payload recovery and factual validation; seven editorial tests pass, horoscope text uses calculated facts and curated interpretations only.
 - [ ] Verify all three articles on the public website — GitHub Deploy over SSH fails; authenticated deployment logs/server access required.
 
 # Horoscope first and today's articles
-- [ ] Move tomorrow horoscope to 09:00 Moscow, astrology to 13:00 and numerology to 18:00; test schedule.
-- [ ] Trigger today's three categories, skipping completed slots, and verify results.
+- [x] Move tomorrow horoscope to 09:00 Moscow, astrology to 13:00 and numerology to 18:00; all three SQL schedule tests pass.
+- [x] Trigger today's three categories, skipping completed slots, and verify results — all three returned HTTP 200 daily_slots_complete; today's slots are successful.
