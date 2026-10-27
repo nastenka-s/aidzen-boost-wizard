@@ -1,5 +1,15 @@
 import { assertEquals, assert, assertThrows } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import { moscowDay,tomorrow,skyBrief,distance,lessons,validateArticle,horoscopeArticle,SIGNS,KINDS } from './editorial.ts';
+import { dailySelection, ASPECT_ACTIONS } from './daily-voice.ts';
+Deno.test('Daily reflection selection follows calculated solar houses and changes with calendar day',()=>{
+ const moonInGeminiForAries=dailySelection('2026-10-28',0,2);
+ assertEquals(moonInGeminiForAries.houseIndex,2);
+ assertEquals(dailySelection('2026-10-28',3,2).houseIndex,11);
+ assertEquals(dailySelection('2026-10-28',11,0).houseIndex,1);
+ assertEquals(dailySelection('2026-10-28',0,2),moonInGeminiForAries);
+ assertEquals(dailySelection('2026-10-29',0,2).variantIndex,(moonInGeminiForAries.variantIndex+1)%3);
+ assertEquals(Object.keys(ASPECT_ACTIONS).map(Number).sort((a,b)=>a-b),[0,60,90,120,180]);
+});
 Deno.test('Three distinct daily article categories',()=>assertEquals(KINDS,['astrology_education','numerology_education','tomorrow_horoscope']));
 Deno.test('Internal source grounding survives article rendering unchanged',()=>{const brief=skyBrief('2026-10-27');const original=structuredClone(brief);horoscopeArticle(brief,[]);assertEquals(brief,original);assert(brief.sources.length>0);assert(brief.method.length>0);});
 Deno.test('Tomorrow follows Moscow calendar including year rollover',()=>{assertEquals(moscowDay(new Date('2026-12-31T21:00:00Z')),'2027-01-01');assertEquals(tomorrow('2026-10-27'),'2026-10-28');assertEquals(tomorrow('2028-02-28'),'2028-02-29');});

@@ -1,6 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { publicationCategories } from "./publication-policy.mjs";
 import { withRssFooter } from "./footer-policy.mjs";
+import approvedArticles from './approved-articles.json' with { type: 'json' };
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -79,7 +80,9 @@ Deno.serve(async (_req) => {
       .limit(20);
     if (error) throw error;
 
-    const items = (data ?? []).map((row) => {
+    const rows = [...approvedArticles, ...(data ?? []).filter(row => !approvedArticles.some(article => article.slug_hint === row.slug_hint))]
+      .sort((a,b) => Date.parse(b.generated_at ?? '') - Date.parse(a.generated_at ?? '')).slice(0,20);
+    const items = rows.map((row) => {
       const url = row.published_url || `${DOMAIN}/${row.slug_hint}`;
       const pubDate = row.generated_at ? rfc822(new Date(row.generated_at)) : rfc822(new Date());
       const cover = row.cover_url || "";

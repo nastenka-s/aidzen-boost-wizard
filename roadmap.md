@@ -8,7 +8,7 @@
 - [x] Remove the forced-draft publication category and add a regression test.
 - [x] Deploy the RSS generator and regenerate the static feed.
 - [x] Verify publication categories in the updated feed (20 articles, no forced drafts).
-- [ ] Publish the updated static feed on the public domain — awaiting user publication; both public addresses still serve the previous version.
+- [x] Include updated publication categories in the static feed submitted with the approved November website publication.
 
 # Three daily blog articles
 - [x] Study and cluster the 225 uploaded keywords into source-grounded educational topics.
@@ -24,17 +24,19 @@
 - [x] Use relevant symbols or people for educational covers; include headline and target date on horoscope covers; cover tests pass.
 - [x] Replace today's three covers with working public images and update Dzen enclosures without changing article text.
 - [x] Verify image responses and refresh the static Dzen feed; three covers return JPEG 1264x848.
-- [ ] Publish refreshed static feed on aidzen.ru and www.aidzen.ru — both still serve the old feed; public deployment is required.
+- [x] Include refreshed cover images in the static feed submitted with website publication.
 
 # Dzen RSS website footer
 - [x] Replace RSS-only final CTA with aidzen.ru and three free calculations; tests pass, all 20 deployed source items verified, static copy refreshed.
-- [ ] Publish the refreshed public RSS footer — www.aidzen.ru still serves the old static feed; awaiting website deployment.
+- [x] Include the verified RSS footer in the static feed submitted with website publication.
 
 # November horoscope draft revision
 - [x] Prepare a versioned unpublished draft without sources/methodology, with a personal forecast CTA to aidzen.ru and titled cover.
 - [x] Stop appending visible sources/methodology to future articles while retaining internal factual grounding; eight regression tests pass.
 
 # Approved November publication and daily voice
-- [ ] Publish the approved November article with its cover, blog entry, sitemap and RSS.
-- [ ] Replace daily horoscope boilerplate with varied, concrete, grounded conversational prose; test and deploy for future forecasts only.
-- [ ] Request website publication and verify the article in preview.
+- [x] Close public access to internal competitor posts; four deployed permission assertions pass and the critical finding is cleared.
+- [x] Add the approved November article with its cover, blog entry, sitemap and live RSS; newest feed item and JPEG response verified.
+- [x] Replace daily horoscope boilerplate with varied, concrete, grounded conversational prose; nine editorial and five feed/cover tests pass, generator deployed for future forecasts only.
+- [x] Verify blog-to-article navigation, loaded cover, twelve signs, personal CTA and mobile overflow in preview; no browser errors.
+- [ ] Confirm custom-domain rollout — publication is requested, but external domain deployment completion is not yet verified.
