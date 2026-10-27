@@ -87,7 +87,7 @@ export function horoscopeArticle(brief:ReturnType<typeof skyBrief>,existing:stri
   const moon=brief.positions[1],sun=brief.positions[0];
   const lunar=dailySelection(brief.target,index,moon.signIndex);
   const solar=dailySelection(brief.target,index,sun.signIndex,1);
-  const paragraphs=index%2===0?[lunar.prose,solar.prose]:[solar.prose,lunar.prose];
+  const paragraphs:string[]=index%2===0?[lunar.prose,solar.prose]:[solar.prose,lunar.prose];
   const relevant=brief.aspects.filter(a=>a.first==='Луна'||a.second==='Луна'||a.first==='Солнце'||a.second==='Солнце');
   const aspect=relevant.length?relevant[index%relevant.length]:brief.aspects[index%Math.max(1,brief.aspects.length)];
   if(aspect){

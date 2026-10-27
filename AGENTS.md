@@ -12,3 +12,4 @@
 - Keep blog category ordering and Moscow release hours in the service-only database scheduling policy, with SQL regression tests, so scheduled claims share one authoritative timetable.
 - Store generated blog covers in a service-write-only private bucket and expose only editorial image filenames through the read-only blog-cover-img endpoint before finalizing RSS; image availability must not depend on website deployment.
 - Apply RSS-only CTA changes at feed rendering in its tested footer policy, preserving stored article prose and website CTAs.
+- Keep approved manually published RSS articles in the feed's local editorial JSON, merged by slug with scheduled database articles, so manual publication does not consume daily slots or depend on provider calls.
