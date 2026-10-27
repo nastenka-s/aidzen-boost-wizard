@@ -261,6 +261,21 @@ export type Database = {
           },
         ]
       }
+      pinterest_dispatch_config: {
+        Row: {
+          function_url: string
+          id: string
+        }
+        Insert: {
+          function_url: string
+          id?: string
+        }
+        Update: {
+          function_url?: string
+          id?: string
+        }
+        Relationships: []
+      }
       pinterest_generation_state: {
         Row: {
           id: string
