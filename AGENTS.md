@@ -14,3 +14,4 @@
 - Store generated blog covers in a service-write-only private bucket and expose only editorial image filenames through the read-only blog-cover-img endpoint before finalizing RSS; image availability must not depend on website deployment.
 - Apply RSS-only CTA changes at feed rendering in its tested footer policy, preserving stored article prose and website CTAs.
 - Keep approved manually published RSS articles in the feed's local editorial JSON, merged by slug with scheduled database articles, so manual publication does not consume daily slots or depend on provider calls.
+- Share approved manual article metadata under functions/_shared for Dzen and Pinterest; wake article pin processing on enqueue and retain hourly timed retries only while campaign jobs remain pending.

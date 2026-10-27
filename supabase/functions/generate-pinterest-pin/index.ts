@@ -2,11 +2,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { moscowDay } from "./editorial.ts";
 import { articlePinContent, type PinArticle } from "./article-editorial.ts";
-import approvedArticles from "../dzen-rss/approved-articles.json" with { type: "json" };
+import approvedArticles from "../_shared/approved-articles.json" with { type: "json" };
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
-const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const KIE_AI_API_KEY = (Deno.env.get("KIE_AI_API_KEY") ?? "").trim();
 class ProviderError extends Error {
   constructor(public status: number, message: string) { super(message); }
@@ -142,5 +141,6 @@ Deno.serve(async (req) => {
   } finally {
     const { error } = await supabase.from("pinterest_generation_state").update({ lease_token: null, lease_until: null }).eq("id", "daily").eq("lease_token", token);
     if (error) console.error("Pinterest lease release failed");
+    if (!error) await supabase.rpc("dispatch_pinterest_articles");
   }
 });

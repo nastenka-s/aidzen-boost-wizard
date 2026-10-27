@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { publicationCategories } from "./publication-policy.mjs";
 import { withRssFooter } from "./footer-policy.mjs";
-import approvedArticles from './approved-articles.json' with { type: 'json' };
+import approvedArticles from '../_shared/approved-articles.json' with { type: 'json' };
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
