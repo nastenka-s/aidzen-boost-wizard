@@ -19,3 +19,8 @@
 # Horoscope first and today's articles
 - [x] Move tomorrow horoscope to 09:00 Moscow, astrology to 13:00 and numerology to 18:00; all three SQL schedule tests pass.
 - [x] Trigger today's three categories, skipping completed slots, and verify results — all three returned HTTP 200 daily_slots_complete; today's slots are successful.
+
+# Blog article cover images
+- [ ] Use relevant symbols or people for educational covers; include headline and target date on horoscope covers.
+- [ ] Replace today's three covers with working public images and update Dzen enclosures without changing article text.
+- [ ] Verify image responses and refresh the static Dzen feed; check public availability.
