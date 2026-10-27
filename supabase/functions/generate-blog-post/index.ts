@@ -252,10 +252,6 @@ ${relatedHint}
       const c = data.choices?.[0]?.message?.content;
       if (data.choices?.[0]?.message?.refusal || !c) {
         throw new ProviderError(403,"AI content refusal or empty response");
-        lastError = "AI returned empty content";
-        console.error(`[${attempt.label}] empty content. Raw:`, JSON.stringify(data).slice(0, 800));
-        await new Promise((r) => setTimeout(r, 1500));
-        continue;
       }
       const candidate = JSON.parse(c.replace(/^```(?:json)?\s*/i," ").replace(/```\s*$/i," ").trim());
       validateArticle(candidate,topic.content_kind,topic.editorial_brief,existing.map(p=>p.slug));
@@ -580,7 +576,8 @@ function updateRss(current: string, a: GeneratedArticle): string {
     </item>
 `;
   // Insert after <atom:link ... />
-  return current.replace(/(<atom:link[^/]*\/>)/, `$1${item}`);
+  if (!/<atom:link[^>]*\/>/.test(current)) throw new Error('RSS insertion marker missing');
+  return current.replace(/(<atom:link[^>]*\/>)/, `$1${item}`);
 }
 
 // ============== Handler ==============

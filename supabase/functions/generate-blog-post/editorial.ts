@@ -65,7 +65,7 @@ export function validateArticle(a:any,kind:Kind,brief:any,existing:string[]) {
  if(kind==='tomorrow_horoscope') {
   if(a.sections.length!==12||a.sections.some((s:any,i:number)=>s.h2!==SIGNS[i]))throw new Error('Horoscope must contain all twelve signs in order');
   // AI authors reflection only. Dated/numerical astronomy comes exclusively from deterministic facts.
-  const prose=JSON.stringify([a.intro,a.sections,a.faq,a.conclusion]);
+  const prose=[...a.intro,...a.sections.flatMap((s:any)=>[s.h2,...s.paragraphs,...(s.bulletList??[]),s.example??'',s.warning??'']),...a.faq.flatMap((q:any)=>[q.question,q.answer]),a.conclusion].join(' ');
   if(/\d/.test(prose)||/ретроград|затмени|новолуни|полнолуни|станци|ингресс|входит в знак|переходит в знак/i.test(prose))throw new Error('Uncomputed astronomical claim in horoscope prose');
   a.title=`Гороскоп на ${dateLabel(brief.target)} для всех знаков зодиака`;
   a.metaTitle=a.title;
