@@ -15,6 +15,20 @@
       "when": 1793005513358,
       "tag": "0001_pinterest_three_daily",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793088142219,
+      "tag": "0002_blog_three_daily_editorial",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793088233926,
+      "tag": "0003_blog_scheduler_auth",
+      "breakpoints": true
     }
   ]
 }
