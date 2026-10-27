@@ -106,6 +106,7 @@ import FinansovyjPotokMatrica from "./pages/blog-auto/FinansovyjPotokMatrica";
 import RetrogradnyjMerkurij2026 from "./pages/blog-auto/RetrogradnyjMerkurij2026";
 import LunnyjKalendarManikyura2026 from "./pages/blog-auto/LunnyjKalendarManikyura2026";
 import KakOpredelitAscendent from "./pages/blog-auto/KakOpredelitAscendent";
+import UchebnikDoma from "./pages/blog-auto/UchebnikDoma";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -122,6 +123,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/uchebnik-doma" element={<UchebnikDoma />} />
           <Route path="/kak-opredelit-ascendent" element={<KakOpredelitAscendent />} />
           <Route path="/lunnyj-kalendar-manikyura-2026" element={<LunnyjKalendarManikyura2026 />} />
           <Route path="/retrogradnyj-merkurij-2026" element={<RetrogradnyjMerkurij2026 />} />
