@@ -94,7 +94,7 @@ export default function GoroskopNaNoyabr2026() {
 <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-6">Ваш личный прогноз: не только солнечный знак</h2>
 <p className="mb-6 leading-relaxed">Общий гороскоп описывает темы для целого знака. В вашей натальной карте Луна, Венера, Марс и другие планеты могут находиться в разных знаках и домах — поэтому личная картина гораздо подробнее.</p>
 <p className="mb-6 leading-relaxed">Хотите посмотреть, как ноябрьские положения планет соотносятся именно с вашей картой? Рассчитайте личный прогноз по дате, времени и месту рождения: он учитывает ваши положения планет, а не только солнечный знак.</p>
-<p className="mb-6 leading-relaxed"><a href="https://aidzen.ru">Рассчитать свой личный прогноз на сайте aidzen.ru</a></p>
+<p className="mb-6 leading-relaxed"><a href="https://aidzen.ru">Рассчитайте свой личный прогноз на сайте aidzen.ru - первые 3 расчета бесплатно.</a></p>
 <p className="mb-6 leading-relaxed">Личная астрологическая трактовка помогает посмотреть на свои темы внимательнее, но не гарантирует события и не заменяет самостоятельных решений.</p></div>
  <section className="mt-12 border-t border-border pt-8"><h2 className="text-2xl font-bold mb-4">Читайте также</h2><div className="flex flex-col gap-3"><Link to="/goroskop-na-2026-10-28">Гороскоп на 28 октября 2026</Link><Link to="/retrogradnyj-merkurij-2026">Ретроградный Меркурий 2026</Link><Link to="/uchebnik-doma">Дома в астрологии</Link></div></section>
  </article></main></div>;
