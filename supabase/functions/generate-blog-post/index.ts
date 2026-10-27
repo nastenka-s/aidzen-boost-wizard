@@ -173,6 +173,7 @@ async function generateArticle(topic: Topic, existing: RelatedPost[]): Promise<G
   const userPrompt = `Тема статьи: "${topic.topic}"
 Ключевые слова для SEO: ${topic.keywords}
 Категория: ${topic.category}
+Тип материала: ${topic.content_kind}
 Проверенная основа и методика: ${JSON.stringify(topic.editorial_brief)}
 Желаемый slug: ${topic.slug_hint}
 
@@ -245,7 +246,8 @@ ${relatedHint}
         console.error(`[${attempt.label}] ${lastError}`);
         if (res.status !== 429 && res.status < 500) throw new ProviderError(res.status,lastError);
         if (attempt === attempts[attempts.length-1]) throw new ProviderError(res.status,lastError);
-        await new Promise((r) => setTimeout(r, 1500 * (attempts.indexOf(attempt)+1)));
+        const retryAfter = Number(res.headers.get('Retry-After'));
+        await new Promise((r) => setTimeout(r, retryAfter > 0 ? retryAfter * 1000 : 1500 * 2 ** attempts.indexOf(attempt)));
         continue;
       }
       const data = await res.json();
