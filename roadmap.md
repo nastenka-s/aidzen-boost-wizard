@@ -27,4 +27,5 @@
 - [ ] Publish refreshed static feed on aidzen.ru and www.aidzen.ru — both still serve the old feed; public deployment is required.
 
 # Dzen RSS website footer
-- [ ] Replace RSS-only final CTA with aidzen.ru and three free calculations; verify deployed feed and refresh static copy.
+- [x] Replace RSS-only final CTA with aidzen.ru and three free calculations; tests pass, all 20 deployed source items verified, static copy refreshed.
+- [ ] Publish the refreshed public RSS footer — www.aidzen.ru still serves the old static feed; awaiting website deployment.
