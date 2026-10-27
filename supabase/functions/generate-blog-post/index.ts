@@ -1,13 +1,15 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
+import { KINDS, lessons, skyBrief, validateArticle, dateLabel, type Kind } from "./editorial.ts";
 
-const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY")!;
-const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN")!;
-const GITHUB_REPO = Deno.env.get("GITHUB_REPO")!; // "owner/repo"
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
+const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN") ?? "";
+const GITHUB_REPO = Deno.env.get("GITHUB_REPO") ?? ""; // "owner/repo"
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 
 const DOMAIN = "https://aidzen.ru";
+let BASE_SHA = "";
 let BRANCH = "main"; // resolved at runtime from repo default_branch
 const GH_API = `https://api.github.com/repos/${GITHUB_REPO}`;
 
@@ -18,6 +20,8 @@ interface Topic {
   keywords: string;
   slug_hint: string;
   category: string;
+  content_kind: Kind;
+  editorial_brief: any;
 }
 
 interface ArticleSection {
@@ -29,6 +33,7 @@ interface ArticleSection {
 }
 
 interface GeneratedArticle {
+  category?: string;
   title: string;
   metaTitle: string;
   metaDescription: string;
@@ -46,7 +51,7 @@ interface RelatedPost { title: string; slug: string; }
 
 // ============== Utilities ==============
 const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{/g, "\\${");
-const escAttr = (s: string) => s.replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const escAttr = (s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escJsx = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
 
 // ============== Dzen-ready HTML builder ==============
@@ -119,7 +124,7 @@ async function generateCoverImage(title: string, category: string): Promise<stri
   });
   if (!res.ok) {
     const t = await res.text();
-    throw new Error(`Image gateway ${res.status}: ${t.slice(0, 300)}`);
+    throw new ProviderError(res.status, `Image gateway ${res.status}: ${t.slice(0, 300)}`);
   }
   const data = await res.json();
   const b64 = data?.data?.[0]?.b64_json;
@@ -136,23 +141,19 @@ function pascalCase(slug: string): string {
 }
 
 function ruDate(d = new Date()): string {
-  const months = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
-  return `${d.getDate()} ${months[d.getMonth()]}, ${d.getFullYear()}`;
+ return d.toLocaleDateString("ru-RU", {day:"numeric",month:"long",year:"numeric",timeZone:"Europe/Moscow"});
 }
-
-function isoDate(d = new Date()): string {
-  return d.toISOString().slice(0, 10);
-}
-
-function rfc822Date(d = new Date()): string {
-  return d.toUTCString().replace("GMT", "+0300");
+function isoDate(d = new Date()): string { return d.toISOString().slice(0,10); }
+function rfc822Date(d = new Date()): string { return d.toUTCString(); }
+class ProviderError extends Error {
+ constructor(public status: number,message: string) { super(message); }
 }
 
 // ============== AI generation ==============
 async function generateArticle(topic: Topic, existing: RelatedPost[]): Promise<GeneratedArticle> {
   const relatedHint = existing.slice(0, 30).map((p) => `- "${p.title}" → ${p.slug}`).join("\n");
 
-  const systemPrompt = `Ты — главный редактор экспертного блога aidzen.ru об астрологии и нумерологии. Пишешь как опытный астролог-практик с 15-летним стажем для аудитории русскоязычных женщин 30-50 лет.
+  const systemPrompt = `Ты — главный редактор экспертного блога aidzen.ru об астрологии и нумерологии. Пишешь образовательные материалы без вымышленного стажа и неподтверждённых утверждений для аудитории русскоязычных женщин 30-50 лет.
 
 ЖЁСТКИЕ ПРАВИЛА КАЧЕСТВА:
 1. Только конкретные факты, формулы, расчёты, примеры. НИКАКОЙ воды.
@@ -161,14 +162,18 @@ async function generateArticle(topic: Topic, existing: RelatedPost[]): Promise<G
 4. Стиль — деловой, тёплый, без эзотерического пафоса. Без "дорогие читательницы". Обращение на "вы" со строчной.
 5. Объём: 1800-2500 слов в сумме (intro + все sections + conclusion).
 6. Структура секции: тезис → объяснение механики → пример с конкретикой → практический вывод/действие.
-7. Если тема нумерологическая — приводи реальные формулы редукции (сложение цифр до однозначного числа).
+7. Не смешивай нумерологию 1–9 и Матрицу судьбы 22 арканов. Не добавляй формулы или значения позиций, отсутствующие в источниковом брифе.
 8. Если астрологическая — упоминай конкретные планеты, дома, аспекты, знаки.
 9. Избегай категоричных предсказаний и фатализма. Используй формулировки "сигнал", "тенденция", "склонность", "повышенная вероятность".
-10. БЕЗ упоминания каких-либо AI, чата GPT, нейросетей.`;
+10. БЕЗ упоминания каких-либо AI, чата GPT, нейросетей.
+11. Источниковый бриф — единственная основа знаний. Объясняй только его положения. Не добавляй неподтверждённые события, даты, формулы, авторов, цитаты и медицинские/финансовые обещания. Различай расчётные факты и символические традиции.
+12. Гороскоп — строго символические рекомендации по рассчитанному брифу, без обещаний событий. Числа, даты, градусы и факты неба будут вставлены программой отдельно.
+13. Не используй HTML, фигурные скобки, JSX, backticks или markdown в текстовых полях.`;
 
   const userPrompt = `Тема статьи: "${topic.topic}"
 Ключевые слова для SEO: ${topic.keywords}
 Категория: ${topic.category}
+Проверенная основа и методика: ${JSON.stringify(topic.editorial_brief)}
 Желаемый slug: ${topic.slug_hint}
 
 Существующие статьи блога (для перекрёстных ссылок — выбери 3 наиболее релевантных):
@@ -201,7 +206,8 @@ ${relatedHint}
 }
 
 Требования к структуре:
-- 5-7 разделов sections
+- Для образовательных статей 5-7 разделов sections.
+- Для tomorrow_horoscope — РОВНО 12 разделов с h2 строго: Овен, Телец, Близнецы, Рак, Лев, Дева, Весы, Скорпион, Стрелец, Козерог, Водолей, Рыбы. Метод: знак читателя как первый солнечный цельнознаковый дом, не индивидуальный асцендент. Опирайся на темы планет и аспектов из брифа, НЕ вводи другие аспекты. В paragraphs/bulletList/example/warning/intro/faq/conclusion не должно быть цифр, дат, градусов и заявлений о ретроградности, затмениях, фазах Луны и переходах знака. Все такие факты добавит программа.
 - Минимум 3 раздела с bulletList или example
 - 4-6 вопросов в faq (для FAQPage schema.org)
 - relatedSlugs — ровно 3 slug из списка выше (без ведущего слэша)
@@ -237,22 +243,27 @@ ${relatedHint}
         const text = await res.text();
         lastError = `AI gateway ${res.status}: ${text.slice(0, 300)}`;
         console.error(`[${attempt.label}] ${lastError}`);
-        // 429/5xx — retry; 4xx других — тоже попробуем следующий вариант
-        await new Promise((r) => setTimeout(r, 1500));
+        if (res.status !== 429 && res.status < 500) throw new ProviderError(res.status,lastError);
+        if (attempt === attempts[attempts.length-1]) throw new ProviderError(res.status,lastError);
+        await new Promise((r) => setTimeout(r, 1500 * (attempts.indexOf(attempt)+1)));
         continue;
       }
       const data = await res.json();
       const c = data.choices?.[0]?.message?.content;
-      if (!c) {
+      if (data.choices?.[0]?.message?.refusal || !c) {
+        throw new ProviderError(403,"AI content refusal or empty response");
         lastError = "AI returned empty content";
         console.error(`[${attempt.label}] empty content. Raw:`, JSON.stringify(data).slice(0, 800));
         await new Promise((r) => setTimeout(r, 1500));
         continue;
       }
-      content = c;
+      const candidate = JSON.parse(c.replace(/^```(?:json)?\s*/i," ").replace(/```\s*$/i," ").trim());
+      validateArticle(candidate,topic.content_kind,topic.editorial_brief,existing.map(p=>p.slug));
+      content = JSON.stringify(candidate);
       console.log(`[${attempt.label}] success, length=${c.length}`);
       break;
     } catch (e) {
+      if (e instanceof ProviderError) throw e;
       lastError = (e as Error).message;
       console.error(`[${attempt.label}] exception: ${lastError}`);
       await new Promise((r) => setTimeout(r, 1500));
@@ -465,7 +476,7 @@ async function ghJson(path: string, init?: RequestInit): Promise<any> {
 }
 
 async function getFileContent(path: string): Promise<string> {
-  const data = await ghJson(`/contents/${encodeURIComponent(path).replace(/%2F/g, "/")}?ref=${BRANCH}`);
+  const data = await ghJson(`/contents/${encodeURIComponent(path).replace(/%2F/g, "/")}?ref=${BASE_SHA || BRANCH}`);
   // GitHub returns base64 with newlines
   const b64 = (data.content || "").replace(/\n/g, "");
   const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
@@ -491,8 +502,8 @@ async function createBlob(content: string, isBase64 = false): Promise<string> {
 }
 
 async function commitFiles(files: { path: string; content: string; isBase64?: boolean }[], message: string): Promise<{ sha: string; url: string }> {
-  const ref = await ghJson(`/git/ref/heads/${BRANCH}`);
-  const baseCommitSha: string = ref.object.sha;
+  const baseCommitSha = BASE_SHA;
+  if (!baseCommitSha) throw new Error("Missing pinned GitHub base");
   const baseCommit = await ghJson(`/git/commits/${baseCommitSha}`);
   const baseTreeSha: string = baseCommit.tree.sha;
 
@@ -574,179 +585,76 @@ function updateRss(current: string, a: GeneratedArticle): string {
 
 // ============== Handler ==============
 Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
-
-  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-  let topicId: string | null = null;
-
-  try {
-    // Required env check
-    for (const [k, v] of [["LOVABLE_API_KEY", LOVABLE_API_KEY], ["GITHUB_TOKEN", GITHUB_TOKEN], ["GITHUB_REPO", GITHUB_REPO]]) {
-      if (!v) throw new Error(`Missing env var: ${k}`);
-    }
-
-    // Resolve default branch
-    const repoInfo = await ghJson("");
-    BRANCH = repoInfo.default_branch || "main";
-
-    // 0. Guard: если за последние 20 часов уже была успешная публикация — выходим (это retry, не нужен)
-    //    Пропускаем при force=true (ручной запуск).
-    let force = false;
-    try {
-      if (req.method === "POST") {
-        const body = await req.clone().json().catch(() => ({}));
-        force = body?.force === true;
-      }
-    } catch { /* ignore */ }
-    if (!force) {
-      const since = new Date(Date.now() - 20 * 60 * 60 * 1000).toISOString();
-      const { data: recent } = await supabase
-        .from("blog_generations")
-        .select("id, slug, created_at")
-        .eq("status", "success")
-        .gte("created_at", since)
-        .limit(1);
-      if (recent && recent.length > 0) {
-        return new Response(
-          JSON.stringify({ ok: true, skipped: true, reason: "Already published in last 20h", last: recent[0] }),
-          { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 },
-        );
-      }
-    }
-
-    // 1. Get next pending topic
-    const { data: topics, error: tErr } = await supabase
-      .from("blog_topics")
-      .select("id, topic, keywords, slug_hint, category")
-      .eq("status", "pending")
-      .order("priority", { ascending: true })
-      .order("created_at", { ascending: true })
-      .limit(1);
-    if (tErr) throw new Error("DB select topics: " + tErr.message);
-    if (!topics || topics.length === 0) {
-      return new Response(JSON.stringify({ ok: false, reason: "No pending topics" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
-      });
-    }
-    const topic = topics[0] as Topic;
-    topicId = topic.id;
-
-    await supabase.from("blog_topics").update({ status: "generating" }).eq("id", topic.id);
-
-    // 2. Read existing blog posts list for related linking and dedup
-    const blogPostsTsRaw = await getFileContent("src/data/blogPosts.ts");
-    const existing: RelatedPost[] = [];
-    const re = /title:\s*'([^']+)'[\s\S]*?link:\s*'(\/[\w\-]+)'/g;
-    let m: RegExpExecArray | null;
-    while ((m = re.exec(blogPostsTsRaw)) !== null) {
-      existing.push({ title: m[1], slug: m[2].replace(/^\//, "") });
-    }
-    // Dedup check
-    if (existing.some((p) => p.slug === topic.slug_hint)) {
-      throw new Error(`Slug ${topic.slug_hint} already exists in blog`);
-    }
-
-    // 3. Generate article via AI
-    const article = await generateArticle(topic, existing);
-    // Force slug from topic to avoid AI drift
-    article.slug = topic.slug_hint;
-
-    // Final dedup with AI-returned slug
-    if (existing.some((p) => p.slug === article.slug)) {
-      throw new Error(`Generated slug collision: ${article.slug}`);
-    }
-
-    // 4. Build related titles map
-    const titleMap = new Map(existing.map((p) => [p.slug, p.title]));
-
-    // 5. Build TSX page
-    const compName = pascalCase(article.slug);
-    const tsxContent = buildTsxPage(article, titleMap);
-
-    // 6. Read other source files
-    const [appTsxRaw, sitemapRaw, rssRaw] = await Promise.all([
-      getFileContent("src/App.tsx"),
-      getFileContent("public/sitemap.xml"),
-      getFileContent("public/rss.xml"),
-    ]);
-
-    // 7. Compose updated files
-    const newBlogPostsTs = updateBlogPostsTs(blogPostsTsRaw, article);
-    const newAppTsx = updateAppTsx(appTsxRaw, article);
-    const newSitemap = updateSitemap(sitemapRaw, article);
-    const newRss = updateRss(rssRaw, article);
-
-    // 7b. Generate cover image for Dzen (≥700px requirement)
-    let coverB64 = "";
-    let coverUrl = "";
-    try {
-      coverB64 = await generateCoverImage(article.title, article.category || topic.category);
-      coverUrl = `${DOMAIN}/blog-covers/${article.slug}.png`;
-      console.log(`[cover] generated ${coverB64.length} bytes (base64) for ${article.slug}`);
-    } catch (e) {
-      console.error("[cover] generation failed, continuing without cover:", (e as Error).message);
-    }
-
-    // 7c. Build Dzen-ready HTML + description
-    const dzenHtml = buildDzenHtml(article, coverUrl);
-    const dzenDescription = buildDzenDescription(article);
-
-    // 8. Atomic commit (include cover if generated)
-    const commitFilesList: { path: string; content: string; isBase64?: boolean }[] = [
-      { path: `src/pages/blog-auto/${compName}.tsx`, content: tsxContent },
-      { path: "src/data/blogPosts.ts", content: newBlogPostsTs },
-      { path: "src/App.tsx", content: newAppTsx },
-      { path: "public/sitemap.xml", content: newSitemap },
-      { path: "public/rss.xml", content: newRss },
-    ];
-    if (coverB64) {
-      commitFilesList.push({
-        path: `public/blog-covers/${article.slug}.png`,
-        content: coverB64,
-        isBase64: true,
-      });
-    }
-    const commit = await commitFiles(
-      commitFilesList,
-      `feat(blog): auto-publish "${article.title.slice(0, 60)}"`,
-    );
-
-    // 9. Mark topic published, log
-    const url = `${DOMAIN}/${article.slug}`;
-    await supabase.from("blog_topics").update({
-      status: "published",
-      published_url: url,
-      generated_at: new Date().toISOString(),
-      cover_url: coverUrl || null,
-      description: dzenDescription,
-      dzen_html: dzenHtml,
-    }).eq("id", topic.id);
-
-    await supabase.from("blog_generations").insert({
-      topic_id: topic.id,
-      status: "success",
-      commit_sha: commit.sha,
-      commit_url: commit.url,
-      slug: article.slug,
-      title: article.title,
-    });
-
-    return new Response(JSON.stringify({
-      ok: true,
-      slug: article.slug,
-      title: article.title,
-      url,
-      commit: commit.url,
-    }), { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 });
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error("generate-blog-post error:", msg);
-    if (topicId) {
-      await supabase.from("blog_topics").update({ status: "pending" }).eq("id", topicId);
-      await supabase.from("blog_generations").insert({ topic_id: topicId, status: "failed", error_message: msg.slice(0, 2000) });
-    }
-    return new Response(JSON.stringify({ ok: false, error: msg }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500,
-    });
+ if(req.method === "OPTIONS") return new Response("ok",{headers:corsHeaders});
+ const respond=(data:unknown,status=200)=>new Response(JSON.stringify(data),{status,headers:{...corsHeaders,"Content-Type":"application/json"}});
+ if(req.method!=="POST")return respond({error:"POST required"},405);
+ const supabase=createClient(SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY);
+ const check=(result:any)=>{if(result.error)throw new Error(result.error.message);return result.data;};
+ let token:string|undefined, day:string|undefined,kind:Kind|undefined,topicId:string|undefined;
+ try {
+  const secret=req.headers.get("x-blog-scheduler-secret")??"";
+  const authorized=check(await supabase.rpc("authorize_blog_scheduler",{p_secret:secret}));
+  if(!authorized)return respond({error:"Unauthorized scheduler"},401);
+  let body:any;try{body=await req.json();}catch{return respond({error:"Invalid JSON"},400);}
+  if(body.kind!==undefined && !KINDS.includes(body.kind))return respond({error:"Invalid kind"},400);
+  for(const [k,v] of [["LOVABLE_API_KEY",LOVABLE_API_KEY],["GITHUB_TOKEN",GITHUB_TOKEN],["GITHUB_REPO",GITHUB_REPO]])if(!v)throw new Error(`Missing env var: ${k}`);
+  const claim=check(await supabase.rpc("claim_blog_daily",{p_kind:body.kind??null}));
+  if(claim.skipped)return respond({ok:true,...claim});
+  token=claim.token;day=claim.day;kind=claim.kind;
+  if(!token||!day||!kind)throw new Error("Invalid claim");
+  const repo=await ghJson("");BRANCH=repo.default_branch||"main";
+  const ref=await ghJson(`/git/ref/heads/${BRANCH}`);BASE_SHA=ref.object.sha;
+  const blogRaw=await getFileContent("src/data/blogPosts.ts");
+  const existing:RelatedPost[]=[];
+  const pattern=/title:\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')[\s\S]*?link:\s*["'](\/[\w-]+)["']/g;
+  for(const match of blogRaw.matchAll(pattern)){let title=match[1].slice(1,-1);if(match[1][0]==='"')title=JSON.parse(match[1]);existing.push({title,slug:match[2].slice(1)});}
+  let topic:Topic;
+  if(claim.slot.topic_id){
+   topic=check(await supabase.from("blog_topics").select("*").eq("id",claim.slot.topic_id).single());
+  }else if(kind==='tomorrow_horoscope'){
+   const brief=skyBrief(day),slug=`goroskop-na-${brief.target}`;
+   const row=check(await supabase.from("blog_topics").select("*").eq("slug_hint",slug).limit(1));
+   topic=row[0]??check(await supabase.from("blog_topics").insert({topic:`Гороскоп на ${dateLabel(brief.target)} для всех знаков зодиака`,keywords:`гороскоп на завтра, гороскоп на ${dateLabel(brief.target)}, гороскоп для всех знаков зодиака`,slug_hint:slug,category:'Гороскоп',content_kind:kind,editorial_brief:brief,target_date:brief.target}).select().single());
+  }else{
+   const pool=lessons().filter(l=>l.kind===kind);
+   const known=check(await supabase.from("blog_topics").select("slug_hint,status").in("slug_hint",pool.map(l=>l.slug)));
+   const lesson=pool.find(l=>!existing.some(p=>p.slug===l.slug)&&!known.some((p:any)=>p.slug_hint===l.slug&&p.status==='published'));
+   if(!lesson)throw new Error(`No remaining source-grounded lessons for ${kind}`);
+   const rows=check(await supabase.from("blog_topics").select("*").eq("slug_hint",lesson.slug).limit(1));
+   topic=rows[0]??check(await supabase.from("blog_topics").insert({topic:lesson.title,keywords:lesson.keywords,slug_hint:lesson.slug,category:kind==='astrology_education'?'Астрология':'Нумерология',content_kind:kind,editorial_brief:lesson}).select().single());
   }
+  topicId=topic.id;
+  check(await supabase.from("blog_daily_slots").update({topic_id:topicId,status:'generating'}).eq('publication_day',day).eq('content_kind',kind));
+  check(await supabase.from("blog_topics").update({status:'generating'}).eq('id',topicId));
+  let payload=claim.slot.payload;
+  if(!payload){
+   if(existing.some(p=>p.slug===topic.slug_hint))throw new Error('Existing article without recoverable payload');
+   const article=await generateArticle(topic,existing);article.slug=topic.slug_hint;article.category=topic.category;
+   if(!/^[a-z][a-z0-9-]*$/.test(article.slug))throw new Error('Unsafe slug');
+   const coverB64=await generateCoverImage(article.title,topic.category);
+   const coverUrl=`${DOMAIN}/blog-covers/${article.slug}.png`;
+   payload={article,coverB64,coverUrl,dzenHtml:buildDzenHtml(article,coverUrl)};
+   check(await supabase.from('blog_daily_slots').update({payload}).eq('publication_day',day).eq('content_kind',kind));
+  }
+  const {article,coverB64,coverUrl,dzenHtml}=payload;
+  let commit={sha:BASE_SHA,url:`https://github.com/${GITHUB_REPO}/commit/${BASE_SHA}`};
+  if(!existing.some(p=>p.slug===article.slug)){
+   const [appRaw,sitemapRaw,rssRaw]=await Promise.all([getFileContent('src/App.tsx'),getFileContent('public/sitemap.xml'),getFileContent('public/rss.xml')]);
+   const files=[{path:`src/pages/blog-auto/${pascalCase(article.slug)}.tsx`,content:buildTsxPage(article,new Map(existing.map(p=>[p.slug,p.title])))},{path:'src/data/blogPosts.ts',content:updateBlogPostsTs(blogRaw,article)},{path:'src/App.tsx',content:updateAppTsx(appRaw,article)},{path:'public/sitemap.xml',content:updateSitemap(sitemapRaw,article)},{path:'public/rss.xml',content:updateRss(rssRaw,article)},{path:`public/blog-covers/${article.slug}.png`,content:coverB64,isBase64:true}];
+   commit=await commitFiles(files,`feat(blog): publish ${kind} ${day}: ${article.title.slice(0,60)}`);
+  }
+  check(await supabase.rpc('finish_blog_daily',{p_token:token,p_day:day,p_kind:kind,p_topic:topicId,p_article:article,p_cover:coverUrl,p_html:dzenHtml,p_commit:commit}));
+  return respond({ok:true,kind,day,title:article.title,url:`${DOMAIN}/${article.slug}`,commit:commit.url});
+ }catch(err){
+  const msg=err instanceof Error?err.message:String(err),status=err instanceof ProviderError?err.status:500;
+  console.error('generate-blog-post:',msg);
+  if(token){
+   const paused=err instanceof ProviderError&&(status===402||status===403||status===429);
+   const release=await supabase.from('blog_job_state').update({lease_token:null,lease_until:null,...(paused?{paused_reason:msg,resume_after:status===429?new Date(Date.now()+3600000).toISOString():null}:{})}).eq('id','daily').eq('lease_token',token);
+   if(release.error)console.error('Release blog lease:',release.error.message);
+   if(day&&kind)await supabase.from('blog_daily_slots').update({status:'pending',error_message:msg.slice(0,2000)}).eq('publication_day',day).eq('content_kind',kind);
+   if(topicId){await supabase.from('blog_topics').update({status:'pending'}).eq('id',topicId);await supabase.from('blog_generations').insert({topic_id:topicId,status:'failed',error_message:msg.slice(0,2000)});}
+  }
+  return respond({ok:false,error:msg},status);
+ }
 });
