@@ -1,6 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
+import { coverPrompt } from "./cover-policy.mjs";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN") ?? "";
@@ -107,9 +108,9 @@ function buildDzenDescription(a: GeneratedArticle): string {
 }
 
 // ============== AI cover image generation ==============
-async function generateCoverImage(title: string, category: string): Promise<string> {
+async function generateCoverImage(title: string, kind: Kind, targetDate?: string): Promise<string> {
   // Returns base64 PNG (no data: prefix)
-  const prompt = `Эстетичная мистическая иллюстрация на тему: "${title}". Категория: ${category}. Стиль: тёмно-фиолетовая палитра с золотыми акцентами, мягкое сияние, звёзды и космические мотивы, абстрактная композиция, минимализм, премиум-вид. БЕЗ текста, букв, цифр и людей. Художественная астрологическая визуализация.`;
+  const prompt = coverPrompt(title, kind, targetDate);
   const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
     method: "POST",
     headers: {
@@ -298,7 +299,7 @@ ${relatedHint}
 }
 
 // ============== TSX template ==============
-function buildTsxPage(a: GeneratedArticle, relatedTitles: Map<string, string>): string {
+function buildTsxPage(a: GeneratedArticle, relatedTitles: Map<string, string>, coverUrl: string): string {
   const dateRu = ruDate();
   const url = `${DOMAIN}/${a.slug}`;
 
@@ -307,7 +308,7 @@ function buildTsxPage(a: GeneratedArticle, relatedTitles: Map<string, string>): 
     "@type": "Article",
     headline: a.title,
     description: a.metaDescription,
-    image: `${DOMAIN}/favicon.svg`,
+    image: coverUrl,
     author: { "@type": "Organization", name: "НейроДзен", url: DOMAIN },
     publisher: { "@type": "Organization", name: "НейроДзен", url: DOMAIN, logo: { "@type": "ImageObject", url: `${DOMAIN}/favicon.svg` } },
     datePublished: new Date().toISOString(),
@@ -383,6 +384,7 @@ const Page = () => {
         <meta property="og:description" content="${escAttr(a.metaDescription)}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="${url}" />
+        <meta property="og:image" content="${escAttr(coverUrl)}" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="${escAttr(a.title)}" />
@@ -421,6 +423,9 @@ const Page = () => {
               <p className="text-muted-foreground text-lg">${dateRu}</p>
             </div>
 
+            <a href="https://chat.aidzen.ru/login" className="block mb-8">
+              <img src="${escAttr(coverUrl)}" alt="${escAttr(a.title)}" width="1536" height="1024" fetchPriority="high" className="w-full h-auto rounded-lg" />
+            </a>
             <div className="prose prose-lg max-w-none">${introJsx}${sectionsJsx}
 
               <h2 className="text-3xl font-bold mt-12 mb-6">Частые вопросы</h2>
@@ -630,16 +635,19 @@ Deno.serve(async (req) => {
    if(existing.some(p=>p.slug===topic.slug_hint))throw new Error('Existing article without recoverable payload');
    const article=kind==='tomorrow_horoscope' ? horoscopeArticle(topic.editorial_brief,existing.map(p=>p.slug)) : await generateArticle(topic,existing);article.slug=topic.slug_hint;article.category=topic.category;
    if(!/^[a-z][a-z0-9-]*$/.test(article.slug))throw new Error('Unsafe slug');
-   const coverB64=await generateCoverImage(article.title,topic.category);
-   const coverUrl=`${DOMAIN}/blog-covers/${article.slug}.png`;
+   const coverB64=await generateCoverImage(article.title,kind,topic.editorial_brief?.target);
+   const coverUrl=`${SUPABASE_URL}/functions/v1/blog-cover-img?p=${article.slug}.png`;
    payload={article,coverB64,coverUrl,dzenHtml:buildDzenHtml(article,coverUrl)};
    check(await supabase.from('blog_daily_slots').update({payload}).eq('publication_day',day).eq('content_kind',kind));
   }
   const {article,coverB64,coverUrl,dzenHtml}=payload;
+  // Publish the image independently of the website deployment before exposing its RSS enclosure.
+  const bytes=Uint8Array.from(atob(coverB64),(c)=>c.charCodeAt(0));
+  check(await supabase.storage.from('blog-covers').upload(`${article.slug}.png`,bytes,{contentType:'image/png',upsert:true}));
   let commit={sha:BASE_SHA,url:`https://github.com/${GITHUB_REPO}/commit/${BASE_SHA}`};
   if(!existing.some(p=>p.slug===article.slug)){
    const [appRaw,sitemapRaw,rssRaw]=await Promise.all([getFileContent('src/App.tsx'),getFileContent('public/sitemap.xml'),getFileContent('public/rss.xml')]);
-   const files=[{path:`src/pages/blog-auto/${pascalCase(article.slug)}.tsx`,content:buildTsxPage(article,new Map(existing.map(p=>[p.slug,p.title])))},{path:'src/data/blogPosts.ts',content:updateBlogPostsTs(blogRaw,article)},{path:'src/App.tsx',content:updateAppTsx(appRaw,article)},{path:'public/sitemap.xml',content:updateSitemap(sitemapRaw,article)},{path:'public/rss.xml',content:updateRss(rssRaw,article)},{path:`public/blog-covers/${article.slug}.png`,content:coverB64,isBase64:true}];
+   const files=[{path:`src/pages/blog-auto/${pascalCase(article.slug)}.tsx`,content:buildTsxPage(article,new Map(existing.map(p=>[p.slug,p.title])),coverUrl)},{path:'src/data/blogPosts.ts',content:updateBlogPostsTs(blogRaw,article)},{path:'src/App.tsx',content:updateAppTsx(appRaw,article)},{path:'public/sitemap.xml',content:updateSitemap(sitemapRaw,article)},{path:'public/rss.xml',content:updateRss(rssRaw,article)},{path:`public/blog-covers/${article.slug}.png`,content:coverB64,isBase64:true}];
    commit=await commitFiles(files,`feat(blog): publish ${kind} ${day}: ${article.title.slice(0,60)}`);
   }
   check(await supabase.rpc('finish_blog_daily',{p_token:token,p_day:day,p_kind:kind,p_topic:topicId,p_article:article,p_cover:coverUrl,p_html:dzenHtml,p_commit:commit}));

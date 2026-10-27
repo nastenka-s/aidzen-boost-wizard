@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Link } from 'react-router-dom';
+import coverImage from '@/assets/blog-covers/horoscope-2026-10-28.jpg';
 
 const Page = () => {
   return (
@@ -56,6 +57,7 @@ const Page = () => {
               <p className="text-muted-foreground text-lg">27 октября 2026 г.</p>
             </div>
 
+            <a href="https://chat.aidzen.ru/login" className="block mb-8"><img src={coverImage} alt="Гороскоп на завтра — 28 октября 2026" width="1264" height="848" fetchPriority="high" className="w-full h-auto rounded-lg" /></a>
             <div className="prose prose-lg max-w-none">
               <p className="text-lg leading-relaxed mb-6">Астрология и нумерология — символические традиции, а не научно подтверждённые прогнозы. Общий гороскоп не заменяет индивидуальную натальную карту.</p>
 
