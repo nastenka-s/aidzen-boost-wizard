@@ -1,6 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
+import { coverPrompt } from "./cover-policy.mjs";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN") ?? "";
@@ -107,9 +108,9 @@ function buildDzenDescription(a: GeneratedArticle): string {
 }
 
 // ============== AI cover image generation ==============
-async function generateCoverImage(title: string, category: string): Promise<string> {
+async function generateCoverImage(title: string, kind: Kind, targetDate?: string): Promise<string> {
   // Returns base64 PNG (no data: prefix)
-  const prompt = `Эстетичная мистическая иллюстрация на тему: "${title}". Категория: ${category}. Стиль: тёмно-фиолетовая палитра с золотыми акцентами, мягкое сияние, звёзды и космические мотивы, абстрактная композиция, минимализм, премиум-вид. БЕЗ текста, букв, цифр и людей. Художественная астрологическая визуализация.`;
+  const prompt = coverPrompt(title, kind, targetDate);
   const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
     method: "POST",
     headers: {
@@ -298,7 +299,7 @@ ${relatedHint}
 }
 
 // ============== TSX template ==============
-function buildTsxPage(a: GeneratedArticle, relatedTitles: Map<string, string>): string {
+function buildTsxPage(a: GeneratedArticle, relatedTitles: Map<string, string>, coverUrl: string): string {
   const dateRu = ruDate();
   const url = `${DOMAIN}/${a.slug}`;
 
@@ -307,7 +308,7 @@ function buildTsxPage(a: GeneratedArticle, relatedTitles: Map<string, string>): 
     "@type": "Article",
     headline: a.title,
     description: a.metaDescription,
-    image: `${DOMAIN}/favicon.svg`,
+    image: coverUrl,
     author: { "@type": "Organization", name: "НейроДзен", url: DOMAIN },
     publisher: { "@type": "Organization", name: "НейроДзен", url: DOMAIN, logo: { "@type": "ImageObject", url: `${DOMAIN}/favicon.svg` } },
     datePublished: new Date().toISOString(),
@@ -383,6 +384,7 @@ const Page = () => {
         <meta property="og:description" content="${escAttr(a.metaDescription)}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="${url}" />
+        <meta property="og:image" content="${escAttr(coverUrl)}" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="${escAttr(a.title)}" />
