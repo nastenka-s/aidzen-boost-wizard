@@ -76,7 +76,7 @@ export function validateArticle(a:any,kind:Kind,brief:any,existing:string[]) {
  }
  a.intro.unshift(DISCLAIMER);
  a.sections.unshift({h2:kind==='tomorrow_horoscope'?'Рассчитанные положения и аспекты дня':'Основа материала',paragraphs:brief.facts});
- a.sections.push({h2:'Источники и методика',paragraphs:[...(brief.method?[brief.method]:[]),...brief.sources]});
+ // Research sources and calculation methodology remain in the internal brief only.
  return a;
 }
 export function horoscopeArticle(brief:ReturnType<typeof skyBrief>,existing:string[]) {

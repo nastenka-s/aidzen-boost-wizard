@@ -29,3 +29,7 @@
 # Dzen RSS website footer
 - [x] Replace RSS-only final CTA with aidzen.ru and three free calculations; tests pass, all 20 deployed source items verified, static copy refreshed.
 - [ ] Publish the refreshed public RSS footer — www.aidzen.ru still serves the old static feed; awaiting website deployment.
+
+# November horoscope draft revision
+- [x] Prepare a versioned unpublished draft without sources/methodology, with a personal forecast CTA to aidzen.ru and titled cover.
+- [x] Stop appending visible sources/methodology to future articles while retaining internal factual grounding; eight regression tests pass.

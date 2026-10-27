@@ -1,6 +1,7 @@
 import { assertEquals, assert, assertThrows } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import { moscowDay,tomorrow,skyBrief,distance,lessons,validateArticle,horoscopeArticle,SIGNS,KINDS } from './editorial.ts';
 Deno.test('Three distinct daily article categories',()=>assertEquals(KINDS,['astrology_education','numerology_education','tomorrow_horoscope']));
+Deno.test('Internal source grounding survives article rendering unchanged',()=>{const brief=skyBrief('2026-10-27');const original=structuredClone(brief);horoscopeArticle(brief,[]);assertEquals(brief,original);assert(brief.sources.length>0);assert(brief.method.length>0);});
 Deno.test('Tomorrow follows Moscow calendar including year rollover',()=>{assertEquals(moscowDay(new Date('2026-12-31T21:00:00Z')),'2027-01-01');assertEquals(tomorrow('2026-10-27'),'2026-10-28');assertEquals(tomorrow('2028-02-28'),'2028-02-29');});
 Deno.test('Circular aspects handle zodiac wrap',()=>{assertEquals(distance(359,1),2);assertEquals(distance(10,190),180);});
 Deno.test('Calculated horoscope includes all twelve signs without AI inventions',()=>{const a=horoscopeArticle(skyBrief('2026-10-27'),[]);assertEquals(a.sections.slice(1,13).map((s:any)=>s.h2),SIGNS);assertEquals(a.slug,'goroskop-na-2026-10-28');});
