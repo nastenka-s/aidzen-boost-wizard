@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_daily_slots: {
+        Row: {
+          commit_sha: string | null
+          content_kind: string
+          error_message: string | null
+          payload: Json | null
+          publication_day: string
+          published_at: string | null
+          status: string
+          topic_id: string | null
+        }
+        Insert: {
+          commit_sha?: string | null
+          content_kind: string
+          error_message?: string | null
+          payload?: Json | null
+          publication_day: string
+          published_at?: string | null
+          status?: string
+          topic_id?: string | null
+        }
+        Update: {
+          commit_sha?: string | null
+          content_kind?: string
+          error_message?: string | null
+          payload?: Json | null
+          publication_day?: string
+          published_at?: string | null
+          status?: string
+          topic_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_daily_slots_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "blog_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blog_generations: {
         Row: {
           commit_sha: string | null
@@ -58,13 +99,42 @@ export type Database = {
           },
         ]
       }
+      blog_job_state: {
+        Row: {
+          id: string
+          lease_token: string | null
+          lease_until: string | null
+          paused_reason: string | null
+          resume_after: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          lease_token?: string | null
+          lease_until?: string | null
+          paused_reason?: string | null
+          resume_after?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          lease_token?: string | null
+          lease_until?: string | null
+          paused_reason?: string | null
+          resume_after?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       blog_topics: {
         Row: {
           category: string
+          content_kind: string | null
           cover_url: string | null
           created_at: string
           description: string | null
           dzen_html: string | null
+          editorial_brief: Json | null
           generated_at: string | null
           id: string
           keywords: string
@@ -72,14 +142,17 @@ export type Database = {
           published_url: string | null
           slug_hint: string
           status: string
+          target_date: string | null
           topic: string
         }
         Insert: {
           category: string
+          content_kind?: string | null
           cover_url?: string | null
           created_at?: string
           description?: string | null
           dzen_html?: string | null
+          editorial_brief?: Json | null
           generated_at?: string | null
           id?: string
           keywords: string
@@ -87,14 +160,17 @@ export type Database = {
           published_url?: string | null
           slug_hint: string
           status?: string
+          target_date?: string | null
           topic: string
         }
         Update: {
           category?: string
+          content_kind?: string | null
           cover_url?: string | null
           created_at?: string
           description?: string | null
           dzen_html?: string | null
+          editorial_brief?: Json | null
           generated_at?: string | null
           id?: string
           keywords?: string
@@ -102,6 +178,7 @@ export type Database = {
           published_url?: string | null
           slug_hint?: string
           status?: string
+          target_date?: string | null
           topic?: string
         }
         Relationships: []
@@ -447,7 +524,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_blog_daily: { Args: { p_kind?: string }; Returns: Json }
       claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
+      finish_blog_daily: {
+        Args: {
+          p_article: Json
+          p_commit: Json
+          p_cover: string
+          p_day: string
+          p_html: string
+          p_kind: string
+          p_token: string
+          p_topic: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
