@@ -32,4 +32,4 @@
 
 # November horoscope draft revision
 - [x] Prepare a versioned unpublished draft without sources/methodology, with a personal forecast CTA to aidzen.ru and titled cover.
-- [ ] Stop appending visible sources/methodology to future articles while retaining internal factual grounding; run regression tests.
+- [x] Stop appending visible sources/methodology to future articles while retaining internal factual grounding; eight regression tests pass.
