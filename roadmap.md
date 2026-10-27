@@ -1,4 +1,6 @@
 # Pinterest updates
+- [x] Queue four article-linked esoteric pins for each new article across four Moscow days; raise atomic cap to twelve, wake on enqueue and retain hourly retries only while jobs remain.
+- [x] Deploy and pass ten editorial tests plus SQL schedule, permission and cap regressions; first November article pin verified in live RSS with its direct link, description and readable 1024×1536 image. Pinterest's own RSS import timing remains external.
 - [x] Add varied visual styles and list categories.
 - [x] Ground dated events in astronomical calculations and clearly label traditional meanings.
 - [x] Limit generation to three pins per Moscow day and adjust schedule.

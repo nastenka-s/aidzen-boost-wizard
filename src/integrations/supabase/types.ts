@@ -186,6 +186,96 @@ export type Database = {
         }
         Relationships: []
       }
+      pinterest_article_campaigns: {
+        Row: {
+          article_url: string
+          content_kind: string
+          created_at: string
+          description: string
+          publication_day: string
+          title: string
+        }
+        Insert: {
+          article_url: string
+          content_kind?: string
+          created_at?: string
+          description?: string
+          publication_day: string
+          title: string
+        }
+        Update: {
+          article_url?: string
+          content_kind?: string
+          created_at?: string
+          description?: string
+          publication_day?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      pinterest_article_jobs: {
+        Row: {
+          article_url: string
+          due_day: string
+          image_payload: Json | null
+          last_error: string | null
+          pin_id: string | null
+          published_at: string | null
+          status: string
+          variant: number
+        }
+        Insert: {
+          article_url: string
+          due_day: string
+          image_payload?: Json | null
+          last_error?: string | null
+          pin_id?: string | null
+          published_at?: string | null
+          status?: string
+          variant: number
+        }
+        Update: {
+          article_url?: string
+          due_day?: string
+          image_payload?: Json | null
+          last_error?: string | null
+          pin_id?: string | null
+          published_at?: string | null
+          status?: string
+          variant?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pinterest_article_jobs_article_url_fkey"
+            columns: ["article_url"]
+            isOneToOne: false
+            referencedRelation: "pinterest_article_campaigns"
+            referencedColumns: ["article_url"]
+          },
+          {
+            foreignKeyName: "pinterest_article_jobs_pin_id_fkey"
+            columns: ["pin_id"]
+            isOneToOne: false
+            referencedRelation: "pinterest_pins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pinterest_dispatch_config: {
+        Row: {
+          function_url: string
+          id: string
+        }
+        Insert: {
+          function_url: string
+          id?: string
+        }
+        Update: {
+          function_url?: string
+          id?: string
+        }
+        Relationships: []
+      }
       pinterest_generation_state: {
         Row: {
           id: string
@@ -212,6 +302,8 @@ export type Database = {
       }
       pinterest_pins: {
         Row: {
+          article_url: string | null
+          article_variant: number | null
           astro_context: string | null
           created_at: string
           description: string
@@ -227,6 +319,8 @@ export type Database = {
           topic: string | null
         }
         Insert: {
+          article_url?: string | null
+          article_variant?: number | null
           astro_context?: string | null
           created_at?: string
           description: string
@@ -242,6 +336,8 @@ export type Database = {
           topic?: string | null
         }
         Update: {
+          article_url?: string | null
+          article_variant?: number | null
           astro_context?: string | null
           created_at?: string
           description?: string
@@ -530,7 +626,19 @@ export type Database = {
       authorize_blog_scheduler: { Args: { p_secret: string }; Returns: boolean }
       blog_schedule_hour: { Args: { p_kind: string }; Returns: number }
       claim_blog_daily: { Args: { p_kind?: string }; Returns: Json }
+      claim_pinterest_article: { Args: never; Returns: Json }
       claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
+      dispatch_pinterest_articles: { Args: never; Returns: undefined }
+      enqueue_pinterest_article: {
+        Args: {
+          p_day: string
+          p_description: string
+          p_kind: string
+          p_title: string
+          p_url: string
+        }
+        Returns: undefined
+      }
       finish_blog_daily: {
         Args: {
           p_article: Json
@@ -544,6 +652,17 @@ export type Database = {
         }
         Returns: undefined
       }
+      finish_pinterest_article: {
+        Args: {
+          p_content: Json
+          p_day: string
+          p_token: string
+          p_url: string
+          p_variant: number
+        }
+        Returns: string
+      }
+      pinterest_daily_limit: { Args: never; Returns: number }
     }
     Enums: {
       [_ in never]: never

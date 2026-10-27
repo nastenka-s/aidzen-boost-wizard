@@ -2,6 +2,7 @@
 - Keep Dzen publication categories in its tested publication policy; imported articles must not be forced into drafts.
 - Keep Pinterest editorial catalogs, astronomical calculations and deterministic visual rotation in the generator's local editorial module so scheduled output is testable independently of paid services.
 - Acquire the service-only database lease before Pinterest provider calls; enforce the Moscow-day publication limit atomically and never allow force requests to bypass it.
+- Queue article-pin campaigns transactionally from published blog records, keep manual approved articles idempotent, and finalize each variant under the shared lease so article links, one-per-article daily pacing and retries cannot duplicate pins.
 - Build all pin text from curated or calculated briefs and allow AI only to select approved copy variants so generated imagery cannot introduce invented dated events or predictive claims.
 - Keep blog keyword catalogs, educational source briefs and tomorrow sky calculations in the local blog editorial module; numerical horoscope facts must be rendered from calculations, not authored by AI.
 - Compose tomorrow horoscope prose deterministically from calculated aspects and declared solar whole-sign themes; free-form AI must not introduce dated sky events or unapproved interpretations.
@@ -13,3 +14,4 @@
 - Store generated blog covers in a service-write-only private bucket and expose only editorial image filenames through the read-only blog-cover-img endpoint before finalizing RSS; image availability must not depend on website deployment.
 - Apply RSS-only CTA changes at feed rendering in its tested footer policy, preserving stored article prose and website CTAs.
 - Keep approved manually published RSS articles in the feed's local editorial JSON, merged by slug with scheduled database articles, so manual publication does not consume daily slots or depend on provider calls.
+- Share approved manual article metadata under functions/_shared for Dzen and Pinterest; wake article pin processing on enqueue and retain hourly timed retries only while campaign jobs remain pending.
