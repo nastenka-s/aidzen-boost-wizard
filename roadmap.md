@@ -13,5 +13,5 @@
 # Three daily blog articles
 - [x] Study and cluster the 225 uploaded keywords into source-grounded educational topics.
 - [x] Schedule one astrology lesson, one numerology lesson and one calculated tomorrow horoscope per Moscow day (09:00, 13:00, 18:00; retries 11:00, 15:00, 21:00).
-- [x] Add atomic daily slots, global lease, provider circuit breaker, saved payload recovery and factual validation; six editorial tests pass.
+- [x] Add atomic daily slots, global lease, provider circuit breaker, saved payload recovery and factual validation; seven editorial tests pass, horoscope text uses calculated facts and curated interpretations only.
 - [ ] Verify all three articles on the public website — GitHub Deploy over SSH fails; authenticated deployment logs/server access required.
