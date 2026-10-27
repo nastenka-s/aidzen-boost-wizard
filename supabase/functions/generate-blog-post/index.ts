@@ -423,6 +423,9 @@ const Page = () => {
               <p className="text-muted-foreground text-lg">${dateRu}</p>
             </div>
 
+            <a href="https://chat.aidzen.ru/login" className="block mb-8">
+              <img src="${escAttr(coverUrl)}" alt="${escAttr(a.title)}" width="1536" height="1024" fetchPriority="high" className="w-full h-auto rounded-lg" />
+            </a>
             <div className="prose prose-lg max-w-none">${introJsx}${sectionsJsx}
 
               <h2 className="text-3xl font-bold mt-12 mb-6">Частые вопросы</h2>
@@ -632,16 +635,19 @@ Deno.serve(async (req) => {
    if(existing.some(p=>p.slug===topic.slug_hint))throw new Error('Existing article without recoverable payload');
    const article=kind==='tomorrow_horoscope' ? horoscopeArticle(topic.editorial_brief,existing.map(p=>p.slug)) : await generateArticle(topic,existing);article.slug=topic.slug_hint;article.category=topic.category;
    if(!/^[a-z][a-z0-9-]*$/.test(article.slug))throw new Error('Unsafe slug');
-   const coverB64=await generateCoverImage(article.title,topic.category);
-   const coverUrl=`${DOMAIN}/blog-covers/${article.slug}.png`;
+   const coverB64=await generateCoverImage(article.title,kind,topic.editorial_brief?.target);
+   const coverUrl=`${SUPABASE_URL}/functions/v1/blog-cover-img?p=${article.slug}.png`;
    payload={article,coverB64,coverUrl,dzenHtml:buildDzenHtml(article,coverUrl)};
    check(await supabase.from('blog_daily_slots').update({payload}).eq('publication_day',day).eq('content_kind',kind));
   }
   const {article,coverB64,coverUrl,dzenHtml}=payload;
+  // Publish the image independently of the website deployment before exposing its RSS enclosure.
+  const bytes=Uint8Array.from(atob(coverB64),(c)=>c.charCodeAt(0));
+  check(await supabase.storage.from('blog-covers').upload(`${article.slug}.png`,bytes,{contentType:'image/png',upsert:true}));
   let commit={sha:BASE_SHA,url:`https://github.com/${GITHUB_REPO}/commit/${BASE_SHA}`};
   if(!existing.some(p=>p.slug===article.slug)){
    const [appRaw,sitemapRaw,rssRaw]=await Promise.all([getFileContent('src/App.tsx'),getFileContent('public/sitemap.xml'),getFileContent('public/rss.xml')]);
-   const files=[{path:`src/pages/blog-auto/${pascalCase(article.slug)}.tsx`,content:buildTsxPage(article,new Map(existing.map(p=>[p.slug,p.title])))},{path:'src/data/blogPosts.ts',content:updateBlogPostsTs(blogRaw,article)},{path:'src/App.tsx',content:updateAppTsx(appRaw,article)},{path:'public/sitemap.xml',content:updateSitemap(sitemapRaw,article)},{path:'public/rss.xml',content:updateRss(rssRaw,article)},{path:`public/blog-covers/${article.slug}.png`,content:coverB64,isBase64:true}];
+   const files=[{path:`src/pages/blog-auto/${pascalCase(article.slug)}.tsx`,content:buildTsxPage(article,new Map(existing.map(p=>[p.slug,p.title])),coverUrl)},{path:'src/data/blogPosts.ts',content:updateBlogPostsTs(blogRaw,article)},{path:'src/App.tsx',content:updateAppTsx(appRaw,article)},{path:'public/sitemap.xml',content:updateSitemap(sitemapRaw,article)},{path:'public/rss.xml',content:updateRss(rssRaw,article)},{path:`public/blog-covers/${article.slug}.png`,content:coverB64,isBase64:true}];
    commit=await commitFiles(files,`feat(blog): publish ${kind} ${day}: ${article.title.slice(0,60)}`);
   }
   check(await supabase.rpc('finish_blog_daily',{p_token:token,p_day:day,p_kind:kind,p_topic:topicId,p_article:article,p_cover:coverUrl,p_html:dzenHtml,p_commit:commit}));
