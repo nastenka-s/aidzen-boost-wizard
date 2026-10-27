@@ -1,5 +1,6 @@
 import * as Astronomy from 'npm:astronomy-engine@2.1.19';
 import keywords from './keywords.json' with { type: 'json' };
+import { dailySelection, ASPECT_ACTIONS } from './daily-voice.ts';
 
 export const KINDS = ['astrology_education', 'numerology_education', 'tomorrow_horoscope'] as const;
 export type Kind = typeof KINDS[number];
@@ -75,18 +76,31 @@ export function validateArticle(a:any,kind:Kind,brief:any,existing:string[]) {
   a.metaDescription=`Гороскоп на ${dateLabel(brief.target)}: символические рекомендации для всех знаков по рассчитанным положениям планет и аспектам дня.`;
  }
  a.intro.unshift(DISCLAIMER);
- a.sections.unshift({h2:kind==='tomorrow_horoscope'?'Рассчитанные положения и аспекты дня':'Основа материала',paragraphs:brief.facts});
+ a.sections.unshift(kind==='tomorrow_horoscope'
+  ? {h2:'Главное в небе завтра',paragraphs:[`На ${dateLabel(brief.target)} Луна находится в знаке ${brief.positions[1].sign}, Солнце — в знаке ${brief.positions[0].sign}.`],bulletList:brief.aspects.slice(0,3).map((a:any)=>`${a.first} — ${a.second}: ${a.name}. В астрологической традиции это тема «${a.meaning}».`)}
+  : {h2:'Основа материала',paragraphs:brief.facts});
  // Research sources and calculation methodology remain in the internal brief only.
  return a;
 }
 export function horoscopeArticle(brief:ReturnType<typeof skyBrief>,existing:string[]) {
- const houseThemes=['личные приоритеты','собственные ресурсы','общение и обучение','дом и близкие','творчество','повседневные задачи','партнёрство','совместные ресурсы','мировоззрение','общественные обязанности','сообщества','отдых и уединение'];
  const sections=SIGNS.map((h2,index)=>{
   const moon=brief.positions[1],sun=brief.positions[0];
-  const theme=(p:typeof moon)=>houseThemes[(p.signIndex-index+12)%12];
-  const paragraphs=[`В солнечной цельнознаковой модели Луна попадает в сектор «${theme(moon)}». В традиционной символике Луна связана с эмоциональными потребностями: можно обратить внимание на эту сферу, не ожидая заранее определённых событий.`,`Солнце в этой модели выделяет тему «${theme(sun)}». Это повод соотнести личные приоритеты с текущими обязанностями, а не обещание удачи или трудностей.`];
-  const bulletList=brief.aspects.slice(0,3).map(a=>{const first=brief.positions.find(p=>p.name===a.first),second=brief.positions.find(p=>p.name===a.second);if(!first||!second)return '';return `${a.first} и ${a.second}: ${a.meaning}. В солнечной модели сопоставляются темы «${theme(first)}» и «${theme(second)}». Символическое упражнение: найдите способ согласовать эти области, опираясь на реальные обстоятельства.`;}).filter(Boolean);
-  return {h2,paragraphs,bulletList,warning:'Солнечные дома — условная общая модель для знака, не ваши индивидуальные натальные дома. Решения принимайте по фактам своей жизни.'};
+  const lunar=dailySelection(brief.target,index,moon.signIndex);
+  const solar=dailySelection(brief.target,index,sun.signIndex,1);
+  const paragraphs=index%2===0?[lunar.prose,solar.prose]:[solar.prose,lunar.prose];
+  const relevant=brief.aspects.filter(a=>a.first==='Луна'||a.second==='Луна'||a.first==='Солнце'||a.second==='Солнце');
+  const aspect=relevant.length?relevant[index%relevant.length]:brief.aspects[index%Math.max(1,brief.aspects.length)];
+  if(aspect){
+   const first=brief.positions.find(p=>p.name===aspect.first),second=brief.positions.find(p=>p.name===aspect.second);
+   if(first&&second){
+    const firstTheme=dailySelection(brief.target,index,first.signIndex,2),secondTheme=dailySelection(brief.target,index,second.signIndex,2);
+    const action=ASPECT_ACTIONS[aspect.angle]?.[(lunar.variantIndex+index)%3];
+    if(action)paragraphs.push(`${aspect.first} и ${aspect.second} связывают темы «${firstTheme.theme}» и «${secondTheme.theme}». ${action}`);
+   }
+  }
+  return {h2,paragraphs};
  });
- return validateArticle({title:'Гороскоп',metaTitle:'Гороскоп',metaDescription:'Гороскоп',slug:`goroskop-na-${brief.target}`,keywords:'гороскоп на завтра, гороскоп для всех знаков зодиака',readingMinutes:10,intro:['Ниже разделены рассчитанные координаты неба и традиционное символическое прочтение. Указанные аспекты проверены на протяжении московских суток; персональные события не предсказываются.'],sections,faq:[{question:'Что лежит в основе материала?',answer:'Положения планет и угловые расстояния вычислены астрономической библиотекой. Их смысл для жизненных тем — традиционная символическая трактовка.'},{question:'Это персональный прогноз?',answer:'Нет. Для индивидуальной карты нужны время и место рождения. Здесь используется общая солнечная модель.'},{question:'Что означает солнечный дом?',answer:'Знак читателя условно принят за первый дом; остальные знаки следуют по порядку. Асцендент не вычисляется.'},{question:'Можно ли ожидать конкретных событий?',answer:'Нет. Символическая интерпретация не гарантирует события и не заменяет собственную оценку обстоятельств.'}],conclusion:'Используйте материал как повод для размышления, а не как руководство к медицинским, финансовым или жизненным решениям.',relatedSlugs:existing.slice(0,3)},'tomorrow_horoscope',brief,existing);
+ const introductions=['Иногда полезнее не искать знак судьбы, а разобраться с вполне земным вопросом: чего вы хотите, о чём пора договориться и что можно сделать проще. Завтрашние положения планет дают темы для такого разговора с собой.','У обычного дня есть много небольших развилок: ответить сразу или уточнить, взяться за новое или закончить начатое. Посмотрим, какие темы выделяет небо завтра и как их можно применить без громких обещаний.','Хороший план не обязан быть грандиозным. Иногда он начинается с ясной просьбы, свободного вечера или отказа от лишней задачи. Ниже — ориентиры для каждого знака, которые стоит примерить к своей жизни.'];
+ const introIndex=dailySelection(brief.target,0,0).variantIndex;
+ return validateArticle({title:'Гороскоп',metaTitle:'Гороскоп',metaDescription:'Гороскоп',slug:`goroskop-na-${brief.target}`,keywords:'гороскоп на завтра, гороскоп для всех знаков зодиака',readingMinutes:7,intro:[introductions[introIndex]],sections,faq:[{question:'Это мой личный прогноз?',answer:'Нет. Люди одного знака живут в разных обстоятельствах. Личная карта учитывает дату, время и место рождения, а не только знак Солнца.'},{question:'Что делать, если совет мне не подходит?',answer:'Не подгоняйте жизнь под гороскоп. Возьмите только то, что помогает яснее увидеть вашу ситуацию, а остальное спокойно оставьте.'},{question:'Можно ли читать раздел партнёра?',answer:'Можно, но не стоит использовать его как объяснение чужих поступков. Прямой разговор даёт больше ясности, чем догадки по знаку.'},{question:'Стоит ли откладывать важное решение?',answer:'Решайте по готовности, условиям и реальным рискам. Общий прогноз не заменяет проверки документов, бюджета или профессиональной консультации.'}],conclusion:'Выберите из своего раздела мысль, которая действительно относится к вашей жизни. Общий гороскоп не знает ваших обстоятельств — личный прогноз по положениям планет в натальной карте помогает посмотреть на них подробнее, но решения остаются за вами.',relatedSlugs:existing.slice(0,3)},'tomorrow_horoscope',brief,existing);
 }
