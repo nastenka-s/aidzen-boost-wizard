@@ -25,3 +25,7 @@
 - [x] Replace today's three covers with working public images and update Dzen enclosures without changing article text.
 - [x] Verify image responses and refresh the static Dzen feed; three covers return JPEG 1264x848.
 - [ ] Publish refreshed static feed on aidzen.ru and www.aidzen.ru — both still serve the old feed; public deployment is required.
+
+# Dzen RSS website footer
+- [x] Replace RSS-only final CTA with aidzen.ru and three free calculations; tests pass, all 20 deployed source items verified, static copy refreshed.
+- [ ] Publish the refreshed public RSS footer — www.aidzen.ru still serves the old static feed; awaiting website deployment.
