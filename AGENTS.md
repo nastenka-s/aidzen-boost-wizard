@@ -9,3 +9,4 @@
 - Read generated blog source mutations against one pinned GitHub commit and advance the branch without force; never overwrite concurrently edited source files.
 - Keep blog category ordering and Moscow release hours in the service-only database scheduling policy, with SQL regression tests, so scheduled claims share one authoritative timetable.
 - Store generated blog covers in a service-write-only private bucket and expose only editorial image filenames through the read-only blog-cover-img endpoint before finalizing RSS; image availability must not depend on website deployment.
+- Apply RSS-only CTA changes at feed rendering in its tested footer policy, preserving stored article prose and website CTAs.

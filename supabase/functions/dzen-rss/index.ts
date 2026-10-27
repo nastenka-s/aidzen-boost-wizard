@@ -1,5 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { publicationCategories } from "./publication-policy.mjs";
+import { withRssFooter } from "./footer-policy.mjs";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -91,7 +92,7 @@ Deno.serve(async (_req) => {
         );
         body = body.replace(coverImgRe, "");
       }
-      body = sanitizeForDzen(body);
+      body = withRssFooter(sanitizeForDzen(body));
       body = `<h1>${esc(row.topic)}</h1>${body}`;
       const coverType = cover.toLowerCase().endsWith(".jpg") || cover.toLowerCase().endsWith(".jpeg")
         ? "image/jpeg"
