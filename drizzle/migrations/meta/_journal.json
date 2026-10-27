@@ -29,6 +29,13 @@
       "when": 1793088233926,
       "tag": "0003_blog_scheduler_auth",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793088889778,
+      "tag": "0004_blog_horoscope_first_schedule",
+      "breakpoints": true
     }
   ]
 }

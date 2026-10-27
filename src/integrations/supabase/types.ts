@@ -528,6 +528,7 @@ export type Database = {
     }
     Functions: {
       authorize_blog_scheduler: { Args: { p_secret: string }; Returns: boolean }
+      blog_schedule_hour: { Args: { p_kind: string }; Returns: number }
       claim_blog_daily: { Args: { p_kind?: string }; Returns: Json }
       claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
       finish_blog_daily: {
