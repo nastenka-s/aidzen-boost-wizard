@@ -9,3 +9,8 @@
 - [x] Deploy the RSS generator and regenerate the static feed.
 - [x] Verify publication categories in the updated feed (20 articles, no forced drafts).
 - [ ] Publish the updated static feed on the public domain — awaiting user publication; both public addresses still serve the previous version.
+
+# Three daily blog articles
+- [ ] Study and cluster the uploaded keywords into source-grounded educational topics.
+- [ ] Schedule one astrology lesson, one numerology lesson and one calculated tomorrow horoscope per Moscow day.
+- [ ] Add atomic daily slots, retries and factual validation; test and verify live publication.
