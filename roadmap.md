@@ -11,6 +11,7 @@
 - [ ] Publish the updated static feed on the public domain — awaiting user publication; both public addresses still serve the previous version.
 
 # Three daily blog articles
-- [ ] Study and cluster the uploaded keywords into source-grounded educational topics.
-- [ ] Schedule one astrology lesson, one numerology lesson and one calculated tomorrow horoscope per Moscow day.
-- [ ] Add atomic daily slots, retries and factual validation; test and verify live publication.
+- [x] Study and cluster the 225 uploaded keywords into source-grounded educational topics.
+- [x] Schedule one astrology lesson, one numerology lesson and one calculated tomorrow horoscope per Moscow day (09:00, 13:00, 18:00; retries 11:00, 15:00, 21:00).
+- [x] Add atomic daily slots, global lease, provider circuit breaker, saved payload recovery and factual validation; six editorial tests pass.
+- [ ] Verify all three articles on the public website — GitHub Deploy over SSH fails; authenticated deployment logs/server access required.
