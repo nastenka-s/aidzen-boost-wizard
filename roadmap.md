@@ -35,6 +35,7 @@
 - [x] Stop appending visible sources/methodology to future articles while retaining internal factual grounding; eight regression tests pass.
 
 # Approved November publication and daily voice
+- [ ] Close public access to internal competitor posts before publishing, preserving automated jobs and adding a permission regression test.
 - [ ] Publish the approved November article with its cover, blog entry, sitemap and RSS.
 - [ ] Replace daily horoscope boilerplate with varied, concrete, grounded conversational prose; test and deploy for future forecasts only.
 - [ ] Request website publication and verify the article in preview.
