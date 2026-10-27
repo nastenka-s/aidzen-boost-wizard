@@ -5,6 +5,8 @@
 - Build all pin text from curated or calculated briefs and allow AI only to select approved copy variants so generated imagery cannot introduce invented dated events or predictive claims.
 - Keep blog keyword catalogs, educational source briefs and tomorrow sky calculations in the local blog editorial module; numerical horoscope facts must be rendered from calculations, not authored by AI.
 - Compose tomorrow horoscope prose deterministically from calculated aspects and declared solar whole-sign themes; free-form AI must not introduce dated sky events or unapproved interpretations.
+- Keep conversational daily forecast variants and aspect-to-action mappings in the local editorial module, selected by calculated solar houses and Moscow date, so style varies without inventing sky facts.
+- Keep competitor research service-only with revoked browser grants and a SQL permission regression test so automated Threads jobs retain access without exposing their inputs.
 - Claim a service-only global blog lease and unique Moscow-day category slot before provider calls; persist generated payloads and finalize publication transactionally for safe retries without duplicate daily articles.
 - Read generated blog source mutations against one pinned GitHub commit and advance the branch without force; never overwrite concurrently edited source files.
 - Keep blog category ordering and Moscow release hours in the service-only database scheduling policy, with SQL regression tests, so scheduled claims share one authoritative timetable.
