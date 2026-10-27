@@ -21,6 +21,6 @@
 - [x] Trigger today's three categories, skipping completed slots, and verify results — all three returned HTTP 200 daily_slots_complete; today's slots are successful.
 
 # Blog article cover images
-- [ ] Use relevant symbols or people for educational covers; include headline and target date on horoscope covers.
-- [ ] Replace today's three covers with working public images and update Dzen enclosures without changing article text.
-- [ ] Verify image responses and refresh the static Dzen feed; check public availability.
+- [x] Use relevant symbols or people for educational covers; include headline and target date on horoscope covers; cover tests pass.
+- [x] Replace today's three covers with working public images and update Dzen enclosures without changing article text.
+- [x] Verify image responses and refresh the static Dzen feed; three covers return JPEG 1264x848.
