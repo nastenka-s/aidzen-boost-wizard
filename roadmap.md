@@ -24,3 +24,4 @@
 - [x] Use relevant symbols or people for educational covers; include headline and target date on horoscope covers; cover tests pass.
 - [x] Replace today's three covers with working public images and update Dzen enclosures without changing article text.
 - [x] Verify image responses and refresh the static Dzen feed; three covers return JPEG 1264x848.
+- [ ] Publish refreshed static feed on aidzen.ru and www.aidzen.ru — both still serve the old feed; public deployment is required.
