@@ -64,6 +64,20 @@
       "when": 1793096166624,
       "tag": "0008_pinterest_dispatch_destination",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793166576263,
+      "tag": "0009_pinterest_informational_monthly_only",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793166636667,
+      "tag": "0010_pinterest_eligibility_regression_checks",
+      "breakpoints": true
     }
   ]
 }

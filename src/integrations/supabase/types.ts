@@ -662,6 +662,10 @@ export type Database = {
         }
         Returns: string
       }
+      pinterest_article_eligible: {
+        Args: { p_kind: string; p_title: string }
+        Returns: boolean
+      }
       pinterest_daily_limit: { Args: never; Returns: number }
     }
     Enums: {
