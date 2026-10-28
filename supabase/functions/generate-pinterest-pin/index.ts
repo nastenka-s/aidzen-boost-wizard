@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { moscowDay } from "./editorial.ts";
-import { articlePinContent, type PinArticle } from "./article-editorial.ts";
+import { articlePinContent, articlePinEligible, type PinArticle } from "./article-editorial.ts";
 import approvedArticles from "../_shared/approved-articles.json" with { type: "json" };
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
@@ -91,6 +91,7 @@ Deno.serve(async (req) => {
   if (authError || !authorized) return response({ error: "Unauthorized scheduler" }, 401);
   // Manual approved articles live outside blog_topics; the unique article URL makes syncing safe.
   for (const article of approvedArticles) {
+    if (!articlePinEligible({ title: article.topic, content_kind: "horoscope" })) continue;
     const { error } = await supabase.rpc("enqueue_pinterest_article", {
       p_url: article.published_url, p_title: article.topic, p_description: article.description,
       p_kind: "horoscope", p_day: moscowDay(new Date(article.generated_at)),
@@ -104,6 +105,7 @@ Deno.serve(async (req) => {
   const article: PinArticle = claim.article;
   const variant: number = claim.job.variant;
   try {
+    if (!articlePinEligible(article)) throw new Error("Article is not eligible for Pinterest pins");
     let content = claim.job.image_payload;
     if (!content) {
       if (!KIE_AI_API_KEY) throw new Error("Image provider is not configured");

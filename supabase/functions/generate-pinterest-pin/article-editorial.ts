@@ -1,6 +1,13 @@
 export const ARTICLE_PIN_COUNT = 4;
 export const ARTICLE_DAILY_LIMIT = 12;
 export type PinArticle = { article_url: string; title: string; description: string; content_kind: string; publication_day: string };
+export function articlePinEligible(article: Pick<PinArticle, "content_kind" | "title">): boolean {
+  const kind = article.content_kind.toLowerCase();
+  const title = article.title.toLowerCase();
+  if (/daily|tomorrow/.test(kind) || /на завтра|на сегодня|на день|\d{4}-\d{2}-\d{2}/.test(title)) return false;
+  if (/^(astrology_education|numerology_education|astrology|numerology|informational)$/.test(kind)) return true;
+  return /^(horoscope|monthly_horoscope)$/.test(kind) && /январ|феврал|март|апрел|ма[йя]|июн|июл|август|сентябр|октябр|ноябр|декабр|на месяц/.test(title);
+}
 const styles = [
   { id: "celestial-engraving", prompt: "Esoteric celestial engraving, emerald velvet and silver foil, delicate zodiac symbols, intricate moon frame, elegant readable serif heading." },
   { id: "mystic-watercolor", prompt: "Esoteric watercolor, pearl paper, burgundy and jade accents, hand-painted celestial symbols and fine botanical framing, elegant readable serif heading." },
@@ -11,6 +18,7 @@ export function articlePinDays(day: string): string[] {
   return Array.from({ length: ARTICLE_PIN_COUNT }, (_, offset) => new Date(Date.parse(`${day}T12:00:00Z`) + offset * 86400000).toISOString().slice(0, 10));
 }
 export function articlePinContent(article: PinArticle, variant: number) {
+  if (!articlePinEligible(article)) throw new Error("Article is not eligible for Pinterest pins");
   if (!Number.isInteger(variant) || variant < 0 || variant >= ARTICLE_PIN_COUNT) throw new Error("Invalid article pin variant");
   const url = new URL(article.article_url);
   if (url.origin !== "https://aidzen.ru" || !/^\/[a-z0-9][a-z0-9/-]*$/.test(url.pathname) || url.search || url.hash) throw new Error("Invalid article URL");
