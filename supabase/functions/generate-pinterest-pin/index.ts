@@ -106,10 +106,10 @@ Deno.serve(async (req) => {
   const variant: number = claim.job.variant;
   try {
     if (!articlePinEligible(article)) throw new Error("Article is not eligible for Pinterest pins");
-    let content = claim.job.image_payload;
+    const copy = articlePinContent(article, variant);
+    let content = claim.job.image_payload ? { ...claim.job.image_payload, ...copy } : null;
     if (!content) {
       if (!KIE_AI_API_KEY) throw new Error("Image provider is not configured");
-      const copy = articlePinContent(article, variant);
       const imageUrl = await kieGenerateImage(copy.image_prompt);
       const imgRes = await fetch(imageUrl);
       if (!imgRes.ok) throw new Error(`download image ${imgRes.status}`);

@@ -1,4 +1,5 @@
 # Architecture rules
+- Keep website URLs as Pinterest campaign identities and store verified Dzen article URLs separately; claim and finalization must require a Dzen destination without a website fallback.
 - Keep Dzen publication categories in its tested publication policy; imported articles must not be forced into drafts.
 - Keep Pinterest editorial catalogs, astronomical calculations and deterministic visual rotation in the generator's local editorial module so scheduled output is testable independently of paid services.
 - Acquire the service-only database lease before Pinterest provider calls; enforce the Moscow-day publication limit atomically and never allow force requests to bypass it.
