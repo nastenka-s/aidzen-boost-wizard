@@ -1,6 +1,6 @@
 # Pinterest updates
 - [ ] Resolve remaining Dzen destinations (November horoscope, zodiac signs and Matrix methods): not visible in the fetched channel listing; exact article URLs or archive discovery required.
-- [ ] Store four verified channel matches, correct article-pin RSS destinations, and block future website fallbacks; verify tests and live feed.
+- [x] Stored four verified channel matches and corrected ten article-pin RSS destinations; deployed generation blocks missing Dzen destinations, fourteen local tests pass and live RSS/readback show no mapped destination mismatches. Pinterest-imported pin edits remain unverified; automatic channel discovery is not configured.
 - [x] Exclude daily forecasts from Pinterest enqueue, claim, publication and generation; clean pending excluded jobs. Thirteen editorial tests and deployed SQL eligibility/daily-enqueue assertions pass; monthly November campaign preserved.
 - [x] Queue four article-linked esoteric pins for each new article across four Moscow days; raise atomic cap to twelve, wake on enqueue and retain hourly retries only while jobs remain.
 - [x] Deploy and pass ten editorial tests plus SQL schedule, permission and cap regressions; first November article pin verified in live RSS with its direct link, description and readable 1024×1536 image. Pinterest's own RSS import timing remains external.
