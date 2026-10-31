@@ -78,6 +78,13 @@
       "when": 1793166636667,
       "tag": "0010_pinterest_eligibility_regression_checks",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793481105950,
+      "tag": "0011_pinterest_verified_dzen_destinations",
+      "breakpoints": true
     }
   ]
 }

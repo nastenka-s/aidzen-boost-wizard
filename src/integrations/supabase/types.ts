@@ -192,6 +192,8 @@ export type Database = {
           content_kind: string
           created_at: string
           description: string
+          dzen_url: string | null
+          dzen_verified_at: string | null
           publication_day: string
           title: string
         }
@@ -200,6 +202,8 @@ export type Database = {
           content_kind?: string
           created_at?: string
           description?: string
+          dzen_url?: string | null
+          dzen_verified_at?: string | null
           publication_day: string
           title: string
         }
@@ -208,6 +212,8 @@ export type Database = {
           content_kind?: string
           created_at?: string
           description?: string
+          dzen_url?: string | null
+          dzen_verified_at?: string | null
           publication_day?: string
           title?: string
         }
@@ -653,6 +659,16 @@ export type Database = {
         Returns: undefined
       }
       finish_pinterest_article: {
+        Args: {
+          p_content: Json
+          p_day: string
+          p_token: string
+          p_url: string
+          p_variant: number
+        }
+        Returns: string
+      }
+      finish_pinterest_article_identity: {
         Args: {
           p_content: Json
           p_day: string
