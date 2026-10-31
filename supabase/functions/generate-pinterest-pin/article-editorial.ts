@@ -1,6 +1,10 @@
 export const ARTICLE_PIN_COUNT = 4;
 export const ARTICLE_DAILY_LIMIT = 12;
-export type PinArticle = { article_url: string; title: string; description: string; content_kind: string; publication_day: string };
+export type PinArticle = { article_url: string; dzen_url?: string | null; title: string; description: string; content_kind: string; publication_day: string };
+export function dzenArticleUrl(value: string | null | undefined): string {
+  if (!value || !/^https:\/\/dzen\.ru\/a\/[A-Za-z0-9_-]+$/.test(value)) throw new Error("Verified Dzen article URL required");
+  return value;
+}
 export function articlePinEligible(article: Pick<PinArticle, "content_kind" | "title">): boolean {
   const kind = article.content_kind.toLowerCase();
   const title = article.title.toLowerCase();
@@ -20,8 +24,9 @@ export function articlePinDays(day: string): string[] {
 export function articlePinContent(article: PinArticle, variant: number) {
   if (!articlePinEligible(article)) throw new Error("Article is not eligible for Pinterest pins");
   if (!Number.isInteger(variant) || variant < 0 || variant >= ARTICLE_PIN_COUNT) throw new Error("Invalid article pin variant");
-  const url = new URL(article.article_url);
-  if (url.origin !== "https://aidzen.ru" || !/^\/[a-z0-9][a-z0-9/-]*$/.test(url.pathname) || url.search || url.hash) throw new Error("Invalid article URL");
+  const source = new URL(article.article_url);
+  if (source.origin !== "https://aidzen.ru" || !/^\/[a-z0-9][a-z0-9/-]*$/.test(source.pathname) || source.search || source.hash) throw new Error("Invalid article URL");
+  const url = new URL(dzenArticleUrl(article.dzen_url));
   const seed = [...article.article_url].reduce((sum, char) => sum + char.charCodeAt(0), 0);
   const design = styles[(seed + variant) % styles.length];
   const title = article.title.trim();
@@ -34,7 +39,8 @@ export function articlePinContent(article: PinArticle, variant: number) {
     pinterest_title: title.slice(0, 100), pinterest_description: description,
     style: design.id === "mystic-watercolor" || design.id === "zodiac-collage" ? "light" : "dark",
     design_id: design.id, topic: `${title} ::ARTICLE::${url.pathname} ::VARIANT::${variant} ::STYLE::${design.id}`,
-    astro_context: JSON.stringify({ article_url: article.article_url, title, variant }),
+    destination_url: url.href,
+    astro_context: JSON.stringify({ article_url: article.article_url, dzen_url: url.href, title, variant }),
     image_prompt: `Create a premium vertical Pinterest image, 1024x1536, 2:3. ${design.prompt} Topic: ${title}. The illustration must specifically reflect this published ${category} article, not a generic unrelated forecast. Render ONLY these exact Russian Cyrillic texts: ${JSON.stringify([title, "Подробнее — в статье", "Нейродзен · aidzen.ru"])}. Make the full title clearly readable, wrapping as needed, with generous safe margins. Do not invent facts, dates, numbers, planetary positions or predictions. Dates in the supplied title must remain exactly unchanged. Celestial elements are decorative, not a chart claiming real planetary positions. No other labels, celebrity faces, watermarks or logos.`,
   };
 }
