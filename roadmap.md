@@ -1,4 +1,5 @@
 # Pinterest updates
+- [ ] Point article pins to their matching published Dzen articles; verify available Dzen URLs before replacing website destinations.
 - [x] Exclude daily forecasts from Pinterest enqueue, claim, publication and generation; clean pending excluded jobs. Thirteen editorial tests and deployed SQL eligibility/daily-enqueue assertions pass; monthly November campaign preserved.
 - [x] Queue four article-linked esoteric pins for each new article across four Moscow days; raise atomic cap to twelve, wake on enqueue and retain hourly retries only while jobs remain.
 - [x] Deploy and pass ten editorial tests plus SQL schedule, permission and cap regressions; first November article pin verified in live RSS with its direct link, description and readable 1024×1536 image. Pinterest's own RSS import timing remains external.
