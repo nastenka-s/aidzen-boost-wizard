@@ -1,3 +1,7 @@
+# November 3 daily horoscope recovery
+- [ ] Diagnose the missing November 1–2 forecasts and resume the current November 3 forecast without backfilling past dates.
+- [ ] Verify the November 3 article and dated cover in the live Dzen feed; report any remaining publication or funding blocker.
+
 # Pinterest updates
 - [ ] Resolve remaining Dzen destinations (November horoscope, zodiac signs and Matrix methods): not visible in the fetched channel listing; exact article URLs or archive discovery required.
 - [x] Stored four verified channel matches and corrected ten article-pin RSS destinations; deployed generation blocks missing Dzen destinations, fourteen local tests pass and live RSS/readback show no mapped destination mismatches. Pinterest-imported pin edits remain unverified; automatic channel discovery is not configured.
