@@ -1,3 +1,7 @@
+# November 3 daily horoscope recovery
+- [x] Diagnosed the October 31 image-gateway 402 and persisted global pause; confirmed restored AI funding, resumed by explicit owner request and generated only the November 3 horoscope (November 2 slot success).
+- [x] Verified successful HTTP response, cleared pause, all twelve signs in live Dzen RSS and a working PNG cover titled November 3, 2026. Both custom-domain static feeds still lack the article; website publication/feed delivery remains external.
+
 # Pinterest updates
 - [ ] Resolve remaining Dzen destinations (November horoscope, zodiac signs and Matrix methods): not visible in the fetched channel listing; exact article URLs or archive discovery required.
 - [x] Stored four verified channel matches and corrected ten article-pin RSS destinations; deployed generation blocks missing Dzen destinations, fourteen local tests pass and live RSS/readback show no mapped destination mismatches. Pinterest-imported pin edits remain unverified; automatic channel discovery is not configured.
