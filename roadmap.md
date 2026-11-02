@@ -1,6 +1,6 @@
 # November 3 daily horoscope recovery
-- [ ] Diagnose the missing November 1–2 forecasts and resume the current November 3 forecast without backfilling past dates.
-- [ ] Verify the November 3 article and dated cover in the live Dzen feed; report any remaining publication or funding blocker.
+- [x] Diagnosed the October 31 image-gateway 402 and persisted global pause; confirmed restored AI funding, resumed by explicit owner request and generated only the November 3 horoscope (November 2 slot success).
+- [x] Verified successful HTTP response, cleared pause, all twelve signs in live Dzen RSS and a working PNG cover titled November 3, 2026. Both custom-domain static feeds still lack the article; website publication/feed delivery remains external.
 
 # Pinterest updates
 - [ ] Resolve remaining Dzen destinations (November horoscope, zodiac signs and Matrix methods): not visible in the fetched channel listing; exact article URLs or archive discovery required.
