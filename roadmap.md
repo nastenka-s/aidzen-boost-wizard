@@ -1,5 +1,5 @@
 # Deployment RSS timeout recovery
-- [ ] Bound RSS requests, retry temporary failures and preserve a validated saved feed on outages; test timeout, invalid responses and missing-cache behavior.
+- [x] Bound RSS requests to 12 seconds with three attempts, atomically replace validated feeds and preserve a valid saved feed with a stale warning on outages; five regression tests pass, live fetch succeeds with 20 items including November 5 Venus article.
 - [ ] Confirm external SSH deployment after rerun — server deployment execution is outside this sandbox.
 
 # November 3 daily horoscope recovery
