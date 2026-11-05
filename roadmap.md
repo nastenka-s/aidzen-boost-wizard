@@ -1,3 +1,7 @@
+# Deployment RSS timeout recovery
+- [x] Bound RSS requests to 12 seconds with three attempts, atomically replace validated feeds and preserve a valid saved feed with a stale warning on outages; five regression tests pass, live fetch succeeds with 20 items including November 5 Venus article.
+- [ ] Confirm external SSH deployment after rerun — server deployment execution is outside this sandbox.
+
 # November 3 daily horoscope recovery
 - [x] Diagnosed the October 31 image-gateway 402 and persisted global pause; confirmed restored AI funding, resumed by explicit owner request and generated only the November 3 horoscope (November 2 slot success).
 - [x] Verified successful HTTP response, cleared pause, all twelve signs in live Dzen RSS and a working PNG cover titled November 3, 2026. Both custom-domain static feeds still lack the article; website publication/feed delivery remains external.
