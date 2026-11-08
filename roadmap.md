@@ -1,4 +1,5 @@
 # November 9–15 weekly horoscope
+- [x] Publish approved v2 text without FAQ, with a dated cover, blog navigation, sitemap and Dzen RSS. Preview navigation, exact text, twelve signs, CTA and mobile layout verified; live/static RSS contain the full article and working JPEG. Website publication requested separately; custom-domain rollout remains external.
 - [x] Cross-check November 9–15 sky events against two research reports and independent Astronomy Engine calculations; deliver an unpublished 2,366-word Russian article with twelve distinct signs, a provocative non-guaranteeing title and the requested Neurodzen paragraph (three free calculations, natal chart, transits and event formulas). No publication requested.
 
 # Deployment RSS timeout recovery
