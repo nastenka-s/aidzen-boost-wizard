@@ -1,3 +1,6 @@
+# November 9–15 weekly horoscope
+- [x] Cross-check November 9–15 sky events against two research reports and independent Astronomy Engine calculations; deliver an unpublished 2,366-word Russian article with twelve distinct signs, a provocative non-guaranteeing title and the requested Neurodzen paragraph (three free calculations, natal chart, transits and event formulas). No publication requested.
+
 # Deployment RSS timeout recovery
 - [x] Bound RSS requests to 12 seconds with three attempts, atomically replace validated feeds and preserve a valid saved feed with a stale warning on outages; five regression tests pass, live fetch succeeds with 20 items including November 5 Venus article.
 - [ ] Confirm external SSH deployment after rerun — server deployment execution is outside this sandbox.
