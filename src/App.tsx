@@ -143,6 +143,7 @@ import UchebnikArkan19 from "./pages/blog-auto/UchebnikArkan19";
 import GoroskopNa20261110 from "./pages/blog-auto/GoroskopNa20261110";
 import UchebnikDom12 from "./pages/blog-auto/UchebnikDom12";
 import UchebnikArkan3 from "./pages/blog-auto/UchebnikArkan3";
+import GoroskopNa20261111 from "./pages/blog-auto/GoroskopNa20261111";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -161,6 +162,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/goroskop-na-2026-11-11" element={<GoroskopNa20261111 />} />
           <Route path="/uchebnik-arkan-3" element={<UchebnikArkan3 />} />
           <Route path="/uchebnik-dom-12" element={<UchebnikDom12 />} />
           <Route path="/goroskop-na-2026-11-10" element={<GoroskopNa20261110 />} />
