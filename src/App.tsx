@@ -109,6 +109,7 @@ import KakOpredelitAscendent from "./pages/blog-auto/KakOpredelitAscendent";
 import UchebnikDoma from "./pages/blog-auto/UchebnikDoma";
 import UchebnikMatricaSovmestimost from "./pages/blog-auto/UchebnikMatricaSovmestimost";
 import GoroskopNa20261028 from "./pages/blog-auto/GoroskopNa20261028";
+import Den11112026 from "./pages/blog-auto/Den11112026";
 import GoroskopNaNedelyu9Noyabrya2026 from "./pages/blog-auto/GoroskopNaNedelyu9Noyabrya2026";
 import GoroskopNaNoyabr2026 from "./pages/blog-auto/GoroskopNaNoyabr2026";
 import GoroskopNa20261029 from "./pages/blog-auto/GoroskopNa20261029";
@@ -161,6 +162,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/den-11-11-2026-numerologiya" element={<Den11112026 />} />
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
