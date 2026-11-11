@@ -1,4 +1,8 @@
-export function coverPrompt(title, kind, targetDate) {
+export function coverPrompt(title, kind, targetDate, coverText) {
+  if (coverText) {
+    if (!/^[А-ЯЁ0-9 ,.–-]{3,40}$/.test(coverText)) throw new Error('Unsafe cover inscription');
+    return `Редакционная обложка астрологической статьи «${title}». Тематические небесные и зодиакальные символы, уникальная композиция, без выдуманной карты или прогнозов. Крупная читаемая надпись ровно «${coverText}», один раз. Без других слов. Безопасные поля вокруг текста, контрастная типографика.`;
+  }
   if (kind === 'tomorrow_horoscope') {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(targetDate ?? '')) throw new Error('Horoscope cover requires target date');
     const date = new Date(`${targetDate}T12:00:00+03:00`).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' }).replace(/\s*г\.$/, '').trim();

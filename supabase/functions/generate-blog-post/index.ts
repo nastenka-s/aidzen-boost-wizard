@@ -2,6 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
 import { coverPrompt } from "./cover-policy.mjs";
+import { PLAN, PLAN_CTA, EPHEMERIS, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, plainText, charLimit, type PlanItem } from "./plan.ts";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN") ?? "";
@@ -108,9 +109,9 @@ function buildDzenDescription(a: GeneratedArticle): string {
 }
 
 // ============== AI cover image generation ==============
-async function generateCoverImage(title: string, kind: Kind, targetDate?: string): Promise<string> {
+async function generateCoverImage(title: string, kind: Kind, targetDate?: string, coverText?: string): Promise<string> {
   // Returns base64 PNG (no data: prefix)
-  const prompt = coverPrompt(title, kind, targetDate);
+  const prompt = coverPrompt(title, kind, targetDate, coverText);
   const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
     method: "POST",
     headers: {
@@ -588,6 +589,96 @@ function updateRss(current: string, a: GeneratedArticle): string {
   return current.replace(/(<atom:link[^>]*\/>)/, `$1${item}`);
 }
 
+// ============== Content plan (12–18 November 2026) ==============
+async function planArticle(p:PlanItem,brief:any):Promise<any>{
+ const system=`Ты — редактор Нейродзена, пишешь статьи для Дзена об астрологии и нумерологии. Живой, понятный язык, без шаблонных вступлений, канцелярита, повторов и искусственной мистики. Первые 2–3 предложения сразу отвечают на запрос читателя и цепляют.
+Правила:
+- Используй ТОЛЬКО факты из брифа. Не придумывай транзиты, аспекты, ретроградность, фазы Луны, затмения, даты, «счастливые дни» и «счастливые знаки». Любая конкретная дата в тексте должна быть из списка events/moonDays брифа и указываться как «24 ноября». Не пиши время событий.
+- Формулировки: «в астрологической традиции», «может указывать», «трактуется как». Без гарантий, без категоричных медицинских, финансовых, юридических советов.
+- Для нумерологии явно назови систему и формулу из брифа; не смешивай системы.
+- Если нужны дома и точные периоды — объясни, что для этого нужны дата, время и место рождения; общий солнечный гороскоп их не заменяет.
+- Без ссылок, URL, HTML, markdown, разделов «Источники»/«Методика».
+- conclusion: вывод с конкретными рекомендациями и мягкий призыв: персональный расчёт можно сделать в Нейродзене, первые 3 расчёта бесплатно. Слово «Нейродзен» обязательно.
+- Общий объём текста (все поля) не более ${charLimit(p)} знаков с пробелами.`;
+ const user=`Заголовок (не меняй): ${p.title}
+Рубрика: ${p.rubric}
+Основной запрос (в первом абзаце естественно): ${p.keyword}
+Связанные запросы (2–4 раза естественно, без переспама): ${p.related}
+${p.signs12?'Структура: короткий лид, затем РОВНО 12 разделов, h2 начинается с названия знака: '+['Овен','Телец','Близнецы','Рак','Лев','Дева','Весы','Скорпион','Стрелец','Козерог','Водолей','Рыбы'].join(', ')+'. Знак читателя = 1-й солнечный дом (солнечные цельнознаковые дома из брифа). Каждый знак — своё, без повторов.':p.signs?'Структура: короткий лид, разделы для знаков: '+p.signs.join(', ')+' (h2 начинается с названия знака), опирайся на солнечные дома из брифа.':'Структура: короткий лид, 2–4 смысловых раздела, конкретные рекомендации.'}
+${p.selection?'Правило выбора: '+p.selection:''}
+${p.facts?'Проверенные факты: '+JSON.stringify(p.facts):''}
+${brief?'Рассчитанные данные: '+JSON.stringify({range:[brief.from,brief.to],events:brief.events.map((e:any)=>({date:e.date,text:e.text})),retrogradeMidRange:brief.retrograde,moonDays:brief.moonDays,solarHouses:brief.solarHouses}):''}
+Верни JSON: {"metaTitle":"до 60 символов","metaDescription":"140–160 символов","intro":["..."],"sections":[{"h2":"...","paragraphs":["..."],"bulletList":["опционально"]}],"conclusion":"..."}`;
+ let last='';
+ for(const model of ['google/gemini-3.8-flash','google/gemini-3.8-flash','google/gemini-3.8-flash']){
+  const res=await fetch("https://ai.gateway.lovable.dev/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":`Bearer ${LOVABLE_API_KEY}`},body:JSON.stringify({model,messages:[{role:"system",content:system},{role:"user",content:user+(last?`\nПредыдущая версия отклонена проверкой: ${last}. Исправь.`:'')}],response_format:{type:"json_object"}})});
+  if(!res.ok){const t=await res.text();if(res.status!==429&&res.status<500)throw new ProviderError(res.status,`AI gateway ${res.status}: ${t.slice(0,300)}`);last=`gateway ${res.status}`;continue;}
+  const c=(await res.json()).choices?.[0]?.message?.content;
+  try{const a=JSON.parse(String(c).replace(/^```(?:json)?\s*/i,"").replace(/```\s*$/i,"").trim());a.title=p.title;return validatePlanArticle(a,p,brief);}catch(e){last=(e as Error).message;console.error('plan validation:',last);}
+ }
+ throw new Error(`Pre-publication check failed: ${last}`);
+}
+
+async function runPlan(supabase:any,check:(r:any)=>any,respond:(d:unknown,s?:number)=>Response){
+ const now=new Date();
+ const rows=check(await supabase.from('blog_plan_items').select('id,status'));
+ const done=new Set<string>(rows.filter((r:any)=>r.status==='success'||r.status==='needs_review').map((r:any)=>r.id));
+ const p=dueItem(now,done);
+ if(!p)return respond({ok:true,skipped:'no_due_plan_items'});
+ const claim=check(await supabase.rpc('claim_blog_plan',{p_item:p.id,p_publish_at:p.at}));
+ if(claim.skipped)return respond({ok:true,item:p.id,...claim});
+ const token=claim.token;let topicId:string|undefined;
+ try{
+  if(!dailyTargetOk(p,now))throw new Error('Daily horoscope date no longer matches tomorrow');
+  const repo=await ghJson("");BRANCH=repo.default_branch||"main";
+  const ref=await ghJson(`/git/ref/heads/${BRANCH}`);BASE_SHA=ref.object.sha;
+  const blogRaw=await getFileContent("src/data/blogPosts.ts");
+  const existing:RelatedPost[]=[];
+  for(const m of blogRaw.matchAll(/title:\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')[\s\S]*?link:\s*["'](\/[\w-]+)["']/g)){let title=m[1].slice(1,-1);if(m[1][0]==='"')title=JSON.parse(m[1]);existing.push({title,slug:m[2].slice(1)});}
+  const brief=p.mode==='daily'?skyBrief(moscowDayOf(now)):p.mode==='events'?rangeEvents(p.range![0],p.range![1],!!p.slow):null;
+  const rowsT=check(await supabase.from('blog_topics').select('*').eq('slug_hint',p.slug).limit(1));
+  const topic=rowsT[0]??check(await supabase.from('blog_topics').insert({topic:p.title,keywords:`${p.keyword}, ${p.related}`,slug_hint:p.slug,category:p.rubric,content_kind:p.pinKind,editorial_brief:{plan:p,brief},target_date:p.target??null}).select().single());
+  topicId=topic.id;
+  let payload=claim.item.payload;
+  if(!payload){
+   if(existing.some(x=>x.slug===p.slug))throw new Error('Existing article without recoverable payload');
+   let article:any;
+   if(p.mode==='daily'){article=horoscopeArticle(brief as any,existing.map(x=>x.slug));article.title=p.title;article.metaTitle=p.title.slice(0,70);article.slug=p.slug;article.keywords=`${p.keyword}, ${p.related}`;article.category=p.rubric;}
+   else article=await planArticle(p,brief);
+   article.conclusion=`${article.conclusion} Рассчитать личный прогноз: ${PLAN_CTA}`.trim();
+   if(p.mode!=='daily'&&plainText(article).length>charLimit(p)+80)throw new Error('Too long after CTA');
+   const coverB64=await generateCoverImage(p.title,p.mode==='daily'?'tomorrow_horoscope':'astrology_education',p.target,p.coverText);
+   const coverUrl=`${SUPABASE_URL}/functions/v1/blog-cover-img?p=${p.slug}.png`;
+   payload={article,coverB64,coverUrl,dzenHtml:buildDzenHtml(article,coverUrl)};
+   check(await supabase.from('blog_plan_items').update({payload}).eq('id',p.id));
+  }
+  const {article,coverB64,coverUrl,dzenHtml}=payload;
+  if(!dzenHtml.includes(`href="${PLAN_CTA}`)&&!dzenHtml.includes(PLAN_CTA))throw new Error('CTA link missing');
+  const bytes=Uint8Array.from(atob(coverB64),(c)=>c.charCodeAt(0));
+  check(await supabase.storage.from('blog-covers').upload(`${article.slug}.png`,bytes,{contentType:'image/png',upsert:true}));
+  let commit={sha:BASE_SHA,url:`https://github.com/${GITHUB_REPO}/commit/${BASE_SHA}`};
+  if(!existing.some(x=>x.slug===article.slug)){
+   const [appRaw,sitemapRaw,rssRaw]=await Promise.all([getFileContent('src/App.tsx'),getFileContent('public/sitemap.xml'),getFileContent('public/rss.xml')]);
+   const files=[{path:`src/pages/blog-auto/${pascalCase(article.slug)}.tsx`,content:buildTsxPage(article,new Map(existing.map(x=>[x.slug,x.title])),coverUrl)},{path:'src/data/blogPosts.ts',content:updateBlogPostsTs(blogRaw,article)},{path:'src/App.tsx',content:updateAppTsx(appRaw,article)},{path:'public/sitemap.xml',content:updateSitemap(sitemapRaw,article)},{path:'public/rss.xml',content:updateRss(rssRaw,article)}];
+   commit=await commitFiles(files,`feat(blog): plan ${p.id}: ${article.title.slice(0,60)}`);
+  }
+  const meta={topic:p.title,rubric:p.rubric,publishAt:p.at,keyword:p.keyword,ctaUrl:PLAN_CTA,url:`${DOMAIN}/${article.slug}`,ephemeris:brief?EPHEMERIS:null,calculatedAt:new Date().toISOString(),timezone:'Europe/Moscow',range:p.range??(p.target?[p.target,p.target]:null),events:(brief as any)?.events??(brief as any)?.aspects??null,chars:plainText(article).length};
+  check(await supabase.rpc('finish_blog_plan',{p_token:token,p_item:p.id,p_topic:topicId,p_article:article,p_cover:coverUrl,p_html:dzenHtml,p_commit:commit,p_meta:meta}));
+  return respond({ok:true,item:p.id,title:article.title,url:meta.url});
+ }catch(err){
+  const msg=err instanceof Error?err.message:String(err),status=err instanceof ProviderError?err.status:500;
+  console.error('plan:',p.id,msg);
+  const paused=err instanceof ProviderError&&(status===402||status===403||status===429);
+  await supabase.from('blog_job_state').update({lease_token:null,lease_until:null,...(paused?{paused_reason:msg,resume_after:status===429?new Date(Date.now()+3600000).toISOString():null}:{})}).eq('id','daily').eq('lease_token',token);
+  // Failed pre-publication checks after three runs go to manual revision instead of publishing.
+  const review=!paused&&(claim.item.attempts>=3||/Pre-publication|no longer matches/.test(msg));
+  await supabase.from('blog_plan_items').update({status:review?'needs_review':'pending',error_message:msg.slice(0,2000),updated_at:new Date().toISOString()}).eq('id',p.id);
+  if(topicId)await supabase.from('blog_generations').insert({topic_id:topicId,status:'failed',error_message:msg.slice(0,2000)});
+  return respond({ok:false,item:p.id,error:msg},status);
+ }
+}
+const moscowDayOf=(d:Date)=>new Date(d.getTime()+10800000).toISOString().slice(0,10);
+
 // ============== Handler ==============
 Deno.serve(async (req) => {
  if(req.method === "OPTIONS") return new Response("ok",{headers:corsHeaders});
@@ -603,6 +694,7 @@ Deno.serve(async (req) => {
   let body:any;try{body=await req.json();}catch{return respond({error:"Invalid JSON"},400);}
   if(body.kind!==undefined && !KINDS.includes(body.kind))return respond({error:"Invalid kind"},400);
   for(const [k,v] of [["LOVABLE_API_KEY",LOVABLE_API_KEY],["GITHUB_TOKEN",GITHUB_TOKEN],["GITHUB_REPO",GITHUB_REPO]])if(!v)throw new Error(`Missing env var: ${k}`);
+  if(body.plan)return await runPlan(supabase,check,respond);
   const claim=check(await supabase.rpc("claim_blog_daily",{p_kind:body.kind??null}));
   if(claim.skipped)return respond({ok:true,...claim});
   token=claim.token;day=claim.day;kind=claim.kind;

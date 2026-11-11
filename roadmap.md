@@ -1,3 +1,9 @@
+# Content plan 12–18 November
+- [x] Publish 28 planned articles at 07:00/11:30/16:00/20:00 Moscow with calculated sky data, pre-publication checks and CTA to https://aidzen.ru; daily three-article schedule replaced.
+- [ ] Confirm the first live run on 12 November 07:00 Moscow — happens after this turn.
+- [ ] Dzen links for new articles still need manual fetch so their pins can go out.
+- [ ] Content plan after 18 November — waits on the next plan from the user.
+
 # November 9–15 weekly horoscope
 - [x] Publish approved v2 text without FAQ, with a dated cover, blog navigation, sitemap and Dzen RSS. Preview navigation, exact text, twelve signs, CTA and mobile layout verified; live/static RSS contain the full article and working JPEG. Website publication requested separately; custom-domain rollout remains external.
 - [x] Cross-check November 9–15 sky events against two research reports and independent Astronomy Engine calculations; deliver an unpublished 2,366-word Russian article with twelve distinct signs, a provocative non-guaranteeing title and the requested Neurodzen paragraph (three free calculations, natal chart, transits and event formulas). No publication requested.

@@ -129,6 +129,48 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_plan_items: {
+        Row: {
+          attempts: number
+          error_message: string | null
+          id: string
+          meta: Json | null
+          payload: Json | null
+          publish_at: string
+          published_at: string | null
+          published_url: string | null
+          status: string
+          topic_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          error_message?: string | null
+          id: string
+          meta?: Json | null
+          payload?: Json | null
+          publish_at: string
+          published_at?: string | null
+          published_url?: string | null
+          status?: string
+          topic_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          error_message?: string | null
+          id?: string
+          meta?: Json | null
+          payload?: Json | null
+          publish_at?: string
+          published_at?: string | null
+          published_url?: string | null
+          status?: string
+          topic_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       blog_topics: {
         Row: {
           category: string
@@ -632,6 +674,10 @@ export type Database = {
       authorize_blog_scheduler: { Args: { p_secret: string }; Returns: boolean }
       blog_schedule_hour: { Args: { p_kind: string }; Returns: number }
       claim_blog_daily: { Args: { p_kind?: string }; Returns: Json }
+      claim_blog_plan: {
+        Args: { p_item: string; p_publish_at: string }
+        Returns: Json
+      }
       claim_pinterest_article: { Args: never; Returns: Json }
       claim_pinterest_generation: { Args: { p_slot: number }; Returns: Json }
       dispatch_pinterest_articles: { Args: never; Returns: undefined }
@@ -653,6 +699,19 @@ export type Database = {
           p_day: string
           p_html: string
           p_kind: string
+          p_token: string
+          p_topic: string
+        }
+        Returns: undefined
+      }
+      finish_blog_plan: {
+        Args: {
+          p_article: Json
+          p_commit: Json
+          p_cover: string
+          p_html: string
+          p_item: string
+          p_meta: Json
           p_token: string
           p_topic: string
         }
