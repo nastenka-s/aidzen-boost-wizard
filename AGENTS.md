@@ -1,6 +1,6 @@
 # Architecture rules
 - Generate deployment RSS with bounded retries and atomically replace only validated complete feeds; retain a valid saved feed with a stale warning during outages so network failures do not block website deployment.
-- Keep website URLs as Pinterest campaign identities and store verified Dzen article URLs separately; claim and finalization must require a Dzen destination without a website fallback.
+- Pinterest article pins link to the website article URL (campaign identity); Dzen URLs are stored separately and are not pin destinations, because Pinterest RSS import requires the verified domain.
 - Keep Dzen publication categories in its tested publication policy; imported articles must not be forced into drafts.
 - Keep Pinterest editorial catalogs, astronomical calculations and deterministic visual rotation in the generator's local editorial module so scheduled output is testable independently of paid services.
 - Acquire the service-only database lease before Pinterest provider calls; enforce the Moscow-day publication limit atomically and never allow force requests to bypass it.

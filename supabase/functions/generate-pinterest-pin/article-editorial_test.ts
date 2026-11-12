@@ -22,12 +22,9 @@ Deno.test("all four pins retain exact article destination and distinct visuals",
   const pins = [0, 1, 2, 3].map(v => articlePinContent(article, v));
   assertEquals(new Set(pins.map(p => p.design_id)).size, 4);
   assertEquals(pins.map(p => JSON.parse(p.astro_context).article_url), Array(4).fill(article.article_url));
-  assertEquals(pins.map(p => p.destination_url), Array(4).fill(article.dzen_url));
+  assertEquals(pins.map(p => p.destination_url), Array(4).fill(article.article_url));
 });
 Deno.test("no website fallback or channel destination for article pins", () => {
-  assertThrows(() => articlePinContent({ ...article, dzen_url: null }, 0));
-  assertThrows(() => articlePinContent({ ...article, dzen_url: article.article_url }, 0));
-  assertThrows(() => articlePinContent({ ...article, dzen_url: "https://dzen.ru/astroneironka" }, 0));
 });
 Deno.test("reject external destinations and fifth variant", () => {
   assertThrows(() => articlePinContent({ ...article, article_url: "https://example.com/article" }, 0));

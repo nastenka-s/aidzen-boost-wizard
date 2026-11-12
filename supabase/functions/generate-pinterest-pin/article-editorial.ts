@@ -26,7 +26,7 @@ export function articlePinContent(article: PinArticle, variant: number) {
   if (!Number.isInteger(variant) || variant < 0 || variant >= ARTICLE_PIN_COUNT) throw new Error("Invalid article pin variant");
   const source = new URL(article.article_url);
   if (source.origin !== "https://aidzen.ru" || !/^\/[a-z0-9][a-z0-9/-]*$/.test(source.pathname) || source.search || source.hash) throw new Error("Invalid article URL");
-  const url = new URL(dzenArticleUrl(article.dzen_url));
+  const url = source;
   const seed = [...article.article_url].reduce((sum, char) => sum + char.charCodeAt(0), 0);
   const design = styles[(seed + variant) % styles.length];
   const title = article.title.trim();
@@ -40,7 +40,7 @@ export function articlePinContent(article: PinArticle, variant: number) {
     style: design.id === "mystic-watercolor" || design.id === "zodiac-collage" ? "light" : "dark",
     design_id: design.id, topic: `${title} ::ARTICLE::${url.pathname} ::VARIANT::${variant} ::STYLE::${design.id}`,
     destination_url: url.href,
-    astro_context: JSON.stringify({ article_url: article.article_url, dzen_url: url.href, title, variant }),
+    astro_context: JSON.stringify({ article_url: article.article_url, title, variant }),
     image_prompt: `Create a premium vertical Pinterest image, 1024x1536, 2:3. ${design.prompt} Topic: ${title}. The illustration must specifically reflect this published ${category} article, not a generic unrelated forecast. Render ONLY these exact Russian Cyrillic texts: ${JSON.stringify([title, "Подробнее — в статье", "Нейродзен · aidzen.ru"])}. Make the full title clearly readable, wrapping as needed, with generous safe margins. Do not invent facts, dates, numbers, planetary positions or predictions. Dates in the supplied title must remain exactly unchanged. Celestial elements are decorative, not a chart claiming real planetary positions. No other labels, celebrity faces, watermarks or logos.`,
   };
 }
