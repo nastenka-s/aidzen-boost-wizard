@@ -151,6 +151,7 @@ import GoroskopNa20261112 from "./pages/blog-auto/GoroskopNa20261112";
 import UchebnikDom8 from "./pages/blog-auto/UchebnikDom8";
 import GoroskopNa13Noyabrya2026 from "./pages/blog-auto/GoroskopNa13Noyabrya2026";
 import Pyatnica13Noyabrya2026AstrologiyaNumerologiya from "./pages/blog-auto/Pyatnica13Noyabrya2026AstrologiyaNumerologiya";
+import ZnakiZodiakaLyubovDoKoncaNoyabrya2026 from "./pages/blog-auto/ZnakiZodiakaLyubovDoKoncaNoyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -170,6 +171,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/znaki-zodiaka-lyubov-do-konca-noyabrya-2026" element={<ZnakiZodiakaLyubovDoKoncaNoyabrya2026 />} />
           <Route path="/pyatnica-13-noyabrya-2026-astrologiya-numerologiya" element={<Pyatnica13Noyabrya2026AstrologiyaNumerologiya />} />
           <Route path="/goroskop-na-13-noyabrya-2026" element={<GoroskopNa13Noyabrya2026 />} />
           <Route path="/uchebnik-dom-8" element={<UchebnikDom8 />} />
