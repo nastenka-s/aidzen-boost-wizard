@@ -174,13 +174,16 @@ const Page = () => {
               <p className="mb-6 leading-relaxed">Совместимость в Матрице судьбы — это глубокий символический язык, созданный для диалога, а не для категоричных диагнозов. Относитесь к расчетам как к ориентирам для наблюдения за собой и партнером, сохраняя здравый смысл и доверие к собственным чувствам. Если вы хотите глубже исследовать персональные и совместные энергии на надежной методической основе, воспользуйтесь нашими подробными материалами и калькуляторами на сайте.</p>
 
               <Card className="p-6 my-8 bg-primary/5 border-primary/20">
-                <p className="font-semibold mb-3">Хотите глубже разобрать свой случай?</p>
-                <p className="mb-4">Сделайте бесплатный расчёт натальной карты или Матрицы судьбы и получите персональную расшифровку с экспертным разбором.</p>
+                <p className="font-semibold mb-3">Нейродзен: три бесплатных расчёта</p>
+                <p className="mb-4">Нейродзен — ИИ-астролог и нумеролог, который строит натальную карту, Матрицу судьбы и личные прогнозы по вашей дате, времени и месту рождения. Первые три расчёта бесплатны.</p>
+                <p className="font-medium mb-3">Запустите три бесплатных анализа</p>
                 <div className="flex flex-wrap gap-3">
-                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                    <Button>Начать расчёт</Button>
+                  <a href="https://t.me/matricasudbyaibot" target="_blank" rel="noopener noreferrer">
+                    <Button>В Telegram боте</Button>
                   </a>
-                  <Link to="/blog"><Button variant="outline">Все статьи блога</Button></Link>
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline">На сайте</Button>
+                  </a>
                 </div>
               </Card>
 

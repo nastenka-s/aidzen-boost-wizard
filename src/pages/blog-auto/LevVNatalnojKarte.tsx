@@ -174,13 +174,16 @@ const Page = () => {
               <p className="mb-6 leading-relaxed">Энергия Льва в натальной карте — это мощный дар, который дает потенциал к яркому самовыражению, творчеству и лидерству. Это призыв быть не зрителем, а главным героем в пьесе своей жизни, быть щедрым правителем своей собственной реальности. Поняв, в какой именно точке вашего гороскопа живет этот «внутренний царь» — в вашем ядре, в вашем образе или в сфере карьеры — вы получаете инструкцию по активации вашей личной харизмы и жизненной силы. Этот разбор — лишь первый шаг. Полную и многогранную картину может дать только целостный анализ вашей уникальной натальной карты.</p>
 
               <Card className="p-6 my-8 bg-primary/5 border-primary/20">
-                <p className="font-semibold mb-3">Хотите глубже разобрать свой случай?</p>
-                <p className="mb-4">Сделайте бесплатный расчёт натальной карты или Матрицы судьбы и получите персональную расшифровку с экспертным разбором.</p>
+                <p className="font-semibold mb-3">Нейродзен: три бесплатных расчёта</p>
+                <p className="mb-4">Нейродзен — ИИ-астролог и нумеролог, который строит натальную карту, Матрицу судьбы и личные прогнозы по вашей дате, времени и месту рождения. Первые три расчёта бесплатны.</p>
+                <p className="font-medium mb-3">Запустите три бесплатных анализа</p>
                 <div className="flex flex-wrap gap-3">
-                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
-                    <Button>Начать расчёт</Button>
+                  <a href="https://t.me/matricasudbyaibot" target="_blank" rel="noopener noreferrer">
+                    <Button>В Telegram боте</Button>
                   </a>
-                  <Link to="/blog"><Button variant="outline">Все статьи блога</Button></Link>
+                  <a href="https://chat.aidzen.ru/login" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline">На сайте</Button>
+                  </a>
                 </div>
               </Card>
 
