@@ -1,0 +1,10 @@
+DROP POLICY IF EXISTS "Public read keywords" ON public.threads_keywords;
+DROP POLICY IF EXISTS "Public read our threads posts" ON public.threads_posts;
+DROP POLICY IF EXISTS "Public can read pinterest pins" ON public.pinterest_pins;
+DROP POLICY IF EXISTS "Public read patterns" ON public.threads_virality_patterns;
+REVOKE ALL ON public.threads_keywords, public.threads_posts, public.pinterest_pins, public.threads_virality_patterns FROM anon, authenticated;
+GRANT ALL ON public.threads_keywords, public.threads_posts, public.pinterest_pins, public.threads_virality_patterns TO service_role;
+CREATE POLICY service_manage ON public.threads_keywords FOR ALL TO service_role USING (true) WITH CHECK (true);
+CREATE POLICY service_manage ON public.threads_posts FOR ALL TO service_role USING (true) WITH CHECK (true);
+CREATE POLICY service_manage ON public.pinterest_pins FOR ALL TO service_role USING (true) WITH CHECK (true);
+CREATE POLICY service_manage ON public.threads_virality_patterns FOR ALL TO service_role USING (true) WITH CHECK (true);

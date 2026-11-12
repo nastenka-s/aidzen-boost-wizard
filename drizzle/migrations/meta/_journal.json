@@ -99,6 +99,13 @@
       "when": 1794471068327,
       "tag": "0013_pinterest_links_to_site",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1794487251607,
+      "tag": "0014_lock_public_read_tables",
+      "breakpoints": true
     }
   ]
 }
