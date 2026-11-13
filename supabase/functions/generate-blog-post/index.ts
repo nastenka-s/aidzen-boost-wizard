@@ -2,9 +2,11 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
 import { coverPrompt } from "./cover-policy.mjs";
+import { generateKieCover, ProviderError } from "./cover-provider.mjs";
 import { PLAN, PLAN_CTA, EPHEMERIS, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, plainText, charLimit, type PlanItem } from "./plan.ts";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
+const KIE_AI_API_KEY = (Deno.env.get("KIE_AI_API_KEY") ?? "").trim();
 const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN") ?? "";
 const GITHUB_REPO = Deno.env.get("GITHUB_REPO") ?? ""; // "owner/repo"
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
@@ -112,26 +114,7 @@ function buildDzenDescription(a: GeneratedArticle): string {
 async function generateCoverImage(title: string, kind: Kind, targetDate?: string, coverText?: string): Promise<string> {
   // Returns base64 PNG (no data: prefix)
   const prompt = coverPrompt(title, kind, targetDate, coverText);
-  const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${LOVABLE_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "google/gemini-2.5-flash-image",
-      messages: [{ role: "user", content: prompt }],
-      modalities: ["image", "text"],
-    }),
-  });
-  if (!res.ok) {
-    const t = await res.text();
-    throw new ProviderError(res.status, `Image gateway ${res.status}: ${t.slice(0, 300)}`);
-  }
-  const data = await res.json();
-  const b64 = data?.data?.[0]?.b64_json;
-  if (!b64) throw new Error("Image gen: no b64_json in response");
-  return b64;
+  return generateKieCover(prompt, KIE_AI_API_KEY);
 }
 
 function pascalCase(slug: string): string {
@@ -147,9 +130,6 @@ function ruDate(d = new Date()): string {
 }
 function isoDate(d = new Date()): string { return d.toISOString().slice(0,10); }
 function rfc822Date(d = new Date()): string { return d.toUTCString(); }
-class ProviderError extends Error {
- constructor(public status: number,message: string) { super(message); }
-}
 
 // ============== AI generation ==============
 async function generateArticle(topic: Topic, existing: RelatedPost[]): Promise<GeneratedArticle> {

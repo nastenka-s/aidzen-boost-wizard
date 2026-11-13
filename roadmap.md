@@ -1,3 +1,6 @@
+# Article cover provider
+- [x] Switch future article covers to GPT Image through the existing kie.ai key; six cover/provider tests and nine plan tests pass, generator deployed, real PNG inspected with correct large Cyrillic headline and 14 November 2026 date; no extra article published and existing covers unchanged.
+
 # Automatic website articles
 - [x] Add public read-only published article delivery, live blog listing and fallback article pages; verify real p06 missing from bundled source, loaded cover, thirteen sections, reload, mobile and 404 with no runtime errors; three privacy/publication tests pass, endpoint deployed and one-time website publication requested.
 - [ ] Confirm custom-domain rollout of live article pages — publication completion is external.
