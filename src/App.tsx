@@ -154,6 +154,7 @@ import Pyatnica13Noyabrya2026AstrologiyaNumerologiya from "./pages/blog-auto/Pya
 import ZnakiZodiakaLyubovDoKoncaNoyabrya2026 from "./pages/blog-auto/ZnakiZodiakaLyubovDoKoncaNoyabrya2026";
 import NatalnayaKartaBesplatnoKakRasschitat from "./pages/blog-auto/NatalnayaKartaBesplatnoKakRasschitat";
 import GoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/GoroskopNaVyhodnye1415Noyabrya2026";
+import LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 
@@ -173,6 +174,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/lyubovnyy-goroskop-na-vyhodnye-14-15-noyabrya-2026" element={<LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 />} />
           <Route path="/goroskop-na-vyhodnye-14-15-noyabrya-2026" element={<GoroskopNaVyhodnye1415Noyabrya2026 />} />
           <Route path="/natalnaya-karta-besplatno-kak-rasschitat" element={<NatalnayaKartaBesplatnoKakRasschitat />} />
           <Route path="/znaki-zodiaka-lyubov-do-konca-noyabrya-2026" element={<ZnakiZodiakaLyubovDoKoncaNoyabrya2026 />} />
