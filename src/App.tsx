@@ -155,6 +155,7 @@ import ZnakiZodiakaLyubovDoKoncaNoyabrya2026 from "./pages/blog-auto/ZnakiZodiak
 import NatalnayaKartaBesplatnoKakRasschitat from "./pages/blog-auto/NatalnayaKartaBesplatnoKakRasschitat";
 import GoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/GoroskopNaVyhodnye1415Noyabrya2026";
 import LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026";
+import VozvrashchatsyaKByvshemuHorarnayaAstrologiya from "./pages/blog-auto/VozvrashchatsyaKByvshemuHorarnayaAstrologiya";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -175,6 +176,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/vozvrashchatsya-k-byvshemu-horarnaya-astrologiya" element={<VozvrashchatsyaKByvshemuHorarnayaAstrologiya />} />
           <Route path="/lyubovnyy-goroskop-na-vyhodnye-14-15-noyabrya-2026" element={<LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 />} />
           <Route path="/goroskop-na-vyhodnye-14-15-noyabrya-2026" element={<GoroskopNaVyhodnye1415Noyabrya2026 />} />
           <Route path="/natalnaya-karta-besplatno-kak-rasschitat" element={<NatalnayaKartaBesplatnoKakRasschitat />} />
