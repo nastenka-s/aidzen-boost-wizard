@@ -1,4 +1,5 @@
 # Article cover provider
+- [x] Replace p07 cover with a romantic photograph and large Russian headline; uploaded replacement verified byte-for-byte through cover delivery and on preview article page, eight tests pass, future headline/romance policy deployed. Existing Dzen imported cover refresh remains outside our control.
 - [x] Switch future article covers to GPT Image through the existing kie.ai key; six cover/provider tests and nine plan tests pass, generator deployed, real PNG inspected with correct large Cyrillic headline and 14 November 2026 date; no extra article published and existing covers unchanged.
 
 # Automatic website articles
