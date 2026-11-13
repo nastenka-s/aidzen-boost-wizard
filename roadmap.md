@@ -1,3 +1,7 @@
+# Automatic website articles
+- [x] Add public read-only published article delivery, live blog listing and fallback article pages; verify real p06 missing from bundled source, loaded cover, thirteen sections, reload, mobile and 404 with no runtime errors; three privacy/publication tests pass, endpoint deployed and one-time website publication requested.
+- [ ] Confirm custom-domain rollout of live article pages — publication completion is external.
+
 # Content plan 12–18 November
 - [x] Publish p06 early on request: HTTP 200, persisted success, complete live RSS text with twelve signs and a working 1024×1024 PNG cover; normal timetable and shared lease retained, nine plan tests and three RSS policy tests pass.
 - [ ] Confirm p06 reaches the www Dzen feed — Cloudflare still serves the prior cached feed after five minutes; Dzen's own import status is external.

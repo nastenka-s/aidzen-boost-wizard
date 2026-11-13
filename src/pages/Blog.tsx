@@ -7,8 +7,17 @@ import { Helmet } from "react-helmet";
 import { blogPosts } from "@/data/blogPosts";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { useLiveArticles } from "@/hooks/useLiveArticles";
 
 const Blog = () => {
+  const { data } = useLiveArticles();
+  const livePosts = (data?.articles ?? []).map(article => ({
+    title: article.title, desc: article.description,
+    date: new Date(article.publishedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' }),
+    link: `/${article.slug}`,
+  }));
+  const liveLinks = new Set(livePosts.map(post => post.link));
+  const posts = [...livePosts, ...blogPosts.filter(post => !liveLinks.has(post.link))];
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -65,8 +74,8 @@ const Blog = () => {
 
           {/* Blog Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {blogPosts.map((post, i) => (
-              <Link key={i} to={post.link}>
+            {posts.map((post) => (
+              <Link key={post.link} to={post.link}>
                 <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm cursor-pointer h-full">
                   <div className="space-y-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

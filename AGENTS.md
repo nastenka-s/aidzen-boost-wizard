@@ -1,4 +1,5 @@
 # Architecture rules
+- Serve completed blog articles through a read-only public projection and client fallback routes merged into the blog catalog, so new article data is live without a frontend deployment while drafts and job payloads remain private.
 - Generate deployment RSS with bounded retries and atomically replace only validated complete feeds; retain a valid saved feed with a stale warning during outages so network failures do not block website deployment.
 - Pinterest article pins link to the website article URL (campaign identity); Dzen URLs are stored separately and are not pin destinations, because Pinterest RSS import requires the verified domain.
 - Keep Dzen publication categories in its tested publication policy; imported articles must not be forced into drafts.

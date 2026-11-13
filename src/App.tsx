@@ -157,6 +157,7 @@ import GoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/GoroskopNaVyho
 import LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
+import LiveArticle from "./pages/LiveArticle";
 
 const queryClient = new QueryClient();
 
@@ -321,6 +322,7 @@ const App = () => (
           <Route path="/publicoffer" element={<PublicOffer />} />
           <Route path="/dataprocessing" element={<DataProcessing />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/:slug" element={<LiveArticle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
