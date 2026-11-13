@@ -15,6 +15,14 @@ Deno.test('Only items scheduled for the current Moscow day and already due are c
  assertEquals(dueItem(new Date('2026-11-13T07:30:00+03:00'),new Set())?.id,'p05');
 });
 Deno.test('Article length is capped at 3000 chars except 12-sign and long forecasts',()=>{assertEquals(charLimit(item('p04')),3000);assertEquals(charLimit(item('p09')),7500);assertThrows(()=>validatePlanArticle(ok({intro:['а'.repeat(3001)]}),item('p04'),{}),Error,'Too long');});
+Deno.test('Requested early publication selects only the next unfinished item today',()=>{
+ const now=new Date('2026-11-13T10:00:00+03:00');
+ const done=new Set(['p05']);
+ assertEquals(dueItem(now,done),undefined);
+ assertEquals(dueItem(now,done,true)?.id,'p06');
+ assertEquals(dueItem(now,new Set(['p05','p06']),true)?.id,'p07');
+ assertEquals(dueItem(now,new Set(['p05','p06','p07','p08']),true),undefined);
+});
 Deno.test('Promised twelve signs must all be present',()=>{assertThrows(()=>validatePlanArticle(ok(),item('p09'),{events:[]}),Error,'signs');validatePlanArticle(ok({sections:SIGNS.map(h2=>({h2,paragraphs:['Текст.']}))}),item('p09'),{events:[]});});
 Deno.test('Dates must come from calculated events',()=>{
  const brief={events:[{date:'2026-11-24',type:'phase'}]};

@@ -622,13 +622,13 @@ ${brief?'Рассчитанные данные: '+JSON.stringify({range:[brief.f
  throw new Error(`Pre-publication check failed: ${last}`);
 }
 
-async function runPlan(supabase:any,check:(r:any)=>any,respond:(d:unknown,s?:number)=>Response){
+async function runPlan(supabase:any,check:(r:any)=>any,respond:(d:unknown,s?:number)=>Response,publishNext=false){
  const now=new Date();
  const rows=check(await supabase.from('blog_plan_items').select('id,status'));
  const done=new Set<string>(rows.filter((r:any)=>r.status==='success'||r.status==='needs_review').map((r:any)=>r.id));
- const p=dueItem(now,done);
+ const p=dueItem(now,done,publishNext);
  if(!p)return respond({ok:true,skipped:'no_due_plan_items'});
- const claim=check(await supabase.rpc('claim_blog_plan',{p_item:p.id,p_publish_at:p.at}));
+ const claim=check(await supabase.rpc('claim_blog_plan',{p_item:p.id,p_publish_at:publishNext?now.toISOString():p.at}));
  if(claim.skipped)return respond({ok:true,item:p.id,...claim});
  const token=claim.token;let topicId:string|undefined;
  try{
@@ -697,7 +697,7 @@ Deno.serve(async (req) => {
   let body:any;try{body=await req.json();}catch{return respond({error:"Invalid JSON"},400);}
   if(body.kind!==undefined && !KINDS.includes(body.kind))return respond({error:"Invalid kind"},400);
   for(const [k,v] of [["LOVABLE_API_KEY",LOVABLE_API_KEY],["GITHUB_TOKEN",GITHUB_TOKEN],["GITHUB_REPO",GITHUB_REPO]])if(!v)throw new Error(`Missing env var: ${k}`);
-  if(body.plan)return await runPlan(supabase,check,respond);
+  if(body.plan)return await runPlan(supabase,check,respond,body.publish_next===true);
   const claim=check(await supabase.rpc("claim_blog_daily",{p_kind:body.kind??null}));
   if(claim.skipped)return respond({ok:true,...claim});
   token=claim.token;day=claim.day;kind=claim.kind;
