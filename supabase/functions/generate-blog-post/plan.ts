@@ -50,9 +50,9 @@ export function rangeEvents(from:string,to:string,slow=false){
  return {from,to,timezone:'Europe/Moscow',source:EPHEMERIS,calculatedAt:new Date().toISOString(),events,retrograde:retro,positionsAtStart:positions(a),positionsAtMid:positions(mid),solarHouses,moonDays};
 }
 
-export function dueItem(now:Date,done:Set<string>){
+export function dueItem(now:Date,done:Set<string>,publishNext=false){
  const today=moscowDay(now);
- return PLAN.find(p=>!done.has(p.id)&&new Date(p.at)<=now&&moscowDay(new Date(p.at))===today);
+ return PLAN.find(p=>!done.has(p.id)&&(publishNext||new Date(p.at)<=now)&&moscowDay(new Date(p.at))===today);
 }
 export function plainText(a:any){return [a.title,...a.intro,...a.sections.flatMap((s:any)=>[s.h2,...s.paragraphs,...(s.bulletList??[]),s.example??'',s.warning??'']),a.conclusion].join(' ');}
 export const charLimit=(p:PlanItem)=>p.long||p.signs12?7500:3000;

@@ -1,4 +1,6 @@
 # Content plan 12–18 November
+- [x] Publish p06 early on request: HTTP 200, persisted success, complete live RSS text with twelve signs and a working 1024×1024 PNG cover; normal timetable and shared lease retained, nine plan tests and three RSS policy tests pass.
+- [ ] Confirm p06 reaches the www Dzen feed — Cloudflare still serves the prior cached feed after five minutes; Dzen's own import status is external.
 - [x] Publish 28 planned articles at 07:00/11:30/16:00/20:00 Moscow with calculated sky data, pre-publication checks and CTA to https://aidzen.ru; daily three-article schedule replaced.
 - [ ] Confirm the first live run on 12 November 07:00 Moscow — happens after this turn.
 - [ ] Dzen links for new articles still need manual fetch so their pins can go out.
