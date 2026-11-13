@@ -1,7 +1,8 @@
 import { assertEquals, assert, assertThrows } from 'https://deno.land/std@0.224.0/assert/mod.ts';
-import { PLAN, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, charLimit } from './plan.ts';
+import { PLAN, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, charLimit, charMin } from './plan.ts';
 import { SIGNS } from './editorial.ts';
-const ok=(over:any={})=>({title:'x',intro:['Короткий лид.'],sections:[{h2:'Раз',paragraphs:['Текст.']},{h2:'Два',paragraphs:['Текст.']}],conclusion:'Персональную карту можно рассчитать в Нейродзене.',...over});
+const FILL='слово '.repeat(1000);
+const ok=(over:any={})=>({title:'x',intro:['Короткий лид.'],sections:[{h2:'Раз',paragraphs:[FILL]},{h2:'Два',paragraphs:['Текст.']},{h2:'Три',paragraphs:['Текст.']},{h2:'Четыре',paragraphs:['Текст.']}],conclusion:'Персональную карту можно рассчитать в Нейродзене.',...over});
 const item=(id:string)=>PLAN.find(p=>p.id===id)!;
 Deno.test('Plan has 28 articles, four per Moscow day from 12 to 18 November at 07:00, 11:30, 16:00, 20:00',()=>{
  assertEquals(PLAN.length,28);
@@ -14,7 +15,7 @@ Deno.test('Only items scheduled for the current Moscow day and already due are c
  assertEquals(dueItem(new Date('2026-11-12T12:00:00+03:00'),new Set(['p01']))?.id,'p02');
  assertEquals(dueItem(new Date('2026-11-13T07:30:00+03:00'),new Set())?.id,'p05');
 });
-Deno.test('Article length is capped at 3000 chars except 12-sign and long forecasts',()=>{assertEquals(charLimit(item('p04')),3000);assertEquals(charLimit(item('p09')),7500);assertThrows(()=>validatePlanArticle(ok({intro:['а'.repeat(3001)]}),item('p04'),{}),Error,'Too long');});
+Deno.test('Regular articles are 4000–7000 chars, 12-sign and long forecasts 6000–11000',()=>{assertEquals([charMin(item('p04')),charLimit(item('p04'))],[4000,7000]);assertEquals([charMin(item('p09')),charLimit(item('p09'))],[6000,11000]);assertThrows(()=>validatePlanArticle(ok({intro:['а'.repeat(7001)]}),item('p04'),{}),Error,'Too long');assertThrows(()=>validatePlanArticle(ok({sections:[1,2,3,4].map(h2=>({h2:String(h2),paragraphs:['Коротко.']}))}),item('p04'),{}),Error,'Too short');});
 Deno.test('Requested early publication selects only the next unfinished item today',()=>{
  const now=new Date('2026-11-13T10:00:00+03:00');
  const done=new Set(['p05']);
@@ -23,7 +24,7 @@ Deno.test('Requested early publication selects only the next unfinished item tod
  assertEquals(dueItem(now,new Set(['p05','p06']),true)?.id,'p07');
  assertEquals(dueItem(now,new Set(['p05','p06','p07','p08']),true),undefined);
 });
-Deno.test('Promised twelve signs must all be present',()=>{assertThrows(()=>validatePlanArticle(ok(),item('p09'),{events:[]}),Error,'signs');validatePlanArticle(ok({sections:SIGNS.map(h2=>({h2,paragraphs:['Текст.']}))}),item('p09'),{events:[]});});
+Deno.test('Promised twelve signs must all be present',()=>{assertThrows(()=>validatePlanArticle(ok(),item('p09'),{events:[]}),Error,'signs');validatePlanArticle(ok({sections:SIGNS.map(h2=>({h2,paragraphs:['слово '.repeat(90)]}))}),item('p09'),{events:[]});});
 Deno.test('Dates must come from calculated events',()=>{
  const brief={events:[{date:'2026-11-24',type:'phase'}]};
  validatePlanArticle(ok({intro:['24 ноября полнолуние.']}),item('p15'),brief);

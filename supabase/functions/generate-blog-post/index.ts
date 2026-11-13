@@ -3,7 +3,7 @@ import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
 import { coverPrompt } from "./cover-policy.mjs";
 import { generateKieCover, ProviderError } from "./cover-provider.mjs";
-import { PLAN, PLAN_CTA, EPHEMERIS, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, plainText, charLimit, type PlanItem } from "./plan.ts";
+import { PLAN, PLAN_CTA, EPHEMERIS, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, plainText, charLimit, charMin, type PlanItem } from "./plan.ts";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const KIE_AI_API_KEY = (Deno.env.get("KIE_AI_API_KEY") ?? "").trim();
@@ -60,6 +60,8 @@ const escJsx = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;").repl
 
 // ============== Dzen-ready HTML builder ==============
 // Only tags allowed by Dzen RSS: p, h2, h3, b, i, ul, ol, li, blockquote, a, img
+const linkCta=(h:string)=>h.replace(/Рассчитать личный прогноз: https:\/\/aidzen\.ru/,'<a href="https://aidzen.ru">Рассчитать личный прогноз: aidzen.ru</a>');
+const linkCtaJsx=(h:string)=>h.replace(/Рассчитать личный прогноз: https:\/\/aidzen\.ru/,'<a href="https://aidzen.ru" className="text-primary underline">Рассчитать личный прогноз: aidzen.ru</a>');
 function escHtml(s: string): string {
   return (s || "")
     .replace(/&/g, "&amp;")
@@ -97,7 +99,7 @@ function buildDzenHtml(a: GeneratedArticle, coverUrl: string): string {
   }
   if (a.conclusion) {
     parts.push(`<h2>Заключение</h2>`);
-    parts.push(`<p>${escHtml(a.conclusion)}</p>`);
+    parts.push(`<p>${linkCta(escHtml(a.conclusion))}</p>`);
   }
   parts.push(`<p><b>Бесплатный расчёт натальной карты и матрицы судьбы:</b> <a href="https://chat.aidzen.ru/login">chat.aidzen.ru</a></p>`);
   return parts.join("\n");
@@ -415,7 +417,7 @@ const Page = () => {
               </Accordion>
 
               <h2 className="text-3xl font-bold mt-12 mb-6">Заключение</h2>
-              <p className="mb-6 leading-relaxed">${escJsx(a.conclusion)}</p>
+              <p className="mb-6 leading-relaxed">${linkCtaJsx(escJsx(a.conclusion))}</p>
 
               <Card className="p-6 my-8 bg-primary/5 border-primary/20">
                 <p className="font-semibold mb-3">Нейродзен: три бесплатных расчёта</p>
@@ -582,12 +584,12 @@ async function planArticle(p:PlanItem,brief:any):Promise<any>{
 - Если нужны дома и точные периоды — объясни, что для этого нужны дата, время и место рождения; общий солнечный гороскоп их не заменяет.
 - Без ссылок, URL, HTML, markdown, разделов «Источники»/«Методика».
 - conclusion: вывод с конкретными рекомендациями и мягкий призыв: персональный расчёт можно сделать в Нейродзене, первые 3 расчёта бесплатно. Слово «Нейродзен» обязательно.
-- Общий объём текста (все поля) не более ${charLimit(p)} знаков с пробелами.`;
+- Общий объём текста (все поля) от ${charMin(p)} до ${charLimit(p)} знаков с пробелами. Пиши подробно и полезно: в каждом разделе 2–4 содержательных абзаца с объяснением, конкретными примерами из жизни и практическими шагами; без воды и общих фраз.`;
  const user=`Заголовок (не меняй): ${p.title}
 Рубрика: ${p.rubric}
 Основной запрос (в первом абзаце естественно): ${p.keyword}
 Связанные запросы (2–4 раза естественно, без переспама): ${p.related}
-${p.signs12?'Структура: короткий лид, затем РОВНО 12 разделов, h2 начинается с названия знака: '+['Овен','Телец','Близнецы','Рак','Лев','Дева','Весы','Скорпион','Стрелец','Козерог','Водолей','Рыбы'].join(', ')+'. Знак читателя = 1-й солнечный дом (солнечные цельнознаковые дома из брифа). Каждый знак — своё, без повторов.':p.signs?'Структура: короткий лид, разделы для знаков: '+p.signs.join(', ')+' (h2 начинается с названия знака), опирайся на солнечные дома из брифа.':'Структура: короткий лид, 2–4 смысловых раздела, конкретные рекомендации.'}
+${p.signs12?'Структура: короткий лид, затем РОВНО 12 разделов, h2 начинается с названия знака: '+['Овен','Телец','Близнецы','Рак','Лев','Дева','Весы','Скорпион','Стрелец','Козерог','Водолей','Рыбы'].join(', ')+'. Знак читателя = 1-й солнечный дом (солнечные цельнознаковые дома из брифа). Каждый знак — своё, без повторов.':p.signs?'Структура: короткий лид, разделы для знаков: '+p.signs.join(', ')+' (h2 начинается с названия знака), опирайся на солнечные дома из брифа.':'Структура: лид из 2 абзацев, 4–6 смысловых разделов, в каждом объяснение, пример и конкретные рекомендации.'}
 ${p.selection?'Правило выбора: '+p.selection:''}
 ${p.facts?'Проверенные факты: '+JSON.stringify(p.facts):''}
 ${brief?'Рассчитанные данные: '+JSON.stringify({range:[brief.from,brief.to],events:brief.events.map((e:any)=>({date:e.date,text:e.text})),retrogradeMidRange:brief.retrograde,moonDays:brief.moonDays,solarHouses:brief.solarHouses}):''}

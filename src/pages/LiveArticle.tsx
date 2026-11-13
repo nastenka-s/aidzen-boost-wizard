@@ -26,6 +26,18 @@ export default function LiveArticle() {
   if (first?.tagName === 'IMG' && first.getAttribute('src') === article.cover) first.remove();
   const last = document.body.lastElementChild;
   if (last?.tagName === 'P' && last.textContent?.startsWith('Бесплатный расчёт натальной карты и матрицы судьбы:')) last.remove();
+  // Make plain-text URLs (e.g. the conclusion CTA) clickable.
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const texts: Text[] = [];
+  while (walker.nextNode()) { const n = walker.currentNode as Text; if (!n.parentElement?.closest('a') && /https?:\/\//.test(n.data)) texts.push(n); }
+  for (const n of texts) {
+    const frag = document.createDocumentFragment();
+    n.data.split(/(https?:\/\/[^\s<]+[^\s<.,;:!?)])/).forEach((part, i) => {
+      if (i % 2) { const a = document.createElement('a'); a.href = part; a.textContent = part; a.className = 'underline'; frag.append(a); }
+      else if (part) frag.append(part);
+    });
+    n.replaceWith(frag);
+  }
   const date = new Date(article.publishedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' });
   return <div className="min-h-screen bg-background">
     <Helmet>

@@ -55,7 +55,8 @@ export function dueItem(now:Date,done:Set<string>,publishNext=false){
  return PLAN.find(p=>!done.has(p.id)&&(publishNext||new Date(p.at)<=now)&&moscowDay(new Date(p.at))===today);
 }
 export function plainText(a:any){return [a.title,...a.intro,...a.sections.flatMap((s:any)=>[s.h2,...s.paragraphs,...(s.bulletList??[]),s.example??'',s.warning??'']),a.conclusion].join(' ');}
-export const charLimit=(p:PlanItem)=>p.long||p.signs12?7500:3000;
+export const charLimit=(p:PlanItem)=>p.long||p.signs12?11000:7000;
+export const charMin=(p:PlanItem)=>p.long||p.signs12?6000:4000;
 const dateRe=new RegExp(`(\\d{1,2})(?:\\s*[–-]\\s*(\\d{1,2}))?\\s+(${MONTHS.join('|')})`,'g');
 // Pre-publication gate: any failure blocks publication and sends the slot to revision.
 export function validatePlanArticle(a:any,p:PlanItem,brief:any){
@@ -63,8 +64,9 @@ export function validatePlanArticle(a:any,p:PlanItem,brief:any){
  for(const s of a.sections)if(typeof s.h2!=='string'||!Array.isArray(s.paragraphs)||!s.paragraphs.every((x:unknown)=>typeof x==='string'))throw new Error('Invalid section');
  const want=p.signs12?SIGNS:p.signs;
  if(want){const h=a.sections.map((s:any)=>s.h2);if(!want.every(s=>h.some((x:string)=>x.startsWith(s))))throw new Error('Promised signs are missing');}
- else if(a.sections.length<2||a.sections.length>4)throw new Error('Expected 2–4 sections');
+ else if(a.sections.length<4||a.sections.length>7)throw new Error('Expected 4–7 sections');
  const text=plainText(a);
+ if(text.length<charMin(p))throw new Error(`Too short: ${text.length} chars`);
  if(text.length>charLimit(p))throw new Error(`Too long: ${text.length} chars`);
  if(/https?:\/\/|www\./i.test(text))throw new Error('Links are added by the program only');
  if(/гарантир|обязательно (?:встретите|случится|получите)|неизбежно|точно (?:будет|случится)/i.test(text))throw new Error('Guaranteed-outcome claim');
