@@ -157,6 +157,7 @@ import GoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/GoroskopNaVyho
 import LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 from "./pages/blog-auto/LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026";
 import VozvrashchatsyaKByvshemuHorarnayaAstrologiya from "./pages/blog-auto/VozvrashchatsyaKByvshemuHorarnayaAstrologiya";
 import SovmestimostPoDatamRozhdeniyaBesplatno from "./pages/blog-auto/SovmestimostPoDatamRozhdeniyaBesplatno";
+import GoroskopNaNedelyu1622Noyabrya2026 from "./pages/blog-auto/GoroskopNaNedelyu1622Noyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -177,6 +178,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/goroskop-na-nedelyu-16-22-noyabrya-2026" element={<GoroskopNaNedelyu1622Noyabrya2026 />} />
           <Route path="/sovmestimost-po-datam-rozhdeniya-besplatno" element={<SovmestimostPoDatamRozhdeniyaBesplatno />} />
           <Route path="/vozvrashchatsya-k-byvshemu-horarnaya-astrologiya" element={<VozvrashchatsyaKByvshemuHorarnayaAstrologiya />} />
           <Route path="/lyubovnyy-goroskop-na-vyhodnye-14-15-noyabrya-2026" element={<LyubovnyyGoroskopNaVyhodnye1415Noyabrya2026 />} />
