@@ -162,6 +162,7 @@ import FinansovyyGoroskopVtorayaPolovinaNoyabrya2026 from "./pages/blog-auto/Fin
 import ChisloSudbyPoDateRozhdeniyaRaschet from "./pages/blog-auto/ChisloSudbyPoDateRozhdeniyaRaschet";
 import ZnakiZodiakaNeozhidannoePredlozhenieNoyabr2026 from "./pages/blog-auto/ZnakiZodiakaNeozhidannoePredlozhenieNoyabr2026";
 import GoroskopNa16Noyabrya2026 from "./pages/blog-auto/GoroskopNa16Noyabrya2026";
+import LyubovnyyGoroskop1622Noyabrya2026 from "./pages/blog-auto/LyubovnyyGoroskop1622Noyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -182,6 +183,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/lyubovnyy-goroskop-16-22-noyabrya-2026" element={<LyubovnyyGoroskop1622Noyabrya2026 />} />
           <Route path="/goroskop-na-16-noyabrya-2026" element={<GoroskopNa16Noyabrya2026 />} />
           <Route path="/znaki-zodiaka-neozhidannoe-predlozhenie-noyabr-2026" element={<ZnakiZodiakaNeozhidannoePredlozhenieNoyabr2026 />} />
           <Route path="/chislo-sudby-po-date-rozhdeniya-raschet" element={<ChisloSudbyPoDateRozhdeniyaRaschet />} />
