@@ -9,6 +9,7 @@
 - Gate article-pin enqueue, claim and finalization with the database eligibility policy and mirror it in local editorial tests; queue eligible published records transactionally and finalize idempotent variants under the shared lease so excluded content, pacing and retries cannot produce unwanted or duplicate pins.
 - Build all pin text from curated or calculated briefs and allow AI only to select approved copy variants so generated imagery cannot introduce invented dated events or predictive claims.
 - Derive article-pin supporting text from complete published description sentences in the local editorial module, separately from article-cover prompts, so informative vertical pins do not inherit square-crop constraints or invented teaser claims.
+- Share Pinterest description URL sanitization between generation and RSS rendering so legacy descriptions are cleaned without changing pin identity or destination.
 - Keep blog keyword catalogs, educational source briefs and tomorrow sky calculations in the local blog editorial module; numerical horoscope facts must be rendered from calculations, not authored by AI.
 - Compose tomorrow horoscope prose deterministically from calculated aspects and declared solar whole-sign themes; free-form AI must not introduce dated sky events or unapproved interpretations.
 - Keep conversational daily forecast variants and aspect-to-action mappings in the local editorial module, selected by calculated solar houses and Moscow date, so style varies without inventing sky facts.

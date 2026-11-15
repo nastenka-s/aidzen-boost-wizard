@@ -1,5 +1,6 @@
 import { assertEquals, assertThrows } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import { ARTICLE_DAILY_LIMIT, ARTICLE_PIN_COUNT, articlePinContent, articlePinDays, articlePinDetails, articlePinEligible } from "./article-editorial.ts";
+import { cleanPinterestDescription } from "../_shared/pinterest-description.ts";
 const article = { article_url: "https://aidzen.ru/goroskop-na-noyabr-2026", dzen_url: "https://dzen.ru/a/test_verified_article", title: "Гороскоп на ноябрь 2026", description: "Гороскоп для всех знаков зодиака.", content_kind: "horoscope", publication_day: "2026-10-27" };
 Deno.test("daily forecasts cannot generate pins", () => {
   const daily = { ...article, title: "Гороскоп на завтра, 29 октября 2026", content_kind: "tomorrow_horoscope" };
@@ -40,4 +41,14 @@ Deno.test("pin details retain published claims rather than inventing teaser fact
 });
 Deno.test("pin details never truncate long source claims into misleading fragments", () => {
   assertEquals(articlePinDetails(`${"Слово ".repeat(100)}не гарантирует события. Краткое пояснение.`), ["Краткое пояснение."]);
+});
+Deno.test("article URLs stay in destinations but never in pin descriptions", () => {
+  for (const variant of [0, 1, 2, 3]) {
+    const pin = articlePinContent({ ...article, description: "Разбор пары. https://aidzen.ru/article www.dzen.ru/a/test aidzen.ru" }, variant);
+    assertEquals(/https?:\/\/|aidzen\.ru|dzen\.ru/.test(pin.pinterest_description), false);
+    assertEquals(pin.destination_url, "https://aidzen.ru/goroskop-na-noyabr-2026");
+  }
+});
+Deno.test("existing RSS descriptions lose web addresses without losing article teaser", () => {
+  assertEquals(cleanPinterestDescription("Разобрали подробнее в статье.\nhttps://aidzen.ru/article?utm_source=pinterest\nhttps://t.me/bot\n#астрология"), "Разобрали подробнее в статье.\n\n#астрология");
 });

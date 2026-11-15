@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { cleanPinterestDescription } from "../_shared/pinterest-description.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -42,7 +43,7 @@ Deno.serve(async () => {
       <link>${esc(uniqueLink)}</link>
       <guid isPermaLink="true">${esc(uniqueLink)}</guid>
       <pubDate>${pub}</pubDate>
-      <description>${esc(row.description)}</description>
+      <description>${esc(cleanPinterestDescription(row.description))}</description>
       <enclosure url="${esc(row.image_url)}" type="image/png" />
       <media:content url="${esc(row.image_url)}" medium="image" />
     </item>`;

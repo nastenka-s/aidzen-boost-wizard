@@ -1,3 +1,5 @@
+import { cleanPinterestDescription } from "../_shared/pinterest-description.ts";
+
 export const ARTICLE_PIN_COUNT = 4;
 export const ARTICLE_DAILY_LIMIT = 12;
 export type PinArticle = { article_url: string; dzen_url?: string | null; title: string; description: string; content_kind: string; publication_day: string };
@@ -22,7 +24,7 @@ export function articlePinDays(day: string): string[] {
   return Array.from({ length: ARTICLE_PIN_COUNT }, (_, offset) => new Date(Date.parse(`${day}T12:00:00Z`) + offset * 86400000).toISOString().slice(0, 10));
 }
 export function articlePinDetails(description: string): string[] {
-  const plain = description.replace(/<[^>]*>/g, " ").replace(/https?:\/\/\S+/g, "").replace(/\s+/g, " ").trim();
+  const plain = cleanPinterestDescription(description.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
   // Keep complete source sentences: cutting a claim midway can change its meaning.
   const sentences = plain.match(/[^.!?]+(?:[.!?]+|$)/gu) ?? [];
   const details: string[] = [];
@@ -47,9 +49,9 @@ export function articlePinContent(article: PinArticle, variant: number) {
   const title = article.title.trim();
   const invitations = ["Подробнее об этой теме рассказали в статье — переходите по ссылке.", "Разобрали эту тему подробнее в статье. Читайте полный материал по ссылке.", "Больше подробностей — в нашей статье на эту тему. Откройте её по ссылке.", "В статье рассказали подробнее: прочитайте полный разбор по ссылке."];
   // All topical claims come from the published article, never from an AI-authored forecast.
-  const summary = article.description.replace(/https?:\/\/\S+/g, "").trim();
+  const summary = cleanPinterestDescription(article.description);
   const details = articlePinDetails(article.description);
-  const description = `${summary ? `${summary}\n` : ""}${invitations[variant]}\n${url.href}\n#астрология #нумерология #эзотерика`.slice(0, 800);
+  const description = `${summary ? `${summary}\n` : ""}${invitations[variant]}\n#астрология #нумерология #эзотерика`.slice(0, 800);
   const category = /numerology|нумеролог/i.test(article.content_kind + title) ? "numerology" : "astrology";
   return {
     pinterest_title: title.slice(0, 100), pinterest_description: description,
