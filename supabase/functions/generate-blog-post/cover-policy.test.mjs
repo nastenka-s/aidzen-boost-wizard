@@ -23,3 +23,9 @@ test('All educational covers have a headline while approved inscriptions stay ex
   assert.equal(coverBrief('Дома в астрологии').headline, 'Дома в астрологии');
   assert.equal(coverBrief('Любовный гороскоп', 'ЛЮБОВНЫЙ ГОРОСКОП 14–15 НОЯБРЯ').headline, 'ЛЮБОВНЫЙ ГОРОСКОП 14–15 НОЯБРЯ');
 });
+test('Every cover prompt keeps the whole text inside the central square crop area', () => {
+  const square = /центральную квадратную область/;
+  assert.ok(square.test(coverPrompt('Гороскоп', 'tomorrow_horoscope', '2026-10-28')));
+  assert.ok(square.test(coverPrompt('Дома в астрологии', 'astrology_education')));
+  assert.ok(square.test(coverPrompt('Любовный гороскоп', 'astrology_education', undefined, 'ЛЮБОВНЫЙ ГОРОСКОП')));
+});
