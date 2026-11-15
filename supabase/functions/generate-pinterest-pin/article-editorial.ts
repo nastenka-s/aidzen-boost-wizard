@@ -21,6 +21,21 @@ const styles = [
 export function articlePinDays(day: string): string[] {
   return Array.from({ length: ARTICLE_PIN_COUNT }, (_, offset) => new Date(Date.parse(`${day}T12:00:00Z`) + offset * 86400000).toISOString().slice(0, 10));
 }
+export function articlePinDetails(description: string): string[] {
+  const plain = description.replace(/<[^>]*>/g, " ").replace(/https?:\/\/\S+/g, "").replace(/\s+/g, " ").trim();
+  // Keep complete source sentences: cutting a claim midway can change its meaning.
+  const sentences = plain.match(/[^.!?]+(?:[.!?]+|$)/gu) ?? [];
+  const details: string[] = [];
+  let length = 0;
+  for (const sentence of sentences) {
+    const detail = sentence.trim();
+    if (!detail || length + detail.length > 480) continue;
+    details.push(detail);
+    length += detail.length;
+    if (details.length === 3) break;
+  }
+  return details;
+}
 export function articlePinContent(article: PinArticle, variant: number) {
   if (!articlePinEligible(article)) throw new Error("Article is not eligible for Pinterest pins");
   if (!Number.isInteger(variant) || variant < 0 || variant >= ARTICLE_PIN_COUNT) throw new Error("Invalid article pin variant");
@@ -33,6 +48,7 @@ export function articlePinContent(article: PinArticle, variant: number) {
   const invitations = ["Подробнее об этой теме рассказали в статье — переходите по ссылке.", "Разобрали эту тему подробнее в статье. Читайте полный материал по ссылке.", "Больше подробностей — в нашей статье на эту тему. Откройте её по ссылке.", "В статье рассказали подробнее: прочитайте полный разбор по ссылке."];
   // All topical claims come from the published article, never from an AI-authored forecast.
   const summary = article.description.replace(/https?:\/\/\S+/g, "").trim();
+  const details = articlePinDetails(article.description);
   const description = `${summary ? `${summary}\n` : ""}${invitations[variant]}\n${url.href}\n#астрология #нумерология #эзотерика`.slice(0, 800);
   const category = /numerology|нумеролог/i.test(article.content_kind + title) ? "numerology" : "astrology";
   return {
@@ -40,7 +56,7 @@ export function articlePinContent(article: PinArticle, variant: number) {
     style: design.id === "mystic-watercolor" || design.id === "zodiac-collage" ? "light" : "dark",
     design_id: design.id, topic: `${title} ::ARTICLE::${url.pathname} ::VARIANT::${variant} ::STYLE::${design.id}`,
     destination_url: url.href,
-    astro_context: JSON.stringify({ article_url: article.article_url, title, variant }),
-    image_prompt: `Create a premium vertical Pinterest image, 1024x1536, 2:3. ${design.prompt} Topic: ${title}. The illustration must specifically reflect this published ${category} article, not a generic unrelated forecast. Render ONLY these exact Russian Cyrillic texts: ${JSON.stringify([title, "Подробнее — в статье", "Нейродзен · aidzen.ru"])}. Make the full title clearly readable, wrapping as needed, with generous safe margins. Do not invent facts, dates, numbers, planetary positions or predictions. Dates in the supplied title must remain exactly unchanged. Celestial elements are decorative, not a chart claiming real planetary positions. No other labels, celebrity faces, watermarks or logos.`,
+    astro_context: JSON.stringify({ article_url: article.article_url, title, variant, details }),
+    image_prompt: `Create a premium vertical Pinterest image, 1024x1536, 2:3. ${design.prompt} Topic: ${title}. The illustration must specifically reflect this published ${category} article, not a generic unrelated forecast. Render ONLY these exact Russian Cyrillic texts: ${JSON.stringify([title, ...details, "Подробнее — в статье", "Нейродзен · aidzen.ru"])}. This is an informative editorial pin, not a title-only article cover: display all supplied article details as prominent readable supporting text blocks beneath the headline, giving a useful preview and a reason to open the full article. Use the full vertical 2:3 composition; do NOT constrain text to a central square crop. Make the full title and every detail clearly readable on a phone, wrapping as needed, with generous outer safe margins and no overlaps. Headline first, supporting details next, invitation and brand last. Do not invent facts, dates, numbers, planetary positions or predictions. Dates in the supplied title must remain exactly unchanged. Celestial elements are decorative, not a chart claiming real planetary positions. No other labels, celebrity faces, watermarks or logos.`,
   };
 }

@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "https://deno.land/std@0.224.0/assert/mod.ts";
-import { ARTICLE_DAILY_LIMIT, ARTICLE_PIN_COUNT, articlePinContent, articlePinDays, articlePinEligible } from "./article-editorial.ts";
+import { ARTICLE_DAILY_LIMIT, ARTICLE_PIN_COUNT, articlePinContent, articlePinDays, articlePinDetails, articlePinEligible } from "./article-editorial.ts";
 const article = { article_url: "https://aidzen.ru/goroskop-na-noyabr-2026", dzen_url: "https://dzen.ru/a/test_verified_article", title: "Гороскоп на ноябрь 2026", description: "Гороскоп для всех знаков зодиака.", content_kind: "horoscope", publication_day: "2026-10-27" };
 Deno.test("daily forecasts cannot generate pins", () => {
   const daily = { ...article, title: "Гороскоп на завтра, 29 октября 2026", content_kind: "tomorrow_horoscope" };
@@ -29,4 +29,15 @@ Deno.test("no website fallback or channel destination for article pins", () => {
 Deno.test("reject external destinations and fifth variant", () => {
   assertThrows(() => articlePinContent({ ...article, article_url: "https://example.com/article" }, 0));
   assertThrows(() => articlePinContent(article, 4));
+});
+Deno.test("pin details retain published claims rather than inventing teaser facts", () => {
+  const description = "Число 11 в этой традиции не сокращают. Личный день рассчитывают по дате рождения. Результат не гарантирует события. https://aidzen.ru/article";
+  const expected = ["Число 11 в этой традиции не сокращают.", "Личный день рассчитывают по дате рождения.", "Результат не гарантирует события."];
+  assertEquals(articlePinDetails(description), expected);
+  for (const variant of [0, 1, 2, 3]) {
+    assertEquals(JSON.parse(articlePinContent({ ...article, description }, variant).astro_context).details, expected);
+  }
+});
+Deno.test("pin details never truncate long source claims into misleading fragments", () => {
+  assertEquals(articlePinDetails(`${"Слово ".repeat(100)}не гарантирует события. Краткое пояснение.`), ["Краткое пояснение."]);
 });
