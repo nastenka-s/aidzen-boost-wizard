@@ -167,6 +167,7 @@ import BlagopriyatnyeDniKonecNoyabrya2026 from "./pages/blog-auto/Blagopriyatnye
 import GoroskopNa17Noyabrya2026 from "./pages/blog-auto/GoroskopNa17Noyabrya2026";
 import ZnakiZodiakaPeremenyVtorayaPolovinaNoyabrya2026 from "./pages/blog-auto/ZnakiZodiakaPeremenyVtorayaPolovinaNoyabrya2026";
 import MenyatRabotuDoKonca2026UdachnyyPeriod from "./pages/blog-auto/MenyatRabotuDoKonca2026UdachnyyPeriod";
+import Rodilis1101928ChislaNumerologiya from "./pages/blog-auto/Rodilis1101928ChislaNumerologiya";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -187,6 +188,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/rodilis-1-10-19-28-chisla-numerologiya" element={<Rodilis1101928ChislaNumerologiya />} />
           <Route path="/menyat-rabotu-do-konca-2026-udachnyy-period" element={<MenyatRabotuDoKonca2026UdachnyyPeriod />} />
           <Route path="/znaki-zodiaka-peremeny-vtoraya-polovina-noyabrya-2026" element={<ZnakiZodiakaPeremenyVtorayaPolovinaNoyabrya2026 />} />
           <Route path="/goroskop-na-17-noyabrya-2026" element={<GoroskopNa17Noyabrya2026 />} />
