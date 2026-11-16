@@ -106,8 +106,13 @@ Deno.serve(async (req) => {
   const variant: number = claim.job.variant;
   try {
     if (!articlePinEligible(article)) throw new Error("Article is not eligible for Pinterest pins");
-    const copy = articlePinContent(article, variant);
-    let content = claim.job.image_payload ? { ...claim.job.image_payload, ...copy } : null;
+    const { data: published, error: articleError } = await supabase.from("blog_topics")
+      .select("dzen_html").eq("published_url", article.article_url).eq("status", "published").maybeSingle();
+    if (articleError) throw new Error("Cannot read published article details");
+    const manual = approvedArticles.find(item => item.published_url === article.article_url);
+    const copy = articlePinContent({ ...article, article_html: published?.dzen_html ?? manual?.dzen_html ?? "" }, variant);
+    // A saved retry must retain the copy that belongs to its already-generated image.
+    let content = claim.job.image_payload ?? null;
     if (!content) {
       if (!KIE_AI_API_KEY) throw new Error("Image provider is not configured");
       const imageUrl = await kieGenerateImage(copy.image_prompt);
