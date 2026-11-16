@@ -166,6 +166,7 @@ import LyubovnyyGoroskop1622Noyabrya2026 from "./pages/blog-auto/LyubovnyyGorosk
 import BlagopriyatnyeDniKonecNoyabrya2026 from "./pages/blog-auto/BlagopriyatnyeDniKonecNoyabrya2026";
 import GoroskopNa17Noyabrya2026 from "./pages/blog-auto/GoroskopNa17Noyabrya2026";
 import ZnakiZodiakaPeremenyVtorayaPolovinaNoyabrya2026 from "./pages/blog-auto/ZnakiZodiakaPeremenyVtorayaPolovinaNoyabrya2026";
+import MenyatRabotuDoKonca2026UdachnyyPeriod from "./pages/blog-auto/MenyatRabotuDoKonca2026UdachnyyPeriod";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -186,6 +187,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/menyat-rabotu-do-konca-2026-udachnyy-period" element={<MenyatRabotuDoKonca2026UdachnyyPeriod />} />
           <Route path="/znaki-zodiaka-peremeny-vtoraya-polovina-noyabrya-2026" element={<ZnakiZodiakaPeremenyVtorayaPolovinaNoyabrya2026 />} />
           <Route path="/goroskop-na-17-noyabrya-2026" element={<GoroskopNa17Noyabrya2026 />} />
           <Route path="/blagopriyatnye-dni-konec-noyabrya-2026" element={<BlagopriyatnyeDniKonecNoyabrya2026 />} />
