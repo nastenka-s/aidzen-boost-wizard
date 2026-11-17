@@ -91,10 +91,11 @@ Deno.serve(async (req) => {
   if (authError || !authorized) return response({ error: "Unauthorized scheduler" }, 401);
   // Manual approved articles live outside blog_topics; the unique article URL makes syncing safe.
   for (const article of approvedArticles) {
-    if (!articlePinEligible({ title: article.topic, content_kind: "horoscope" })) continue;
+    const kind = (article as { pin_kind?: string }).pin_kind ?? "horoscope";
+    if (!articlePinEligible({ title: article.topic, content_kind: kind })) continue;
     const { error } = await supabase.rpc("enqueue_pinterest_article", {
       p_url: article.published_url, p_title: article.topic, p_description: article.description,
-      p_kind: "horoscope", p_day: moscowDay(new Date(article.generated_at)),
+      p_kind: kind, p_day: moscowDay(new Date(article.generated_at)),
     });
     if (error) return response({ error: "Cannot sync approved article" }, 500);
   }
@@ -110,7 +111,7 @@ Deno.serve(async (req) => {
       .select("dzen_html").eq("published_url", article.article_url).eq("status", "published").maybeSingle();
     if (articleError) throw new Error("Cannot read published article details");
     const manual = approvedArticles.find(item => item.published_url === article.article_url);
-    const copy = articlePinContent({ ...article, article_html: published?.dzen_html ?? manual?.dzen_html ?? "" }, variant);
+    const copy = articlePinContent({ ...article, pin_design: (manual as { pin_design?: string } | undefined)?.pin_design, article_html: published?.dzen_html ?? manual?.dzen_html ?? "" }, variant);
     // A saved retry must retain the copy that belongs to its already-generated image.
     let content = claim.job.image_payload ?? null;
     if (!content) {

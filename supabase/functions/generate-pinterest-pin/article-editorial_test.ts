@@ -73,3 +73,8 @@ Deno.test("practical definitions and limitations precede generic opening promise
   const html = `<p>Этот метод позволяет заглянуть в особенности отношений и понять их потенциал.</p><p>${definition}</p><p>${caution}</p>`;
   assertEquals(articleBodyDetails(html, 0).slice(0, 2), [definition, caution]);
 });
+Deno.test("manual article pins use the requested wish-board design on every variant", () => {
+  const article = { article_url: "https://aidzen.ru/karta-zhelaniy-na-2027-god", title: "Карта желаний на 2027 год", description: "Карта желаний помогает сформулировать цели. Делайте её без спешки.", content_kind: "informational", publication_day: "2026-11-17", pin_design: "wish-board-collage" };
+  for (const v of [0, 1, 2, 3]) assertEquals(articlePinContent(article, v).design_id, "wish-board-collage");
+  assertEquals(articlePinContent({ ...article, pin_design: undefined }, 0).design_id === "wish-board-collage", false);
+});
