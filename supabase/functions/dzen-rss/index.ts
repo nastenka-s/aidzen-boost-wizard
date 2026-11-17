@@ -83,7 +83,7 @@ Deno.serve(async (_req) => {
     const rows = [...approvedArticles, ...(data ?? []).filter(row => !approvedArticles.some(article => article.slug_hint === row.slug_hint))]
       .sort((a,b) => Date.parse(b.generated_at ?? '') - Date.parse(a.generated_at ?? '')).slice(0,20);
     const items = rows.map((row) => {
-      const url = row.published_url || `${DOMAIN}/${row.slug_hint}`;
+      const url = ("dzen_link" in row && row.dzen_link) || row.published_url || `${DOMAIN}/${row.slug_hint}`;
       const pubDate = row.generated_at ? rfc822(new Date(row.generated_at)) : rfc822(new Date());
       const cover = row.cover_url || "";
       // Убираем дублирующую обложку из начала content:encoded — она уже отдается через <enclosure>

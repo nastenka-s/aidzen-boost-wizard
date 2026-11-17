@@ -1,4 +1,6 @@
 # Dzen article links
+- [x] Reissue corrected December horoscope in RSS with a separate feed URL; verified one replacement item with both links, unchanged website/Pinterest identity. Dzen reimport itself is unverified.
+- [ ] Delete original December article inside Dzen — no connected channel-management access; the user must remove it in Dzen.
 - [x] Preserve Telegram bot and website links inside RSS lists; five checks pass, deployed live December feed contains both clickable destinations. Already imported Dzen article updates remain outside our control.
 
 # Article cover provider

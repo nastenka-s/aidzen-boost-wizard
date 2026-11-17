@@ -20,6 +20,7 @@
 - Store generated blog covers in a service-write-only private bucket and expose only editorial image filenames through the read-only blog-cover-img endpoint before finalizing RSS; image availability must not depend on website deployment.
 - Apply RSS-only CTA changes at feed rendering in its tested footer policy, preserving stored article prose and website CTAs.
 - Keep approved manually published RSS articles in the feed's local editorial JSON, merged by slug with scheduled database articles, so manual publication does not consume daily slots or depend on provider calls.
+- Keep manual Dzen reissue URLs separate from website article identity so resending corrected RSS content does not duplicate website pages or Pinterest campaigns; RSS removal does not manage imported Dzen copies.
 - Share approved manual article metadata under functions/_shared for Dzen and Pinterest; wake article pin processing on enqueue and retain hourly timed retries only while campaign jobs remain pending.
 - Keep the user's dated content plan in generate-blog-post/content-plan.json with calculated range events and a blocking pre-publication gate in plan.ts; failing items go to needs_review instead of publishing unverified forecasts.
 - Scheduler-authenticated early publication may select only the next unfinished item of the current Moscow day under the existing lease and item identity, preserving normal scheduling and duplicate prevention.
