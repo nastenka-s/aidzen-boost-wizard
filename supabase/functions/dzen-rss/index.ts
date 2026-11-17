@@ -37,10 +37,10 @@ function sanitizeForDzen(html: string): string {
   // 3) Normalize <strong>/<em> to <b>/<i> (both supported, but b/i are canonical)
   out = out.replace(/<\/?strong>/gi, (m) => m.includes("/") ? "</b>" : "<b>");
   out = out.replace(/<\/?em>/gi, (m) => m.includes("/") ? "</i>" : "<i>");
-  // 4) Remove disallowed inline formatting inside <li> (Dzen ignores it anyway)
+  // 4) Remove inline formatting inside <li>, but preserve links and their destinations.
   out = out.replace(/<li>([\s\S]*?)<\/li>/gi, (_m, inner) => {
     const clean = inner
-      .replace(/<\/?(b|strong|i|em|u|s|a|span|code)[^>]*>/gi, "")
+      .replace(/<\/?(b|strong|i|em|u|s|span|code)[^>]*>/gi, "")
       .trim();
     return `<li>${clean}</li>`;
   });
