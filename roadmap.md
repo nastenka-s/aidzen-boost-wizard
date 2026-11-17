@@ -32,6 +32,7 @@
 - [x] Verified successful HTTP response, cleared pause, all twelve signs in live Dzen RSS and a working PNG cover titled November 3, 2026. Both custom-domain static feeds still lack the article; website publication/feed delivery remains external.
 
 # Pinterest updates
+- [x] Reduce global publication cap to five per Moscow day; pending pins and one daily variant per article retained. Live policy verified, SQL cap/schedule regression and sixteen editorial tests passed; generator deployed.
 - [x] Replace description-only pin teasers with complete published body details ranked for definitions, examples and limitations; rotate informative layouts and excerpts, retain saved image/copy pairs on retries. Twenty-one tests pass; generator deployed; real kie.ai preview visually inspected with four readable grounded notes and romantic photography. Existing published pins unchanged; Pinterest impression growth and the next scheduled RSS output are not yet verified.
 - [x] Remove URLs from new and existing feed descriptions while preserving pin destinations; twelve tests pass, generators deployed, live RSS has fifty items with zero description URLs and unchanged aidzen.ru destinations. Generation adds twelve pins daily with no pause or job errors.
 - [x] Check Pinterest feed delivery — live RSS and sampled images work; user confirmed pins are delivered and everything is okay. No further import investigation requested; Pinterest recommendation visibility was not independently verified.

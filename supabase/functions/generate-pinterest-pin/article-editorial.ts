@@ -1,7 +1,7 @@
 import { cleanPinterestDescription } from "../_shared/pinterest-description.ts";
 
 export const ARTICLE_PIN_COUNT = 4;
-export const ARTICLE_DAILY_LIMIT = 12;
+export const ARTICLE_DAILY_LIMIT = 5;
 export type PinArticle = { article_url: string; dzen_url?: string | null; title: string; description: string; article_html?: string; content_kind: string; publication_day: string; pin_design?: string };
 export function dzenArticleUrl(value: string | null | undefined): string {
   if (!value || !/^https:\/\/dzen\.ru\/a\/[A-Za-z0-9_-]+$/.test(value)) throw new Error("Verified Dzen article URL required");
