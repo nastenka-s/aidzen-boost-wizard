@@ -111,6 +111,7 @@ import UchebnikMatricaSovmestimost from "./pages/blog-auto/UchebnikMatricaSovmes
 import GoroskopNa20261028 from "./pages/blog-auto/GoroskopNa20261028";
 import Den11112026 from "./pages/blog-auto/Den11112026";
 import GoroskopNaDekabr2026 from "./pages/blog-auto/GoroskopNaDekabr2026";
+import GoroskopNaNedelyu2329Noyabrya2026 from "./pages/blog-auto/GoroskopNaNedelyu2329Noyabrya2026";
 import KartaZhelaniy2027 from "./pages/blog-auto/KartaZhelaniy2027";
 import GoroskopNaNedelyu9Noyabrya2026 from "./pages/blog-auto/GoroskopNaNedelyu9Noyabrya2026";
 import GoroskopNaNoyabr2026 from "./pages/blog-auto/GoroskopNaNoyabr2026";
@@ -190,6 +191,7 @@ const App = () => (
         <CookieConsent />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/goroskop-na-nedelyu-23-29-noyabrya-2026" element={<GoroskopNaNedelyu2329Noyabrya2026 />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/den-11-11-2026-numerologiya" element={<Den11112026 />} />
           <Route path="/karta-zhelaniy-na-2027-god" element={<KartaZhelaniy2027 />} />
