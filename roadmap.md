@@ -1,3 +1,6 @@
+# Weekly horoscope draft
+- [x] Deliver an unpublished November 23–29, 2026 horoscope in the successful November 9–15 style: 10,933 characters, twelve distinct signs, Moscow-timed full Moon and Mars ingress plus five calculated planetary aspects cross-checked with an external ephemeris, two working-format CTA links, no FAQ/sources. Used the next full week relative to November 18; the user can choose November 16–22 instead.
+
 # Dzen article links
 - [x] Reissue corrected December horoscope in RSS with a separate feed URL; verified one replacement item with both links, unchanged website/Pinterest identity. Dzen reimport itself is unverified.
 - [ ] Delete original December article inside Dzen — no connected channel-management access; the user must remove it in Dzen.
