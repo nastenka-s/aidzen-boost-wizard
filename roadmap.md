@@ -1,3 +1,6 @@
+# New Year outfit article
+- [x] Publish approved outfit article unchanged with kie.ai cover, blog page, sitemap and Dzen RSS; verified twelve signs, working cover, both CTA links, mobile without overflow and five RSS tests. Website publication requested separately; Dzen import timing is external.
+
 # Weekly horoscope draft
 - [x] Publish approved November 23–29 horoscope unchanged with dated kie.ai cover, website page and live Dzen RSS; four GPT pins generated, visually inspected and saved in existing pending jobs (18–21 November) with advice for three signs each. Five pins already published today: new jobs wait under the cap. Preview page, twelve signs, links, mobile and image delivery verified; website deployment requested; custom-domain RSS and Dzen import pending cache/import refresh.
 - [x] Deliver an unpublished November 23–29, 2026 horoscope in the successful November 9–15 style: 10,933 characters, twelve distinct signs, Moscow-timed full Moon and Mars ingress plus five calculated planetary aspects cross-checked with an external ephemeris, two working-format CTA links, no FAQ/sources. Used the next full week relative to November 18; the user can choose November 16–22 instead.
