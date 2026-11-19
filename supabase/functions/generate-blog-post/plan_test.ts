@@ -5,7 +5,7 @@ const FILL='слово '.repeat(1000);
 const ok=(over:any={})=>({title:'x',intro:['Короткий лид.'],sections:[{h2:'Раз',paragraphs:[FILL]},{h2:'Два',paragraphs:['Текст.']},{h2:'Три',paragraphs:['Текст.']},{h2:'Четыре',paragraphs:['Текст.']}],conclusion:'Персональную карту можно рассчитать в Нейродзене.',...over});
 const item=(id:string)=>PLAN.find(p=>p.id===id)!;
 Deno.test('Plan has 28 articles, four per Moscow day from 12 to 18 November at 07:00, 11:30, 16:00, 20:00',()=>{
- assertEquals(PLAN.length,28);
+ assertEquals(PLAN.length,30);
  for(let d=12;d<=18;d++)assertEquals(PLAN.filter(p=>p.at.startsWith(`2026-11-${d}`)).map(p=>p.at.slice(11,16)),['07:00','11:30','16:00','20:00']);
 });
 Deno.test('Daily horoscope titles target the next calendar day',()=>{for(const p of PLAN.filter(p=>p.mode==='daily'))assert(dailyTargetOk(p,new Date(p.at)));assert(!dailyTargetOk(item('p01'),new Date('2026-11-13T05:00:00+03:00')));});
@@ -37,3 +37,7 @@ Deno.test('Guarantees, links, uncalculated retrogrades and missing Нейрод�
  assertThrows(()=>validatePlanArticle(ok({conclusion:'Удачи.'}),item('p04'),{}),Error,'Нейродзен');
 });
 Deno.test('Calculated November 2026 events include the 24 November full moon in Gemini',()=>{const b=rangeEvents('2026-11-15','2026-11-30');assert(b.events.some(e=>e.date==='2026-11-24'&&e.text.startsWith('Полнолуние в знаке Близнецы')));assert(b.events.some(e=>e.text.startsWith('Солнце переходит в знак Стрелец')&&e.date==='2026-11-22'));});
+Deno.test('Cached 2027 range equals a fresh calculation',()=>{
+ const c=rangeEvents('2027-01-01','2027-12-31',true),f=rangeEvents('2027-01-01','2027-12-31',true,false);
+ assertEquals(JSON.stringify(c.events),JSON.stringify(f.events));assert(c.events.length>30);
+});

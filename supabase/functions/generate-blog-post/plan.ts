@@ -1,5 +1,6 @@
 import * as Astronomy from 'npm:astronomy-engine@2.1.19';
 import plan from './content-plan.json' with { type: 'json' };
+import rangeCache from './range-cache.json' with { type: 'json' };
 import { SIGNS, distance, longitude, moscowDay, tomorrow } from './editorial.ts';
 
 // Editorial content plan: publication slots, eclipse/station/ingress/aspect calculation and pre-publication checks.
@@ -19,7 +20,10 @@ function bisect(f:(d:Date)=>boolean,a:Date,b:Date){let lo=a.getTime(),hi=b.getTi
 const KIND:Record<string,string>={penumbral:' (полутеневое)',partial:' (частное)',total:' (полное)',annular:' (кольцеобразное)',hybrid:' (гибридное)'};
 export interface SkyEvent { date:string; time?:string; type:string; text:string; }
 // Only events found by calculation inside the requested range; nothing is taken from model memory.
-export function rangeEvents(from:string,to:string,slow=false){
+// Long slow ranges exceed the edge CPU budget, so they are precomputed with this same function (range-cache.json).
+export function rangeEvents(from:string,to:string,slow=false,useCache=true){
+ const cached=useCache?(rangeCache as Record<string,any>)[`${from}|${to}|${slow?'slow':'fast'}`]:undefined;
+ if(cached)return {...cached,calculatedAt:new Date().toISOString()};
  const a=start(from),b=end(to),events:SkyEvent[]=[];
  const push=(d:Date,type:string,text:string,timed=true)=>{const m=msk(d);if(d>=a&&d<=b)events.push({date:m.day,time:timed?m.time:undefined,type,text});};
  if(!slow)for(const [phase,name] of [[0,'Новолуние'],[180,'Полнолуние']] as [number,string][]){let t:any=a;for(;;){const r=Astronomy.SearchMoonPhase(phase,t,40);if(!r||r.date>b)break;push(r.date,'phase',`${name} в знаке ${signOf(longitude(B.Moon,r.date))}`);t=new Date(r.date.getTime()+86400000);}}
