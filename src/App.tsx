@@ -182,6 +182,7 @@ import KogdaNachinatNovyeOtnosheniya2027 from "./pages/blog-auto/KogdaNachinatNo
 import GoroskopNaVyhodnye2122Noyabrya2026 from "./pages/blog-auto/GoroskopNaVyhodnye2122Noyabrya2026";
 import GoroskopNa21Noyabrya2026 from "./pages/blog-auto/GoroskopNa21Noyabrya2026";
 import LyubovnyyGoroskop2122Noyabrya2026 from "./pages/blog-auto/LyubovnyyGoroskop2122Noyabrya2026";
+import VeneraI7DomOdinTipLyudey from "./pages/blog-auto/VeneraI7DomOdinTipLyudey";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -206,6 +207,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/venera-i-7-dom-odin-tip-lyudey" element={<VeneraI7DomOdinTipLyudey />} />
           <Route path="/lyubovnyy-goroskop-21-22-noyabrya-2026" element={<LyubovnyyGoroskop2122Noyabrya2026 />} />
           <Route path="/goroskop-na-21-noyabrya-2026" element={<GoroskopNa21Noyabrya2026 />} />
           <Route path="/goroskop-na-vyhodnye-21-22-noyabrya-2026" element={<GoroskopNaVyhodnye2122Noyabrya2026 />} />
