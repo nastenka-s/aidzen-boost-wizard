@@ -1,3 +1,7 @@
+# Content plan 20–26 November
+- [x] Schedule 35 articles from the new plan (five per Moscow day; today 12:30–16:30, then 07:00/09:00/12:00/15:00/18:00) with calculated briefs, gates and pins for non-daily articles; 12 plan tests pass, generator deployed.
+- [ ] Confirm first live run today at 12:30 Moscow — happens after this turn.
+
 # New Year outfit article
 - [x] Publish approved outfit article unchanged with kie.ai cover, blog page, sitemap and Dzen RSS; verified twelve signs, working cover, both CTA links, mobile without overflow and five RSS tests. Website publication requested separately; Dzen import timing is external.
 
@@ -24,7 +28,7 @@
 - [x] Publish 28 planned articles at 07:00/11:30/16:00/20:00 Moscow with calculated sky data, pre-publication checks and CTA to https://aidzen.ru; daily three-article schedule replaced.
 - [ ] Confirm the first live run on 12 November 07:00 Moscow — happens after this turn.
 - [ ] Dzen links for new articles still need manual fetch so their pins can go out.
-- [ ] Content plan after 18 November — waits on the next plan from the user.
+- [x] Content plan after 18 November — received 20–26 November plan.
 
 # November 9–15 weekly horoscope
 - [x] Publish approved v2 text without FAQ, with a dated cover, blog navigation, sitemap and Dzen RSS. Preview navigation, exact text, twelve signs, CTA and mobile layout verified; live/static RSS contain the full article and working JPEG. Website publication requested separately; custom-domain rollout remains external.
