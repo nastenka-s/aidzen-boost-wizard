@@ -186,6 +186,7 @@ import VeneraI7DomOdinTipLyudey from "./pages/blog-auto/VeneraI7DomOdinTipLyudey
 import KareraIDengiVNatalnoyKarte from "./pages/blog-auto/KareraIDengiVNatalnoyKarte";
 import DenezhnyyGoroskop2329Noyabrya2026 from "./pages/blog-auto/DenezhnyyGoroskop2329Noyabrya2026";
 import GoroskopNa22Noyabrya2026 from "./pages/blog-auto/GoroskopNa22Noyabrya2026";
+import SovmestimostPoLune from "./pages/blog-auto/SovmestimostPoLune";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -210,6 +211,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/sovmestimost-po-lune" element={<SovmestimostPoLune />} />
           <Route path="/goroskop-na-22-noyabrya-2026" element={<GoroskopNa22Noyabrya2026 />} />
           <Route path="/denezhnyy-goroskop-23-29-noyabrya-2026" element={<DenezhnyyGoroskop2329Noyabrya2026 />} />
           <Route path="/karera-i-dengi-v-natalnoy-karte" element={<KareraIDengiVNatalnoyKarte />} />
