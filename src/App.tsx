@@ -188,6 +188,7 @@ import DenezhnyyGoroskop2329Noyabrya2026 from "./pages/blog-auto/DenezhnyyGorosk
 import GoroskopNa22Noyabrya2026 from "./pages/blog-auto/GoroskopNa22Noyabrya2026";
 import SovmestimostPoLune from "./pages/blog-auto/SovmestimostPoLune";
 import SolnceLunaAscendent from "./pages/blog-auto/SolnceLunaAscendent";
+import GoroskopNedelya2329NoyabryaRabotaDengiOtnosheniya from "./pages/blog-auto/GoroskopNedelya2329NoyabryaRabotaDengiOtnosheniya";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -212,6 +213,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/goroskop-nedelya-23-29-noyabrya-rabota-dengi-otnosheniya" element={<GoroskopNedelya2329NoyabryaRabotaDengiOtnosheniya />} />
           <Route path="/solnce-luna-ascendent" element={<SolnceLunaAscendent />} />
           <Route path="/sovmestimost-po-lune" element={<SovmestimostPoLune />} />
           <Route path="/goroskop-na-22-noyabrya-2026" element={<GoroskopNa22Noyabrya2026 />} />
