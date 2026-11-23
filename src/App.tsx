@@ -194,6 +194,7 @@ import LyubovnyyGoroskop2329Noyabrya2026 from "./pages/blog-auto/LyubovnyyGorosk
 import VeneraVNatalnoyKarteSimpatiya from "./pages/blog-auto/VeneraVNatalnoyKarteSimpatiya";
 import NatalnayaKartaBezVremeniRozhdeniya from "./pages/blog-auto/NatalnayaKartaBezVremeniRozhdeniya";
 import GoroskopKarery2329Noyabrya2026 from "./pages/blog-auto/GoroskopKarery2329Noyabrya2026";
+import GoroskopNa24Noyabrya2026 from "./pages/blog-auto/GoroskopNa24Noyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -218,6 +219,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/goroskop-na-24-noyabrya-2026" element={<GoroskopNa24Noyabrya2026 />} />
           <Route path="/goroskop-karery-23-29-noyabrya-2026" element={<GoroskopKarery2329Noyabrya2026 />} />
           <Route path="/natalnaya-karta-bez-vremeni-rozhdeniya" element={<NatalnayaKartaBezVremeniRozhdeniya />} />
           <Route path="/venera-v-natalnoy-karte-simpatiya" element={<VeneraVNatalnoyKarteSimpatiya />} />
