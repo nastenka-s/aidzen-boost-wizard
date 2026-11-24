@@ -198,6 +198,7 @@ import GoroskopNa24Noyabrya2026 from "./pages/blog-auto/GoroskopNa24Noyabrya2026
 import LunaIMarsPosleSsory from "./pages/blog-auto/LunaIMarsPosleSsory";
 import GoroskopNa25Noyabrya2026 from "./pages/blog-auto/GoroskopNa25Noyabrya2026";
 import PartnerDlyaSeryeznyhOtnosheniy7Dom from "./pages/blog-auto/PartnerDlyaSeryeznyhOtnosheniy7Dom";
+import KakChitatLunnyyKalendar from "./pages/blog-auto/KakChitatLunnyyKalendar";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -222,6 +223,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/kak-chitat-lunnyy-kalendar" element={<KakChitatLunnyyKalendar />} />
           <Route path="/partner-dlya-seryeznyh-otnosheniy-7-dom" element={<PartnerDlyaSeryeznyhOtnosheniy7Dom />} />
           <Route path="/goroskop-na-25-noyabrya-2026" element={<GoroskopNa25Noyabrya2026 />} />
           <Route path="/luna-i-mars-posle-ssory" element={<LunaIMarsPosleSsory />} />
