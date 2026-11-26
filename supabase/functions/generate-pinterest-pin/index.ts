@@ -1,75 +1,29 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { moscowDay } from "./editorial.ts";
-import { articlePinContent, articlePinEligible, type PinArticle } from "./article-editorial.ts";
+import { articlePinDestination, articlePinEligible, type PinArticle } from "./article-editorial.ts";
+import { extractPinSpec, GatewayError, gatewayPropose } from "./pin-extract.ts";
+import { articlePlainText, pinDescription, pinPalette } from "./pin-spec.ts";
+import { renderPinPng } from "./pin-render.ts";
 import approvedArticles from "../_shared/approved-articles.json" with { type: "json" };
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
-const KIE_AI_API_KEY = (Deno.env.get("KIE_AI_API_KEY") ?? "").trim();
-class ProviderError extends Error {
-  constructor(public status: number, message: string) { super(message); }
-}
+const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const response = (data: unknown, status = 200) => new Response(JSON.stringify(data), {
   status, headers: { ...corsHeaders, "Content-Type": "application/json" },
 });
-
-
-// =============== kie.ai GPT-Image-2 ===============
-async function kieGenerateImage(prompt: string): Promise<string> {
-  const create = await fetch("https://api.kie.ai/api/v1/jobs/createTask", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${KIE_AI_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-image-2-text-to-image",
-      input: {
-        prompt,
-        size: "2:3",
-        nVariants: 1,
-        quality: "high",
-      },
-    }),
-  });
-  const ctext = await create.text();
-  if (!create.ok) throw new ProviderError(create.status, `Image provider ${create.status}`);
-  const cjson = JSON.parse(ctext);
-  const taskId = cjson?.data?.taskId ?? cjson?.data?.task_id ?? cjson?.taskId;
-  if (!taskId) throw new Error(`kie.ai no taskId: ${ctext}`);
-
-  // Poll up to ~5 min
-  for (let i = 0; i < 60; i++) {
-    await new Promise((r) => setTimeout(r, 5000));
-    const info = await fetch(`https://api.kie.ai/api/v1/jobs/recordInfo?taskId=${taskId}`, {
-      headers: { Authorization: `Bearer ${KIE_AI_API_KEY}` },
-    });
-    const itext = await info.text();
-    if (!info.ok) {
-      console.warn(`recordInfo ${info.status}: ${itext}`);
-      continue;
-    }
-    const ij = JSON.parse(itext);
-    const state: string = ij?.data?.state ?? ij?.data?.status ?? "";
-    if (state === "success" || state === "succeeded" || state === "completed") {
-      const resultJson = ij?.data?.resultJson ?? ij?.data?.response ?? ij?.data;
-      const parsedResult = typeof resultJson === "string" ? JSON.parse(resultJson) : resultJson;
-      const urls: string[] =
-        parsedResult?.resultUrls ??
-        parsedResult?.result_urls ??
-        parsedResult?.images ??
-        parsedResult?.output ??
-        [];
-      const url = Array.isArray(urls) ? urls[0] : urls;
-      if (typeof url === "string" && url.startsWith("http")) return url;
-      throw new Error(`kie.ai success but no url: ${itext}`);
-    }
-    if (state === "fail" || state === "failed" || state === "error") {
-      throw new ProviderError(403, "Image provider denied or refused the task");
-    }
-  }
-  throw new Error("kie.ai polling timeout");
+const WASM_PATH = "assets/resvg-2.6.2.wasm";
+// The renderer binary is kept in our own private storage; the public CDN only seeds it once.
+// deno-lint-ignore no-explicit-any
+async function loadWasm(supabase: any): Promise<ArrayBuffer> {
+  const saved = await supabase.storage.from("pinterest").download(WASM_PATH);
+  if (saved.data) return await saved.data.arrayBuffer();
+  const res = await fetch("https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm");
+  if (!res.ok) throw new Error("Pin renderer unavailable");
+  const bytes = await res.arrayBuffer();
+  await supabase.storage.from("pinterest").upload(WASM_PATH, new Uint8Array(bytes), { contentType: "application/wasm", upsert: true });
+  return bytes;
 }
 
 // One item per invocation, protected by a database lease and a hard daily cap.
@@ -111,19 +65,33 @@ Deno.serve(async (req) => {
       .select("dzen_html").eq("published_url", article.article_url).eq("status", "published").maybeSingle();
     if (articleError) throw new Error("Cannot read published article details");
     const manual = approvedArticles.find(item => item.published_url === article.article_url);
-    const copy = articlePinContent({ ...article, pin_design: (manual as { pin_design?: string } | undefined)?.pin_design, article_html: published?.dzen_html ?? manual?.dzen_html ?? "" }, variant);
-    // A saved retry must retain the copy that belongs to its already-generated image.
+    const destination = articlePinDestination(article, variant);
+    // A saved retry keeps the image and the copy that belong together.
     let content = claim.job.image_payload ?? null;
     if (!content) {
-      if (!KIE_AI_API_KEY) throw new Error("Image provider is not configured");
-      const imageUrl = await kieGenerateImage(copy.image_prompt);
-      const imgRes = await fetch(imageUrl);
-      if (!imgRes.ok) throw new Error(`download image ${imgRes.status}`);
-      const bytes = new Uint8Array(await imgRes.arrayBuffer());
+      if (!LOVABLE_API_KEY) throw new Error("AI gateway is not configured");
+      const articleText = articlePlainText(published?.dzen_html ?? manual?.dzen_html ?? "");
+      if (articleText.length < 600) throw new Error("Published article text is missing");
+      let previous: { title: string; layout: string } | undefined;
+      if (variant > 0) {
+        const { data: earlier } = await supabase.from("pinterest_pins").select("astro_context").eq("article_url", article.article_url).lt("article_variant", variant).order("article_variant", { ascending: false }).limit(1).maybeSingle();
+        try { const spec = JSON.parse(earlier?.astro_context ?? "{}").spec; if (spec?.title) previous = { title: spec.title, layout: spec.layout }; } catch { /* legacy pin without a spec */ }
+      }
+      const spec = await extractPinSpec({ title: article.title, articleText, variant, previous, propose: gatewayPropose(LOVABLE_API_KEY) });
+      const bytes = await renderPinPng(spec, () => loadWasm(supabase));
+      const palette = pinPalette(spec);
       const path = `articles/${crypto.randomUUID()}.png`;
       const { error: upErr } = await supabase.storage.from("pinterest").upload(path, bytes, { contentType: "image/png", upsert: false });
       if (upErr) throw upErr;
-      content = { ...copy, image_url: `${SUPABASE_URL}/functions/v1/pinterest-img/${path}` };
+      content = {
+        pinterest_title: spec.title.slice(0, 100), pinterest_description: pinDescription(spec, variant, article.content_kind),
+        style: palette.dark ? "dark" : "light", destination_url: destination,
+        topic: `${article.title} ::ARTICLE::${new URL(destination).pathname} ::VARIANT::${variant} ::LAYOUT::${spec.layout}`,
+        // The editable fields the image was drawn from.
+        astro_context: JSON.stringify({ article_url: article.article_url, title: article.title, variant, spec }),
+        image_prompt: `programmatic:${spec.layout}:${palette.id}`,
+        image_url: `${SUPABASE_URL}/functions/v1/pinterest-img/${path}`,
+      };
       const { error: savedError } = await supabase.from("pinterest_article_jobs").update({ image_payload: content }).eq("article_url", article.article_url).eq("variant", variant).eq("status", "pending");
       if (savedError) throw savedError;
     }
@@ -137,14 +105,17 @@ Deno.serve(async (req) => {
     return response({ ok: true, variant, article_url: article.article_url, pin_id: pinId });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
-    const status = e instanceof ProviderError ? e.status : 500;
+    const status = e instanceof GatewayError ? e.status : 500;
     console.error("generate-pinterest-pin:", msg);
-    if ([402, 403, 429].includes(status)) {
+    if (status === 402 || status === 429) {
+      // Only an account-wide gateway limit pauses the queue, and it always resumes by itself.
       await supabase.from("pinterest_generation_state").update({
-        paused_reason: msg, resume_after: status === 429 ? new Date(Date.now()+6*3600000).toISOString() : null,
+        paused_reason: msg, resume_after: new Date(Date.now() + (status === 429 ? 1 : 6) * 3600000).toISOString(),
       }).eq("id", "daily").eq("lease_token", token);
+    } else {
+      // One article that cannot produce a valid pin must not block the others.
+      await supabase.rpc("fail_pinterest_article", { p_url: article.article_url, p_variant: variant, p_error: msg.slice(0, 1000) });
     }
-    await supabase.from("pinterest_article_jobs").update({ last_error: msg.slice(0,1000) }).eq("article_url", article.article_url).eq("variant", variant);
     return response({ ok: false, error: msg, variant }, status);
   } finally {
     const { error } = await supabase.from("pinterest_generation_state").update({ lease_token: null, lease_until: null }).eq("id", "daily").eq("lease_token", token);

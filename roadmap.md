@@ -1,3 +1,10 @@
+# Week 30 Nov – 6 Dec horoscope and pin redesign
+- [x] Deliver unpublished weekly horoscope draft for 30 November – 6 December 2026 from calculated Moscow-time events.
+- [x] Pins stopped on 18 November: one refused image task paused the queue with no resume time. Pause cleared; a failing pin is now retried three times and retired alone, only AI gateway limits pause with automatic resume (SQL regression passed).
+- [x] Rebuild pins per the uploaded brief: five layouts (elements, table, calendar, grid, matrix/chart scheme), text typeset programmatically at 1000×1500, palettes by topic, checks for signs, arithmetic, article dates, time zone, CTA and fit; 25 tests pass; deployed; five live pins published today and two inspected. No editor page (confirmed). Palmistry diagram and generated illustrations are not built.
+- [x] Two pins per article, one per day (confirmed); pending third/fourth pins removed, 65 remain queued, newest articles first.
+- [ ] Compare impressions, saves and clicks per 1,000 impressions for the first 14 days — needs Pinterest statistics from the user.
+
 # Content plan 20–26 November
 - [x] Schedule 35 articles from the new plan (five per Moscow day; today 12:30–16:30, then 07:00/09:00/12:00/15:00/18:00) with calculated briefs, gates and pins for non-daily articles; 12 plan tests pass, generator deployed.
 - [ ] Confirm first live run today at 12:30 Moscow — happens after this turn.

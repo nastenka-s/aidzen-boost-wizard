@@ -264,6 +264,7 @@ export type Database = {
       pinterest_article_jobs: {
         Row: {
           article_url: string
+          attempts: number
           due_day: string
           image_payload: Json | null
           last_error: string | null
@@ -274,6 +275,7 @@ export type Database = {
         }
         Insert: {
           article_url: string
+          attempts?: number
           due_day: string
           image_payload?: Json | null
           last_error?: string | null
@@ -284,6 +286,7 @@ export type Database = {
         }
         Update: {
           article_url?: string
+          attempts?: number
           due_day?: string
           image_payload?: Json | null
           last_error?: string | null
@@ -689,6 +692,10 @@ export type Database = {
           p_title: string
           p_url: string
         }
+        Returns: undefined
+      }
+      fail_pinterest_article: {
+        Args: { p_error: string; p_url: string; p_variant: number }
         Returns: undefined
       }
       finish_blog_daily: {
