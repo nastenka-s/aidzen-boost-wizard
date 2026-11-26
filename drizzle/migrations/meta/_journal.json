@@ -120,6 +120,13 @@
       "when": 1795697670872,
       "tag": "0016_pinterest_two_infographic_pins",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1795697972754,
+      "tag": "0017_pinterest_daily_limit_four",
+      "breakpoints": true
     }
   ]
 }

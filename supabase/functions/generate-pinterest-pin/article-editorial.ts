@@ -1,5 +1,5 @@
 export const ARTICLE_PIN_COUNT = 2;
-export const ARTICLE_DAILY_LIMIT = 5;
+export const ARTICLE_DAILY_LIMIT = 4;
 export type PinArticle = { article_url: string; dzen_url?: string | null; title: string; description: string; content_kind: string; publication_day: string };
 export function articlePinEligible(article: Pick<PinArticle, "content_kind" | "title">): boolean {
   const kind = article.content_kind.toLowerCase();

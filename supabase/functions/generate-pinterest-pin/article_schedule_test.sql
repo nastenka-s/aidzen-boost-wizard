@@ -2,7 +2,7 @@ BEGIN;
 DO $$
 DECLARE days date[]; n integer;
 BEGIN
- IF public.pinterest_daily_limit()<>5 THEN RAISE EXCEPTION 'Expected five daily pins'; END IF;
+ IF public.pinterest_daily_limit()<>4 THEN RAISE EXCEPTION 'Expected four daily pins'; END IF;
  IF has_table_privilege('anon','public.pinterest_article_jobs','SELECT') OR has_function_privilege('authenticated','public.claim_pinterest_article()','EXECUTE') OR has_function_privilege('anon','public.fail_pinterest_article(text,integer,text)','EXECUTE') THEN RAISE EXCEPTION 'Queue must be service-only'; END IF;
  PERFORM public.enqueue_pinterest_article('https://aidzen.ru/pin-schedule-regression','Regression','','astrology','2099-10-30');
  PERFORM public.enqueue_pinterest_article('https://aidzen.ru/pin-schedule-regression','Regression','','astrology','2099-10-30');

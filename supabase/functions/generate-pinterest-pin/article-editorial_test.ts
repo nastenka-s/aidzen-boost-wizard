@@ -18,7 +18,7 @@ Deno.test("two article pins: publication day and the next day", () => {
   assertEquals(ARTICLE_PIN_COUNT, 2);
   assertEquals(articlePinDays("2026-10-30"), ["2026-10-30", "2026-10-31"]);
 });
-Deno.test("approved global daily cap is five pins", () => assertEquals(ARTICLE_DAILY_LIMIT, 5));
+Deno.test("approved global daily cap is four pins", () => assertEquals(ARTICLE_DAILY_LIMIT, 4));
 Deno.test("both pins open the article; external destinations and a third variant are rejected", () => {
   assertEquals([0, 1].map(v => articlePinDestination(article, v)), Array(2).fill(article.article_url));
   assertThrows(() => articlePinDestination({ ...article, article_url: "https://example.com/article" }, 0));
