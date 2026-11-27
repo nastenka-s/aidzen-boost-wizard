@@ -7,7 +7,7 @@ import { SIGNS, distance, longitude, moscowDay, tomorrow } from './editorial.ts'
 export const PLAN = plan as PlanItem[];
 export const PLAN_CTA = 'https://aidzen.ru';
 export const EPHEMERIS = 'Astronomy Engine 2.1.19 (геоцентрический тропический зодиак, Europe/Moscow)';
-export interface PlanItem { id:string; at:string; rubric:string; title:string; slug:string; keyword:string; related:string; mode:'daily'|'events'|'evergreen'; target?:string; range?:[string,string]; signs12?:boolean; signs?:string[]; long?:boolean; slow?:boolean; facts?:string[]; selection?:string; coverText?:string; pinKind:string; }
+export interface PlanItem { id:string; at:string; rubric:string; title:string; slug:string; keyword:string; related:string; mode:'daily'|'events'|'evergreen'; target?:string; range?:[string,string]; signs12?:boolean; signs?:string[]; long?:boolean; slow?:boolean; facts?:string[]; selection?:string; coverText?:string; retryAt?:string; pinKind:string; }
 const MONTHS=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 const B=Astronomy.Body;
 const BODIES:[Astronomy.Body,string][]=[[B.Sun,'Солнце'],[B.Mercury,'Меркурий'],[B.Venus,'Венера'],[B.Mars,'Марс'],[B.Jupiter,'Юпитер'],[B.Saturn,'Сатурн'],[B.Uranus,'Уран'],[B.Neptune,'Нептун'],[B.Pluto,'Плутон']];
@@ -54,9 +54,11 @@ export function rangeEvents(from:string,to:string,slow=false,useCache=true){
  return {from,to,timezone:'Europe/Moscow',source:EPHEMERIS,calculatedAt:new Date().toISOString(),events,retrograde:retro,positionsAtStart:positions(a),positionsAtMid:positions(mid),solarHouses,moonDays};
 }
 
+// A blocked item is released again by giving it a new slot in retryAt; its original slot stays as planned.
+export const slotAt=(p:PlanItem)=>p.retryAt??p.at;
 export function dueItem(now:Date,done:Set<string>,publishNext=false){
  const today=moscowDay(now);
- return PLAN.find(p=>!done.has(p.id)&&(publishNext||new Date(p.at)<=now)&&moscowDay(new Date(p.at))===today);
+ return PLAN.find(p=>!done.has(p.id)&&(publishNext||new Date(slotAt(p))<=now)&&moscowDay(new Date(slotAt(p)))===today);
 }
 export function plainText(a:any){return [a.title,...a.intro,...a.sections.flatMap((s:any)=>[s.h2,...s.paragraphs,...(s.bulletList??[]),s.example??'',s.warning??'']),a.conclusion].join(' ');}
 export const charLimit=(p:PlanItem)=>p.long||p.signs12?11000:7000;
@@ -69,14 +71,9 @@ export function validatePlanArticle(a:any,p:PlanItem,brief:any){
  const want=p.signs12?SIGNS:p.signs;
  if(want){const h=a.sections.map((s:any)=>s.h2);if(!want.every(s=>h.some((x:string)=>x.startsWith(s))))throw new Error('Promised signs are missing');}
  else if(a.sections.length<4||a.sections.length>7)throw new Error('Expected 4–7 sections');
- // Slight overshoot is fixed by dropping whole closing paragraphs of the longest sections, never by cutting sentences.
- if(plainText(a).length<=charLimit(p)*1.15)while(plainText(a).length>charLimit(p)){
-  const s=a.sections.filter((x:any)=>x.paragraphs.length>1).sort((x:any,y:any)=>y.paragraphs.join(' ').length-x.paragraphs.join(' ').length)[0];
-  if(!s)break;s.paragraphs.pop();
- }
+ // charLimit is only the length the writer aims for: a longer article is published as written.
  const text=plainText(a);
  if(text.length<charMin(p))throw new Error(`Too short: ${text.length} chars`);
- if(text.length>charLimit(p))throw new Error(`Too long: ${text.length} chars`);
  if(/https?:\/\/|www\./i.test(text))throw new Error('Links are added by the program only');
  if(/гарантир|обязательно (?:встретите|случится|получите)|неизбежно|точно (?:будет|случится)/i.test(text))throw new Error('Guaranteed-outcome claim');
  if(/источник|методик|библиограф/i.test(a.sections.map((s:any)=>s.h2).join(' ')))throw new Error('Sources section is not published');

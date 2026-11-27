@@ -24,4 +24,5 @@
 - Share approved manual article metadata under functions/_shared for Dzen and Pinterest; wake article pin processing on enqueue and retain hourly timed retries only while campaign jobs remain pending.
 - Keep the user's dated content plan in generate-blog-post/content-plan.json with calculated range events and a blocking pre-publication gate in plan.ts; failing items go to needs_review instead of publishing unverified forecasts.
 - Scheduler-authenticated early publication may select only the next unfinished item of the current Moscow day under the existing lease and item identity, preserving normal scheduling and duplicate prevention.
-- The plan gate fixes slight article length overshoot by dropping whole closing paragraphs of the longest sections, never by cutting sentences or loosening limits, so near-limit drafts publish instead of landing in needs_review.
+- The plan gate enforces a minimum article length only; the upper figure is a writing target, because the user accepts longer articles and blocking them left planned slots unpublished.
+- A blocked plan item is released again through retryAt (a new slot) plus a reset of its row, never by editing its original slot, so plan-shape tests and item identity stay intact.

@@ -15,7 +15,7 @@ Deno.test('Only items scheduled for the current Moscow day and already due are c
  assertEquals(dueItem(new Date('2026-11-12T12:00:00+03:00'),new Set(['p01']))?.id,'p02');
  assertEquals(dueItem(new Date('2026-11-13T07:30:00+03:00'),new Set())?.id,'p05');
 });
-Deno.test('Regular articles are 4000–7000 chars, 12-sign and long forecasts 6000–11000',()=>{assertEquals([charMin(item('p04')),charLimit(item('p04'))],[4000,7000]);assertEquals([charMin(item('p09')),charLimit(item('p09'))],[6000,11000]);assertThrows(()=>validatePlanArticle(ok({intro:['а'.repeat(7001)]}),item('p04'),{}),Error,'Too long');assertThrows(()=>validatePlanArticle(ok({sections:[1,2,3,4].map(h2=>({h2:String(h2),paragraphs:['Коротко.']}))}),item('p04'),{}),Error,'Too short');});
+Deno.test('Regular articles are 4000–7000 chars, 12-sign and long forecasts 6000–11000',()=>{assertEquals([charMin(item('p04')),charLimit(item('p04'))],[4000,7000]);assertEquals([charMin(item('p09')),charLimit(item('p09'))],[6000,11000]);assertThrows(()=>validatePlanArticle(ok({sections:[1,2,3,4].map(h2=>({h2:String(h2),paragraphs:['Коротко.']}))}),item('p04'),{}),Error,'Too short');});
 Deno.test('Requested early publication selects only the next unfinished item today',()=>{
  const now=new Date('2026-11-13T10:00:00+03:00');
  const done=new Set(['p05']);
@@ -36,7 +36,7 @@ Deno.test('Guarantees, links, uncalculated retrogrades and missing Нейрод�
  assertThrows(()=>validatePlanArticle(ok({intro:['Меркурий ретроградный.']}),item('p04'),{}),Error,'retrograde');
  assertThrows(()=>validatePlanArticle(ok({conclusion:'Удачи.'}),item('p04'),{}),Error,'Нейродзен');
 });
-Deno.test('Calculated November 2026 events include the 24 November full moon in Gemini',()=>{const b=rangeEvents('2026-11-15','2026-11-30');assert(b.events.some(e=>e.date==='2026-11-24'&&e.text.startsWith('Полнолуние в знаке Близнецы')));assert(b.events.some(e=>e.text.startsWith('Солнце переходит в знак Стрелец')&&e.date==='2026-11-22'));});
+Deno.test('Calculated November 2026 events include the 24 November full moon in Gemini',()=>{const b=rangeEvents('2026-11-15','2026-11-30');assert(b.events.some((e:any)=>e.date==='2026-11-24'&&e.text.startsWith('Полнолуние в знаке Близнецы')));assert(b.events.some((e:any)=>e.text.startsWith('Солнце переходит в знак Стрелец')&&e.date==='2026-11-22'));});
 Deno.test('Cached 2027 range equals a fresh calculation',()=>{
  const c=rangeEvents('2027-01-01','2027-12-31',true),f=rangeEvents('2027-01-01','2027-12-31',true,false);
  assertEquals(JSON.stringify(c.events),JSON.stringify(f.events));assert(c.events.length>30);
@@ -52,10 +52,15 @@ Deno.test('Plan 27 November – 3 December: five articles per Moscow day, horosc
  for(const p of PLAN.filter(p=>p.mode==='evergreen'&&Number(p.id.slice(1))>65))assert(p.facts!.length>=5);
  assertEquals(dueItem(new Date('2026-11-27T11:45:00+03:00'),new Set())?.id,'p66');
 });
-Deno.test('Slightly overlong articles lose whole closing paragraphs; far overlong ones are blocked',()=>{
+Deno.test('A longer article is published as written, without cutting paragraphs',()=>{
  const sec=(n:number)=>({h2:'Раздел',paragraphs:Array.from({length:n},()=>'а'.repeat(990)+'.')});
- const a=validatePlanArticle(ok({sections:[sec(3),sec(2),sec(1),sec(1)]}),item('p04'),{});
- const len=[a.title,...a.intro,...a.sections.flatMap((s:any)=>[s.h2,...s.paragraphs]),a.conclusion].join(' ').length;
- assert(len<=7000&&len>=4000,String(len));assert(a.sections.every((s:any)=>s.paragraphs.length>=1&&s.paragraphs.every((x:string)=>x.endsWith('.'))));
- assertThrows(()=>validatePlanArticle(ok({sections:[sec(4),sec(3),sec(2),sec(1)]}),item('p04'),{}),Error,'Too long');
+ const a=validatePlanArticle(ok({sections:[sec(4),sec(3),sec(2),sec(1)]}),item('p04'),{});
+ assertEquals(a.sections.map((s:any)=>s.paragraphs.length),[4,3,2,1]);
+});
+Deno.test('Blocked articles are released again in a new slot on the day of retryAt',()=>{
+ const p=item('p40');assert(p.retryAt);
+ const rest=new Set(PLAN.filter(x=>x.id!=='p40').map(x=>x.id));
+ assertEquals(dueItem(new Date(new Date(p.retryAt!).getTime()+60000),rest)?.id,'p40');
+ assertEquals(dueItem(new Date(new Date(p.retryAt!).getTime()-60000),rest),undefined);
+ assertEquals(dueItem(new Date(new Date(p.at).getTime()+60000),rest),undefined);
 });

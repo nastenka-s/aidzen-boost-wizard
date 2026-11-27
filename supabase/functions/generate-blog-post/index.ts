@@ -3,7 +3,7 @@ import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { KINDS, lessons, skyBrief, validateArticle, horoscopeArticle, dateLabel, type Kind } from "./editorial.ts";
 import { coverPrompt } from "./cover-policy.mjs";
 import { generateKieCover, ProviderError } from "./cover-provider.mjs";
-import { PLAN, PLAN_CTA, EPHEMERIS, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, plainText, charLimit, charMin, type PlanItem } from "./plan.ts";
+import { PLAN, PLAN_CTA, EPHEMERIS, rangeEvents, dueItem, validatePlanArticle, dailyTargetOk, slotAt, plainText, charLimit, charMin, type PlanItem } from "./plan.ts";
 
 const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY") ?? "";
 const KIE_AI_API_KEY = (Deno.env.get("KIE_AI_API_KEY") ?? "").trim();
@@ -584,7 +584,7 @@ async function planArticle(p:PlanItem,brief:any):Promise<any>{
 - Если нужны дома и точные периоды — объясни, что для этого нужны дата, время и место рождения; общий солнечный гороскоп их не заменяет.
 - Без ссылок, URL, HTML, markdown, разделов «Источники»/«Методика».
 - conclusion: вывод с конкретными рекомендациями и мягкий призыв: персональный расчёт можно сделать в Нейродзене, первые 3 расчёта бесплатно. Слово «Нейродзен» обязательно.
-- Общий объём текста (все поля) от ${charMin(p)} до ${charLimit(p)} знаков с пробелами; целься примерно в ${Math.round((charMin(p)+charLimit(p))/2)} знаков — текст длиннее ${charLimit(p)} знаков не публикуется. Пиши подробно и полезно: в каждом разделе 2–4 содержательных абзаца с объяснением, конкретными примерами из жизни и практическими шагами; без воды и общих фраз.`;
+- Общий объём текста (все поля) от ${charMin(p)} до ${charLimit(p)} знаков с пробелами; целься примерно в ${Math.round((charMin(p)+charLimit(p))/2)} знаков — немного длиннее можно, если это нужно для полноты. Пиши подробно и полезно: в каждом разделе 2–4 содержательных абзаца с объяснением, конкретными примерами из жизни и практическими шагами; без воды и общих фраз.`;
  const user=`Заголовок (не меняй): ${p.title}
 Рубрика: ${p.rubric}
 Основной запрос (в первом абзаце естественно): ${p.keyword}
@@ -610,7 +610,7 @@ async function runPlan(supabase:any,check:(r:any)=>any,respond:(d:unknown,s?:num
  const done=new Set<string>(rows.filter((r:any)=>r.status==='success'||r.status==='needs_review').map((r:any)=>r.id));
  const p=dueItem(now,done,publishNext);
  if(!p)return respond({ok:true,skipped:'no_due_plan_items'});
- const claim=check(await supabase.rpc('claim_blog_plan',{p_item:p.id,p_publish_at:publishNext?now.toISOString():p.at}));
+ const claim=check(await supabase.rpc('claim_blog_plan',{p_item:p.id,p_publish_at:publishNext?now.toISOString():slotAt(p)}));
  if(claim.skipped)return respond({ok:true,item:p.id,...claim});
  const token=claim.token;let topicId:string|undefined;
  try{
@@ -631,7 +631,6 @@ async function runPlan(supabase:any,check:(r:any)=>any,respond:(d:unknown,s?:num
    if(p.mode==='daily'){article=horoscopeArticle(brief as any,existing.map(x=>x.slug));article.title=p.title;article.metaTitle=p.title.slice(0,70);article.slug=p.slug;article.keywords=`${p.keyword}, ${p.related}`;article.category=p.rubric;}
    else article=await planArticle(p,brief);
    article.conclusion=`${article.conclusion} Рассчитать личный прогноз: ${PLAN_CTA}`.trim();
-   if(p.mode!=='daily'&&plainText(article).length>charLimit(p)+80)throw new Error('Too long after CTA');
    const coverB64=await generateCoverImage(p.title,p.mode==='daily'?'tomorrow_horoscope':'astrology_education',p.target,p.coverText);
    const coverUrl=`${SUPABASE_URL}/functions/v1/blog-cover-img?p=${p.slug}.png`;
    payload={article,coverB64,coverUrl,dzenHtml:buildDzenHtml(article,coverUrl)};
