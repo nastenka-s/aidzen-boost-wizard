@@ -69,6 +69,11 @@ export function validatePlanArticle(a:any,p:PlanItem,brief:any){
  const want=p.signs12?SIGNS:p.signs;
  if(want){const h=a.sections.map((s:any)=>s.h2);if(!want.every(s=>h.some((x:string)=>x.startsWith(s))))throw new Error('Promised signs are missing');}
  else if(a.sections.length<4||a.sections.length>7)throw new Error('Expected 4–7 sections');
+ // Slight overshoot is fixed by dropping whole closing paragraphs of the longest sections, never by cutting sentences.
+ if(plainText(a).length<=charLimit(p)*1.15)while(plainText(a).length>charLimit(p)){
+  const s=a.sections.filter((x:any)=>x.paragraphs.length>1).sort((x:any,y:any)=>y.paragraphs.join(' ').length-x.paragraphs.join(' ').length)[0];
+  if(!s)break;s.paragraphs.pop();
+ }
  const text=plainText(a);
  if(text.length<charMin(p))throw new Error(`Too short: ${text.length} chars`);
  if(text.length>charLimit(p))throw new Error(`Too long: ${text.length} chars`);

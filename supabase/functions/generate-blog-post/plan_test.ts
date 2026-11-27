@@ -5,7 +5,7 @@ const FILL='слово '.repeat(1000);
 const ok=(over:any={})=>({title:'x',intro:['Короткий лид.'],sections:[{h2:'Раз',paragraphs:[FILL]},{h2:'Два',paragraphs:['Текст.']},{h2:'Три',paragraphs:['Текст.']},{h2:'Четыре',paragraphs:['Текст.']}],conclusion:'Персональную карту можно рассчитать в Нейродзене.',...over});
 const item=(id:string)=>PLAN.find(p=>p.id===id)!;
 Deno.test('Plan has 28 articles, four per Moscow day from 12 to 18 November at 07:00, 11:30, 16:00, 20:00',()=>{
- assertEquals(PLAN.length,65);
+ assertEquals(PLAN.length,100);
  for(let d=12;d<=18;d++)assertEquals(PLAN.filter(p=>p.at.startsWith(`2026-11-${d}`)).map(p=>p.at.slice(11,16)),['07:00','11:30','16:00','20:00']);
 });
 Deno.test('Daily horoscope titles target the next calendar day',()=>{for(const p of PLAN.filter(p=>p.mode==='daily'))assert(dailyTargetOk(p,new Date(p.at)));assert(!dailyTargetOk(item('p01'),new Date('2026-11-13T05:00:00+03:00')));});
@@ -46,3 +46,16 @@ Deno.test('Plan 20–26 November: five articles per Moscow day, unique slugs, ho
  assertEquals(new Set(PLAN.map(p=>p.slug)).size,PLAN.length);
 });
 Deno.test('December month brief calculates within budget',()=>{const t=Date.now();const b=rangeEvents('2026-12-01','2026-12-31');assert(b.events.length>5);assert(Date.now()-t<4000,`${Date.now()-t}ms`);});
+Deno.test('Plan 27 November – 3 December: five articles per Moscow day, horoscope for the next day, regular slots 07:00–18:00',()=>{
+ const days=['2026-11-27','2026-11-28','2026-11-29','2026-11-30','2026-12-01','2026-12-02','2026-12-03','2026-12-04'];
+ for(let i=0;i<7;i++){const day=PLAN.filter(p=>p.at.startsWith(days[i])&&Number(p.id.slice(1))>65);assertEquals(day.length,5);assertEquals(day.filter(p=>p.mode==='daily').map(p=>p.target),[days[i+1]]);if(i>0)assertEquals(day.map(p=>p.at.slice(11,16)),['07:00','09:00','12:00','15:00','18:00']);}
+ for(const p of PLAN.filter(p=>p.mode==='evergreen'&&Number(p.id.slice(1))>65))assert(p.facts!.length>=5);
+ assertEquals(dueItem(new Date('2026-11-27T11:45:00+03:00'),new Set())?.id,'p66');
+});
+Deno.test('Slightly overlong articles lose whole closing paragraphs; far overlong ones are blocked',()=>{
+ const sec=(n:number)=>({h2:'Раздел',paragraphs:Array.from({length:n},()=>'а'.repeat(990)+'.')});
+ const a=validatePlanArticle(ok({sections:[sec(3),sec(2),sec(1),sec(1)]}),item('p04'),{});
+ const len=[a.title,...a.intro,...a.sections.flatMap((s:any)=>[s.h2,...s.paragraphs]),a.conclusion].join(' ').length;
+ assert(len<=7000&&len>=4000,String(len));assert(a.sections.every((s:any)=>s.paragraphs.length>=1&&s.paragraphs.every((x:string)=>x.endsWith('.'))));
+ assertThrows(()=>validatePlanArticle(ok({sections:[sec(4),sec(3),sec(2),sec(1)]}),item('p04'),{}),Error,'Too long');
+});
