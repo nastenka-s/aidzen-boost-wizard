@@ -26,4 +26,5 @@
 - Scheduler-authenticated early publication may select only the next unfinished item of the current Moscow day under the existing lease and item identity, preserving normal scheduling and duplicate prevention.
 - The plan gate enforces a minimum article length only; the upper figure is a writing target, because the user accepts longer articles and blocking them left planned slots unpublished.
 - Retrograde and eclipse wording passes the plan gate when the item's approved facts name it, since those facts are the verified brief; dates are still checked against calculations.
+- The guarantee gate ignores explicitly negated wording, because a denied guarantee is the disclaimer the editorial rules ask for.
 - A blocked plan item is released again through retryAt (a new slot) plus a reset of its row, never by editing its original slot, so plan-shape tests and item identity stay intact.

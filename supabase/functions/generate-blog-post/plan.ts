@@ -75,7 +75,9 @@ export function validatePlanArticle(a:any,p:PlanItem,brief:any){
  const text=plainText(a);
  if(text.length<charMin(p))throw new Error(`Too short: ${text.length} chars`);
  if(/https?:\/\/|www\./i.test(text))throw new Error('Links are added by the program only');
- if(/гарантир|обязательно (?:встретите|случится|получите)|неизбежно|точно (?:будет|случится)/i.test(text))throw new Error('Guaranteed-outcome claim');
+ // A denied guarantee («не гарантирует», «не означает неизбежного») is a disclaimer, not a promise.
+ const claims=text.replace(/(?<![а-яё])(?:не|нельзя|никто не|ничто не)\s+(?:(?:может|могут|стоит|нужно|означает|значит|является|являются|делает|делают|будет|будут)\s+)?(?:гарантир|неизбежн)[а-яё]*/gi,'');
+ if(/гарантир|обязательно (?:встретите|случится|получите)|неизбежно|точно (?:будет|случится)/i.test(claims))throw new Error('Guaranteed-outcome claim');
  if(/источник|методик|библиограф/i.test(a.sections.map((s:any)=>s.h2).join(' ')))throw new Error('Sources section is not published');
  if(!/Нейродзен/i.test(a.conclusion))throw new Error('Conclusion must contain Нейродзен CTA');
  // The item's approved facts may name retrogrades or eclipses as general tradition; dated claims stay gated by the date check below.

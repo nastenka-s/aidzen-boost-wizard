@@ -68,3 +68,8 @@ Deno.test('Retrograde named in the approved facts may be explained as tradition;
  validatePlanArticle(ok({intro:['Для договоров традиционно избегают ретроградного Меркурия.']}),item('p50'),null);
  assertThrows(()=>validatePlanArticle(ok({intro:['Меркурий ретроградный.']}),item('p04'),{}),Error,'retrograde');
 });
+Deno.test('A denied guarantee is allowed as a disclaimer; a promised outcome is still blocked',()=>{
+ validatePlanArticle(ok({intro:['Соляр не гарантирует событий и не означает неизбежного исхода. Никто не может гарантировать результат.']}),item('p04'),{});
+ assertThrows(()=>validatePlanArticle(ok({intro:['Соляр гарантирует успех.']}),item('p04'),{}),Error,'Guaranteed');
+ assertThrows(()=>validatePlanArticle(ok({intro:['Это неизбежно приведёт к переменам.']}),item('p04'),{}),Error,'Guaranteed');
+});
