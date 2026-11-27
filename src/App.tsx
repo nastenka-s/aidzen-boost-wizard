@@ -209,6 +209,7 @@ import GoroskopKareryDekabr2026 from "./pages/blog-auto/GoroskopKareryDekabr2026
 import OdinTranzitRaznyeSfery from "./pages/blog-auto/OdinTranzitRaznyeSfery";
 import GoroskopNa28Noyabrya2026 from "./pages/blog-auto/GoroskopNa28Noyabrya2026";
 import DenezhnyyGoroskop30Noyabrya6Dekabrya2026 from "./pages/blog-auto/DenezhnyyGoroskop30Noyabrya6Dekabrya2026";
+import LichnyyMesyacDekabrRaschet from "./pages/blog-auto/LichnyyMesyacDekabrRaschet";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -233,6 +234,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/lichnyy-mesyac-dekabr-raschet" element={<LichnyyMesyacDekabrRaschet />} />
           <Route path="/denezhnyy-goroskop-30-noyabrya-6-dekabrya-2026" element={<DenezhnyyGoroskop30Noyabrya6Dekabrya2026 />} />
           <Route path="/goroskop-na-28-noyabrya-2026" element={<GoroskopNa28Noyabrya2026 />} />
           <Route path="/odin-tranzit-raznye-sfery" element={<OdinTranzitRaznyeSfery />} />
