@@ -25,4 +25,5 @@
 - Keep the user's dated content plan in generate-blog-post/content-plan.json with calculated range events and a blocking pre-publication gate in plan.ts; failing items go to needs_review instead of publishing unverified forecasts.
 - Scheduler-authenticated early publication may select only the next unfinished item of the current Moscow day under the existing lease and item identity, preserving normal scheduling and duplicate prevention.
 - The plan gate enforces a minimum article length only; the upper figure is a writing target, because the user accepts longer articles and blocking them left planned slots unpublished.
+- Retrograde and eclipse wording passes the plan gate when the item's approved facts name it, since those facts are the verified brief; dates are still checked against calculations.
 - A blocked plan item is released again through retryAt (a new slot) plus a reset of its row, never by editing its original slot, so plan-shape tests and item identity stay intact.

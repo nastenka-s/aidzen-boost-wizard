@@ -64,3 +64,7 @@ Deno.test('Blocked articles are released again in a new slot on the day of retry
  assertEquals(dueItem(new Date(new Date(p.retryAt!).getTime()-60000),rest),undefined);
  assertEquals(dueItem(new Date(new Date(p.at).getTime()+60000),rest),undefined);
 });
+Deno.test('Retrograde named in the approved facts may be explained as tradition; elsewhere it stays blocked',()=>{
+ validatePlanArticle(ok({intro:['Для договоров традиционно избегают ретроградного Меркурия.']}),item('p50'),null);
+ assertThrows(()=>validatePlanArticle(ok({intro:['Меркурий ретроградный.']}),item('p04'),{}),Error,'retrograde');
+});

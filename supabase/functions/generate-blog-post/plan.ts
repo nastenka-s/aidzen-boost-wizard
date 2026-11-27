@@ -78,8 +78,10 @@ export function validatePlanArticle(a:any,p:PlanItem,brief:any){
  if(/гарантир|обязательно (?:встретите|случится|получите)|неизбежно|точно (?:будет|случится)/i.test(text))throw new Error('Guaranteed-outcome claim');
  if(/источник|методик|библиограф/i.test(a.sections.map((s:any)=>s.h2).join(' ')))throw new Error('Sources section is not published');
  if(!/Нейродзен/i.test(a.conclusion))throw new Error('Conclusion must contain Нейродзен CTA');
- if(/ретроград/i.test(text)&&!(brief?.retrograde?.length||brief?.events?.some((e:any)=>e.type==='station')))throw new Error('Uncalculated retrograde claim');
- if(/затмени/i.test(text)&&!brief?.events?.some((e:any)=>e.type==='eclipse'))throw new Error('Uncalculated eclipse claim');
+ // The item's approved facts may name retrogrades or eclipses as general tradition; dated claims stay gated by the date check below.
+ const facts=(p.facts??[]).join(' ');
+ if(/ретроград/i.test(text)&&!/ретроград/i.test(facts)&&!(brief?.retrograde?.length||brief?.events?.some((e:any)=>e.type==='station')))throw new Error('Uncalculated retrograde claim');
+ if(/затмени/i.test(text)&&!/затмени/i.test(facts)&&!brief?.events?.some((e:any)=>e.type==='eclipse'))throw new Error('Uncalculated eclipse claim');
  const allowed=new Set<string>([...(brief?.events??[]).map((e:any)=>e.date),...(brief?.moonDays??[]).map((m:any)=>m.date)]);
  if(p.range){allowed.add(p.range[0]);allowed.add(p.range[1]);}
  if(p.target)allowed.add(p.target);
