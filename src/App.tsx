@@ -214,6 +214,7 @@ import KarmicheskayaSovmestimostAspekty from "./pages/blog-auto/KarmicheskayaSov
 import DenezhnyyGoroskopDekabr2026 from "./pages/blog-auto/DenezhnyyGoroskopDekabr2026";
 import DataZapuskaProektaElektivnayaAstrologiya from "./pages/blog-auto/DataZapuskaProektaElektivnayaAstrologiya";
 import SolyarProstymiSlovami from "./pages/blog-auto/SolyarProstymiSlovami";
+import LunnyyKalendar17Dekabrya2026 from "./pages/blog-auto/LunnyyKalendar17Dekabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -238,6 +239,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/lunnyy-kalendar-1-7-dekabrya-2026" element={<LunnyyKalendar17Dekabrya2026 />} />
           <Route path="/solyar-prostymi-slovami" element={<SolyarProstymiSlovami />} />
           <Route path="/data-zapuska-proekta-elektivnaya-astrologiya" element={<DataZapuskaProektaElektivnayaAstrologiya />} />
           <Route path="/denezhnyy-goroskop-dekabr-2026" element={<DenezhnyyGoroskopDekabr2026 />} />
