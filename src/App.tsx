@@ -223,6 +223,7 @@ import ZnakiZodiakaPeremenyDekabr2026 from "./pages/blog-auto/ZnakiZodiakaPereme
 import GoroskopNa29Noyabrya2026 from "./pages/blog-auto/GoroskopNa29Noyabrya2026";
 import MerkuriyVNatalnoyKarteKakVyDogovarivaetes from "./pages/blog-auto/MerkuriyVNatalnoyKarteKakVyDogovarivaetes";
 import VeneraIMarsVSovmestimosti from "./pages/blog-auto/VeneraIMarsVSovmestimosti";
+import KvadratPifagoraKakRasschitatPsihomatricu from "./pages/blog-auto/KvadratPifagoraKakRasschitatPsihomatricu";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -247,6 +248,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/kvadrat-pifagora-kak-rasschitat-psihomatricu" element={<KvadratPifagoraKakRasschitatPsihomatricu />} />
           <Route path="/venera-i-mars-v-sovmestimosti" element={<VeneraIMarsVSovmestimosti />} />
           <Route path="/merkuriy-v-natalnoy-karte-kak-vy-dogovarivaetes" element={<MerkuriyVNatalnoyKarteKakVyDogovarivaetes />} />
           <Route path="/goroskop-na-29-noyabrya-2026" element={<GoroskopNa29Noyabrya2026 />} />
