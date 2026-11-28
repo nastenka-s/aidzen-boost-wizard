@@ -220,6 +220,7 @@ import MarsVNatalnoyKarteKakVyDeystvuete from "./pages/blog-auto/MarsVNatalnoyKa
 import Rodilis2112029ChislaNumerologiya from "./pages/blog-auto/Rodilis2112029ChislaNumerologiya";
 import PustyeDomaVNatalnoyKarte from "./pages/blog-auto/PustyeDomaVNatalnoyKarte";
 import ZnakiZodiakaPeremenyDekabr2026 from "./pages/blog-auto/ZnakiZodiakaPeremenyDekabr2026";
+import GoroskopNa29Noyabrya2026 from "./pages/blog-auto/GoroskopNa29Noyabrya2026";
 // __AUTOGEN_IMPORTS__ (do not remove — used by generate-blog-post edge function)
 import CookieConsent from "./components/CookieConsent";
 import LiveArticle from "./pages/LiveArticle";
@@ -244,6 +245,7 @@ const App = () => (
           <Route path="/goroskop-na-nedelyu-9-15-noyabrya-2026" element={<GoroskopNaNedelyu9Noyabrya2026 />} />
           <Route path="/goroskop-na-noyabr-2026" element={<GoroskopNaNoyabr2026 />} />
           {/* __AUTOGEN_ROUTES__ (do not remove — used by generate-blog-post edge function) */}
+          <Route path="/goroskop-na-29-noyabrya-2026" element={<GoroskopNa29Noyabrya2026 />} />
           <Route path="/znaki-zodiaka-peremeny-dekabr-2026" element={<ZnakiZodiakaPeremenyDekabr2026 />} />
           <Route path="/pustye-doma-v-natalnoy-karte" element={<PustyeDomaVNatalnoyKarte />} />
           <Route path="/rodilis-2-11-20-29-chisla-numerologiya" element={<Rodilis2112029ChislaNumerologiya />} />
